@@ -1,0 +1,9 @@
+#!/bin/bash
+git remote set-url origin https://github.com/Webconverger/rpi2.git
+# Upgrade
+git pull origin master
+# Sync /boot with the fat partition
+cp -r /boot/* /bootfat/
+
+. /etc/webc/webc.conf
+sed -i "s,$, $(cmdline_get boot_append)," /bootfat/cmdline.txt

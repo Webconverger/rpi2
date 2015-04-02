@@ -1,0 +1,10 @@
+[Unit]
+Description=Upgrade
+After=graphical.target network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/webc-upgrade
+
+[Install]
+WantedBy=default.target
