@@ -1972,6 +1972,7 @@ Internationalization and character sets
 * recode: (recode).             Conversion between character sets and surfaces.
 
 Libraries
+* AA-lib: (aalib).              An ASCII-art graphics library
 * History: (history).           The GNU history library API.
 * RLuserman: (rluserman).       The GNU readline library User's Manual.
 * Readline: (readline).         The GNU readline library API.

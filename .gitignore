@@ -47,3 +47,5 @@ root/.Xauthority
 bootfat
 tmp
 etc/machine-id
+etc/webc/cmdline
+root/.viminfo

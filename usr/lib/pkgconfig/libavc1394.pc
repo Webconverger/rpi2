@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libavc1394
+Description: AV/C protocol library for IEEE 1394.
+Version: 0.5.4
+Requires: libraw1394
+Libs: -L${libdir} -lavc1394 -lrom1394
+Cflags: -I${includedir}
