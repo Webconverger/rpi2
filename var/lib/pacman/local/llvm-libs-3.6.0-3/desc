@@ -1,0 +1,43 @@
+%NAME%
+llvm-libs
+
+%VERSION%
+3.6.0-3
+
+%DESC%
+Low Level Virtual Machine (runtime library)
+
+%URL%
+http://llvm.org/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1426469370
+
+%INSTALLDATE%
+1427957174
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu2@archlinuxarm.org>
+
+%SIZE%
+29306880
+
+%REASON%
+1
+
+%LICENSE%
+custom:University of Illinois/NCSA Open Source License
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+gcc-libs
+zlib
+libffi
+libedit
+ncurses
+

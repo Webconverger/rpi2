@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/luit
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-luit/
+usr/share/licenses/xorg-luit/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/luit.1.gz
+

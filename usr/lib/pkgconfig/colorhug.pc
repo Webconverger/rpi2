@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: colorhug
+Description: ColorHug is a simple display hardware colorimeter
+Version: 1.2.9
+Requires.private: gthread-2.0
+Requires: glib-2.0, gobject-2.0, gusb, colord
+Libs: -L${libdir} -lcolorhug
+Cflags: -I${includedir}/colord-1/colorhug
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/x-tiff-multipage">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Multi-page TIFF image</comment>
+  <acronym>TIFF</acronym>
+  <expanded-acronym>Tagged Image File Format</expanded-acronym>
+  <sub-class-of type="image/tiff"/>
+</mime-type>

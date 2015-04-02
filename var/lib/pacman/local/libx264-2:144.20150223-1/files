@@ -1,0 +1,11 @@
+%FILES%
+usr/
+usr/include/
+usr/include/x264.h
+usr/include/x264_config.h
+usr/lib/
+usr/lib/libx264.so
+usr/lib/libx264.so.144
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/x264.pc
+

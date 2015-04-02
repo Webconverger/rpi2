@@ -1,0 +1,11 @@
+%FILES%
+usr/
+usr/include/
+usr/include/txc_dxtn.h
+usr/lib/
+usr/lib/libtxc_dxtn.so
+usr/share/
+usr/share/licenses/
+usr/share/licenses/libtxc_dxtn/
+usr/share/licenses/libtxc_dxtn/LICENSE
+

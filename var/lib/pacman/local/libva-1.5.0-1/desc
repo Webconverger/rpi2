@@ -1,0 +1,45 @@
+%NAME%
+libva
+
+%VERSION%
+1.5.0-1
+
+%DESC%
+Video Acceleration (VA) API for Linux
+
+%URL%
+http://freedesktop.org/wiki/Software/vaapi
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1420007541
+
+%INSTALLDATE%
+1427957255
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+odroid1@archlinuxarm.org>
+
+%SIZE%
+647168
+
+%REASON%
+1
+
+%LICENSE%
+MIT
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libgl
+libdrm
+libxfixes
+
+%OPTDEPENDS%
+libva-vdpau-driver: backend for Nvidia and AMD cards
+libva-intel-driver: backend for Intel cards
+

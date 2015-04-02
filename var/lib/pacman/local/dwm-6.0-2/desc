@@ -1,0 +1,37 @@
+%NAME%
+dwm
+
+%VERSION%
+6.0-2
+
+%DESC%
+A dynamic window manager for X
+
+%URL%
+http://dwm.suckless.org
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1404217952
+
+%INSTALLDATE%
+1427959622
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+82944
+
+%LICENSE%
+MIT
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libx11
+libxinerama
+

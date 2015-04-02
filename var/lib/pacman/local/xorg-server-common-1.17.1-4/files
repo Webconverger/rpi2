@@ -1,0 +1,17 @@
+%FILES%
+usr/
+usr/lib/
+usr/lib/xorg/
+usr/lib/xorg/protocol.txt
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-server-common/
+usr/share/licenses/xorg-server-common/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/Xserver.1.gz
+var/
+var/lib/
+var/lib/xkb/
+var/lib/xkb/README.compiled
+

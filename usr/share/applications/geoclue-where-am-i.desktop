@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Where am I?
+GenericName=Demo geolocation application
+Comment=Find your current location
+Keywords=geolocation;
+Exec=/usr/lib/geoclue2/geoclue-2.0/demos/where-am-i
+Icon=mark-location-symbolic
+NoDisplay=true
+Terminal=true
+Type=Application

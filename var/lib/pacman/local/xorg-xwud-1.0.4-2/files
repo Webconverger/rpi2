@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xwud
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xwud/
+usr/share/licenses/xorg-xwud/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xwud.1.gz
+

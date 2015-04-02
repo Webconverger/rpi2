@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.ms-publisher">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Microsoft Publisher document</comment>
+  <comment xml:lang="ca">document Publisher de Microsoft</comment>
+  <comment xml:lang="de">Microsoft Publisher-Dokument</comment>
+  <comment xml:lang="el">Έγγραφο Microsoft Publisher</comment>
+  <comment xml:lang="en_GB">Microsoft Publisher document</comment>
+  <comment xml:lang="es">documento de Microsoft Publisher</comment>
+  <comment xml:lang="eu">Microsoft Publisher dokumentua</comment>
+  <comment xml:lang="fr">document Microsoft Publisher</comment>
+  <comment xml:lang="he">מסמך Microsoft Publisher</comment>
+  <comment xml:lang="id">Dokumen Microsoft Publisher</comment>
+  <comment xml:lang="it">Documento Microsoft Publisher</comment>
+  <comment xml:lang="kk">Microsoft Publisher құжаты</comment>
+  <comment xml:lang="ko">마이크로소프트 퍼블리셔 문서</comment>
+  <comment xml:lang="pl">Dokument Microsoft Publisher</comment>
+  <comment xml:lang="pt_BR">Documento do Microsoft Publisher</comment>
+  <comment xml:lang="uk">документ Microsoft Publisher</comment>
+  <comment xml:lang="zh_CN">Microsoft Publisher 文档</comment>
+  <sub-class-of type="application/x-ole-storage"/>
+  <glob pattern="*.pub"/>
+</mime-type>

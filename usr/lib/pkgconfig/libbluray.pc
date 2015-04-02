@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libbluray
+Description: library supporting Blu-ray playback
+Version: 0.7.0
+Libs: -L${libdir} -lbluray
+Libs.private: -ldl -lxml2  -lfreetype  -lfontconfig -lfreetype 
+Cflags: -I${includedir}

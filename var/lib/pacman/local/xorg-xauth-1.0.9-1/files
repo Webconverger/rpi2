@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xauth
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xauth/
+usr/share/licenses/xorg-xauth/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xauth.1.gz
+

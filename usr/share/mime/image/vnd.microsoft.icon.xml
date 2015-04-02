@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/vnd.microsoft.icon">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Windows icon</comment>
+  <glob pattern="*.ico"/>
+  <alias type="application/ico"/>
+  <alias type="image/ico"/>
+  <alias type="image/icon"/>
+  <alias type="image/x-ico"/>
+  <alias type="image/x-icon"/>
+  <alias type="text/ico"/>
+</mime-type>

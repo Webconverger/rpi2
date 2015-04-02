@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: datrie
+Description: Double-array trie library
+Version: 0.2.8
+Libs: -L${libdir} -ldatrie
+Cflags: -I${includedir}

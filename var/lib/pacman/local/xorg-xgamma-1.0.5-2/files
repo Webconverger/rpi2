@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xgamma
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xgamma/
+usr/share/licenses/xorg-xgamma/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xgamma.1.gz
+

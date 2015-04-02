@@ -1,0 +1,6 @@
+sdkdir=/usr/include/xorg
+
+Name: xorg-libinput
+Description: X.Org libinput input driver.
+Version: 0.8.0
+Cflags: -I${sdkdir}

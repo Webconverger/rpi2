@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/mkfontscale
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-mkfontscale/
+usr/share/licenses/xorg-mkfontscale/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/mkfontscale.1.gz
+

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+libdir=${exec_prefix}/lib
+xcbincludedir=${datadir}/xcb
+pythondir=${prefix}/lib/python3.4/site-packages
+
+Name: XCB Proto
+Description: X protocol descriptions for XCB
+Version: 1.11

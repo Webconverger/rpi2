@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xdpyinfo
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xdpyinfo/
+usr/share/licenses/xorg-xdpyinfo/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xdpyinfo.1.gz
+

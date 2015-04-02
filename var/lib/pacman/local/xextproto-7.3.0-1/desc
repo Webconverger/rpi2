@@ -1,0 +1,36 @@
+%NAME%
+xextproto
+
+%VERSION%
+7.3.0-1
+
+%DESC%
+X11 various extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1389637268
+
+%INSTALLDATE%
+1427957141
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+720896
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

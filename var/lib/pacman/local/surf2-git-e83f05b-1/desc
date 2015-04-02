@@ -1,0 +1,49 @@
+%NAME%
+surf2-git
+
+%VERSION%
+e83f05b-1
+
+%DESC%
+a WebKit based browser
+
+%URL%
+http://surf.suckless.org/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1427797807
+
+%INSTALLDATE%
+1427957343
+
+%PACKAGER%
+Unknown Packager
+
+%SIZE%
+62464
+
+%LICENSE%
+custom:MIT/X
+
+%VALIDATION%
+none
+
+%DEPENDS%
+webkit2gtk
+xorg-xprop
+dmenu
+
+%OPTDEPENDS%
+ca-certificates: SSL verification
+st: default terminal for the download handler
+curl: default download handler
+
+%CONFLICTS%
+surf2-git
+
+%PROVIDES%
+surf2-git
+

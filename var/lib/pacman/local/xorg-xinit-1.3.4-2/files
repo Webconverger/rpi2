@@ -1,0 +1,23 @@
+%FILES%
+etc/
+etc/X11/
+etc/X11/xinit/
+etc/X11/xinit/xinitrc
+etc/X11/xinit/xserverrc
+usr/
+usr/bin/
+usr/bin/startx
+usr/bin/xinit
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xinit/
+usr/share/licenses/xorg-xinit/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/startx.1.gz
+usr/share/man/man1/xinit.1.gz
+
+%BACKUP%
+etc/X11/xinit/xserverrc	12edd1bd52ddf2084cf0972921db5a84
+etc/X11/xinit/xinitrc	06ae3437e98ba4210f871afd61204f0d
+

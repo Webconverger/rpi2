@@ -1,0 +1,10 @@
+prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: SpiderMonkey 17.0.4esrpre
+Description: The Mozilla library for JavaScript
+Version: 17.0.4esrpre
+Requires.private: nspr >= 4.9.2
+Libs: -L${libdir} -lmozjs-17.0
+Cflags: -include ${includedir}/js-17.0/js/RequiredDefines.h -I${includedir}/js-17.0

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="text/x-scons">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>SCons configuration file</comment>
+  <sub-class-of type="text/x-python"/>
+  <glob pattern="SConstruct"/>
+  <glob pattern="SConscript"/>
+  <glob pattern="SConscript.*"/>
+</mime-type>

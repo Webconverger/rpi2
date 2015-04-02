@@ -1,0 +1,9 @@
+%FILES%
+usr/
+usr/include/
+usr/include/xvid.h
+usr/lib/
+usr/lib/libxvidcore.so
+usr/lib/libxvidcore.so.4
+usr/lib/libxvidcore.so.4.3
+

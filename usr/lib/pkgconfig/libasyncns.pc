@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libasyncns
+Description: Asynchronous Name Service
+Version: 0.8
+Libs: -L${libdir} -lasyncns
+Cflags: -I${includedir}

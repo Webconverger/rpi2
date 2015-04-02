@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib
+includedir=${prefix}/include
+
+Name: avahi-ui
+Description: Avahi Multicast DNS Responder (Common GTK3 UI support)
+Requires: gtk+-3.0 avahi-client avahi-glib
+Version: 0.6.31
+Libs: -L${libdir} -lavahi-ui-gtk3
+Cflags: -D_REENTRANT -I${includedir}

@@ -1,0 +1,16 @@
+%FILES%
+usr/
+usr/include/
+usr/include/X11/
+usr/include/X11/xshmfence.h
+usr/lib/
+usr/lib/libxshmfence.so
+usr/lib/libxshmfence.so.1
+usr/lib/libxshmfence.so.1.0.0
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/xshmfence.pc
+usr/share/
+usr/share/licenses/
+usr/share/licenses/libxshmfence/
+usr/share/licenses/libxshmfence/COPYING
+

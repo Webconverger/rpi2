@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libthai
+Description: Thai support library
+Version: 0.1.21
+Requires.private: datrie-0.2
+Libs: -L${libdir} -lthai
+Cflags: -I${includedir}

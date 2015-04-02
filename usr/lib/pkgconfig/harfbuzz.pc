@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: harfbuzz
+Description: HarfBuzz text shaping library
+Version: 0.9.40
+
+Libs: -L${libdir} -lharfbuzz
+Cflags: -I${includedir}/harfbuzz

@@ -1,0 +1,36 @@
+%NAME%
+renderproto
+
+%VERSION%
+0.11.1-3
+
+%DESC%
+X11 Render extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1404394980
+
+%INSTALLDATE%
+1427957157
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+109568
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

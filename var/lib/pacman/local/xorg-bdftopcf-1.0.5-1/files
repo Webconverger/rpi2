@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/bdftopcf
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-bdftopcf/
+usr/share/licenses/xorg-bdftopcf/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/bdftopcf.1.gz
+

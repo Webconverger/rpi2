@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+daemon_user=colord
+
+Name: colord
+Description: colord is a system daemon for managing color devices
+Version: 1.2.9
+Requires.private: lcms2, libudev
+Requires: glib-2.0, gobject-2.0, gio-2.0
+Libs: -L${libdir} -lcolord -lcolordprivate
+Cflags: -I${includedir}/colord-1

@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xbacklight
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xbacklight/
+usr/share/licenses/xorg-xbacklight/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xbacklight.1.gz
+

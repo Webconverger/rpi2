@@ -1,0 +1,36 @@
+%NAME%
+libdaemon
+
+%VERSION%
+0.14-3
+
+%DESC%
+Lightweight C library that eases the writing of UNIX daemons
+
+%URL%
+http://0pointer.de/lennart/projects/libdaemon/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1404128754
+
+%INSTALLDATE%
+1427957177
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+89088
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+

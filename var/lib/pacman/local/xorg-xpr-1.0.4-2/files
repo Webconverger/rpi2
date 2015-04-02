@@ -1,0 +1,14 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xdpr
+usr/bin/xpr
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xpr/
+usr/share/licenses/xorg-xpr/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xdpr.1.gz
+usr/share/man/man1/xpr.1.gz
+

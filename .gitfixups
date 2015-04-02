@@ -1,0 +1,10 @@
+for i in dev var/spool/mail proc run sys bootfat srv/ftp srv/http var/empty
+do
+	test -d $i || mkdir -p $i
+done
+
+if ! test -d tmp
+then
+	mkdir tmp
+	chmod o+t,ugo+rw tmp
+fi

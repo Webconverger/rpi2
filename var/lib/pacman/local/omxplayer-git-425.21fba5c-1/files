@@ -1,0 +1,11 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/omxplayer
+usr/bin/omxplayer.bin
+usr/share/
+usr/share/doc/
+usr/share/doc/omxplayer/
+usr/share/doc/omxplayer/COPYING
+usr/share/doc/omxplayer/README.md
+

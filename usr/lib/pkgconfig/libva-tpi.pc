@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libva-tpi
+Description: Userspace Video Acceleration (VA) 3rd party interface
+Requires: libva
+Version: 0.37.0
+Libs: -L${libdir} -lva-tpi
+Cflags: -I${includedir}

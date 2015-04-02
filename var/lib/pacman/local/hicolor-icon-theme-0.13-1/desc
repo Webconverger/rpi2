@@ -1,0 +1,36 @@
+%NAME%
+hicolor-icon-theme
+
+%VERSION%
+0.13-1
+
+%DESC%
+Freedesktop.org Hicolor icon theme
+
+%URL%
+http://icon-theme.freedesktop.org/wiki/HicolorTheme
+
+%ARCH%
+any
+
+%BUILDDATE%
+1392639219
+
+%INSTALLDATE%
+1427957177
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+1432576
+
+%REASON%
+1
+
+%LICENSE%
+GPL2
+
+%VALIDATION%
+sha256
+

@@ -1,0 +1,36 @@
+%NAME%
+recordproto
+
+%VERSION%
+1.14.2-2
+
+%DESC%
+X11 Record extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1404394891
+
+%INSTALLDATE%
+1427957208
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+121856
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

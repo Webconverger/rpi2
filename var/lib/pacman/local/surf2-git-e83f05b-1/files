@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/surf2
+usr/share/
+usr/share/licenses/
+usr/share/licenses/surf2-git/
+usr/share/licenses/surf2-git/LICENSE
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/surf2.1.gz
+

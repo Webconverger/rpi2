@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xvinfo
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xvinfo/
+usr/share/licenses/xorg-xvinfo/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xvinfo.1.gz
+

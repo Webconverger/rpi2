@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: polkit-agent-1
+Description: PolicyKit Authentication Agent API
+Version: 0.112
+Libs: -L${libdir} -lpolkit-agent-1
+Cflags: -I${includedir}/polkit-1
+Requires: polkit-gobject-1

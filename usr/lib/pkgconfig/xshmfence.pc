@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: xshmfence
+Description: The X Shared Memory Fence Library
+Version: 1.2
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lxshmfence
+Libs.private: 

@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xmodmap
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xmodmap/
+usr/share/licenses/xorg-xmodmap/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xmodmap.1.gz
+

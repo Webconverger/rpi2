@@ -1,0 +1,14 @@
+%FILES%
+usr/
+usr/include/
+usr/include/X11/
+usr/include/X11/extensions/
+usr/include/X11/extensions/panoramiXproto.h
+usr/lib/
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/xineramaproto.pc
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xineramaproto/
+usr/share/licenses/xineramaproto/COPYING
+

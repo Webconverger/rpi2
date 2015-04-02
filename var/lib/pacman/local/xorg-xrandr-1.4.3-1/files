@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xrandr
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xrandr/
+usr/share/licenses/xorg-xrandr/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xrandr.1.gz
+

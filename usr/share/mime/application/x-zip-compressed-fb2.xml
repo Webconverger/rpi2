@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-zip-compressed-fb2">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Compressed FictionBook document</comment>
+  <comment xml:lang="ca">document comprimit de FictionBook</comment>
+  <comment xml:lang="de">Komprimiertes FictionBook-Dokument</comment>
+  <comment xml:lang="el">Συμπιεσμένο έγγραφο FictionBook</comment>
+  <comment xml:lang="en_GB">Compressed FictionBook document</comment>
+  <comment xml:lang="es">documento comprimido de FictionBook</comment>
+  <comment xml:lang="eu">Konprimitutako FictionBook dokumentua</comment>
+  <comment xml:lang="fr">document FictionBook compressé</comment>
+  <comment xml:lang="id">Dokumen FictionBook terkompresi</comment>
+  <comment xml:lang="it">Documento FictionBook compresso</comment>
+  <comment xml:lang="kk">Сығылған FictionBook құжаты</comment>
+  <comment xml:lang="ko">압축한 픽션북 문서 </comment>
+  <comment xml:lang="pl">Skompresowany dokument FictionBook</comment>
+  <comment xml:lang="pt_BR">Documento FictionBook comprimido</comment>
+  <comment xml:lang="uk">стиснений документ FictionBook</comment>
+  <comment xml:lang="zh_CN">压缩的 FictionBook 文档</comment>
+  <sub-class-of type="application/zip"/>
+  <glob pattern="*.fb2.zip"/>
+</mime-type>

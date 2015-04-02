@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+display=egl
+
+Name: libva-${display}
+Description: Userspace Video Acceleration (VA) ${display} interface
+Requires: libva
+Version: 0.37.0
+Libs: -L${libdir} -lva-${display}
+Cflags: -I${includedir}
+

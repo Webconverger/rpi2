@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xlsclients
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xlsclients/
+usr/share/licenses/xorg-xlsclients/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xlsclients.1.gz
+

@@ -1,0 +1,36 @@
+%NAME%
+xorg-fonts-alias
+
+%VERSION%
+1.0.3-1
+
+%DESC%
+X.org font alias files
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1368982218
+
+%INSTALLDATE%
+1427959022
+
+%PACKAGER%
+Kevin Mihelich <kevin@archlinuxarm.org>
+
+%SIZE%
+59392
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

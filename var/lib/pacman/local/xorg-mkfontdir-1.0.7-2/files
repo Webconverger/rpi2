@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/mkfontdir
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-mkfontdir/
+usr/share/licenses/xorg-mkfontdir/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/mkfontdir.1.gz
+

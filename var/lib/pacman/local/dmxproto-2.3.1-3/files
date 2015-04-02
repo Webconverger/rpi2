@@ -1,0 +1,15 @@
+%FILES%
+usr/
+usr/include/
+usr/include/X11/
+usr/include/X11/extensions/
+usr/include/X11/extensions/dmx.h
+usr/include/X11/extensions/dmxproto.h
+usr/lib/
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/dmxproto.pc
+usr/share/
+usr/share/licenses/
+usr/share/licenses/dmxproto/
+usr/share/licenses/dmxproto/COPYING
+

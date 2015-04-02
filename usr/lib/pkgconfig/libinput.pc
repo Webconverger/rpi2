@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+datarootdir=${prefix}/share
+pkgdatadir=${datarootdir}/libinput
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Libinput
+Description: Input device library
+Version: 0.13.0
+Cflags: -I${includedir}
+Libs: -L${libdir} -linput
+Libs.private: -lm -lrt
+Requires.private: libudev

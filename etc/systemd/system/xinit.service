@@ -1,0 +1,15 @@
+[Unit]
+Description=Root Xorg
+After=x@vt7.service systemd-user-sessions.service
+Wants=x@vt7.service
+Conflicts=getty@tty7.service
+
+[Service]
+User=root
+TTYPath=/dev/tty7
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/xinit -- vt7 -keeptty -nolisten tcp
+Restart=Always
+
+[Install]
+WantedBy=graphical.target

@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libunwind-coredump
+Description: libunwind coredump library
+Version: 1.1
+Requires: libunwind-generic libunwind
+Libs: -L${libdir} -lunwind-coredump

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: dconf-dbus-1
+Description: dconf client library for libdbus-1
+Version: 0.22.0
+Requires: dbus-1, glib-2.0
+Libs: -L${libdir} -ldconf-dbus-1
+Cflags: -I${includedir}/dconf-dbus-1

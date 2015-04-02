@@ -1,0 +1,15 @@
+%FILES%
+usr/
+usr/lib/
+usr/lib/xorg/
+usr/lib/xorg/modules/
+usr/lib/xorg/modules/input/
+usr/lib/xorg/modules/input/void_drv.so
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xf86-input-void/
+usr/share/licenses/xf86-input-void/COPYING
+usr/share/man/
+usr/share/man/man4/
+usr/share/man/man4/void.4.gz
+

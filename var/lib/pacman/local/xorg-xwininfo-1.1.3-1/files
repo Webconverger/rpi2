@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xwininfo
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xwininfo/
+usr/share/licenses/xorg-xwininfo/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xwininfo.1.gz
+

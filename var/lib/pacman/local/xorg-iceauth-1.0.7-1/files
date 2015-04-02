@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/iceauth
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-iceauth/
+usr/share/licenses/xorg-iceauth/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/iceauth.1.gz
+

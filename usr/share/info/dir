@@ -1809,6 +1809,10 @@ GNU organization
 * Maintaining Findutils: (find-maint).
                                 Maintaining GNU findutils
 
+GNU Packages
+* Aspell: (aspell).             GNU Aspell spelling checker
+* Aspell-dev: (aspell-dev).     For Aspell developers
+
 GNU Utilities
 * dirmngr: (gnupg).             X.509 CRL and OCSP server.
 * dirmngr-client: (gnupg).      X.509 CRL and OCSP client.
@@ -1964,6 +1968,9 @@ Individual utilities
 * zgrep: (gzip)Overview.                        Search compressed files.
 * zmore: (gzip)Overview.                        Decompression output by pages.
 
+Internationalization and character sets
+* recode: (recode).             Conversion between character sets and surfaces.
+
 Libraries
 * History: (history).           The GNU history library API.
 * RLuserman: (rluserman).       The GNU readline library User's Manual.
@@ -1973,6 +1980,10 @@ Libraries
 Localization
 * idn: (libidn)Invoking idn.    Internationalized Domain Name (IDN) string 
                                   conversion.
+
+Miscellaneous
+* Gpm: (gpm).                   Text-mode (non-X) mouse library and server 
+                                  daemon.
 
 Network applications
 * Gawkinet: (gawkinet).         TCP/IP Internetworking With `gawk'.

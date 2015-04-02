@@ -1,0 +1,36 @@
+%NAME%
+xineramaproto
+
+%VERSION%
+1.2.1-3
+
+%DESC%
+X11 Xinerama extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1404394573
+
+%INSTALLDATE%
+1427957182
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+50176
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

@@ -1,0 +1,16 @@
+%FILES%
+usr/
+usr/include/
+usr/include/X11/
+usr/include/X11/extensions/
+usr/include/X11/extensions/xf86vm.h
+usr/include/X11/extensions/xf86vmproto.h
+usr/include/X11/extensions/xf86vmstr.h
+usr/lib/
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/xf86vidmodeproto.pc
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xf86vidmodeproto/
+usr/share/licenses/xf86vidmodeproto/COPYING
+

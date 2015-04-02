@@ -1,0 +1,13 @@
+%FILES%
+usr/
+usr/share/
+usr/share/man/
+usr/share/man/man3/
+usr/share/man/man3/Error.3pm.gz
+usr/share/man/man3/Error::Simple.3pm.gz
+usr/share/perl5/
+usr/share/perl5/vendor_perl/
+usr/share/perl5/vendor_perl/Error.pm
+usr/share/perl5/vendor_perl/Error/
+usr/share/perl5/vendor_perl/Error/Simple.pm
+

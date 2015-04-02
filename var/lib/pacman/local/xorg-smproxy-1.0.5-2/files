@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/smproxy
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-smproxy/
+usr/share/licenses/xorg-smproxy/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/smproxy.1.gz
+

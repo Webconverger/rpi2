@@ -1,0 +1,28 @@
+#!/bin/bash
+
+until test "$mac"
+do
+	. "/etc/webc/webc.conf"
+done
+
+logger "Fetching $config_url"
+if curl -f -o /etc/webc/cmdline.tmp --retry 5 "$config_url"
+then
+	# curl has a bug where it doesn't write an empty file
+	touch /etc/webc/cmdline.tmp
+	# This file can be empty in the case of an invalidated configuration
+	mv /etc/webc/cmdline.tmp "$config_runtime"
+	logger "CONFIG: Download applied $(md5sum $config_runtime)"
+else
+	logger "CONFIG: Failed to download from $config_url"
+fi
+
+. "$config_runtime"
+
+if ! test "$homepage"
+then
+	install_base_url="https://config.webconverger.com/clients"
+	homepage="${install_base_url}/?v=${webc_version}&id=${webc_id}"
+fi
+
+/usr/bin/surf2 $homepage

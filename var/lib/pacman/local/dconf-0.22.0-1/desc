@@ -1,0 +1,42 @@
+%NAME%
+dconf
+
+%VERSION%
+0.22.0-1
+
+%DESC%
+A low-level configuration system.
+
+%URL%
+http://live.gnome.org/dconf
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1413474333
+
+%INSTALLDATE%
+1427957206
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+1543168
+
+%REASON%
+1
+
+%LICENSE%
+LGPL2.1
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+glib2
+
+%OPTDEPENDS%
+gtk3: for dconf-editor
+

@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xprop
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xprop/
+usr/share/licenses/xorg-xprop/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xprop.1.gz
+

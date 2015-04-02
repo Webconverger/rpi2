@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: cairo-gl
+Description: OpenGL surface backend for cairo graphics library
+Version: 1.14.2
+
+Requires: cairo gl
+Libs:  
+Cflags: -I${includedir}/cairo 

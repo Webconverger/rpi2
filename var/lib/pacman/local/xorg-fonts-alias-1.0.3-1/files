@@ -1,0 +1,16 @@
+%FILES%
+usr/
+usr/share/
+usr/share/fonts/
+usr/share/fonts/100dpi/
+usr/share/fonts/100dpi/fonts.alias
+usr/share/fonts/75dpi/
+usr/share/fonts/75dpi/fonts.alias
+usr/share/fonts/cyrillic/
+usr/share/fonts/cyrillic/fonts.alias
+usr/share/fonts/misc/
+usr/share/fonts/misc/fonts.alias
+usr/share/licenses/
+usr/share/licenses/xorg-fonts-alias/
+usr/share/licenses/xorg-fonts-alias/LICENSE
+

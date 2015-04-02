@@ -1,0 +1,13 @@
+[Unit]
+Description=Web browser
+After=graphical.target network-online.target
+Wants=network-online.target
+Requires=xinit.service
+
+[Service]
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/webc-surf
+Restart=always
+
+[Install]
+WantedBy=default.target

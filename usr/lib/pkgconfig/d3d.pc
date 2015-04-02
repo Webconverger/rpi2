@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+moduledir=${exec_prefix}/lib/d3d
+
+Name: d3d
+Description: Native D3D driver modules
+Version: 1.0.0
+Requires.private: libdrm >= 2.4.38
+Cflags: -I${includedir}

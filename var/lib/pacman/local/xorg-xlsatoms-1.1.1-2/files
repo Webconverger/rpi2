@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xlsatoms
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xlsatoms/
+usr/share/licenses/xorg-xlsatoms/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xlsatoms.1.gz
+

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+
+dbus_interface=${datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2.xml
+agent_dbus_interface=${datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2.Agent.xml
+
+Name: Geoclue
+Description: The Geoinformation Service
+Version: 2.1.10

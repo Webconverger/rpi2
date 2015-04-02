@@ -1,0 +1,43 @@
+%NAME%
+gstreamer
+
+%VERSION%
+1.4.5-1
+
+%DESC%
+GStreamer Multimedia Framework
+
+%URL%
+http://gstreamer.freedesktop.org/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1419180099
+
+%INSTALLDATE%
+1427957141
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu0@archlinuxarm.org>
+
+%SIZE%
+14765056
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libxml2
+glib2
+
+%OPTDEPENDS%
+sh: feedback script
+

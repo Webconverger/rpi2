@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/sessreg
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-sessreg/
+usr/share/licenses/xorg-sessreg/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/sessreg.1.gz
+

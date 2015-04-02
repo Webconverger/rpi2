@@ -1,0 +1,62 @@
+%NAME%
+avahi
+
+%VERSION%
+0.6.31-15
+
+%DESC%
+Multicast/unicast DNS-SD framework
+
+%URL%
+http://git.0pointer.net/avahi.git
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1427333358
+
+%INSTALLDATE%
+1427957177
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu3@archlinuxarm.org>
+
+%SIZE%
+2259968
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+expat
+libdaemon
+glib2
+libcap
+gdbm
+dbus
+
+%OPTDEPENDS%
+gtk3: avahi-discover-standalone, bshell, bssh, bvnc
+gtk2: gtk2 bindings
+qt4: qt4 bindings
+pygtk: avahi-bookmarks, avahi-discover
+python2-twisted: avahi-bookmarks
+mono: mono bindings
+python2-dbus: avahi-discover
+nss-mdns: NSS support for mDNS
+
+%CONFLICTS%
+howl
+mdnsresponder
+
+%PROVIDES%
+howl
+mdnsresponder
+

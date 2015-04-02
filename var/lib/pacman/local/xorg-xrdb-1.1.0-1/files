@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xrdb
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xrdb/
+usr/share/licenses/xorg-xrdb/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xrdb.1.gz
+

@@ -1,0 +1,16 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xkbbell
+usr/bin/xkbvleds
+usr/bin/xkbwatch
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xkbutils/
+usr/share/licenses/xorg-xkbutils/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xkbbell.1.gz
+usr/share/man/man1/xkbvleds.1.gz
+usr/share/man/man1/xkbwatch.1.gz
+

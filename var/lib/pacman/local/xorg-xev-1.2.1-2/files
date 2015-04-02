@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xev
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xev/
+usr/share/licenses/xorg-xev/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xev.1.gz
+

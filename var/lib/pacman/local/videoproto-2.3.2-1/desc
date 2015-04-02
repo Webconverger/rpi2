@@ -1,0 +1,36 @@
+%NAME%
+videoproto
+
+%VERSION%
+2.3.2-1
+
+%DESC%
+X11 Video extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1374605476
+
+%INSTALLDATE%
+1427957141
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+odroid1@archlinuxarm.org>
+
+%SIZE%
+103424
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

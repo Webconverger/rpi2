@@ -1,0 +1,47 @@
+%NAME%
+libproxy
+
+%VERSION%
+0.4.11-5
+
+%DESC%
+A library that provides automatic proxy configuration management
+
+%URL%
+http://libproxy.googlecode.com
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1425560112
+
+%INSTALLDATE%
+1427957120
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu3@archlinuxarm.org>
+
+%SIZE%
+337920
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+gcc-libs
+
+%OPTDEPENDS%
+networkmanager: NetworkManager configuration module
+perl: Perl bindings
+python2: Python bindings
+glib2: gsettings configuration module
+js17: PAC proxy support - Mozilla based pacrunner
+webkitgtk: PAC proxy support - Webkit based pacrunner
+

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+fontrootdir=/usr/share/fonts
+mapdir=/usr/share/fonts/util
+ 
+Name: FontUtil
+Description: Font utilities dirs
+Version: 1.3.1

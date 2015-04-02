@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xcursorgen
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xcursorgen/
+usr/share/licenses/xorg-xcursorgen/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xcursorgen.1.gz
+

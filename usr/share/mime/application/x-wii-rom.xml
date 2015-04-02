@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-wii-rom">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>Wii disc image</comment>
+  <comment xml:lang="ca">imatge de risc de Wii</comment>
+  <comment xml:lang="de">Wii-Datenträgerabbild</comment>
+  <comment xml:lang="el">Εικόνα δίσκου Wii</comment>
+  <comment xml:lang="en_GB">Wii disc image</comment>
+  <comment xml:lang="es">imagen de disco de Wii</comment>
+  <comment xml:lang="eu">Wii disko irudia</comment>
+  <comment xml:lang="fr">image disque Wii</comment>
+  <comment xml:lang="he">דמות כונן Wii</comment>
+  <comment xml:lang="id">Image disk Wii</comment>
+  <comment xml:lang="it">Immagine disco Wii</comment>
+  <comment xml:lang="kk">Wii диск бейнесі</comment>
+  <comment xml:lang="ko">Wii 디스크 이미지</comment>
+  <comment xml:lang="pl">Obraz płyty konsoli Wii</comment>
+  <comment xml:lang="pt_BR">Imagem de disco Wii</comment>
+  <comment xml:lang="uk">образ диска Wii</comment>
+  <comment xml:lang="zh_CN">Wii光盘镜像</comment>
+  <alias type="application/x-wii-iso-image"/>
+  <alias type="application/x-wbfs"/>
+  <alias type="application/x-wia"/>
+  <generic-icon name="application-x-executable"/>
+  <glob pattern="*.iso"/>
+</mime-type>

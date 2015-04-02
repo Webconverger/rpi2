@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xkbevd
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xkbevd/
+usr/share/licenses/xorg-xkbevd/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xkbevd.1.gz
+

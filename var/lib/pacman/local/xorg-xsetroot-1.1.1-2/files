@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xsetroot
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xsetroot/
+usr/share/licenses/xorg-xsetroot/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xsetroot.1.gz
+

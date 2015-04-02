@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xrefresh
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xrefresh/
+usr/share/licenses/xorg-xrefresh/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xrefresh.1.gz
+

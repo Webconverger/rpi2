@@ -12,3 +12,8 @@ systemd-timesync:x:192:192:systemd-timesync:/:/usr/bin/nologin
 systemd-network:x:193:193:systemd-network:/:/usr/bin/nologin
 systemd-bus-proxy:x:194:194:systemd-bus-proxy:/:/usr/bin/nologin
 systemd-resolve:x:195:195:systemd-resolve:/:/usr/bin/nologin
+systemd-journal-upload:x:998:998:systemd Journal Upload:/:/sbin/nologin
+systemd-journal-remote:x:999:999:systemd Journal Remote:/:/sbin/nologin
+git:x:997:997:git daemon user:/:/bin/bash
+avahi:x:84:84:avahi:/:/bin/nologin
+polkitd:x:102:102:Policy Kit Daemon:/:/bin/false

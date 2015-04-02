@@ -1,0 +1,43 @@
+%NAME%
+openjpeg
+
+%VERSION%
+1.5.2-1
+
+%DESC%
+An open source JPEG 2000 codec
+
+%URL%
+http://www.openjpeg.org
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1398674118
+
+%INSTALLDATE%
+1427957256
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu0@archlinuxarm.org>
+
+%SIZE%
+415744
+
+%REASON%
+1
+
+%LICENSE%
+BSD
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+zlib
+
+%OPTDEPENDS%
+lcms2: j2k_to_image and image_to_j2k programs
+libpng: j2k_to_image and image_to_j2k programs
+

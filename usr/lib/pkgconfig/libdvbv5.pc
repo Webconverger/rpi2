@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: libdvbv5
+Description: DVBv5 utility library
+Version: 1.6.2
+Libs: -L${libdir} -ldvbv5
+Cflags: -I${includedir}

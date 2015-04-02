@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/xhost
+usr/share/
+usr/share/licenses/
+usr/share/licenses/xorg-xhost/
+usr/share/licenses/xorg-xhost/COPYING
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/xhost.1.gz
+

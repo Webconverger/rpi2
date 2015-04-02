@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: atspi
+Description: Accessibility Technology software library
+Requires: dbus-1 glib-2.0
+Version: 2.14.1
+Libs: -L${libdir} -latspi
+Cflags: -I${includedir}/at-spi-2.0

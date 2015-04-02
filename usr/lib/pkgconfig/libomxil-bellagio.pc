@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+toolsdir=${exec_prefix}/bin
+pluginsdir=${libdir}/bellagio
+
+Name: libomxil
+Description: OpenMAX Integration Layer library
+Version: 0.9.3
+Libs: -L${libdir} -lomxil-bellagio
+Cflags: -I${includedir} -I${includedir}/bellagio
+
