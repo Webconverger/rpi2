@@ -12,4 +12,11 @@ do
 xsetroot -name "$(print_mem) $webc_id $webc_version"
 sleep 5
 done &
-exec dwm
+
+. /etc/webc/webc.conf
+if cmdline_has debug
+then 
+	exec dwm
+else
+	exec dwm.web
+fi

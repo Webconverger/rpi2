@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/alsa_delay
+usr/bin/alsa_loopback
+usr/include/
+usr/include/zita-alsa-pcmi.h
+usr/lib/
+usr/lib/libzita-alsa-pcmi.so
+usr/lib/libzita-alsa-pcmi.so.0
+usr/lib/libzita-alsa-pcmi.so.0.2.0
+
