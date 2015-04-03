@@ -9,7 +9,7 @@ User=root
 TTYPath=/dev/tty7
 Environment=DISPLAY=:0
 ExecStart=/usr/bin/xinit -- vt7 -keeptty -nolisten tcp
-Restart=Always
+Restart=always
 
 [Install]
 WantedBy=graphical.target

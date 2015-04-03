@@ -24,5 +24,7 @@ then
 	install_base_url="https://config.webconverger.com/clients"
 	homepage="${install_base_url}/?v=${webc_version}&id=${webc_id}"
 fi
+export webc_id=$webc_id
+export homepage=$homepage
 
-/usr/bin/surf2 $homepage
+/usr/bin/webc-wsc /usr/bin/surf2 $homepage
