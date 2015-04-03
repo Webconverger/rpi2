@@ -1,0 +1,36 @@
+%NAME%
+unclutter
+
+%VERSION%
+8-10
+
+%DESC%
+A small program for hiding the mouse cursor
+
+%URL%
+http://ftp.x.org/contrib/utilities/unclutter-8.README
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1386258542
+
+%INSTALLDATE%
+1428066087
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+47104
+
+%LICENSE%
+Public Domain
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libxext
+

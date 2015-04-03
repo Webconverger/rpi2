@@ -9,11 +9,14 @@ print_mem(){
 while true
 do
 . /etc/webc/webc.conf
-xsetroot -name "$(print_mem) $webc_id $webc_version"
-sleep 5
+	xsetroot -name "$(print_mem) $webc_id $webc_version"
+	sleep 5
 done &
 
 . /etc/webc/webc.conf
+
+cmdline | grep -qs showcursor || exec /usr/bin/unclutter &
+
 if cmdline_has debug
 then 
 	exec dwm

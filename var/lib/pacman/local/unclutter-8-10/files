@@ -1,0 +1,12 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/unclutter
+usr/share/
+usr/share/licenses/
+usr/share/licenses/unclutter/
+usr/share/licenses/unclutter/unclutter-8.README
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/unclutter.1.gz
+
