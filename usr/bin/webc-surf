@@ -94,4 +94,4 @@ fi
 export webc_id=$webc_id
 export homepage=$homepage
 
-/usr/bin/webc-wsc /usr/bin/surf2 $homepage
+/usr/bin/webc-wsc ${webck:-/usr/bin/surf2} $homepage

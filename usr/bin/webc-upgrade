@@ -1,9 +1,20 @@
 #!/bin/bash
 git remote set-url origin https://github.com/Webconverger/rpi2.git
 # Upgrade
-git pull origin master
-# Sync /boot with the fat partition
+git pull origin master || exit 1
+# Sync /boot with the fat partition TODO: Is there a safer way of doing this?
 cp -r /boot/* /bootfat/
 
 . /etc/webc/webc.conf
+
 sed -i "s,$, $(cmdline_get boot_append)," /bootfat/cmdline.txt
+
+. "$config_runtime"
+
+if test "$rpi2config"
+then
+	if curl -f -o /bootfat/config.txt --retry 5 "$rpi2config"
+	then
+		logger "$rpi2config" succesfully set
+	fi
+fi

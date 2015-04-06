@@ -5,6 +5,8 @@ Wants=network-online.target
 
 [Service]
 ExecStart=/usr/bin/webc-upgrade
+Restart=on-failure
+RestartSec=30
 
 [Install]
 WantedBy=default.target
