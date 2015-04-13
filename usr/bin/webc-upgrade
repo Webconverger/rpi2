@@ -18,3 +18,5 @@ then
 		logger "$rpi2config" succesfully set
 	fi
 fi
+
+logger Upgrade finished

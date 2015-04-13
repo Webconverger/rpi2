@@ -1,4 +1,4 @@
-for i in dev var/spool/mail proc run sys bootfat srv/ftp srv/http var/empty
+for i in dev var/spool/mail proc run sys bootfat srv/ftp srv/http var/empty etc/dbus-1/session.d
 do
 	test -d $i || mkdir -p $i
 done

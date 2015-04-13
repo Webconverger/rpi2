@@ -1,0 +1,89 @@
+#!/bin/bash
+
+logger Fetching config $(date)
+
+until test "$mac"
+do
+	. "/etc/webc/webc.conf"
+done
+
+logger "Fetching $config_url"
+if curl -f -o /etc/webc/cmdline.tmp --retry 5 "$config_url"
+then
+	# curl has a bug where it doesn't write an empty file
+	touch /etc/webc/cmdline.tmp
+	# This file can be empty in the case of an invalidated configuration
+	mv /etc/webc/cmdline.tmp "$config_runtime"
+	logger "CONFIG: Download applied $(md5sum $config_runtime)"
+else
+	logger "CONFIG: Failed to download from $config_url"
+fi
+
+. "$config_runtime"
+
+for x in $(cmdline)
+do
+	case $x in
+
+		xkb=*)
+			koptions=$( echo ${x#xkb=} | urldecode )
+			if setxkbmap $koptions; then logger "setxkbmap OK $koptions"; else logger "setxkbmap ERR $koptions"; fi
+			;;
+
+		# swarp=0,0 // move mouse pointer to top left of screen
+		swarp=*)
+			koptions=$( echo ${x#swarp=} | urldecode )
+			swarp $(echo $koptions | sed 's/[^0-9]/ /g')
+			;;
+
+		# http://webconverger.org/touch_screen_calibration/
+		xinput=*)
+			option=$( echo ${x#xinput=} | urldecode )
+			if eval xinput "$option"
+			then
+				logger "OK: xinput $option"
+			else
+				logger "ERROR: xinput $option"
+			fi
+			;;
+
+		# https://groups.google.com/forum/#!msg/webc-users/GlHh_SX17BM/GojceXVSazgJ
+		xrandr-all=*)
+			xoptions=$( echo ${x#xrandr-all=} | urldecode )
+
+			logger "xrandr-all: $xoptions"
+
+			xrandr | awk '$2 ~ /^connected$/ { print $1 }' | while read output
+			do
+				xrandr --output $output $xoptions
+			done
+
+			;;
+
+		xrandr=*)
+
+			xoptions=$( echo ${x#xrandr=} | urldecode )
+
+			if xrandr $xoptions
+			then
+				logger "xrandr OK $xoptions"
+			else
+				logger "xrandr ERR $xoptions"
+			fi
+
+			;;
+
+		noblank)
+			logger "noblank"
+			xset s off
+			xset -dpms
+			;;
+
+		blank=*)
+			secondstillblank=$((${x#blank=} * 60))
+			logger "screen will blank after $secondstillblank seconds"
+			xset s $secondstillblank
+			;;
+
+	esac
+done

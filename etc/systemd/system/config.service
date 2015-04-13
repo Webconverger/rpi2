@@ -1,0 +1,13 @@
+[Unit]
+Description=Fetch and apply configuration
+After=graphical.target network-online.target
+Wants=network-online.target
+Requires=xinit.service
+
+[Service]
+Environment=DISPLAY=:0
+Type=oneshot
+ExecStart=/usr/bin/webc-config
+
+[Install]
+WantedBy=default.target

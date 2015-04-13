@@ -1,8 +1,8 @@
 [Unit]
 Description=Web browser
-After=graphical.target network-online.target
+After=graphical.target network-online.target config.service
 Wants=network-online.target
-Requires=xinit.service
+Requires=xinit.service config.service
 
 [Service]
 Environment=DISPLAY=:0
