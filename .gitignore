@@ -49,3 +49,4 @@ tmp
 etc/machine-id
 etc/webc/cmdline
 root/.viminfo
+usr/share/fish

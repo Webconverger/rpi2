@@ -26,19 +26,19 @@ do
 	case $x in
 
 		xkb=*)
-			koptions=$( echo ${x#xkb=} | urldecode )
+			koptions=$( cmdline_get xkb )
 			if setxkbmap $koptions; then logger "setxkbmap OK $koptions"; else logger "setxkbmap ERR $koptions"; fi
 			;;
 
 		# swarp=0,0 // move mouse pointer to top left of screen
 		swarp=*)
-			koptions=$( echo ${x#swarp=} | urldecode )
+			koptions=$( cmdline_get swarp )
 			swarp $(echo $koptions | sed 's/[^0-9]/ /g')
 			;;
 
 		# http://webconverger.org/touch_screen_calibration/
 		xinput=*)
-			option=$( echo ${x#xinput=} | urldecode )
+			option=$( cmdline_get xinput )
 			if eval xinput "$option"
 			then
 				logger "OK: xinput $option"
@@ -49,7 +49,7 @@ do
 
 		# https://groups.google.com/forum/#!msg/webc-users/GlHh_SX17BM/GojceXVSazgJ
 		xrandr-all=*)
-			xoptions=$( echo ${x#xrandr-all=} | urldecode )
+			xoptions=$( cmdline_get xrandr-all )
 
 			logger "xrandr-all: $xoptions"
 
@@ -62,7 +62,7 @@ do
 
 		xrandr=*)
 
-			xoptions=$( echo ${x#xrandr=} | urldecode )
+			xoptions=$( cmdline_get xrandr )
 
 			if xrandr $xoptions
 			then

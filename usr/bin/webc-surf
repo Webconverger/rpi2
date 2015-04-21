@@ -17,4 +17,5 @@ then
 	rm -rf ~/.{cache,config,dbus,local}
 fi
 
+webck=$(cmdline_get webck)
 /usr/bin/webc-wsc ${webck:-/usr/bin/surf2} $homepage
