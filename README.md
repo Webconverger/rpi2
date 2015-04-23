@@ -6,41 +6,39 @@ NOTE: On my system: `sd=/dev/sdb`. This is the device of my microSD card discove
 
 Start fdisk to partition the SD card: `# fdisk $sd` Warning: All data will be deleted from the  microSD card.
 
-* At the fdisk prompt, delete old partitions and create a new one:
-	* Type o. This will clear out any partitions on the drive.
-	* Type p to list partitions. There should be no partitions left.
-	* Type n, then p for primary, 1 for the first partition on the drive, press ENTER to accept the default first sector, then type +100M for the last sector.
-	* Type t, then c to set the first partition to type W95 FAT32 (LBA).
-	* Type n, then p for primary, 2 for the second partition on the drive, and then press ENTER twice to accept the default first and last sector.
-	* Write the partition table and exit by typing w.
+At the fdisk prompt, we will delete old partitions and create one **100M FAT32** boot partition and leave the rest for a **ext4** formatted root partition with the following commands:
 
-So now we have 1 partition with 100M formatted as fat so the Rpi2 can bootstrap
-the Linux kernel. And the 2nd partition is the actual operating system rootfs.
+1. Type `o`. This will clear out any partitions on the drive.
+* Type `p` to list partitions. There should be no partitions left.
+* Type `n`, then `p` for primary, 1 for the first partition on the drive, press ENTER to accept the default first sector, then type `+100M` for the last sector.
+* Type `t`, then `c` to set the first partition to type W95 FAT32 (LBA).
+* Type `n`, then `p` for primary, `2` for the second partition on the drive, and then press ENTER twice to accept the default first and last sector.
+* Write the partition table and exit by typing `w`.
 
-Lets setup the rootfs:
+Lets setup the rootfs on the microSD card:
 
-	mkfs.ext4 ${sd}2
-	mkdir /mnt/$(basename ${sd})2
-	mount ${sd}2 /mnt/$(basename ${sd})2
+	# mkfs.ext4 ${sd}2
+	# mkdir /mnt/$(basename ${sd})2
+	# mount ${sd}2 /mnt/$(basename ${sd})2
 
-Now, lets fetch the Webconverger rootfs for rpi2 from Github as your super user:
+Now, lets fetch the Webconverger rootfs for rpi2 from Github:
 
 	sdb2# git init
 	Initialized empty Git repository in /mnt/sdb2/.git/
-	sdb2# git remote add origin https://github.com/Webconverger/rpi2.git
+	sdb2# git remote add origin https://github.com/Webconverger/rpi2.git # be patient!
 	sdb2# git pull origin master
 	sdb2# bash ./.gitfixups # create some missing empty directories, since git doesn't store empty dirs
 
 Ok, we should have all the files! Now we need to copy over the kernel stuff
-into the special first fat partition for the Rpi to boot.
+into the special first fat partition for the Rpi2 to boot.
 
-	/mnt# sudo mount ${sd}1 /mnt/$(basename ${sd})1
+	/mnt# mkfs.vfat ${sd}1
+	/mnt# mount ${sd}1 /mnt/$(basename ${sd})1
 	/mnt# cd /mnt/$(basename ${sd})1
-	/mnt/sdb1# sudo cp -r ../$(basename ${sd})2/boot/* .
+	/mnt/sdb1# cp -r ../$(basename ${sd})2/boot/* .
 
 ## For the developer
 
-	sudo chown -R $USER .git/
 	git remote set-url --push origin git@github.com:Webconverger/rpi2.git
 	git push -u origin master
 
