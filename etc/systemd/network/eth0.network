@@ -2,4 +2,4 @@
 Name=eth0
 
 [Network]
-DHCP=both
+DHCP=v4

@@ -87,3 +87,17 @@ do
 
 	esac
 done
+
+wpassid=$( cmdline_get wpa-ssid )
+wpapsk=$( cmdline_get wpa-psk )
+if test "$wpassid" && test "$wpapsk"
+then
+logger "Setting up wifi with $wpassid:$wpapsk"
+cat <<EOF > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+ctrl_interface=/run/wpa_supplicant
+network={
+    ssid="$wpassid"
+    psk="$wpapsk"
+}
+EOF
+fi

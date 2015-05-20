@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+        "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+        <vendor>The systemd Project</vendor>
+        <vendor_url>http://www.freedesktop.org/wiki/Software/systemd</vendor_url>
+
+        <action id="org.freedesktop.import1.pull">
+                <description>Download a VM or container image</description>
+                <description xml:lang="de">Abbild einer VM oder eines Containers herunterladen</description>
+                <description xml:lang="fr">Télécharger une image de machine virtuelle (VM) ou de conteneur</description>
+                <description xml:lang="pl">Pobranie obrazu maszyny wirtualnej lub kontenera</description>
+                <description xml:lang="ru">Загрузить образ виртуальной машины или контейнера</description>
+                <message>Authentication is required to download a VM or container image</message>
+                <message xml:lang="de">Legitimierung ist zum Herunterladen eines VM- oder Containerabbilds erforderlich</message>
+                <message xml:lang="fr">Authentification requise pour télécharger une image de machine virtuelle (VM) ou de conteneur.</message>
+                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby pobrać obraz maszyny wirtualnej lub kontenera</message>
+                <message xml:lang="ru">Чтобы загрузить образ виртуальной машины или контейнера, необходимо пройти аутентификацию.</message>
+                <defaults>
+                        <allow_any>auth_admin</allow_any>
+                        <allow_inactive>auth_admin</allow_inactive>
+                        <allow_active>auth_admin_keep</allow_active>
+                </defaults>
+        </action>
+
+</policyconfig>

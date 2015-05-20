@@ -19,3 +19,4 @@ Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/lib/systemd/systemd-backlight load %i
 ExecStop=/usr/lib/systemd/systemd-backlight save %i
+TimeoutSec=90s

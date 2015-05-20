@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+        "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+        <vendor>The systemd Project</vendor>
+        <vendor_url>http://www.freedesktop.org/wiki/Software/systemd</vendor_url>
+
+        <action id="org.freedesktop.machine1.login">
+                <description>Log into a local container</description>
+                <description xml:lang="de">In einem lokalen Container anmelden</description>
+                <description xml:lang="fr">Connexion dans un conteneur local</description>
+                <description xml:lang="hu">Bejelentkezés helyi konténerbe</description>
+                <description xml:lang="it">Accedi in un container locale</description>
+                <description xml:lang="pl">Logowanie do lokalnego kontenera</description>
+                <description xml:lang="pt_BR">Conectar a um contêiner local</description>
+                <description xml:lang="ru">Зайти в локальный контейнер</description>
+                <description xml:lang="sv">Logga till en lokal behållare</description>
+                <message>Authentication is required to log into a local container</message>
+                <message xml:lang="de">Legitimierung ist zum Anmelden in einem lokalen Container notwendig</message>
+                <message xml:lang="fr">Authentification requise pour permettre la connexion dans un conteneur local.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a bejelentkezéshez egy helyi konténerbe.</message>
+                <message xml:lang="it">Autenticazione richiesta per accedere in un container locale</message>
+                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zalogować się do lokalnego kontenera</message>
+                <message xml:lang="pt_BR">É necessária autenticação para se conectar a um contêiner local.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta loggning till en lokal behållare.</message>
+                <defaults>
+                        <allow_any>auth_admin</allow_any>
+                        <allow_inactive>auth_admin</allow_inactive>
+                        <allow_active>auth_admin_keep</allow_active>
+                </defaults>
+        </action>
+
+</policyconfig>

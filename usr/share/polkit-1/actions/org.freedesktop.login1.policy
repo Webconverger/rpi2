@@ -11,17 +11,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Herunterfahren des Systems unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν τον τερματισμό του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher l'arrêt du système</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a rendszer leállítását</description>
                 <description xml:lang="it">Consenti alle applicazioni di inibire lo spegnimento del sistema</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymywanie wyłączenia systemu</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam o desligamento do sistema</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку на выключение системы</description>
+                <description xml:lang="sv">Tillåt program att hindra systemavstängning</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати вимкненню системи</description>
-                <message>Authentication is required to allow an application to inhibit system shutdown.</message>
+                <message>Authentication is required for an application to inhibit system shutdown.</message>
                 <message xml:lang="de">Legitimierung ist notwendig, um Anwendungen das Herunterfahren des Systems zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει τον τερματισμό του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher l'arrêt du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazione di inibire lo spegnimento del sistema</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie wyłączenia systemu.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a rendszerleállítás meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire lo spegnimento del sistema.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać wyłączenie systemu.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba o desligamento do sistema.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку на выключение системы, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra systemavstängning.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати вимкненню системи.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -36,17 +42,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Herunterfahren des Systems verzögern</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να καθυστερούν τον τερματισμό του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications de retarder l'arrêt du système</description>
+                <description xml:lang="hu">Alkalmazások késleltethetik a rendszer leállítását</description>
                 <description xml:lang="it">Consenti alle applicazioni di ritardare lo spegnimento del sistema</description>
                 <description xml:lang="pl">Zezwolenie programom na opóźnienie wyłączenia systemu</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos atrasem o desligamento do sistema</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать задержку на выключение системы</description>
+                <description xml:lang="sv">Tillåt program att fördröja systemavstängning</description>
                 <description xml:lang="uk">Дозволити програмам затримувати вимкнення системи</description>
-                <message>Authentication is required to allow an application to delay system shutdown.</message>
+                <message>Authentication is required for an application to delay system shutdown.</message>
                 <message xml:lang="de">Legitimierung ist notwendig, um Anwendungen das Verzögern des Herunterfahren des Systems zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να καθυστερήσει τον τερματισμό του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application de retarder l'arrêt du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazione di ritardare lo spegnimento del sistema.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na opóźnienie wyłączenia systemu.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a rendszerleállítás késleltetéséhez.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per ritardare lo spegnimento del sistema.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby opóźnić wyłączenie systemu.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo atrase o desligamento do sistema.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать задержку на выключение системы, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att fördröja systemavstängning.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам затримувати вимкнення системи.</message>
                 <defaults>
                         <allow_any>yes</allow_any>
@@ -61,17 +73,23 @@
                 <description xml:lang="de">Anwendungen dürfen den Bereitschaftsmodus unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν την ύπνωση του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher la mise en veille du système</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a rendszer altatását</description>
                 <description xml:lang="it">Consenti alle applicazioni di inibire il sistema in pausa</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie uśpienia systemu</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam a suspensão do sistema</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку на засыпание системы</description>
+                <description xml:lang="sv">Tillåt program att hindra system att försättas i viloläge</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати засинанню системи</description>
-                <message>Authentication is required to allow an application to inhibit system sleep.</message>
+                <message>Authentication is required for an application to inhibit system sleep.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, um Anwendungen das Unterbinden des Bereitschaftsmodus zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την ύπνωση του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher la mise en veille du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazioni di inibire il sistema in pausa.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie uśpienia systemu.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a rendszeraltatás meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire il sistema in pausa.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać uśpienie systemu.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a suspensão do sistema.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку на засыпание системы, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra ett system att försättas i viloläge.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати засинанню системи.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -86,17 +104,23 @@
                 <description xml:lang="de">Anwendungen dürfen den Bereitschaftsmodus verzögern</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να καθυστερούν την ύπνωση του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications de retarder la mise en veille du système</description>
+                <description xml:lang="hu">Alkalmazások késleltethetik a rendszer altatását</description>
                 <description xml:lang="it">Consenti alle applicazioni di ritardare il sistema in pausa</description>
                 <description xml:lang="pl">Zezwolenie programom na opóźnienie uśpienia systemu</description>
+                <description xml:lang="pt_BR">Permite que aplicativos atrasem a suspensão do sistema</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать задержку на засыпание системы</description>
+                <description xml:lang="sv">Tillåt program att fördröja att system försätts i viloläge</description>
                 <description xml:lang="uk">Дозволити програмами затримувати засинання системи</description>
-                <message>Authentication is required to allow an application to delay system sleep.</message>
+                <message>Authentication is required for an application to delay system sleep.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, um Anwendungen das Verzögern des Bereitschaftsmodus zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να καθυστερήσει την ύπνωση του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application de retarder la mise en veille du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazioni di ritardare il sistema in pausa.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na opóźnienie uśpienia systemu.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a rendszeraltatás késleltetéséhez.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per ritardare il sistema in pausa.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby opóźnić uśpienie systemu.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo atrase a suspensão do sistema.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать задержку на засыпание системы, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att fördröja ett system att försättas i viloläge.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам затримувати засинання системи.</message>
                 <defaults>
                         <allow_any>yes</allow_any>
@@ -110,17 +134,23 @@
                 <description xml:lang="de">Anwendungen dürfen den automatischen Bereitschaftsmodus unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν την αυτόματη αναστολή του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher l'hibernation automatique du système</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a rendszer automatikus felfüggesztését</description>
                 <description xml:lang="it">Consenti alle applicazioni di inibire la sospesione automatica del sistema</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie automatycznego uśpienia systemu</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam a suspensão automática do sistema</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку на автоматический переход системы в ждущий режим</description>
+                <description xml:lang="sv">Tillåt program att hindra automatiskt systemvänteläge</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати автоматичному призупиненню системи</description>
-                <message>Authentication is required to allow an application to inhibit automatic system suspend.</message>
+                <message>Authentication is required for an application to inhibit automatic system suspend.</message>
                 <message xml:lang="de">Legitimierung ist notwendig, um Anwendungen das Unterbinden des automatischen Bereitschaftsmodus zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την αυτόματη αναστολή του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher l'hibernation automatique du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazioni di inibire la sospensione automatica del sistema.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie automatycznego uśpienia systemu.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára az automatikus rendszerfelfüggesztés meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire la sospensione automatica del sistema.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać automatyczne uśpienie systemu.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a suspensão automática do sistema.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку на автоматический переход системы в ждущий режим, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra automatiskt systemvänteläge.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати автоматичному призупиненню системи.</message>
                 <defaults>
                         <allow_any>yes</allow_any>
@@ -134,17 +164,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Auswerten des Ein-/Ausschaltknopfs des Systems unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν τη διαχείριση του πλήκτρου ενεργοποίησης του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher la gestion du bouton d'alimentation  du système</description>
-                <description xml:lang="it">Consenti alle applicazioni di inibire al sistema la gestione del tasto di accensione</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a bekapcsoló gomb rendszer általi kezelését</description>
+                <description xml:lang="it">Consenti alle applicazioni di inibire la gestione di sistema del tasto di accensione</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie obsługi klawisza zasilania przez system</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam o sistema de gerenciar o botão de energia</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку обработки нажатий на кнопку выключения</description>
+                <description xml:lang="sv">Tillåt program att hindra systemhantering av strömknappen</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати обробленню системою клавіші живлення</description>
-                <message>Authentication is required to allow an application to inhibit system handling of the power key.</message>
+                <message>Authentication is required for an application to inhibit system handling of the power key.</message>
                 <message xml:lang="de">Legitmierung ist erforderlich, um Anwendungen das Unterbinden der Auswertung der Ein-/Ausschaltknopfs des Systems zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την διαχείριση του πλήκτρου ενεργοποίησης του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher la gestion du bouton d'alimentation du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazioni di inibire al sistema la gestione del tasto di accensione.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie obsługi klawisza zasilania przez system.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a bekapcsoló gomb rendszer általi kezelésének meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire la gestione di sistema del tasto di accensione.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać obsługę klawisza zasilania przez system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a manipulação do sistema sobre a chave de ligar/desligar.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку обработки нажатий на кнопку выключения, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra systemhantering av strömknappen.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати обробленню системою клавіші живлення.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -159,17 +195,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Auswerten des Bereitschaftsknopfs des Systems unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν τη διαχείριση του πλήκτρου αναστολής του συστήματος.</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher la gestion du bouton de mise en veille du système</description>
-                <description xml:lang="it">Consenti alle applicazioni di inibire al sistema la gestione del tasto di sospensione</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a felfüggesztés gomb rendszer általi kezelését</description>
+                <description xml:lang="it">Consenti alle applicazioni di inibire la gestione di sistema del tasto di sospensione</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie obsługi klawisza uśpienia przez system</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam o sistema de gerenciar o botão de suspensão</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку обработки нажатий на кнопку перехода в ждущий режим</description>
+                <description xml:lang="sv">Tillåt program att hindra systemhantering av väntelägesknappen</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати обробленню системою клавіші призупинення</description>
-                <message>Authentication is required to allow an application to inhibit system handling of the suspend key.</message>
+                <message>Authentication is required for an application to inhibit system handling of the suspend key.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, um Anwendungen das Unterbinden der Auswertung des Bereitschaftsknopfes des Systems zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την διαχείριση του πλήκτρου αναστολής του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher la gestion du bouton de mise en veille du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire ad un'applicazione di inibire al sistema la gestione del tasto di sospensione.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie obsługi klawisza uśpienia przez system.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a felfüggesztés gomb rendszer általi kezelésének meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire la gestione di sistema del tasto di sospensione.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać obsługę klawisza uśpienia przez system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a manipulação do sistema sobre a chave de suspensão.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку обработки нажатий на кнопку перехода в ждущий режим, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra systemhantering av väntelägesknappen.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати обробленню системою клавіші призупинення.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -184,17 +226,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Auswerten des Knopfs für den Ruhezustand unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν τη διαχείριση του πλήκτρου αδρανοποίησης του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher la gestion du bouton d'hibernation du système</description>
-                <description xml:lang="it">Consenti alle applicazioni di inibire al sistema la gestione del tasto di ibernazione</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a hibernálás gomb rendszer általi kezelését</description>
+                <description xml:lang="it">Consenti alle applicazioni di inibire la gestione di sistema del tasto di ibernazione</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie obsługi klawisza hibernacji przez system</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam o sistema de gerenciar o botão de hibernação</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку обработки нажатий на кнопку перехода в спящий режим</description>
+                <description xml:lang="sv">Tillåt program att hindra systemhantering av vilolägesknappen</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати обробленню системою клавіші присипання</description>
-                <message>Authentication is required to allow an application to inhibit system handling of the hibernate key.</message>
+                <message>Authentication is required for an application to inhibit system handling of the hibernate key.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, um Anwendungen das Unterbinden der Auswertung des Knopfs für den Ruhezustand zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την διαχείριση του πλήκτρου αδρανοποίησης του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher la gestion du bouton d'hibernation du système.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire ad un'applicazione di inibire al sistema la gestione del tasto di ibernazione.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie obsługi klawisza hibernacji przez system.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a hibernálás gomb rendszer általi kezelésének meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per un'applicazione per inibire la gestione di sistema del tasto di ibernazione.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać obsługę klawisza hibernacji przez system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a manipulação do sistema sobre a chave de hibernar.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку обработки нажатий на кнопку перехода в спящий режим, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra systemhantering av vilolägesknappen.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати обробленню системою клавіші присипання.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -208,17 +256,23 @@
                 <description xml:lang="de">Anwendungen dürfen das Auswerten des Notebookdeckelschalters unterbinden</description>
                 <description xml:lang="el">Να επιτρέπεται στις εφαρμογές να αποτρέπουν τη διαχείριση του διακόπτη καλύμματος του συστήματος</description>
                 <description xml:lang="fr">Permet aux applications d'empêcher la gestion par le système du rabat de l'écran</description>
-                <description xml:lang="it">Consenti alle applicazioni di inibire al sistema la gestione degli eventi relativi alla chiusura del portatile</description>
+                <description xml:lang="hu">Alkalmazások meggátolhatják a fedélkapcsoló rendszer általi kezelését</description>
+                <description xml:lang="it">Consenti alle applicazioni di inibire la gestione di sistema alla apertura/chiusura del portatile</description>
                 <description xml:lang="pl">Zezwolenie programom na wstrzymanie obsługi przełącznika pokrywy przez system</description>
+                <description xml:lang="pt_BR">Permitir que aplicativos inibam o sistema de gerenciar a abertura/fechamento da tampa do dispositivo portátil</description>
                 <description xml:lang="ru">Разрешить приложениям устанавливать блокировку на обработку закрытия крышки ноутбука</description>
+                <description xml:lang="sv">Tillåt program att hindra systemhantering av växel för datorhölje</description>
                 <description xml:lang="uk">Дозволити програмам перешкоджати обробленню системою клавіші перемикання кришки</description>
-                <message>Authentication is required to allow an application to inhibit system handling of the lid switch.</message>
+                <message>Authentication is required for an application to inhibit system handling of the lid switch.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, um Anwendungen das Unterbinden der Auswertung des Notebookdeckelschalters des Systems zu erlauben.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μια εφαρμογή να αποτρέψει την διαχείριση του διακόπτη καλύμματος του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour permettre à une application d'empêcher la gestion par le système du rabat de l'écran.</message>
-                <message xml:lang="it">Autenticazione richiesta per consentire alle applicazioni di inibire al sistema la gestione degli eventi relativi alla chiusura del portatile.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić programowi na wstrzymanie obsługi przełącznika pokrywy przez system.</message>
+                <message xml:lang="hu">Hitelesítés szükséges egy alkalmazás számára a fedélkapcsoló rendszer általi kezelésének meggátlásához.</message>
+                <message xml:lang="it">Autenticazione richiesta per consentire ad un'applicazione di inibire la gestione di sistema alla apertura/chiusura del portatile.</message>
+                <message xml:lang="pl">Program wymaga uwierzytelnienia, aby wstrzymać obsługę przełącznika pokrywy przez system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para que um aplicativo iniba a manipulação do sistema sobre o interruptor da tela.</message>
                 <message xml:lang="ru">Чтобы разрешить приложениям устанавливать блокировку на обработку закрытия крышки ноутбука, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att tillåta ett program att hindra systemhantering av brytaren för datorhöljet.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити програмам перешкоджати обробленню системою клавіші перемикання кришки.</message>
                 <defaults>
                         <allow_any>no</allow_any>
@@ -232,17 +286,23 @@
                 <description xml:lang="de">Nicht angemeldete Benutzer dürfen Programme ausführen</description>
                 <description xml:lang="el">Να επιτρέπεται σε μη συνδεμένους χρήστες να εκτελούν προγράμματα</description>
                 <description xml:lang="fr">Permet aux utilisateurs non connectés d'exécuter des programmes</description>
+                <description xml:lang="hu">Programfuttatás engedélyezése be nem jelentkezett felhasználók számára</description>
                 <description xml:lang="it">Consenti agli utenti non connessi di eseguire programmi</description>
                 <description xml:lang="pl">Zezwolenie niezalogowanym użytkownikom na uruchamianie programów</description>
+                <description xml:lang="pt_BR">Permitir que programas sejam executados por usuários que não possuem sessão</description>
                 <description xml:lang="ru">Разрешить пользователям оставлять программы в фоновом режиме после завершения сеанса</description>
+                <description xml:lang="sv">Tillåt ej inloggade användare att köra program</description>
                 <description xml:lang="uk">Дозволити незареєстрованим користувачам запускати програми</description>
-                <message>Authentication is required to allow a non-logged-in user to run programs.</message>
+                <message>Authentication is required to run programs as a non-logged-in user.</message>
                 <message xml:lang="de">Legitimierung ist erforderlich, damit nicht angemeldete Benutzer Programme ausführen dürfen.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για να επιτρέπεται σε μη συνδεμένους χρήστες να εκτελούν προγράμματα.</message>
                 <message xml:lang="fr">Authentification requise pour permettre aux utilisateurs non connectés d'exécuter des programmes.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a programfuttatáshoz be nem jelentkezett felhasználóként.</message>
                 <message xml:lang="it">Autenticazione richiesta per consentire agli utenti non connessi di eseguire programmi.</message>
-                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zezwolić niezalogowanemu użytkownikowi na uruchamianie programów.</message>
+                <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchamiać programy jako niezalogowany użytkownik.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para executar programas como usuário sem sessão aberta.</message>
                 <message xml:lang="ru">Чтобы разрешить пользователям оставлять программы в фоновом режиме после завершения сеанса, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att köra program som en icke inloggad användare.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб дозволити незареєстрованим користувачам запускати програми.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -256,17 +316,23 @@
                 <description xml:lang="de">Das Anschließen von Geräten an Arbeitsstationen erlauben</description>
                 <description xml:lang="el">Να επιτρέπεται η προσάρτηση συσκευών στους σταθμούς εργασίας</description>
                 <description xml:lang="fr">Permet d'associer des périphériques à des postes (seats)</description>
+                <description xml:lang="hu">Eszközök csatolásának engedélyezése munkaállomásokhoz</description>
                 <description xml:lang="it">Consenti di collegare dispositivi alle postazioni</description>
                 <description xml:lang="pl">Zezwolenie na podłączanie urządzeń do stanowisk</description>
+                <description xml:lang="pt_BR">Permitir conectar dispositivos em estações</description>
                 <description xml:lang="ru">Разрешить подключение устройств к рабочим местам</description>
+                <description xml:lang="sv">Tillåt att binda enheter till platser</description>
                 <description xml:lang="uk">Дозволити під'єднання пристроїв до місць</description>
                 <message>Authentication is required for attaching a device to a seat.</message>
                 <message xml:lang="de">Legitimierung ist zum Anschließen eines Geräts an eine Arbeitsstation notwendig.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για προσάρτηση μιας συσκευής σε έναν σταθμό εργασίας.</message>
                 <message xml:lang="fr">Authentification requise pour associer un périphérique à un poste (seat).</message>
-                <message xml:lang="it">Autenticazione richiesta per collegare un dispositivo alla postazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges eszköz csatolásának engedélyezéséhez egy munkaállomáshoz</message>
+                <message xml:lang="it">Autenticazione richiesta per collegare un dispositivo ad una postazione.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby podłączyć urządzenie do stanowiska.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para conectar um dispositivo em uma estação.</message>
                 <message xml:lang="ru">Чтобы разрешить подключение устройств к рабочим местам, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att binda en enhet till en plats.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб під'єднувати пристрої до місць.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -281,17 +347,23 @@
                 <description xml:lang="de">Zurücksetzen der an eine Arbeitsstation angeschlossenen Geräte</description>
                 <description xml:lang="el">Αφαίρεση συσκευής από προσαρτήσεις σταθμού εργασίας</description>
                 <description xml:lang="fr">Révoquer les associations de périphériques aux postes (seats)</description>
+                <description xml:lang="hu">Eszközök és munkaállomások csatolásainak törlése</description>
                 <description xml:lang="it">Scollega i dispositivi dalla postazione</description>
                 <description xml:lang="pl">Usunięcie podłączenia urządzeń do stanowisk</description>
+                <description xml:lang="pt_BR">Liberar dispositivo para conexões da estação</description>
                 <description xml:lang="ru">Сбросить привязки устройств к рабочим местам</description>
+                <description xml:lang="sv">Töm bindningar för enhet-till-plats</description>
                 <description xml:lang="uk">Очисний пристрій для під'єднань до місця</description>
                 <message>Authentication is required for resetting how devices are attached to seats.</message>
                 <message xml:lang="de">Legitimierung ist zum Zurücksetzen notwendig, wie Geräte an eine Arbeitsstation angeschlossen werden.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για επαναφορά του τρόπου που οι συσκευές προσαρτώνται στους σταθμούς εργασίας.</message>
                 <message xml:lang="fr">Authentification requise pour révoquer les associations de périphériques aux postes (seats).</message>
-                <message xml:lang="it">Autenticazione richiesta per scollegare i dispositivi dalla postazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges az eszközök munkaállomásokhoz csatolásainak alaphelyzetbe állításához.</message>
+                <message xml:lang="it">Autenticazione richiesta per ripristinare come i dispositivi sono collegati alle postazioni.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby ponownie ustawić sposób podłączenia urządzeń do stanowisk.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para redefinir a quantidade de dispositivos conectados na estação.</message>
                 <message xml:lang="ru">Чтобы сбросить привязки устройств к рабочим местам, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att återställa hur enheter är bundna till platser.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб перезапустити спосіб під'єднання до місць.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -305,17 +377,23 @@
                 <description xml:lang="de">Das System ausschalten</description>
                 <description xml:lang="el">Σβήσιμο του συστήματος</description>
                 <description xml:lang="fr">Éteindre le système</description>
+                <description xml:lang="hu">A rendszer kikapcsolása</description>
                 <description xml:lang="it">Spegnere il sistema</description>
                 <description xml:lang="pl">Wyłączenie systemu</description>
+                <description xml:lang="pt_BR">Desligar o sistema</description>
                 <description xml:lang="ru">Выключить систему</description>
+                <description xml:lang="sv">Stäng av systemet</description>
                 <description xml:lang="uk">Вимкнути систему</description>
                 <message>Authentication is required for powering off the system.</message>
                 <message xml:lang="de">Legitimierung ist zum Ausschalten des Systems notwendig.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για την σβήσιμο του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour éteindre le système.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer kikapcsolásához.</message>
                 <message xml:lang="it">Autenticazione richiesta per spegnere il sistema.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby wyłączyć system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para desligar o sistema.</message>
                 <message xml:lang="ru">Чтобы выключить систему, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att stänga av systemet.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб вимкнути систему.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -329,17 +407,23 @@
                 <description xml:lang="de">Das System herunter fahren, während andere Benutzer angemeldet sind</description>
                 <description xml:lang="el">Σβήσιμο του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι</description>
                 <description xml:lang="fr">Éteindre le système alors que d'autres utilisateurs sont connectés</description>
+                <description xml:lang="hu">A rendszer kikapcsolása miközben be vannak jelentkezve más felhasználók</description>
                 <description xml:lang="it">Spegnere il sistema mentre altri utenti sono connessi</description>
                 <description xml:lang="pl">Wyłączenie systemu, kiedy są zalogowani inni użytkownicy</description>
+                <description xml:lang="pt_BR">Desligar o sistema enquanto outros usuários estão conectados</description>
                 <description xml:lang="ru">Выключить систему, несмотря на то, что в ней работают другие пользователи</description>
+                <description xml:lang="sv">Stäng av systemet medan andra användare är inloggade</description>
                 <description xml:lang="uk">Вимикнути систему, коли інші користувачі ще в ній</description>
                 <message>Authentication is required for powering off the system while other users are logged in.</message>
                 <message xml:lang="de">Legitimierung ist zum Herunterfahren des Systems notwendig, während andere Benutzer angemeldet sind.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για σβήσιμο του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι.</message>
                 <message xml:lang="fr">Authentification requise pour éteindre le système alors que d'autres utilisateurs sont connectés.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer kikapcsolásához miközben be vannak jelentkezve más felhasználók.</message>
                 <message xml:lang="it">Autenticazione richiesta per spegnere il sistema mentre altri utenti sono connessi.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby wyłączyć system, kiedy są zalogowani inni użytkownicy.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para desligar o sistema enquanto outros usuários estão conectados.</message>
                 <message xml:lang="ru">Чтобы выключить систему, несмотря на то, что в ней работают другие пользователи, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att stänga av systemet medan andra användare är inloggade.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб вимкнути систему, коли інші користувачі в ній.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -354,17 +438,23 @@
                 <description xml:lang="de">Das System ausschalten, während eine Anwendung anfordert es zu unterbinden</description>
                 <description xml:lang="el">Απενεργοποίηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί.</description>
                 <description xml:lang="fr">Éteindre le système alors qu'une application a demandé de l'empêcher</description>
-                <description xml:lang="it">Spegnere il sistema nonostante l'inibizione di una applicazione</description>
+                <description xml:lang="hu">A rendszer kikapcsolása miközben egy alkalmazás ennek meggátlását kérte</description>
+                <description xml:lang="it">Spegnere il sistema mentre un'applicazione chiede di inibirne l'azione</description>
                 <description xml:lang="pl">Wyłączenie systemu, kiedy program zażądał jego wstrzymania</description>
+                <description xml:lang="pt_BR">Desligar o sistema enquanto um aplicativo solicitou inibição</description>
                 <description xml:lang="ru">Выключить систему, несмотря на то, что приложение запросило блокировку выключения</description>
+                <description xml:lang="sv">Stäng av systemet även då ett program hindrar det</description>
                 <description xml:lang="uk">Вимкнути систему, коли програми намагаються першкодити цьому</description>
                 <message>Authentication is required for powering off the system while an application asked to inhibit it.</message>
                 <message xml:lang="de">Legitimierung ist zum Ausschalten des Systems notwendig, während eine Anwendung anfordert es zu unterbinden.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για απενεργοποίηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί.</message>
                 <message xml:lang="fr">Authentification requise pour éteindre le système alors qu'une application a demandé de l'empêcher.</message>
-                <message xml:lang="it">Autenticazione richiesta per spegnere il sistema nonostante l'inibizione di una applicazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer kikapcsolásához miközben egy alkalmazás ennek meggátlását kérte.</message>
+                <message xml:lang="it">Autenticazione richiesta per spegnere il sistema mentre un'applicazione chiede di inibirne l'azione.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby wyłączyć system, kiedy program zażądał jego wstrzymania.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para desligar o sistema enquanto um aplicativo solicitou inibição.</message>
                 <message xml:lang="ru">Чтобы выключить систему, несмотря на то, что приложение запросило блокировку выключения, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att stänga av systemet även då ett program hindrar det.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб вимкнути систему, коли програми намагаються першкодити цьому.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -379,17 +469,23 @@
                 <description xml:lang="de">Das System neu starten</description>
                 <description xml:lang="el">Επανεκκίνηση του συστήματος</description>
                 <description xml:lang="fr">Redémarrer le système</description>
+                <description xml:lang="hu">A rendszer újraindítása</description>
                 <description xml:lang="it">Riavviare il sistema</description>
                 <description xml:lang="pl">Ponowne uruchomienie systemu</description>
+                <description xml:lang="pt_BR">Reiniciar o sistema</description>
                 <description xml:lang="ru">Перезагрузить систему</description>
+                <description xml:lang="sv">Starta om systemet</description>
                 <description xml:lang="uk">Перезавантажити систему</description>
                 <message>Authentication is required for rebooting the system.</message>
                 <message xml:lang="de">Legitimierung ist zum Neustart des Systems notwendig.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για επανεκκίνηση του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour redémarrer le système.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer újraindításához.</message>
                 <message xml:lang="it">Autenticazione richiesta per riavviare il sistema.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby ponownie uruchomić system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para reiniciar o sistema.</message>
                 <message xml:lang="ru">Чтобы перезагрузить систему, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att starta om systemet.</message>
                 <message xml:lang="uk">Для перезавантаження системи необхідна ідентифікація.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -403,17 +499,23 @@
                 <description xml:lang="de">Das Systems neu starten, während andere Benutzer angemeldet sind</description>
                 <description xml:lang="el">Επανεκκίνηση του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι</description>
                 <description xml:lang="fr">Redémarrer le système alors que d'autres utilisateurs sont connectés</description>
+                <description xml:lang="hu">A rendszer újraindítása mialatt be vannak jelentkezve más felhasználók</description>
                 <description xml:lang="it">Riavviare il sistema mentre altri utenti sono connessi</description>
                 <description xml:lang="pl">Ponowne uruchomienie systemu, kiedy są zalogowani inni użytkownicy</description>
+                <description xml:lang="pt_BR">Reiniciar o sistema enquanto outros usuários estiverem conectados</description>
                 <description xml:lang="ru">Перезагрузить систему, несмотря на то, что в ней работают другие пользователи</description>
+                <description xml:lang="sv">Starta om systemet medan andra användare är inloggade</description>
                 <description xml:lang="uk">Перезавантажити, якщо інщі користувачі в системі</description>
                 <message>Authentication is required for rebooting the system while other users are logged in.</message>
                 <message xml:lang="de">Legitimierung ist zum Neustart des Systems notwendig, während andere Benutzer angemeldet sind.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για επανεκκίνηση του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι.</message>
                 <message xml:lang="fr">Authentification requise pour redémarrer le système alors que d'autres utilisateurs sont connectés.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer újraindításához miközben be vannak jelentkezve más felhasználók.</message>
                 <message xml:lang="it">Autenticazione richiesta per riavviare il sistema mentre altri utenti sono connessi.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby ponownie uruchomić system, kiedy są zalogowani inni użytkownicy.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para reiniciar o sistema enquanto outros usuários estiverem conectados.</message>
                 <message xml:lang="ru">Чтобы перезагрузить систему, несмотря на то, что в ней работают другие пользователи, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att starta om systemet medan andra användare är inloggade.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб перезапустити систему, коли інші користувачі в ній.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -428,17 +530,23 @@
                 <description xml:lang="de">Das System neu starten, während eine Anwendung anfordert es zu unterbinden</description>
                 <description xml:lang="el">Επανεκκίνηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί</description>
                 <description xml:lang="fr">Redémarrer le système alors qu'une application a demandé de l'empêcher</description>
-                <description xml:lang="it">Riavviare il sistema nonostante l'inibizione di una applicazione</description>
-                <description xml:lang="pl">Ponowne uruchomienie systemu, kiedy program poprosił o jego wstrzymanie</description>
+                <description xml:lang="hu">A rendszer újraindítása miközben egy alkalmazás ennek meggátlását kérte</description>
+                <description xml:lang="it">Riavviare il sistema mentre un'applicazione chiede di inibirne l'azione</description>
+                <description xml:lang="pl">Ponowne uruchomienie systemu, kiedy program zażądał jego wstrzymania</description>
+                <description xml:lang="pt_BR">Reiniciar o sistema enquanto um aplicativo solicitou inibição</description>
                 <description xml:lang="ru">Перезагрузить систему, несмотря на то, что приложение запросило блокировку выключения</description>
+                <description xml:lang="sv">Starta om systemet även då ett program hindrar det.</description>
                 <description xml:lang="uk">Перезапустити систему, коли програми намагаються першкодити цьому</description>
                 <message>Authentication is required for rebooting the system while an application asked to inhibit it.</message>
                 <message xml:lang="de">Legitimierung ist zum Neustart des Systems notwendig, während eine Anwendung anforderte es zu unterbinden.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για επανεκκίνηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί.</message>
                 <message xml:lang="fr">Authentification requise pour redémarrer le système alors qu'une application  a demandé de l'empêcher.</message>
-                <message xml:lang="it">Autenticazione richiesta per riavviare il sistema nonostante l'inibizione di una applicazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer újraindításához miközben egy alkalmazás ennek meggátlását kérte.</message>
+                <message xml:lang="it">Autenticazione richiesta per riavviare il sistema mentre un'applicazione chiede di inibirne l'azione.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby ponownie uruchomić system, kiedy program zażądał jego wstrzymania.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para reiniciar o sistema enquanto um aplicativo solicitou inibição.</message>
                 <message xml:lang="ru">Чтобы перезагрузить систему, несмотря на то, что приложение запросило блокировку выключения, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att starta om systemet även då ett program hindrar det.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб перезапустити систему, коли програми намагаються першкодити цьому.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -453,17 +561,23 @@
                 <description xml:lang="de">Das System in Bereitschaft versetzen</description>
                 <description xml:lang="el">Αναστολή του συστήματος</description>
                 <description xml:lang="fr">Mettre le système en veille</description>
+                <description xml:lang="hu">A rendszer felfüggesztése</description>
                 <description xml:lang="it">Sospendere il sistema</description>
                 <description xml:lang="pl">Uśpienie systemu</description>
+                <description xml:lang="pt_BR">Suspender o sistema</description>
                 <description xml:lang="ru">Перевести систему в ждущий режим</description>
+                <description xml:lang="sv">Försätt system i vänteläge</description>
                 <description xml:lang="uk">Призупинити систему</description>
                 <message>Authentication is required for suspending the system.</message>
                 <message xml:lang="de">Legitimierung ist zum Versetzen des Systems in Bereitschaft notwendig.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για την αναστολή του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en veille.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer felfüggesztéséhez.</message>
                 <message xml:lang="it">Autenticazione richiesta per sospendere il sistema.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uśpić system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para suspender o sistema.</message>
                 <message xml:lang="ru">Чтобы перевести систему в ждущий режим, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta system i vänteläge.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб призупинити систему.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -477,17 +591,23 @@
                 <description xml:lang="de">Das System in Bereitschaft versetzen, während andere Benutzer angemeldet sind.</description>
                 <description xml:lang="el">Αναστολή του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι</description>
                 <description xml:lang="fr">Mettre le système en veille alors que d'autres utilisateurs sont connectés</description>
+                <description xml:lang="hu">A rendszer felfüggesztése mialatt be vannak jelentkezve más felhasználók</description>
                 <description xml:lang="it">Sospendere il sistema mentre altri utenti sono connessi</description>
                 <description xml:lang="pl">Uśpienie systemu, kiedy są zalogowani inni użytkownicy</description>
+                <description xml:lang="pt_BR">Suspender o sistema enquanto outros usuários estiverem conectados</description>
                 <description xml:lang="ru">Перевести систему в ждущий режим, несмотря на то, что в ней работают другие пользователи</description>
+                <description xml:lang="sv">Försätt systemet i vänteläge medan andra användare är inloggade</description>
                 <description xml:lang="uk">Призупинити систему, коли інші користувачі в ній</description>
                 <message>Authentication is required for suspending the system while other users are logged in.</message>
                 <message xml:lang="de">Legitimierung ist zum Versetzen des Systems in Bereitschaft notwendig, während andere Benutzer angemeldet sind.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για αναστολή του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en veille alors que d'autres utilisateurs sont connectés.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer felfüggesztéséhez miközben be vannak jelentkezve más felhasználók.</message>
                 <message xml:lang="it">Autenticazione richiesta per sospendere il sistema mentre altri utenti sono connessi.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uśpić system, kiedy są zalogowani inni użytkownicy.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para suspender o sistema enquanto outros usuários estiverem conectados.</message>
                 <message xml:lang="ru">Чтобы перевести систему в ждущий режим, несмотря на то, что в ней работают другие пользователи, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta systemet i vänteläge medan andra användare är inloggade.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб призупинити систему, коли інші користувачі в ній.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -502,17 +622,23 @@
                 <description xml:lang="de">Das System in Bereitschaft versetzen, während eine Anwendung anfordert dies zu unterbinden</description>
                 <description xml:lang="el">Αναστολή του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί</description>
                 <description xml:lang="fr">Mettre le système en veille alors qu'une application a demandé de l'empêcher</description>
-                <description xml:lang="it">Sospendere il sistema nonostante l'inibizione di una applicazione</description>
-                <description xml:lang="pl">Uśpienie systemu, kiedy program poprosił o jego wstrzymanie</description>
+                <description xml:lang="hu">A rendszer felfüggesztése miközben egy alkalmazás ennek meggátlását kérte</description>
+                <description xml:lang="it">Sospendere il sistema mentre un'applicazione chiede di inibirne l'azione</description>
+                <description xml:lang="pl">Uśpienie systemu, kiedy program zażądał jego wstrzymania</description>
+                <description xml:lang="pt_BR">Suspender o sistema enquanto um aplicativo solicitou inibição</description>
                 <description xml:lang="ru">Перевести систему в ждущий режим, несмотря на то, что приложение запросило блокировку</description>
+                <description xml:lang="sv">Försätt systemet i vänteläge även då ett program hindrar det</description>
                 <description xml:lang="uk">Призупинити систему, коли програми намагаються першкодити цьому</description>
                 <message>Authentication is required for suspending the system while an application asked to inhibit it.</message>
                 <message xml:lang="de">Legitimierung ist zum Versetzen des Systems in Bereitschaft notwendig, während eine Anwendung anfordert dies zu unterbinden.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για αναστολή του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en veille alors qu'une application a demandé de l'empêcher.</message>
-                <message xml:lang="it">Autenticazione richiesta per sospendere il sistema nonostante l'inibizione di una applicazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer felfüggesztéséhez miközben egy alkalmazás ennek meggátlását kérte.</message>
+                <message xml:lang="it">Autenticazione richiesta per sospendere il sistema mentre un'applicazione chiede di inibirne l'azione.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uśpić system, kiedy program zażądał jego wstrzymania.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para suspender o sistema enquanto um aplicativo solicitou inibição.</message>
                 <message xml:lang="ru">Чтобы перевести систему в ждущий режим, несмотря на то, что приложение запросило блокировку, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta ett program i vänteläge även då ett program hindrar det.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб призупнити систему, коли програми намагаються першкодити цьому.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -527,17 +653,23 @@
                 <description xml:lang="de">Den Ruhezustand des Systems aktivieren</description>
                 <description xml:lang="el">Αδρανοποίηση του συτήματος</description>
                 <description xml:lang="fr">Mettre le système en hibernation</description>
+                <description xml:lang="hu">A rendszer hibernálása</description>
                 <description xml:lang="it">Ibernare il sistema</description>
                 <description xml:lang="pl">Hibernacja systemu</description>
+                <description xml:lang="pt_BR">Hibernar o sistema</description>
                 <description xml:lang="ru">Перевести систему в спящий режим</description>
+                <description xml:lang="sv">Försätt systemet i viloläge</description>
                 <description xml:lang="uk">Приспати систему</description>
                 <message>Authentication is required for hibernating the system.</message>
                 <message xml:lang="de">Legitimierung ist zum Aktivieren des Ruhezustands des Systems notwendig.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για αδρανοποίηση του συστήματος.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en hibernation.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer hibernálásához.</message>
                 <message xml:lang="it">Autenticazione richiesta per ibernare il sistema.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zahibernować system.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para hibernar o sistema.</message>
                 <message xml:lang="ru">Чтобы перевести систему в спящий режим, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta systemet i viloläge.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб приспати систему.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -551,17 +683,23 @@
                 <description xml:lang="de">Den Ruhezustand des Systems aktivieren, während andere Benutzer angemeldet sind</description>
                 <description xml:lang="el">Αδρανοποίηση του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι</description>
                 <description xml:lang="fr">Mettre le système en hibernation alors que d'autres utilisateurs sont connectés</description>
+                <description xml:lang="hu">A rendszer hibernálása mialatt be vannak jelentkezve más felhasználók</description>
                 <description xml:lang="it">Ibernare il sistema mentre altri utenti sono connessi</description>
                 <description xml:lang="pl">Hibernacja systemu, kiedy są zalogowani inni użytkownicy</description>
+                <description xml:lang="pt_BR">Hibernar o sistema enquanto outros usuários estiverem conectados</description>
                 <description xml:lang="ru">Перевести систему в спящий режим, несмотря на то, что в ней работают другие пользователи</description>
+                <description xml:lang="sv">Försätt systemet i viloläge medan andra användare är inloggade</description>
                 <description xml:lang="uk">Приспати систему, коли інші користувачі в ній</description>
                 <message>Authentication is required for hibernating the system while other users are logged in.</message>
                 <message xml:lang="de">Legitimierung ist zum Aktivieren des Ruhezustands des Systems notwendig, während andere Benutzer angemeldet sind.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για αδρανοποίηση του συστήματος ενώ άλλοι χρήστες είναι συνδεμένοι.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en hibernation alors que d'autres utilisateurs sont connectés.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer hibernálásához miközben be vannak jelentkezve más felhasználók.</message>
                 <message xml:lang="it">Autenticazione richiesta per ibernare il sistema mentre altri utenti sono connessi.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zahibernować system, kiedy są zalogowani inni użytkownicy.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para hibernar o sistema enquanto outros usuários estiverem conectados.</message>
                 <message xml:lang="ru">Чтобы перевести систему в спящий режим, несмотря на то, что в ней работают другие пользователи, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta systemet i viloläge medan andra användare är inloggade.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб присипання систему, коли інші користувачі в ній.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>
@@ -576,17 +714,23 @@
                 <description xml:lang="de">Das System in den Ruhezustand versetzen, während eine Anwendung wünscht dies zu verhindern</description>
                 <description xml:lang="el">Αδρανοποίηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί</description>
                 <description xml:lang="fr">Mettre le système en hibernation alors qu'une application a demandé de l'empêcher</description>
-                <description xml:lang="it">Ibernare il sistema nonostante l'inibizione di una applicazione</description>
+                <description xml:lang="hu">A rendszer hibernálása miközben egy alkalmazás ennek meggátlását kérte</description>
+                <description xml:lang="it">Ibernare il sistema mentre un'applicazione chiede di inibirne l'azione</description>
                 <description xml:lang="pl">Hibernacja systemu, kiedy program zażądał jej wstrzymania</description>
+                <description xml:lang="pt_BR">Hibernar o sistema enquanto um aplicativo solicitou inibição</description>
                 <description xml:lang="ru">Перевести систему в спящий режим, несмотря на то, что приложение запросило блокировку</description>
+                <description xml:lang="sv">Försätt systemet i viloläge även då ett program hindrar det</description>
                 <description xml:lang="uk">Приспати систему, коли програми намагаються першкодити цьому</description>
                 <message>Authentication is required for hibernating the system while an application asked to inhibit it.</message>
                 <message xml:lang="de">Legitimierung ist zum Versetzen des System in den Ruhezustand notwendig, während eine Anwendung wünscht dies zu verhindern.</message>
                 <message xml:lang="el">Απαιτείται πιστοποίηση για αδρανοποίηση του συστήματος ενώ μια εφαρμογή ζήτησε να αποτραπεί.</message>
                 <message xml:lang="fr">Authentification requise pour mettre le système en hibernation alors qu'une application a demandé de l'empêcher.</message>
-                <message xml:lang="it">Autenticazione richiesta per ibernare il sistema nonostante l'inibizione di una applicazione.</message>
+                <message xml:lang="hu">Hitelesítés szükséges a rendszer hibernálásához miközben egy alkalmazás ennek meggátlását kérte.</message>
+                <message xml:lang="it">Autenticazione richiesta per ibernare il sistema mentre un'applicazione chiede di inibirne l'azione.</message>
                 <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zahibernować system, kiedy program zażądał jej wstrzymania.</message>
+                <message xml:lang="pt_BR">É necessária autenticação para hibernar o sistema enquanto um aplicativo solicitou inibição.</message>
                 <message xml:lang="ru">Чтобы перевести систему в спящий режим, несмотря на то, что приложение запросило блокировку, необходимо пройти аутентификацию.</message>
+                <message xml:lang="sv">Autentisering krävs för att försätta ett program i viloläge även då ett program hindrar det.</message>
                 <message xml:lang="uk">Засвідчення потрібно, щоб приспати систему, коли програми намагаються першкодити цьому.</message>
                 <defaults>
                         <allow_any>auth_admin_keep</allow_any>

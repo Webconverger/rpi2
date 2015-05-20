@@ -21,7 +21,6 @@ IgnoreOnIsolate=yes
 # that serial gettys are covered by serial-getty@.service, not this
 # unit.
 ConditionPathExists=/dev/tty0
-ConditionKernelCommandLine=debug
 
 [Service]
 # the VT is cleared by TTYVTDisallocate
