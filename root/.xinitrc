@@ -5,11 +5,15 @@ print_mem(){
 	echo -e "$memfree"
 }
 
+print_ip(){
+	ip route get 8.8.8.8 2>/dev/null|grep -Eo 'src [0-9.]+'|grep -Eo '[0-9.]+'
+}
+
 
 while true
 do
 . /etc/webc/webc.conf
-	xsetroot -name "$(print_mem) $webc_id $webc_version"
+	xsetroot -name "$(print_mem) $(print_ip) $webc_id $webc_version"
 	sleep 5
 done &
 

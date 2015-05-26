@@ -79,10 +79,22 @@ do
 			xset -dpms
 			;;
 
+                timezone=*)
+                        xoptions=$( cmdline_get timezone )
+                        if timedatectl set-timezone "$xoptions"
+                        then
+                                logger "Setup timezone: $xoptions"
+                        fi
+                        ;;
+
 		blank=*)
 			secondstillblank=$((${x#blank=} * 60))
-			logger "screen will blank after $secondstillblank seconds"
-			xset s $secondstillblank
+			if xset s $secondstillblank
+			then
+				logger "screen will blank after $secondstillblank seconds"
+			else
+				logger "ERROR: screen will not blank after $secondstillblank seconds"
+			fi
 			;;
 
 	esac
