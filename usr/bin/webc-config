@@ -111,6 +111,31 @@ then
 	fi
 fi
 
+
+if cmdline_has shell
+then
+	shell=$(cmdline_get shell)
+	if test "$shell"
+	then
+		tmp=$(mktemp)
+		curl $shell > $tmp
+		read -r csum _ < <(sha1sum $tmp)
+		log=/var/log/$csum
+		if ! test -f $log
+		then
+			git status &>> $log
+			bash $tmp &>> $log
+			echo RETURN CODE: $? &>> $log
+			git status &>> $log
+			logger "Ran script from $shell and logged it at $log"
+		else
+			logger "ALREADY ran script from $shell and logged it at $log"
+		fi
+	fi
+fi
+
+
+
 wpassid=$( cmdline_get wpa-ssid )
 wpapsk=$( cmdline_get wpa-psk )
 if test "$wpassid" && test "$wpapsk"
