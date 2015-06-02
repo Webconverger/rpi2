@@ -100,6 +100,17 @@ do
 	esac
 done
 
+if cmdline_has debug
+then
+	sshkey=$(cmdline_get ssh)
+	if test "$sshkey"
+	then
+		mkdir ~/.ssh || true
+		curl $sshkey > ~/.ssh/authorized_keys
+		logger "Setup key from $sshkey"
+	fi
+fi
+
 wpassid=$( cmdline_get wpa-ssid )
 wpapsk=$( cmdline_get wpa-psk )
 if test "$wpassid" && test "$wpapsk"
