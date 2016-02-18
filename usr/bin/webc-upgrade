@@ -2,8 +2,6 @@
 git remote set-url origin https://github.com/Webconverger/rpi2.git
 # Upgrade
 git pull origin master || exit 1
-# Sync /boot with the fat partition TODO: Is there a safer way of doing this?
-cp -r /boot/* /bootfat/
 
 . /etc/webc/webc.conf
 
