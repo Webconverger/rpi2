@@ -17,3 +17,4 @@ systemd-journal-remote:x:999:999:systemd Journal Remote:/:/sbin/nologin
 git:x:997:997:git daemon user:/:/bin/bash
 avahi:x:84:84:avahi:/:/bin/nologin
 polkitd:x:102:102:Policy Kit Daemon:/:/bin/false
+colord:x:124:124::/var/lib/colord:/bin/false

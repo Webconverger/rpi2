@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -397,6 +397,14 @@
 # else
 #  define _Noreturn
 # endif
+#endif
+
+#if (!defined _Static_assert && !defined __cplusplus \
+     && (defined __STDC_VERSION__ ? __STDC_VERSION__ : 0) < 201112 \
+     && (!__GNUC_PREREQ (4, 6) || defined __STRICT_ANSI__))
+# define _Static_assert(expr, diagnostic) \
+    extern int (*__Static_assert_function (void)) \
+      [!!sizeof (struct { int __error_if_negative: (expr) ? 2 : -1; })]
 #endif
 
 #include <bits/wordsize.h>

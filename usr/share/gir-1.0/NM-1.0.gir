@@ -175,6 +175,11 @@ is supported</doc>
               c:type="NM_ACCESS_POINT_HW_ADDRESS">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="ACCESS_POINT_LAST_SEEN"
+              value="last-seen"
+              c:type="NM_ACCESS_POINT_LAST_SEEN">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="ACCESS_POINT_MAX_BITRATE"
               value="max-bitrate"
               c:type="NM_ACCESS_POINT_MAX_BITRATE">
@@ -385,6 +390,23 @@ not be modified or freed.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_last_seen"
+              c:identifier="nm_access_point_get_last_seen"
+              version="1.0.6">
+        <doc xml:space="preserve">Returns the timestamp (in CLOCK_BOOTTIME seconds) for the last time the
+access point was found in scan results.  A value of -1 means the access
+point has not been found in a scan.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the last seen time in seconds</doc>
+          <type name="gint" c:type="gint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ap" transfer-ownership="none">
+            <doc xml:space="preserve">a #NMAccessPoint</doc>
+            <type name="AccessPoint" c:type="NMAccessPoint*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_max_bitrate"
               c:identifier="nm_access_point_get_max_bitrate">
         <doc xml:space="preserve">Gets the maximum bit rate of the access point in kbit/s.</doc>
@@ -487,6 +509,12 @@ point.</doc>
         <doc xml:space="preserve">Alias for #NMAccessPoint:bssid.</doc>
         <doc-deprecated xml:space="preserve">use #NMAccessPoint:bssid.</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="last-seen" version="1.0.6" transfer-ownership="none">
+        <doc xml:space="preserve">The timestamp (in CLOCK_BOOTTIME seconds) for the last time the
+access point was found in scan results.  A value of -1 means the
+access point has not been found in a scan.</doc>
+        <type name="gint" c:type="gint"/>
       </property>
       <property name="max-bitrate" transfer-ownership="none">
         <doc xml:space="preserve">The maximum bit rate of the access point in kbit/s.</doc>
@@ -1026,6 +1054,9 @@ Bluetooth device.
     <constant name="CLIENT_HOSTNAME"
               value="hostname"
               c:type="NM_CLIENT_HOSTNAME">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="CLIENT_METERED" value="metered" c:type="NM_CLIENT_METERED">
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <constant name="CLIENT_NETWORKING_ENABLED"
@@ -2515,6 +2546,10 @@ Element-type: NMDevice</doc>
         <doc xml:space="preserve">The machine hostname stored in persistent configuration. This can be
 modified by calling nm_client_save_hostname().</doc>
         <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="metered" version="1.0.6" transfer-ownership="none">
+        <doc xml:space="preserve">Whether the connectivity is metered.</doc>
+        <type name="guint" c:type="guint"/>
       </property>
       <property name="networking-enabled"
                 writable="1"
@@ -4476,6 +4511,9 @@ and some #NMSetting8021x operations.</doc>
     <constant name="DEVICE_MANAGED" value="managed" c:type="NM_DEVICE_MANAGED">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="DEVICE_METERED" value="metered" c:type="NM_DEVICE_METERED">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="DEVICE_MODEM_CURRENT_CAPABILITIES"
               value="current-capabilities"
               c:type="NM_DEVICE_MODEM_CURRENT_CAPABILITIES">
@@ -5281,6 +5319,21 @@ used by the device, and must not be modified.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_metered"
+              c:identifier="nm_device_get_metered"
+              version="1.0.6">
+        <doc xml:space="preserve">Gets the metered setting of a #NMDevice.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the metered setting.</doc>
+          <type name="Metered" c:type="NMMetered"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="device" transfer-ownership="none">
+            <doc xml:space="preserve">a #NMDevice</doc>
+            <type name="Device" c:type="NMDevice*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_mtu" c:identifier="nm_device_get_mtu">
         <doc xml:space="preserve">Gets the  MTU of the #NMDevice.</doc>
         <return-value transfer-ownership="none">
@@ -5512,6 +5565,10 @@ operations like addressing and routing.</doc>
       <property name="managed" transfer-ownership="none">
         <doc xml:space="preserve">Whether the device is managed by NetworkManager.</doc>
         <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <property name="metered" version="1.0.6" transfer-ownership="none">
+        <doc xml:space="preserve">Whether the device is metered.</doc>
+        <type name="guint" c:type="guint"/>
       </property>
       <property name="mtu" transfer-ownership="none">
         <doc xml:space="preserve">The MTU of the device.</doc>
@@ -6937,6 +6994,24 @@ device, and must not be modified.</doc>
               glib:nick="sim-pin-incorrect">
         <doc xml:space="preserve">SIM PIN was incorrect</doc>
       </member>
+      <member name="new_activation"
+              value="60"
+              c:identifier="NM_DEVICE_STATE_REASON_NEW_ACTIVATION"
+              glib:nick="new-activation">
+        <doc xml:space="preserve">New connection activation was enqueued</doc>
+      </member>
+      <member name="parent_changed"
+              value="61"
+              c:identifier="NM_DEVICE_STATE_REASON_PARENT_CHANGED"
+              glib:nick="parent-changed">
+        <doc xml:space="preserve">the device's parent changed</doc>
+      </member>
+      <member name="parent_managed_changed"
+              value="62"
+              c:identifier="NM_DEVICE_STATE_REASON_PARENT_MANAGED_CHANGED"
+              glib:nick="parent-managed-changed">
+        <doc xml:space="preserve">the device parent's management changed</doc>
+      </member>
     </enumeration>
     <class name="DeviceTeam"
            c:symbol-prefix="device_team"
@@ -7459,6 +7534,84 @@ set.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="request_scan_options"
+              c:identifier="nm_device_wifi_request_scan_options"
+              version="1.0.6"
+              throws="1">
+        <doc xml:space="preserve">Request NM to scan for access points on @device. Note that the function
+returns immediately after requesting the scan, and it may take some time
+after that for the scan to complete.
+This is the same as @nm_device_wifi_request_scan except it accepts @options
+for the scanning. The argument is the dictionary passed to RequestScan()
+D-Bus call. Valid otions inside the dictionary are:
+'ssids' =&gt; array of SSIDs (saay)</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE on success, %FALSE on error, in which case @error will be
+set.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="device" transfer-ownership="none">
+            <doc xml:space="preserve">a #NMDeviceWifi</doc>
+            <type name="DeviceWifi" c:type="NMDeviceWifi*"/>
+          </instance-parameter>
+          <parameter name="options" transfer-ownership="none">
+            <doc xml:space="preserve">dictionary with options for RequestScan(), or %NULL</doc>
+            <type name="GLib.Variant" c:type="GVariant*"/>
+          </parameter>
+          <parameter name="cancellable"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+            <type name="Gio.Cancellable" c:type="GCancellable*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="request_scan_options_async"
+              c:identifier="nm_device_wifi_request_scan_options_async"
+              version="1.0.6">
+        <doc xml:space="preserve">Request NM to scan for access points on @device. Note that @callback will be
+called immediately after requesting the scan, and it may take some time after
+that for the scan to complete.
+This is the same as @nm_device_wifi_request_scan_async except it accepts @options
+for the scanning. The argument is the dictionary passed to RequestScan()
+D-Bus call. Valid otions inside the dictionary are:
+'ssids' =&gt; array of SSIDs (saay)</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="device" transfer-ownership="none">
+            <doc xml:space="preserve">a #NMDeviceWifi</doc>
+            <type name="DeviceWifi" c:type="NMDeviceWifi*"/>
+          </instance-parameter>
+          <parameter name="options" transfer-ownership="none">
+            <doc xml:space="preserve">dictionary with options for RequestScan(), or %NULL</doc>
+            <type name="GLib.Variant" c:type="GVariant*"/>
+          </parameter>
+          <parameter name="cancellable"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+            <type name="Gio.Cancellable" c:type="GCancellable*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <doc xml:space="preserve">callback to be called when the scan has been requested</doc>
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data" transfer-ownership="none">
+            <doc xml:space="preserve">caller-specific data passed to @callback</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
       <property name="access-points" transfer-ownership="none">
         <doc xml:space="preserve">List of all Wi-Fi access points the device can see.
 
@@ -7579,6 +7732,24 @@ Element-type: NMAccessPoint</doc>
               c:identifier="NM_WIFI_DEVICE_CAP_ADHOC"
               glib:nick="adhoc">
         <doc xml:space="preserve">device supports Ad-Hoc mode</doc>
+      </member>
+      <member name="freq_valid"
+              value="256"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_VALID"
+              glib:nick="freq-valid">
+        <doc xml:space="preserve">device reports frequency capabilities</doc>
+      </member>
+      <member name="freq_2ghz"
+              value="512"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_2GHZ"
+              glib:nick="freq-2ghz">
+        <doc xml:space="preserve">device supports 2.4GHz frequencies</doc>
+      </member>
+      <member name="freq_5ghz"
+              value="1024"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_5GHZ"
+              glib:nick="freq-5ghz">
+        <doc xml:space="preserve">device supports 5GHz frequencies</doc>
       </member>
     </bitfield>
     <record name="DeviceWifiClass"
@@ -8941,7 +9112,7 @@ reaches zero, the object will be destroyed.</doc>
 is compiled against.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="0" c:type="NM_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="10" c:type="NM_MICRO_VERSION">
       <doc xml:space="preserve">Evaluates to the micro version number of NetworkManager which this source
 compiled against.</doc>
       <type name="gint" c:type="gint"/>
@@ -9043,6 +9214,40 @@ errors in that namespace.</doc>
           <type name="GLib.Quark" c:type="GQuark"/>
         </return-value>
       </function>
+    </enumeration>
+    <enumeration name="Metered"
+                 version="1.0.6"
+                 glib:type-name="NMMetered"
+                 glib:get-type="nm_metered_get_type"
+                 c:type="NMMetered">
+      <doc xml:space="preserve">(Corresponds to the NM_METERED type in nm-device.xml.)</doc>
+      <member name="unknown"
+              value="0"
+              c:identifier="NM_METERED_UNKNOWN"
+              glib:nick="unknown">
+        <doc xml:space="preserve">The metered status is unknown</doc>
+      </member>
+      <member name="yes"
+              value="1"
+              c:identifier="NM_METERED_YES"
+              glib:nick="yes">
+        <doc xml:space="preserve">Metered, the value was statically set</doc>
+      </member>
+      <member name="no" value="2" c:identifier="NM_METERED_NO" glib:nick="no">
+        <doc xml:space="preserve">Not metered, the value was statically set</doc>
+      </member>
+      <member name="guess_yes"
+              value="3"
+              c:identifier="NM_METERED_GUESS_YES"
+              glib:nick="guess-yes">
+        <doc xml:space="preserve">Metered, the value was guessed</doc>
+      </member>
+      <member name="guess_no"
+              value="4"
+              c:identifier="NM_METERED_GUESS_NO"
+              glib:nick="guess-no">
+        <doc xml:space="preserve">Not metered, the value was guessed</doc>
+      </member>
     </enumeration>
     <constant name="OBJECT_DBUS_CONNECTION"
               value="dbus-connection"
@@ -9597,6 +9802,11 @@ after you already have a reference to it.)</doc>
               c:type="NM_SETTING_802_1X_CA_PATH">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="SETTING_802_1X_CERT_SCHEME_PREFIX_PATH"
+              value="file://"
+              c:type="NM_SETTING_802_1X_CERT_SCHEME_PREFIX_PATH">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="SETTING_802_1X_CLIENT_CERT"
               value="client-cert"
               c:type="NM_SETTING_802_1X_CLIENT_CERT">
@@ -10027,6 +10237,11 @@ NAP (Network Access Point) protocol, which accepts connections via PANU.</doc>
               c:type="NM_SETTING_CONNECTION_AUTOCONNECT_PRIORITY_MIN">
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="SETTING_CONNECTION_AUTOCONNECT_SLAVES"
+              value="autoconnect-slaves"
+              c:type="NM_SETTING_CONNECTION_AUTOCONNECT_SLAVES">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="SETTING_CONNECTION_GATEWAY_PING_TIMEOUT"
               value="gateway-ping-timeout"
               c:type="NM_SETTING_CONNECTION_GATEWAY_PING_TIMEOUT">
@@ -10045,6 +10260,11 @@ NAP (Network Access Point) protocol, which accepts connections via PANU.</doc>
     <constant name="SETTING_CONNECTION_MASTER"
               value="master"
               c:type="NM_SETTING_CONNECTION_MASTER">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="SETTING_CONNECTION_METERED"
+              value="metered"
+              c:type="NM_SETTING_CONNECTION_METERED">
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <constant name="SETTING_CONNECTION_PERMISSIONS"
@@ -10772,6 +10992,16 @@ supported for IPv6)</doc>
     <constant name="SETTING_WIRED_SPEED"
               value="speed"
               c:type="NM_SETTING_WIRED_SPEED">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="SETTING_WIRED_WAKE_ON_LAN"
+              value="wake-on-lan"
+              c:type="NM_SETTING_WIRED_WAKE_ON_LAN">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="SETTING_WIRED_WAKE_ON_LAN_PASSWORD"
+              value="wake-on-lan-password"
+              c:type="NM_SETTING_WIRED_WAKE_ON_LAN_PASSWORD">
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <constant name="SETTING_WIRELESS_BAND"
@@ -13083,7 +13313,10 @@ authentication server certificate's subject is performed.</doc>
 specified at configure time with the --system-ca-path switch.  The
 certificates in this directory are added to the verification chain in
 addition to any certificates specified by the #NMSetting8021x:ca-cert and
-#NMSetting8021x:phase2-ca-cert properties.</doc>
+#NMSetting8021x:phase2-ca-cert properties. If the path provided with
+--system-ca-path is rather a file name (bundle of trusted CA certificates),
+it overrides #NMSetting8021x:ca-cert and #NMSetting8021x:phase2-ca-cert
+properties instead (sets ca_cert/ca_cert2 options for wpa_supplicant).</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -14299,6 +14532,23 @@ The higher number, the higher priority.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_autoconnect_slaves"
+              c:identifier="nm_setting_connection_get_autoconnect_slaves"
+              version="1.0.4">
+        <doc xml:space="preserve">Returns the #NMSettingConnection:autoconnect-slaves property of the connection.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">whether slaves of the connection should be activated together
+         with the connection.</doc>
+          <type name="SettingConnectionAutoconnectSlaves"
+                c:type="NMSettingConnectionAutoconnectSlaves"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingConnection</doc>
+            <type name="SettingConnection" c:type="NMSettingConnection*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_connection_type"
               c:identifier="nm_setting_connection_get_connection_type">
         <doc xml:space="preserve">Returns the #NMSettingConnection:type property of the connection.</doc>
@@ -14361,6 +14611,20 @@ property.</doc>
           <doc xml:space="preserve">interface name of the master device or UUID of the master
 connection.</doc>
           <type name="utf8" c:type="const char*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingConnection</doc>
+            <type name="SettingConnection" c:type="NMSettingConnection*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_metered"
+              c:identifier="nm_setting_connection_get_metered"
+              version="1.0.6">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the #NMSettingConnection:metered property of the setting.</doc>
+          <type name="Metered" c:type="NMMetered"/>
         </return-value>
         <parameters>
           <instance-parameter name="setting" transfer-ownership="none">
@@ -14653,6 +14917,20 @@ connections with higher priority will be preferred. Defaults to 0.
 The higher number means higher priority.</doc>
         <type name="gint" c:type="gint"/>
       </property>
+      <property name="autoconnect-slaves"
+                version="1.0.4"
+                writable="1"
+                construct="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether or not slaves of this connection should be automatically brought up
+when NetworkManager activates this connection. This only has a real effect
+for master connections.
+The permitted values are: 0: leave slave connections untouched,
+1: activate all the slave connections with this connection, -1: default.
+If -1 (default) is set, global connection.autoconnect-slaves is read to
+determine the real value. If it is default as well, this fallbacks to 0.</doc>
+        <type name="SettingConnectionAutoconnectSlaves"/>
+      </property>
       <property name="gateway-ping-timeout"
                 writable="1"
                 construct="1"
@@ -14683,6 +14961,13 @@ connection may be applied to the wrong interface.</doc>
       <property name="master" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">Interface name of the master device or UUID of the master connection.</doc>
         <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="metered"
+                version="1.0.6"
+                writable="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether the connection is metered.</doc>
+        <type name="Metered"/>
       </property>
       <property name="permissions" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">An array of strings defining what access a given user has to this
@@ -14773,6 +15058,33 @@ firewall.</doc>
         <type name="Setting" c:type="NMSetting"/>
       </field>
     </class>
+    <enumeration name="SettingConnectionAutoconnectSlaves"
+                 glib:type-name="NMSettingConnectionAutoconnectSlaves"
+                 glib:get-type="nm_setting_connection_autoconnect_slaves_get_type"
+                 c:type="NMSettingConnectionAutoconnectSlaves">
+      <doc xml:space="preserve">#NMSettingConnectionAutoconnectSlaves values indicate whether slave connections
+should be activated when master is activated.</doc>
+      <member name="default"
+              value="-1"
+              c:identifier="NM_SETTING_CONNECTION_AUTOCONNECT_SLAVES_DEFAULT"
+              glib:nick="default">
+        <doc xml:space="preserve">default value</doc>
+      </member>
+      <member name="no"
+              value="0"
+              c:identifier="NM_SETTING_CONNECTION_AUTOCONNECT_SLAVES_NO"
+              glib:nick="no">
+        <doc xml:space="preserve">slaves are not brought up when
+  master is activated</doc>
+      </member>
+      <member name="yes"
+              value="1"
+              c:identifier="NM_SETTING_CONNECTION_AUTOCONNECT_SLAVES_YES"
+              glib:nick="yes">
+        <doc xml:space="preserve">slaves are brought up when
+  master is activated</doc>
+      </member>
+    </enumeration>
     <record name="SettingConnectionClass"
             c:type="NMSettingConnectionClass"
             glib:is-gtype-struct-for="SettingConnection">
@@ -15703,9 +16015,15 @@ property.</doc>
 enabled, it makes the kernel generate a temporary IPv6 address in
 addition to the public one generated from MAC address via modified
 EUI-64.  This enhances privacy, but could cause problems in some
-applications, on the other hand.  The permitted values are: 0: disabled,
-1: enabled (prefer public address), 2: enabled (prefer temporary
-addresses).</doc>
+applications, on the other hand.  The permitted values are: -1: unknown,
+0: disabled, 1: enabled (prefer public address), 2: enabled (prefer temporary
+addresses).
+
+Having a per-connection setting set to "-1" (unknown) means fallback to
+global configuration "ipv6.ip6-privacy".
+
+If also global configuration is unspecified or set to "-1", fallback to read
+"/proc/sys/net/ipv6/conf/default/use_tempaddr".</doc>
         <type name="SettingIP6ConfigPrivacy"/>
       </property>
       <field name="parent">
@@ -15893,7 +16211,7 @@ given route is duplicated internally and is not changed by this function.</doc>
       </method>
       <method name="get_address"
               c:identifier="nm_setting_ip_config_get_address">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">the address at index @i</doc>
           <type name="IPAddress" c:type="NMIPAddress*"/>
         </return-value>
@@ -16118,7 +16436,7 @@ property.</doc>
         </parameters>
       </method>
       <method name="get_route" c:identifier="nm_setting_ip_config_get_route">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">the route at index @i</doc>
           <type name="IPRoute" c:type="NMIPRoute*"/>
         </return-value>
@@ -18519,6 +18837,37 @@ conjunction with that device.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_wake_on_lan"
+              c:identifier="nm_setting_wired_get_wake_on_lan"
+              version="1.0.6">
+        <doc xml:space="preserve">Returns the Wake-on-LAN options enabled for the connection</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the Wake-on-LAN options</doc>
+          <type name="SettingWiredWakeOnLan" c:type="NMSettingWiredWakeOnLan"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingWired</doc>
+            <type name="SettingWired" c:type="NMSettingWired*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_wake_on_lan_password"
+              c:identifier="nm_setting_wired_get_wake_on_lan_password"
+              version="1.0.6">
+        <doc xml:space="preserve">Returns the Wake-on-LAN password. This only applies to
+%NM_SETTING_WIRED_WAKE_ON_LAN_MAGIC.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the Wake-on-LAN setting password, or %NULL if there is no password.</doc>
+          <type name="utf8" c:type="const char*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingWired</doc>
+            <type name="SettingWired" c:type="NMSettingWired*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="remove_mac_blacklist_item"
               c:identifier="nm_setting_wired_remove_mac_blacklist_item">
         <doc xml:space="preserve">Removes the MAC address at index @idx from the blacklist.</doc>
@@ -18663,6 +19012,30 @@ period (.) character.</doc>
 Mbit/s, ie 100 == 100Mbit/s.</doc>
         <type name="guint" c:type="guint"/>
       </property>
+      <property name="wake-on-lan"
+                version="1.0.6"
+                writable="1"
+                construct="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The #NMSettingWiredWakeOnLan options to enable. Not all devices support all options.
+May be any combination of %NM_SETTING_WIRED_WAKE_ON_LAN_PHY,
+%NM_SETTING_WIRED_WAKE_ON_LAN_UNICAST, %NM_SETTING_WIRED_WAKE_ON_LAN_MULTICAST,
+%NM_SETTING_WIRED_WAKE_ON_LAN_BROADCAST, %NM_SETTING_WIRED_WAKE_ON_LAN_ARP,
+%NM_SETTING_WIRED_WAKE_ON_LAN_MAGIC or the special values
+%NM_SETTING_WIRED_WAKE_ON_LAN_DEFAULT (to use global settings) and
+%NM_SETTING_WIRED_WAKE_ON_LAN_IGNORE (to disable management of Wake-on-LAN in
+NetworkManager).</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="wake-on-lan-password"
+                version="1.0.6"
+                writable="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">If specified, the password used with magic-packet-based
+Wake-on-LAN, represented as an Ethernet MAC address.  If %NULL,
+no password will be required.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
       <field name="parent">
         <type name="Setting" c:type="NMSetting"/>
       </field>
@@ -18679,6 +19052,62 @@ Mbit/s, ie 100 == 100Mbit/s.</doc>
         </array>
       </field>
     </record>
+    <bitfield name="SettingWiredWakeOnLan"
+              version="1.0.6"
+              glib:type-name="NMSettingWiredWakeOnLan"
+              glib:get-type="nm_setting_wired_wake_on_lan_get_type"
+              c:type="NMSettingWiredWakeOnLan">
+      <doc xml:space="preserve">Options for #NMSettingWired:wake-on-lan. Note that not all options
+are supported by all devices.</doc>
+      <member name="phy"
+              value="2"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_PHY"
+              glib:nick="phy">
+        <doc xml:space="preserve">Wake on PHY activity</doc>
+      </member>
+      <member name="unicast"
+              value="4"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_UNICAST"
+              glib:nick="unicast">
+        <doc xml:space="preserve">Wake on unicast messages</doc>
+      </member>
+      <member name="multicast"
+              value="8"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_MULTICAST"
+              glib:nick="multicast">
+        <doc xml:space="preserve">Wake on multicast messages</doc>
+      </member>
+      <member name="broadcast"
+              value="16"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_BROADCAST"
+              glib:nick="broadcast">
+        <doc xml:space="preserve">Wake on broadcast messages</doc>
+      </member>
+      <member name="arp"
+              value="32"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_ARP"
+              glib:nick="arp">
+        <doc xml:space="preserve">Wake on ARP</doc>
+      </member>
+      <member name="magic"
+              value="64"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_MAGIC"
+              glib:nick="magic">
+        <doc xml:space="preserve">Wake on magic packet</doc>
+      </member>
+      <member name="default"
+              value="1"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_DEFAULT"
+              glib:nick="default">
+        <doc xml:space="preserve">Use the default value</doc>
+      </member>
+      <member name="ignore"
+              value="32768"
+              c:identifier="NM_SETTING_WIRED_WAKE_ON_LAN_IGNORE"
+              glib:nick="ignore">
+        <doc xml:space="preserve">Don't change configured settings</doc>
+      </member>
+    </bitfield>
     <class name="SettingWireless"
            c:symbol-prefix="setting_wireless"
            c:type="NMSettingWireless"
@@ -21512,6 +21941,70 @@ underlying device driver.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="utils_enum_from_str"
+              c:identifier="nm_utils_enum_from_str"
+              version="1.0.6">
+      <doc xml:space="preserve">Converts a string to the matching enum value.
+
+If the enum is a %G_TYPE_FLAGS the function returns the logical OR of values
+matching the comma-separated tokens in the string; if an unknown token is found
+the function returns %FALSE and stores a pointer to a newly allocated string
+containing the unrecognized token in @err_token.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if the conversion was successful, %FALSE otherwise</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve">the %GType of the enum</doc>
+          <type name="GType" c:type="GType"/>
+        </parameter>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve">the input string</doc>
+          <type name="utf8" c:type="const char*"/>
+        </parameter>
+        <parameter name="out_value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full"
+                   optional="1"
+                   allow-none="1">
+          <doc xml:space="preserve">the output value</doc>
+          <type name="gint" c:type="int*"/>
+        </parameter>
+        <parameter name="err_token"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full"
+                   optional="1"
+                   allow-none="1">
+          <doc xml:space="preserve">location to store the first unrecognized token</doc>
+          <type name="utf8" c:type="char**"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="utils_enum_to_str"
+              c:identifier="nm_utils_enum_to_str"
+              version="1.0.6">
+      <doc xml:space="preserve">Converts an enum value to its string representation. If the enum is a
+%G_TYPE_FLAGS the function returns a comma-separated list of matching values.
+If the enum is a %G_TYPE_ENUM and the given value is not valid the
+function returns %NULL.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a newly allocated string or %NULL</doc>
+        <type name="utf8" c:type="char*"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve">the %GType of the enum</doc>
+          <type name="GType" c:type="GType"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">the value to be translated</doc>
+          <type name="gint" c:type="int"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="utils_escape_ssid" c:identifier="nm_utils_escape_ssid">
       <doc xml:space="preserve">This function does a quick printable character conversion of the SSID, simply
 replacing embedded NULLs and non-printable characters with the hexadecimal
@@ -22484,6 +22977,24 @@ object's #NMSettingConnection:id: property.  Should be freed with g_free()</doc>
           <type name="WepKeyType" c:type="NMWepKeyType"/>
         </parameter>
       </parameters>
+    </function>
+    <function name="utils_wifi_2ghz_freqs"
+              c:identifier="nm_utils_wifi_2ghz_freqs"
+              version="1.0.6">
+      <doc xml:space="preserve">Utility function to return 2.4 GHz Wi-Fi frequencies (802.11bg band).</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">zero-terminated array of frequencies numbers (in MHz)</doc>
+        <type name="guint" c:type="const guint*"/>
+      </return-value>
+    </function>
+    <function name="utils_wifi_5ghz_freqs"
+              c:identifier="nm_utils_wifi_5ghz_freqs"
+              version="1.0.6">
+      <doc xml:space="preserve">Utility function to return 5 GHz Wi-Fi frequencies (802.11a band).</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">zero-terminated array of frequencies numbers (in MHz)</doc>
+        <type name="guint" c:type="const guint*"/>
+      </return-value>
     </function>
     <function name="utils_wifi_channel_to_freq"
               c:identifier="nm_utils_wifi_channel_to_freq">

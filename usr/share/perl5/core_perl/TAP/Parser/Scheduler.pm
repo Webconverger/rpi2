@@ -13,11 +13,11 @@ TAP::Parser::Scheduler - Schedule tests during parallel testing
 
 =head1 VERSION
 
-Version 3.30
+Version 3.35
 
 =cut
 
-our $VERSION = '3.30';
+our $VERSION = '3.35';
 
 =head1 SYNOPSIS
 
@@ -100,7 +100,7 @@ Here are some examples:
 
 =head3 Rules resolution
 
-=over4
+=over 4
 
 =item * By default, all tests are eligible to be run in parallel. Specifying any of your own rules removes this one.
 

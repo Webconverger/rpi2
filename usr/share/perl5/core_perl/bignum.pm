@@ -1,7 +1,7 @@
 package bignum;
 use 5.006;
 
-$VERSION = '0.37';
+$VERSION = '0.39';
 use Exporter;
 @ISA 		= qw( bigint );
 @EXPORT_OK	= qw( PI e bexp bpi hex oct ); 
@@ -155,8 +155,7 @@ sub import
     # see if we can find Math::BigInt::Lite
     if (!defined $a && !defined $p)		# rounding won't work to well
       {
-      eval 'require Math::BigInt::Lite;';
-      if ($@ eq '')
+      if (eval { require Math::BigInt::Lite; 1 })
         {
         @import = ( );				# :constant in Lite, not MBI
         Math::BigInt::Lite->import( ':constant' );
@@ -572,6 +571,29 @@ minus infinity. You will get '+inf' when dividing a positive number by 0, and
 =head1 CAVEATS
 
 =over 2
+
+=item Operator vs literal overloading
+
+C<bignum> works by overloading handling of integer and floating point
+literals, converting them to L<Math::BigInt> or L<Math::BigFloat>
+objects.
+
+This means that arithmetic involving only string values or string
+literals will be performed using Perl's built-in operators.
+
+For example:
+
+    use bignum;
+    my $x = "900000000000000009";
+    my $y = "900000000000000007";
+    print $x - $y;
+
+will output C<0> on default 32-bit builds, since C<bigrat> never sees
+the string literals.  To ensure the expression is all treated as
+C<Math::BigInt> or C<BigFloat> objects, use a literal number in the
+expression:
+
+    print +(0+$x) - $y;
 
 =item in_effect()
 

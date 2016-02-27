@@ -41,11 +41,13 @@
   <comment xml:lang="sk">Zdrojový kód CMake</comment>
   <comment xml:lang="sl">Datoteka izvorne kode CMake</comment>
   <comment xml:lang="sq">Kod burues CMake</comment>
+  <comment xml:lang="sr">Ц Мејк изворни ко̂д</comment>
   <comment xml:lang="sv">CMake-källkod</comment>
+  <comment xml:lang="tr">CMake kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код CMake</comment>
   <comment xml:lang="vi">Mã nguồn CMake</comment>
   <comment xml:lang="zh_CN">CMake 源代码</comment>
-  <comment xml:lang="zh_TW">CMake 源碼</comment>
+  <comment xml:lang="zh_TW">CMake 原始碼</comment>
   <glob pattern="*.cmake"/>
   <glob pattern="CMakeLists.txt"/>
   <sub-class-of type="text/plain"/>

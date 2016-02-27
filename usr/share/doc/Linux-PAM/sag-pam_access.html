@@ -14,19 +14,24 @@
       The pam_access PAM module is mainly for access management.
       It provides logdaemon style login access control based on login
       names, host or domain names, internet addresses or network numbers,
-      or on terminal line names in case of non-networked logins.
+      or on terminal line names, X <code class="varname">$DISPLAY</code> values,
+      or PAM service names in case of non-networked logins.
     </p><p>
       By default rules for access management are taken from config file
       <code class="filename">/etc/security/access.conf</code> if you don't specify
       another file.
     </p><p>
       If Linux PAM is compiled with audit support the module will report
-      when it denies access based on origin (host or tty).
+      when it denies access based on origin (host, tty, etc.).
     </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-access.conf-description"></a>6.1.2. DESCRIPTION</h3></div></div></div><p>
       The <code class="filename">/etc/security/access.conf</code> file specifies
       (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>host</code></em>),
-      (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>network/netmask</code></em>) or
-      (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>tty</code></em>)
+      (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>network/netmask</code></em>),
+      (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>tty</code></em>),
+      (<em class="replaceable"><code>user/group</code></em>,
+      <em class="replaceable"><code>X-$DISPLAY-value</code></em>), or
+      (<em class="replaceable"><code>user/group</code></em>,
+      <em class="replaceable"><code>pam-service-name</code></em>)
       combinations for which a login will be either accepted or refused.
     </p><p>
       When someone logs in, the file <code class="filename">access.conf</code> is
@@ -36,7 +41,14 @@
       combination, or, in case of non-networked logins, the first entry
       that matches the
       (<em class="replaceable"><code>user/group</code></em>, <em class="replaceable"><code>tty</code></em>)
-      combination.  The permissions field of that table entry determines
+      combination, or in the case of non-networked logins without a
+      tty, the first entry that matches the
+      (<em class="replaceable"><code>user/group</code></em>,
+      <em class="replaceable"><code>X-$DISPLAY-value</code></em>) or
+      (<em class="replaceable"><code>user/group</code></em>,
+      <em class="replaceable"><code>pam-service-name/</code></em>)
+      combination.  The permissions field of that table entry
+      determines
       whether the login will be accepted or refused.
    </p><p>
       Each line of the login access control table has three fields separated
@@ -57,14 +69,25 @@
     </p><p>
       The third field, the <em class="replaceable"><code>origins</code></em>
       field, should be a list of one or more tty names (for non-networked
-      logins), host names, domain names (begin with "."), host addresses,
+      logins), X <code class="varname">$DISPLAY</code> values or PAM service
+      names (for non-networked logins without a tty), host names,
+      domain names (begin with "."), host addresses,
       internet network numbers (end with "."), internet network addresses
       with network mask (where network mask can be a decimal number or an
       internet address also), <span class="emphasis"><em>ALL</em></span> (which always matches)
-      or <span class="emphasis"><em>LOCAL</em></span>. <span class="emphasis"><em>LOCAL</em></span>
-      keyword matches if and only if the <span class="emphasis"><em>PAM_RHOST</em></span> is
-      not set and &lt;origin&gt; field is thus set from
-      <span class="emphasis"><em>PAM_TTY</em></span> or <span class="emphasis"><em>PAM_SERVICE</em></span>".
+      or <span class="emphasis"><em>LOCAL</em></span>. The <span class="emphasis"><em>LOCAL</em></span>
+      keyword matches if and only if
+      <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>,
+      when called with an <em class="parameter"><code>item_type</code></em> of
+      <span class="emphasis"><em>PAM_RHOST</em></span>, returns <code class="code">NULL</code> or an
+      empty string (and therefore the
+      <em class="replaceable"><code>origins</code></em> field is compared against the
+      return value of
+      <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>
+      called with an <em class="parameter"><code>item_type</code></em> of
+      <span class="emphasis"><em>PAM_TTY</em></span> or, absent that,
+      <span class="emphasis"><em>PAM_SERVICE</em></span>).
+    </p><p>
       If supported by the system you can use
       <span class="emphasis"><em>@netgroupname</em></span> in host or user patterns. The
       <span class="emphasis"><em>@@netgroupname</em></span> syntax is supported in the user

@@ -12,13 +12,14 @@ struct gp {
     SV *	gp_sv;		/* scalar value */
     struct io *	gp_io;		/* filehandle value */
     CV *	gp_cv;		/* subroutine value */
-    U32		gp_cvgen;	/* generational validity of cached gv_cv */
+    U32		gp_cvgen;	/* generational validity of cached gp_cv */
     U32		gp_refcnt;	/* how many globs point to this? */
     HV *	gp_hv;		/* hash value */
     AV *	gp_av;		/* array value */
     CV *	gp_form;	/* format value */
     GV *	gp_egv;		/* effective gv, if *glob */
-    line_t	gp_line;	/* line first declared at (for -w) */
+    PERL_BITFIELD32 gp_line:31;	/* line first declared at (for -w) */
+    PERL_BITFIELD32 gp_flags:1;
     HEK *	gp_file_hek;	/* file first declared in (for -w) */
 };
 
@@ -139,6 +140,8 @@ Return the CV from the GV.
 #define GvCVGEN(gv)	(GvGP(gv)->gp_cvgen)
 #define GvCVu(gv)	(GvGP(gv)->gp_cvgen ? NULL : GvGP(gv)->gp_cv)
 
+#define GvGPFLAGS(gv)	(GvGP(gv)->gp_flags)
+
 #define GvLINE(gv)	(GvGP(gv)->gp_line)
 #define GvFILE_HEK(gv)	(GvGP(gv)->gp_file_hek)
 #define GvFILEx(gv)	HEK_KEY(GvFILE_HEK(gv))
@@ -156,7 +159,7 @@ Return the CV from the GV.
 #define GVf_INTRO	0x01
 #define GVf_MULTI	0x02
 #define GVf_ASSUMECV	0x04
-#define GVf_IN_PAD	0x08
+/*	UNUSED		0x08 */
 #define GVf_IMPORTED	0xF0
 #define GVf_IMPORTED_SV	  0x10
 #define GVf_IMPORTED_AV	  0x20
@@ -195,11 +198,16 @@ Return the CV from the GV.
 #define GvIMPORTED_CV_on(gv)	(GvFLAGS(gv) |= GVf_IMPORTED_CV)
 #define GvIMPORTED_CV_off(gv)	(GvFLAGS(gv) &= ~GVf_IMPORTED_CV)
 
-#define GvIN_PAD(gv)		(GvFLAGS(gv) & GVf_IN_PAD)
-#define GvIN_PAD_on(gv)		(GvFLAGS(gv) |= GVf_IN_PAD)
-#define GvIN_PAD_off(gv)	(GvFLAGS(gv) &= ~GVf_IN_PAD)
+#define GPf_ALIASED_SV	1
+
+#define GvALIASED_SV(gv)	(GvGPFLAGS(gv) & GPf_ALIASED_SV)
+#define GvALIASED_SV_on(gv)	(GvGPFLAGS(gv) |= GPf_ALIASED_SV)
+#define GvALIASED_SV_off(gv)	(GvGPFLAGS(gv) &= ~GPf_ALIASED_SV)
 
 #ifndef PERL_CORE
+#  define GvIN_PAD(gv)		0
+#  define GvIN_PAD_on(gv)	NOOP
+#  define GvIN_PAD_off(gv)	NOOP
 #  define Nullgv Null(GV*)
 #endif
 
@@ -221,7 +229,7 @@ Return the CV from the GV.
 #define GV_ADDMULTI	0x02	/* add, pretending it has been added
 				   already; used also by gv_init_* */
 #define GV_ADDWARN	0x04	/* add, but warn if symbol wasn't already there */
-#define GV_ADDINEVAL	0x08	/* add, as though we're doing so within an eval */
+		/*	0x08	   UNUSED */
 #define GV_NOINIT	0x10	/* add, but don't init symbol, if type != PVGV */
 /* This is used by toke.c to avoid turing placeholder constants in the symbol
    table into full PVGVs with attached constant subroutines.  */
@@ -235,6 +243,8 @@ Return the CV from the GV.
 #define GV_ADDMG	0x400	/* add if magical */
 #define GV_NO_SVGMAGIC	0x800	/* Skip get-magic on an SV argument;
 				   used only by gv_fetchsv(_nomg) */
+#define GV_CACHE_ONLY	0x1000  /* return stash only if found in cache;
+				   used only in flags parameter to gv_stash* family */
 
 /* Flags for gv_fetchmeth_pvn and gv_autoload_pvn*/
 #define GV_SUPER	0x1000	/* SUPER::method */
@@ -279,11 +289,5 @@ Return the CV from the GV.
 #define gv_SVadd(gv) gv_add_by_type((gv), SVt_NULL)
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

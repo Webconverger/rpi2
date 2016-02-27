@@ -184,6 +184,8 @@
   compalfl90      FL90
   creativedw7000  Creative Desktop Wireless 7000
   htcdream        Htc Dream phone
+  teck227         Truly Ergonomic Computer Keyboard Model 227 (Wide Alt keys)
+  teck229         Truly Ergonomic Computer Keyboard Model 229 (Standard sized Alt keys, additional Super and Menu key)
 
 ! layout
   us              English (US)
@@ -275,6 +277,7 @@
   tm              Turkmen
   ml              Bambara
   tz              Swahili (Tanzania)
+  tg              French (Togo)
   ke              Swahili (Kenya)
   bw              Tswana
   ph              Filipino
@@ -292,7 +295,7 @@
   dvorak-l        us: English (left handed Dvorak)
   dvorak-r        us: English (right handed Dvorak)
   dvorak-classic  us: English (classic Dvorak)
-  dvp             us: English (programmer Dvorak)
+  dvp             us: English (Programmer Dvorak)
   rus             us: Russian (US, phonetic)
   mac             us: English (Macintosh)
   altgr-intl      us: English (international AltGr dead keys)
@@ -348,6 +351,7 @@
   mal_lalitha     in: Malayalam (Lalitha)
   mal_enhanced    in: Malayalam (enhanced Inscript, with rupee sign)
   ori             in: Oriya
+  olck            in: Ol Chiki
   tam_unicode     in: Tamil (Unicode)
   tam_keyboard_with_numerals in: Tamil (keyboard with numerals)
   tam_TAB         in: Tamil (TAB typewriter)
@@ -373,6 +377,7 @@
   nativo          br: Portuguese (Brazil, Nativo)
   nativo-us       br: Portuguese (Brazil, Nativo for US keyboards)
   nativo-epo      br: Esperanto (Brazil, Nativo)
+  thinkpad        br: Portuguese (Brazil, IBM/Lenovo ThinkPad)
   phonetic        bg: Bulgarian (traditional phonetic)
   bas_phonetic    bg: Bulgarian (new phonetic)
   french          ma: French (Morocco)
@@ -405,6 +410,7 @@
   qwerty_bksl     cz: Czech (qwerty, extended Backslash)
   ucw             cz: Czech (UCW layout, accented letters only)
   dvorak-ucw      cz: Czech (US Dvorak with CZ UCW support)
+  rus             cz: Russian (Czech, phonetic)
   nodeadkeys      dk: Danish (eliminate dead keys)
   winkeys         dk: Danish (Winkeys)
   mac             dk: Danish (Macintosh)
@@ -431,6 +437,7 @@
   winkeys         fi: Finnish (Winkeys)
   smi             fi: Northern Saami (Finland)
   mac             fi: Finnish (Macintosh)
+  das             fi: Finnish (DAS)
   nodeadkeys      fr: French (eliminate dead keys)
   sundeadkeys     fr: French (Sun dead keys)
   oss             fr: French (alternative)
@@ -444,6 +451,7 @@
   bepo_latin9     fr: French (Bepo, ergonomic, Dvorak way, Latin-9 only)
   dvorak          fr: French (Dvorak)
   mac             fr: French (Macintosh)
+  azerty          fr: French (Azerty)
   bre             fr: French (Breton)
   oci             fr: Occitan
   geo             fr: Georgian (France, AZERTY Tskapo)
@@ -525,6 +533,7 @@
   nodeadkeys      latam: Spanish (Latin American, eliminate dead keys)
   deadtilde       latam: Spanish (Latin American, include dead tilde)
   sundeadkeys     latam: Spanish (Latin American, Sun dead keys)
+  dvorak          latam: Spanish (Latin American, Dvorak)
   std             lt: Lithuanian (standard)
   us              lt: Lithuanian (US keyboard with Lithuanian letters)
   ibm             lt: Lithuanian (IBM LST 1205-92)
@@ -640,6 +649,7 @@
   legacy          tj: Tajik (legacy)
   tam_unicode     lk: Tamil (Sri Lanka, Unicode)
   tam_TAB         lk: Tamil (Sri Lanka, TAB Typewriter)
+  us              lk: Sinhala (US keyboard with Sinhala letters)
   tis             th: Thai (TIS-820.2538)
   pat             th: Thai (Pattachote)
   f               tr: Turkish (F)
@@ -802,6 +812,7 @@
   caps:backspace       Make Caps Lock an additional Backspace
   caps:super           Make Caps Lock an additional Super
   caps:hyper           Make Caps Lock an additional Hyper
+  caps:menu            Make Caps Lock an additional Menu key
   caps:shiftlock       Caps Lock toggles ShiftLock (affects all keys)
   caps:none            Caps Lock is disabled
   caps:ctrl_modifier   Make Caps Lock an additional Ctrl
@@ -815,7 +826,9 @@
   altwin:left_meta_win Meta is mapped to Left Win
   altwin:hyper_win     Hyper is mapped to Win keys
   altwin:alt_super_win Alt is mapped to Right Win, Super to Menu
+  altwin:swap_lalt_lwin Left Alt is swapped with Left Win
   altwin:swap_alt_win  Alt is swapped with Win
+  altwin:prtsc_rwin    Win is mapped to PrtSc (and the usual Win key)
   Compose key          Position of Compose key
   compose:ralt         Right Alt
   compose:lwin         Left Win

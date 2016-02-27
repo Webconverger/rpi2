@@ -8,7 +8,7 @@
   <comment xml:lang="ca">document de registre de canvis</comment>
   <comment xml:lang="cs">dokument ChangeLog</comment>
   <comment xml:lang="da">ChangeLot-dokument</comment>
-  <comment xml:lang="de">Änderungsprotokoll</comment>
+  <comment xml:lang="de">Änderungsprotokoll-Dokument</comment>
   <comment xml:lang="el">Έγγραφο ChangeLog</comment>
   <comment xml:lang="en_GB">ChangeLog document</comment>
   <comment xml:lang="es">documento de registro de cambios</comment>
@@ -39,7 +39,9 @@
   <comment xml:lang="sk">Dokument ChangeLog</comment>
   <comment xml:lang="sl">Dokument ChangeLog</comment>
   <comment xml:lang="sq">Dokument ChangeLog</comment>
+  <comment xml:lang="sr">Ченџ Лог документ</comment>
   <comment xml:lang="sv">Ändringsloggsdokument</comment>
+  <comment xml:lang="tr">Değişim Günlüğü belgesi</comment>
   <comment xml:lang="uk">документ ChangeLog</comment>
   <comment xml:lang="vi">Tài liệu ChangeLog (ghi lưu thay đổi)</comment>
   <comment xml:lang="zh_CN">变更日志文档</comment>

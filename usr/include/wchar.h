@@ -1,4 +1,4 @@
-/* Copyright (C) 1995-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1995-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -145,11 +145,13 @@ __USING_NAMESPACE_STD(tm)
 __BEGIN_NAMESPACE_STD
 /* Copy SRC to DEST.  */
 extern wchar_t *wcscpy (wchar_t *__restrict __dest,
-			const wchar_t *__restrict __src) __THROW;
+			const wchar_t *__restrict __src)
+     __THROW __nonnull ((1, 2));
+
 /* Copy no more than N wide-characters of SRC to DEST.  */
 extern wchar_t *wcsncpy (wchar_t *__restrict __dest,
 			 const wchar_t *__restrict __src, size_t __n)
-     __THROW;
+     __THROW __nonnull ((1, 2));
 
 /* Append SRC onto DEST.  */
 extern wchar_t *wcscat (wchar_t *__restrict __dest,

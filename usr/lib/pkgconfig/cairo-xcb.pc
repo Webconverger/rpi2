@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: cairo-xcb
 Description: XCB surface backend for cairo graphics library
-Version: 1.14.2
+Version: 1.14.6
 
 Requires: cairo xcb >= 1.6 xcb-render >= 1.6
 Libs:  

@@ -5,6 +5,6 @@ includedir=${prefix}/include
 
 Name: libraw1394
 Description: Interface library for the Linux IEEE1394 drivers.
-Version: 2.1.0
+Version: 2.1.1
 Libs: -L${libdir} -lraw1394
 Cflags: -I${includedir}

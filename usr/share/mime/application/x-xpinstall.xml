@@ -7,7 +7,7 @@
   <comment xml:lang="ca">mòdul instal·lador d'XPinstall</comment>
   <comment xml:lang="cs">modul instalátoru XPInstall</comment>
   <comment xml:lang="da">XPInstall-installationsmodul</comment>
-  <comment xml:lang="de">XPInstall-Installermodul</comment>
+  <comment xml:lang="de">XPInstall-Installationsmodul</comment>
   <comment xml:lang="el">Άρθρωμα εγκατάστασης XPInstall</comment>
   <comment xml:lang="en_GB">XPInstall installer module</comment>
   <comment xml:lang="es">módulo del instalador XPInstall</comment>
@@ -34,7 +34,9 @@
   <comment xml:lang="ru">модуль установщика XPInstall</comment>
   <comment xml:lang="sk">Modul inštalátora XPInstall</comment>
   <comment xml:lang="sl">modul namestilnika XPInstall</comment>
+  <comment xml:lang="sr">модул инсталатера Инсталирања ИксПе-а</comment>
   <comment xml:lang="sv">XPInstall-installeringsmodul</comment>
+  <comment xml:lang="tr">XPInstall kurulum modülü</comment>
   <comment xml:lang="uk">модуль засобу встановлення XPInstall</comment>
   <comment xml:lang="zh_CN">XPInstall 安装工具模块</comment>
   <comment xml:lang="zh_TW">XPInstall 安裝程式模組</comment>

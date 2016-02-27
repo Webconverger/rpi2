@@ -76,6 +76,8 @@ _SD_BEGIN_DECLARATIONS;
 */
 int sd_listen_fds(int unset_environment);
 
+int sd_listen_fds_with_names(int unset_environment, char ***names);
+
 /*
   Helper call for identifying a passed file descriptor. Returns 1 if
   the file descriptor is a FIFO in the file system stored under the
@@ -168,7 +170,7 @@ int sd_is_mq(int fd, const char *path);
                   value daemons should send is "READY=1".
 
      STATUS=...   Passes a single-line status string back to systemd
-                  that describes the daemon state. This is free-from
+                  that describes the daemon state. This is free-form
                   and can be used for various purposes: general state
                   feedback, fsck-like programs could pass completion
                   percentages and failing programs could pass a human

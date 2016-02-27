@@ -10,28 +10,54 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software Foundation,
-# Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 #
 # Edit an lvm.conf file to adjust various properties
 #
 
-DEFAULT_USE_LVMETAD=0
+# cluster with clvmd and/or locking lib?
+HANDLE_CLUSTER=0
+
+# cluster without clvmd?
+HANDLE_HALVM=0
+
+# also enable services appropriately (lvmetad, clvmd)?
+HANDLE_SERVICES=0
+
+# also enable cmirrord service in addition?
+HANDLE_MIRROR_SERVICE=0
+
+# also start/start services in addition to enabling/disabling them?
+START_STOP_SERVICES=0
 
 function usage
 {
-    echo "usage: $0 <command>"
+    echo "Usage: $0 <command>"
     echo ""
     echo "Commands:"
     echo "Enable clvm:  --enable-cluster [--lockinglibdir <dir>] [--lockinglib <lib>]"
     echo "Disable clvm: --disable-cluster"
+    echo "Enable halvm: --enable-halvm"
+    echo "Disable halvm: --disable-halvm"
     echo "Set locking library: --lockinglibdir <dir> [--lockinglib <lib>]"
     echo ""
     echo "Global options:"
     echo "Config file location: --file <configfile>"
+    echo "Set services: --services [--mirrorservice] [--startstopservices]"
     echo ""
+    echo "Use the separate command 'lvmconfig' to display configuration information"
 }
 
+function set_default_use_lvmetad_var
+{
+	eval $(lvm dumpconfig --type default global/use_lvmetad 2>/dev/null)
+	if [ "$?" != "0" ]; then
+		USE_LVMETAD=0
+	else
+                USE_LVMETAD=$use_lvmetad
+	fi
+}
 
 function parse_args
 {
@@ -40,12 +66,26 @@ function parse_args
             --enable-cluster)
                 LOCKING_TYPE=3
                 USE_LVMETAD=0
+                HANDLE_CLUSTER=1
                 shift
                 ;;
             --disable-cluster)
                 LOCKING_TYPE=1
-                USE_LVMETAD=$DEFAULT_USE_LVMETAD
+                set_default_use_lvmetad_var
+                HANDLE_CLUSTER=1
                 shift
+                ;;
+            --enable-halvm)
+                LOCKING_TYPE=1
+		USE_LVMETAD=0
+                HANDLE_HALVM=1
+		shift
+                ;;
+            --disable-halvm)
+                LOCKING_TYPE=1
+                set_default_use_lvmetad_var
+                HANDLE_HALVM=1
+		shift
                 ;;
             --lockinglibdir)
                 if [ -n "$2" ]; then
@@ -55,6 +95,7 @@ function parse_args
                     usage
                     exit 1
                 fi
+                HANDLE_CLUSTER=1
                 ;;
             --lockinglib)
                 if [ -n "$2" ]; then
@@ -64,6 +105,7 @@ function parse_args
                     usage
                     exit 1
                 fi
+                HANDLE_CLUSTER=1
                 ;;
             --file)
                 if [ -n "$2" ]; then
@@ -74,11 +116,28 @@ function parse_args
                     exit 1
                 fi
                 ;;
+            --services)
+                HANDLE_SERVICES=1
+                shift
+                ;;
+            --mirrorservice)
+                HANDLE_MIRROR_SERVICE=1
+                shift
+                ;;
+            --startstopservices)
+                START_STOP_SERVICES=1
+                shift
+                ;;
             *)
                 usage
                 exit 1
         esac
     done
+
+    if [ "$LOCKINGLIBDIR" -o "$LOCKINGLIB" ]; then
+        LOCKING_TYPE=2
+        USE_LVMETAD=0
+    fi
 }
 
 function validate_args
@@ -89,6 +148,22 @@ function validate_args
             then
             echo "$CONFIGFILE does not exist"
             exit 10
+    fi
+
+    if [ "$HANDLE_CLUSTER" = "1" -a "$HANDLE_HALVM" = "1" ]; then
+        echo "Either HA LVM or cluster method may be used at one time"
+	    exit 18
+    fi
+
+    if [ "$HANDLE_SERVICES" = "0" ]; then
+        if [ "$HANDLE_MIRROR_SERVICE" = "1" ]; then
+            echo "--mirrorservice may be used only with --services"
+            exit 19
+        fi
+        if [ "$START_STOP_SERVICES" = "1" ]; then
+            echo "--startstopservices may be used only with --services"
+            exit 19
+        fi
     fi
 
     if [ -z "$LOCKING_TYPE" ] && [ -z "$LOCKINGLIBDIR" ]; then
@@ -277,3 +352,104 @@ if [ $? != 0 ]
 fi
 
 rm -f $SCRIPTFILE $TMPFILE
+
+function set_service {
+    local type="$1"
+    local action="$2"
+    shift 2
+
+    if [ "$type" = "systemd" ]; then
+        if [ "$action" = "activate" ]; then
+            for i in $@; do
+                eval $($SYSTEMCTL_BIN show $i -p LoadState)
+                test  "$LoadState" = "loaded" || continue
+                $SYSTEMCTL_BIN enable $i
+                if [ "$START_STOP_SERVICES" = "1" ]; then
+                    $SYSTEMCTL_BIN start $i
+                fi
+            done
+        elif [ "$action" = "deactivate" ]; then
+            for i in $@; do
+                eval $($SYSTEMCTL_BIN show $i -p LoadState)
+                test  "$LoadState" = "loaded" || continue
+                $SYSTEMCTL_BIN disable $i
+                if [ "$START_STOP_SERVICES" = "1" ]; then
+                    $SYSTEMCTL_BIN stop $i
+                fi
+            done
+        fi
+    elif [ "$type" = "sysv" ]; then
+        if [ "$action" = "activate" ]; then
+            for i in $@; do
+                $CHKCONFIG_BIN --list $i > /dev/null || continue
+                $CHKCONFIG_BIN $i on
+                if [ "$START_STOP_SERVICES" = "1" ]; then
+                    $SERVICE_BIN $i start
+                fi
+            done
+        elif [ "$action" = "deactivate" ]; then
+            for i in $@; do
+                $CHKCONFIG_BIN --list $i > /dev/null  || continue
+                if [ "$START_STOP_SERVICES" = "1" ]; then
+                    $SERVICE_BIN $i stop
+                fi
+                $CHKCONFIG_BIN $i off
+            done
+        fi
+    fi
+}
+
+# Start/stop and enable/disable services if needed.
+
+if [ "$HANDLE_SERVICES" == "1" ]; then
+
+    SYSTEMCTL_BIN=$(which systemctl 2>/dev/null)
+    CHKCONFIG_BIN=$(which chkconfig 2>/dev/null)
+    SERVICE_BIN=$(which service 2>/dev/null)
+
+    # Systemd services
+    if [ -n "$SYSTEMCTL_BIN" ]; then
+        if [ "$USE_LVMETAD" = "0" ]; then
+            set_service systemd deactivate lvm2-lvmetad.service lvm2-lvmetad.socket
+        else
+            set_service systemd activate lvm2-lvmetad.socket
+        fi
+
+        if [ "$LOCKING_TYPE" = "3" ]; then
+            set_service systemd activate lvm2-cluster-activation.service
+            if [ "$HANDLE_MIRROR_SERVICE" = "1" ]; then
+                set_service activate lvm2-cmirrord.service
+            fi
+        else
+            set_service systemd deactivate lvm2-cluster-activation.service
+            if [ "$HANDLE_MIRROR_SERVICE" = "1" ]; then
+                set_service systemd deactivate lvm2-cmirrord.service
+            fi
+        fi
+
+    # System V init scripts
+    elif [ -n "$SERVICE_BIN" -a -n "$CHKCONFIG_BIN" ]; then
+        if [ "$USE_LVMETAD" = "0" ]; then
+            set_service sysv deactivate lvm2-lvmetad
+        else
+            set_service sysv activate lvm2-lvmetad
+        fi
+
+        if [ "$LOCKING_TYPE" = "3" ]; then
+            set_service sysv activate clvmd
+            if [ "$HANDLE_MIRROR_SERVICE" = "1" ]; then
+                set_service sysv activate cmirrord
+            fi
+        else
+            set_service sysv deactivate clvmd
+            if [ "$HANDLE_MIRROR_SERVICE" = "1" ]; then
+                set_service sysv deactivate cmirrord
+            fi
+        fi
+
+    # None of the service tools found, error out
+    else
+        echo "Missing tools to handle services"
+        exit 20
+    fi
+fi

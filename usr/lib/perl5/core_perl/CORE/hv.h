@@ -58,7 +58,7 @@ struct shared_he {
 
 /* Subject to change.
    Don't access this directly.
-   Use the funcs in mro.c
+   Use the funcs in mro_core.c
 */
 
 struct mro_alg {
@@ -629,11 +629,5 @@ Creates a new HV.  The reference count is set to 1.
 #include "hv_func.h"
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

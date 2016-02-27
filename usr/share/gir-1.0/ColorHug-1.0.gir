@@ -357,7 +357,8 @@ The hardware versions are as follows:
 0x01		= ColorHug
 0x02		= ColorHug2
 0x03		= ColorHug+
-0x04-0x0f	= Reserved for future use
+0x04		= ColorHugALS
+0x05-0x0f	= Reserved for future use
 
 IN:  [1:cmd]
 OUT: [1:retval][1:cmd][1:hw_version]
@@ -540,7 +541,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ×
 ColorHug+      |      ×       |      ×
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_GET_REMOTE_HASH"
@@ -1009,7 +1010,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ×
 ColorHug+      |      ×       |      ×
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_SET_REMOTE_HASH"
@@ -1049,7 +1050,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ✓
 ColorHug+      |      ×       |      ✓
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_TAKE_READINGS"
@@ -1186,7 +1187,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ✓
 ColorHug+      |      ×       |      ✓
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_WRITE_FLASH"
@@ -1238,6 +1239,26 @@ ColorHugALS    |      ×       |      ×</doc>
       <member name="green" value="3" c:identifier="CH_COLOR_SELECT_GREEN">
       </member>
     </enumeration>
+    <constant name="DEVICE_GUID_COLORHUG"
+              value="40338ceb-b966-4eae-adae-9c32edfcc484"
+              c:type="CH_DEVICE_GUID_COLORHUG">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG2"
+              value="2082b5e0-7a64-478a-b1b2-e3404fab6dad"
+              c:type="CH_DEVICE_GUID_COLORHUG2">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG_ALS"
+              value="84f40464-9272-4ef7-9399-cd95f12da696"
+              c:type="CH_DEVICE_GUID_COLORHUG_ALS">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG_PLUS"
+              value="6d6f05a9-3ecb-43a2-bcbb-3844f1825366"
+              c:type="CH_DEVICE_GUID_COLORHUG_PLUS">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="DEVICE_USB_TIMEOUT"
               value="10000"
               c:type="CH_DEVICE_USB_TIMEOUT">
@@ -2063,6 +2084,34 @@ WARNING: this function is syncronous and will block.</doc>
           <parameter name="res" transfer-ownership="none">
             <doc xml:space="preserve">the #GAsyncResult</doc>
             <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="read_firmware"
+              c:identifier="ch_device_queue_read_firmware"
+              version="1.2.11">
+        <doc xml:space="preserve">Reads firmware on the device.
+
+NOTE: This command is available on hardware version: 1 &amp; 2</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="device_queue" transfer-ownership="none">
+            <doc xml:space="preserve">A #ChDeviceQueue</doc>
+            <type name="DeviceQueue" c:type="ChDeviceQueue*"/>
+          </instance-parameter>
+          <parameter name="device" transfer-ownership="none">
+            <doc xml:space="preserve">A #GUsbDevice</doc>
+            <type name="GUsb.Device" c:type="GUsbDevice*"/>
+          </parameter>
+          <parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">Firmware binary data</doc>
+            <type name="guint8" c:type="guint8**"/>
+          </parameter>
+          <parameter name="len" transfer-ownership="none">
+            <doc xml:space="preserve">Size of @data</doc>
+            <type name="gsize" c:type="gsize*"/>
           </parameter>
         </parameters>
       </method>
@@ -3444,6 +3493,11 @@ Flags for controlling processing options</doc>
               c:type="CH_USB_PID_FIRMWARE_ALS">
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="USB_PID_FIRMWARE_ALS_SENSOR_HID"
+              value="4104"
+              c:type="CH_USB_PID_FIRMWARE_ALS_SENSOR_HID">
+      <type name="gint" c:type="gint"/>
+    </constant>
     <constant name="USB_PID_FIRMWARE_PLUS"
               value="4098"
               c:type="CH_USB_PID_FIRMWARE_PLUS">
@@ -3510,6 +3564,19 @@ Flags for controlling processing options</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="device_close"
+              c:identifier="ch_device_close"
+              version="1.2.11"
+              throws="1">
+      <return-value transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="device_error_quark"
               c:identifier="ch_device_error_quark"
               version="0.1.1">
@@ -3517,6 +3584,21 @@ Flags for controlling processing options</doc>
         <doc xml:space="preserve">ChDevice error quark.</doc>
         <type name="GLib.Quark" c:type="GQuark"/>
       </return-value>
+    </function>
+    <function name="device_get_guid"
+              c:identifier="ch_device_get_guid"
+              version="1.2.9">
+      <doc xml:space="preserve">Returns the GUID for the connected ColorHug device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the GUID address, or %NULL for error</doc>
+        <type name="utf8" c:type="const gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="device_get_mode"
               c:identifier="ch_device_get_mode"

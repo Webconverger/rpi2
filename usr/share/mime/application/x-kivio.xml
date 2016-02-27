@@ -27,7 +27,7 @@
   <comment xml:lang="it">Diagramma di flusso Kivio</comment>
   <comment xml:lang="ja">Kivio フローチャート</comment>
   <comment xml:lang="kk">Kivio диаграммасы</comment>
-  <comment xml:lang="ko">Kivio 흐름도</comment>
+  <comment xml:lang="ko">Kivio 순서도</comment>
   <comment xml:lang="lt">Kivio eigos diagrama</comment>
   <comment xml:lang="lv">Kivio blokshēma</comment>
   <comment xml:lang="ms">Cartalir Kivio</comment>
@@ -42,8 +42,9 @@
   <comment xml:lang="sk">Vývojový diagram Kivio</comment>
   <comment xml:lang="sl">Datoteka grafikona Kivio</comment>
   <comment xml:lang="sq">Diagramë fluksi Kivio</comment>
-  <comment xml:lang="sr">Kivio дијаграм</comment>
+  <comment xml:lang="sr">Кливиов дијаграм протока</comment>
   <comment xml:lang="sv">Kivio-flödesschema</comment>
+  <comment xml:lang="tr">Kivio akış şeması</comment>
   <comment xml:lang="uk">блок-схема Kivio</comment>
   <comment xml:lang="vi">Lược đồ Kivio</comment>
   <comment xml:lang="zh_CN">Kivio 流程图</comment>

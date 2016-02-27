@@ -1,10 +1,9 @@
 package ExtUtils::CBuilder::Platform::VMS;
-
+$ExtUtils::CBuilder::Platform::VMS::VERSION = '0.280221';
 use strict;
 use ExtUtils::CBuilder::Base;
 
-use vars qw($VERSION @ISA);
-$VERSION = '0.280217';
+use vars qw(@ISA);
 @ISA = qw(ExtUtils::CBuilder::Base);
 
 use File::Spec::Functions qw(catfile catdir);
@@ -166,7 +165,6 @@ sub _liblist_ext {
                  'socket' => '', 'X11' => 'DECW$XLIBSHR',
                  'Xt' => 'DECW$XTSHR', 'Xm' => 'DECW$XMLIBSHR',
                  'Xmu' => 'DECW$XMULIBSHR');
-  if ($self->{'config'}{'vms_cc_type'} ne 'decc') { $libmap{'curses'} = 'VAXCCURSE'; }
 
   warn "Potential libraries are '$potential_libs'\n" if $verbose;
 
@@ -267,9 +265,7 @@ sub _liblist_ext {
         }
       }
       if ($ctype) { 
-        # This has to precede any other CRTLs, so just make it first
-        if ($cand eq 'VAXCCURSE') { unshift @{$found{$ctype}}, $cand; }  
-        else                      { push    @{$found{$ctype}}, $cand; }
+        push @{$found{$ctype}}, $cand;
         warn "\tFound as $cand (really $fullname), type $ctype\n" 
           if $verbose > 1;
 	push @flibs, $name unless $libs_seen{$fullname}++;

@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libdrm_tegra
+Description: Userspace interface to Tegra kernel DRM services
+Version: 2.4.66
+Libs: -L${libdir} -ldrm_tegra
+Cflags: -I${includedir} -I${includedir}/libdrm
+Requires.private: libdrm

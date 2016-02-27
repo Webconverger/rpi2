@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: Pango Xft
 Description: Xft font support for Pango
-Version: 1.36.8
+Version: 1.38.1
 Requires: pango pangoft2 xft
 Libs: -L${libdir} -lpangoxft-1.0
 Cflags: -I${includedir}/pango-1.0

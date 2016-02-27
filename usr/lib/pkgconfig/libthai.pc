@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: libthai
 Description: Thai support library
-Version: 0.1.21
+Version: 0.1.22
 Requires.private: datrie-0.2
 Libs: -L${libdir} -lthai
 Cflags: -I${includedir}

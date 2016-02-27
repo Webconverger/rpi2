@@ -1,0 +1,36 @@
+%NAME%
+xproto
+
+%VERSION%
+7.0.28-1
+
+%DESC%
+X11 core wire protocol and auxiliary headers
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1435784338
+
+%INSTALLDATE%
+1455616132
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu4@archlinuxarm.org>
+
+%SIZE%
+1240064
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

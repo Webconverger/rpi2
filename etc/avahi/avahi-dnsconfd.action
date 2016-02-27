@@ -53,16 +53,16 @@ elif [ -x /sbin/modify_resolvconf ] ; then
     else
 	/sbin/modify_resolvconf restore -s avahi
     fi
-elif [ -x /usr/sbin/resolvconf ] ; then
+elif [ -x /sbin/resolvconf ] ; then
 
     # We have Debian's resolvconf tool
 
     if [ "x$AVAHI_INTERFACE_DNS_SERVERS" = "x" ] ; then
-        /usr/sbin/resolvconf -d "$AVAHI_INTERFACE.avahi"
+        /sbin/resolvconf -d "$AVAHI_INTERFACE.avahi"
     else
         for n in $AVAHI_INTERFACE_DNS_SERVERS ; do 
             echo "nameserver $n"
-        done | /usr/sbin/resolvconf -a "$AVAHI_INTERFACE.avahi"
+        done | /sbin/resolvconf -a "$AVAHI_INTERFACE.avahi"
     fi
 else
 

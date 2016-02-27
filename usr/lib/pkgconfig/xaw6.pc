@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: Xaw
 Description: X Athena Widgets Library, version 6
-Version: 1.0.12
+Version: 1.0.13
 Requires: xproto xt
 Requires.private: x11 xext xt xmu
 Cflags: -I${includedir}

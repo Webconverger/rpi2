@@ -16,7 +16,7 @@
   <comment xml:lang="eo">metrikoj de Adobe-tiparo</comment>
   <comment xml:lang="es">métricas tipográficas de Adobe</comment>
   <comment xml:lang="eu">Adobe letra-tipoen neurriak</comment>
-  <comment xml:lang="fi">Adobe-kirjasinmitat</comment>
+  <comment xml:lang="fi">Adobe-fonttimitat</comment>
   <comment xml:lang="fr">métriques de police Adobe</comment>
   <comment xml:lang="ga">meadarachtaí cló Adobe</comment>
   <comment xml:lang="gl">métricas de fonte de Adobe</comment>
@@ -28,7 +28,7 @@
   <comment xml:lang="it">Metriche tipo carattere Adobe</comment>
   <comment xml:lang="ja">Adobe フォントメトリック</comment>
   <comment xml:lang="kk">Adobe қаріп метрикалары</comment>
-  <comment xml:lang="ko">어도비 글꼴 메트릭</comment>
+  <comment xml:lang="ko">Adobe 글꼴 메트릭</comment>
   <comment xml:lang="lt">Adobe šriftų metrika</comment>
   <comment xml:lang="lv">Adobe fonta metrika</comment>
   <comment xml:lang="ms">Metrik font Adobe</comment>
@@ -43,8 +43,9 @@
   <comment xml:lang="sk">Metrika písma Adobe</comment>
   <comment xml:lang="sl">Matrika pisave Adobe</comment>
   <comment xml:lang="sq">Metrik lloj gërmash Adobe</comment>
-  <comment xml:lang="sr">Adobe метрика фонта</comment>
+  <comment xml:lang="sr">метрика Адобе слова</comment>
   <comment xml:lang="sv">Adobe-typsnittsmetrik</comment>
+  <comment xml:lang="tr">Adobe yazıtipi ölçüleri</comment>
   <comment xml:lang="uk">метрики шрифту Adobe</comment>
   <comment xml:lang="vi">Cách đo phông chữ Adobe</comment>
   <comment xml:lang="zh_CN">Adobe 字体参数</comment>

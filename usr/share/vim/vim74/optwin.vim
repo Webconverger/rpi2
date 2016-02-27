@@ -1,7 +1,7 @@
 " These commands create the option window.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last Change:	2014 Nov 19
+" Last Change:	2015 Nov 10
 
 " If there already is an option window, jump to that one.
 if bufwinnr("option-window") > 0
@@ -289,6 +289,10 @@ call append("$", " \tset tl=" . &tl)
 call append("$", "tags\tlist of file names to search for tags")
 call append("$", "\t(global or local to buffer)")
 call <SID>OptionG("tag", &tag)
+call append("$", "tagcase\thow to handle case when searching in tags files:")
+call append("$", "\t\"followic\" to follow 'ignorecase', \"ignore\" or \"match\"")
+call append("$", "\t(global or local to buffer)")
+call <SID>OptionG("tc", &tc)
 call append("$", "tagrelative\tfile names in a tags file are relative to the tags file")
 call <SID>BinOptionG("tr", &tr)
 call append("$", "tagstack\ta :tag command will use the tagstack")
@@ -705,6 +709,8 @@ call append("$", "errorbells\tring the bell for error messages")
 call <SID>BinOptionG("eb", &eb)
 call append("$", "visualbell\tuse a visual bell instead of beeping")
 call <SID>BinOptionG("vb", &vb)
+call append("$", "belloff\tdo not ring the bell for these reasons")
+call <SID>OptionG("belloff", &belloff)
 if has("multi_lang")
   call append("$", "helplang\tlist of preferred languages for finding help")
   call <SID>OptionG("hlg", &hlg)
@@ -788,7 +794,7 @@ call append("$", "infercase\tadjust case of a keyword completion match")
 call append("$", "\t(local to buffer)")
 call <SID>BinOptionL("inf")
 if has("digraphs")
-  call append("$", "digraph\tenable entering digraps with c1 <BS> c2")
+  call append("$", "digraph\tenable entering digraphs with c1 <BS> c2")
   call <SID>BinOptionG("dg", &dg)
 endif
 call append("$", "tildeop\tthe \"~\" command behaves like an operator")
@@ -954,6 +960,9 @@ call <SID>BinOptionL("bin")
 call append("$", "endofline\tlast line in the file has an end-of-line")
 call append("$", "\t(local to buffer)")
 call <SID>BinOptionL("eol")
+call append("$", "fixendofline\tfixes missing end-of-line at end of text file")
+call append("$", "\t(local to buffer)")
+call <SID>BinOptionL("fixeol")
 if has("multi_byte")
   call append("$", "bomb\tprepend a Byte Order Mark to the file")
   call append("$", "\t(local to buffer)")
@@ -1190,7 +1199,7 @@ if has("arabic")
   call <SID>BinOptionG("tbidi", &tbidi)
 endif
 if has("keymap")
-  call append("$", "keymap\tname of a keyboard mappping")
+  call append("$", "keymap\tname of a keyboard mapping")
   call <SID>OptionL("kmp")
 endif
 if has("langmap")
@@ -1301,6 +1310,30 @@ call append("$", " \tset debug=" . &debug)
 if has("mzscheme")
   call append("$", "mzquantum\tinterval in milliseconds between polls for MzScheme threads")
   call append("$", " \tset mzq=" . &mzq)
+endif
+if exists("&luadll")
+  call append("$", "luadll\tname of the Lua dynamic library")
+  call <SID>OptionG("luadll", &luadll)
+endif
+if exists("&perldll")
+  call append("$", "perldll\tname of the Perl dynamic library")
+  call <SID>OptionG("perldll", &perldll)
+endif
+if exists("&pythondll")
+  call append("$", "pythondll\tname of the Python 2 dynamic library")
+  call <SID>OptionG("pythondll", &pythondll)
+endif
+if exists("&pythonthreedll")
+  call append("$", "pythonthreedll\tname of the Python 3 dynamic library")
+  call <SID>OptionG("pythonthreedll", &pythonthreedll)
+endif
+if exists("&rubydll")
+  call append("$", "rubydll\tname of the Ruby dynamic library")
+  call <SID>OptionG("rubydll", &rubydll)
+endif
+if exists("&tcldll")
+  call append("$", "tcldll\tname of the Tcl dynamic library")
+  call <SID>OptionG("tcldll", &tcldll)
 endif
 
 set cpo&vim

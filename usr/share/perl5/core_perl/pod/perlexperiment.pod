@@ -87,10 +87,6 @@ See also: L<perlrecharclass/Extended Bracketed Character Classes>
 Using this feature triggers warnings in the category
 C<experimental::regex_sets>.
 
-=item C<\s> in regexp matches vertical tab
-
-Introduced in Perl 5.18
-
 =item Subroutine signatures
 
 Introduced in Perl 5.20.0
@@ -110,6 +106,51 @@ C<experimental::postderef>.
 
 The ticket for this feature is
 L<[perl #120162]|https://rt.perl.org:443/rt3/Ticket/Display.html?id=120162>.
+
+=item Aliasing via reference
+
+Introduced in Perl 5.22.0
+
+Using this feature triggers warnings in the category
+C<experimental::refaliasing>.
+
+The ticket for this feature is
+L<[perl #122947]|https://rt.perl.org/rt3/Ticket/Display.html?id=122947>.
+
+See also: L<perlref/Assigning to References>
+
+=item The "const" attribute
+
+Introduced in Perl 5.22.0
+
+Using this feature triggers warnings in the category
+C<experimental::const_attr>.
+
+The ticket for this feature is
+L<[perl #123630]|https://rt.perl.org/rt3/Ticket/Display.html?id=123630>.
+
+See also: L<perlsub/Constant Functions>
+
+=item use re 'strict';
+
+Introduced in Perl 5.22.0
+
+Using this feature triggers warnings in the category
+C<experimental::re_strict>.
+
+See L<re/'strict' mode>
+
+=item String- and number-specific bitwise operators
+
+Introduced in: Perl 5.22.0
+
+See also: L<perlop/Bitwise String Operators>
+
+Using this feature triggers warnings in the category
+C<experimental::bitwise>.
+
+The ticket for this feature is
+L<[perl #123707]|https://rt.perl.org/rt3/Ticket/Display.html?id=123707>.
 
 =item The <:win32> IO pseudolayer
 
@@ -224,6 +265,10 @@ Accepted in Perl 5.20.0
 See also L<perlrun>
 
 Accepted in Perl 5.20.0
+
+=item C<\s> in regexp matches vertical tab
+
+Accepted in Perl 5.22.0
 
 =back
 

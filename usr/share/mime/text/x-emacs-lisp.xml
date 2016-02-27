@@ -51,7 +51,7 @@
   <comment xml:lang="uk">вихідний код мовою Emacs Lisp</comment>
   <comment xml:lang="vi">Mã nguồn Lisp Emacs</comment>
   <comment xml:lang="zh_CN">Emacs Lisp 源代码</comment>
-  <comment xml:lang="zh_TW">Emacs Lisp 源碼</comment>
+  <comment xml:lang="zh_TW">Emacs Lisp 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.el"/>
 </mime-type>

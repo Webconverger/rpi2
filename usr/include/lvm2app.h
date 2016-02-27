@@ -9,7 +9,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 #ifndef _LIB_LVM2APP_H
 #define _LIB_LVM2APP_H
@@ -231,10 +231,12 @@ typedef struct lvm_property_value {
 	uint32_t is_string:1;
 	uint32_t is_integer:1;
 	uint32_t is_valid:1;
-	uint32_t padding:28;
+	uint32_t is_signed:1;
+	uint32_t padding:27;
 	union {
 		const char *string;
 		uint64_t integer;
+		int64_t signed_integer;
 	} value;
 } lvm_property_value_t;
 

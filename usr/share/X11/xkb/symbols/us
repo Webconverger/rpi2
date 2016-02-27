@@ -541,11 +541,12 @@ xkb_symbols "dvorak-classic" {
 // Main features: Numbers are in shift position (like French), symbols have been
 // placed in locations that give good hand-alternation and finger rolling with
 // symbols that usually follows, accented characters are possible for I18N.
+// Patch suggestions should be sent upstream.
 partial alphanumeric_keys
 xkb_symbols "dvp" {
 
     include "us(dvorak)"
-    name[Group1] = "English (programmer Dvorak)";
+    name[Group1] = "English (Programmer Dvorak)";
 
     //             Unmodified       Shift           AltGr            Shift+AltGr
     // symbols row, left side
@@ -568,8 +569,8 @@ xkb_symbols "dvp" {
 
     // upper row, left side
     key <AD01> { [ semicolon,       colon,          dead_diaeresis              ] };
-    key <AD02> { [ comma,           less,           guillemotleft,   ellipsis   ] };
-    key <AD03> { [ period,          greater,        guillemotright              ] };
+    key <AD02> { [ comma,           less,           guillemotleft,   U201C      ] };
+    key <AD03> { [ period,          greater,        guillemotright,  U201D      ] };
     key <AD04> { [ p,               P,              paragraph,       section    ] };
     key <AD05> { [ y,               Y,              udiaeresis,      Udiaeresis ] };
 
@@ -596,9 +597,9 @@ xkb_symbols "dvp" {
 
     // lower row, left side
     key <AB01> { [ apostrophe,      quotedbl,       dead_acute                  ] };
-    key <AB07> { [ m,               M,              mu                          ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
 
-    include "level3(ralt_switch)"
+    // do NOT hardcode this switch; use lv3:ralt_switch option instead!
+    //include "level3(ralt_switch)"
 };
 
 // phonetic layout for Russian letters on an US keyboard

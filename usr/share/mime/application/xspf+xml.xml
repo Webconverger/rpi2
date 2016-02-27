@@ -24,7 +24,7 @@
   <comment xml:lang="hu">XSPF-lejátszólista</comment>
   <comment xml:lang="ia">Lista de selection XSPF</comment>
   <comment xml:lang="id">Senarai pular XSPF</comment>
-  <comment xml:lang="it">Scaletta XSPF</comment>
+  <comment xml:lang="it">Playlist XSPF</comment>
   <comment xml:lang="ja">XSPF 再生リスト</comment>
   <comment xml:lang="kk">XSPF ойнау тізімі</comment>
   <comment xml:lang="ko">XSPF 재생 목록</comment>
@@ -40,7 +40,9 @@
   <comment xml:lang="sk">Zoznam skladieb XSPF</comment>
   <comment xml:lang="sl">Seznam predvajanja XSPF</comment>
   <comment xml:lang="sq">Listë titujsh XSPF</comment>
+  <comment xml:lang="sr">ИксСПФ списак нумера</comment>
   <comment xml:lang="sv">XSPF-spellista</comment>
+  <comment xml:lang="tr">XSPF çalma listesi</comment>
   <comment xml:lang="uk">список програвання XSPF</comment>
   <comment xml:lang="vi">Danh mục nhạc XSPF</comment>
   <comment xml:lang="zh_CN">XSPF 播放列表</comment>

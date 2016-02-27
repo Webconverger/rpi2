@@ -752,6 +752,7 @@ GNU C library functions and macros
 * envz_entry: (libc)Envz Functions.
 * envz_get: (libc)Envz Functions.
 * envz_merge: (libc)Envz Functions.
+* envz_remove: (libc)Envz Functions.
 * envz_strip: (libc)Envz Functions.
 * erand48: (libc)SVID Random.
 * erand48_r: (libc)SVID Random.
@@ -1300,6 +1301,8 @@ GNU C library functions and macros
 * perror: (libc)Error Messages.
 * pipe: (libc)Creating a Pipe.
 * popen: (libc)Pipe to a Subprocess.
+* posix_fallocate: (libc)Storage Allocation.
+* posix_fallocate64: (libc)Storage Allocation.
 * posix_memalign: (libc)Aligned Memory Blocks.
 * pow: (libc)Exponents and Logarithms.
 * pow10: (libc)Exponents and Logarithms.
@@ -1476,24 +1479,24 @@ GNU C library functions and macros
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
-* sigblock: (libc)Blocking in BSD.
+* sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
-* siginterrupt: (libc)BSD Handler.
+* siginterrupt: (libc)BSD Signal Handling.
 * sigismember: (libc)Signal Sets.
 * siglongjmp: (libc)Non-Local Exits and Signals.
-* sigmask: (libc)Blocking in BSD.
+* sigmask: (libc)BSD Signal Handling.
 * signal: (libc)Basic Signal Handling.
 * signbit: (libc)FP Bit Twiddling.
 * significand: (libc)Normalization Functions.
 * significandf: (libc)Normalization Functions.
 * significandl: (libc)Normalization Functions.
-* sigpause: (libc)Blocking in BSD.
+* sigpause: (libc)BSD Signal Handling.
 * sigpending: (libc)Checking for Pending Signals.
 * sigprocmask: (libc)Process Signal Mask.
 * sigsetjmp: (libc)Non-Local Exits and Signals.
-* sigsetmask: (libc)Blocking in BSD.
+* sigsetmask: (libc)BSD Signal Handling.
 * sigstack: (libc)Signal Stack.
 * sigsuspend: (libc)Sigsuspend.
 * sigvec: (libc)BSD Handler.
@@ -1749,17 +1752,19 @@ GNU C library functions and macros
 * ynl: (libc)Special Functions.
 
 GNU Gettext Utilities
-* autopoint: (gettext)autopoint Invocation.
-                                Copy gettext infrastructure.
-* envsubst: (gettext)envsubst Invocation.
-                                Expand environment variables.
-* gettextize: (gettext)gettextize Invocation.
-                                Prepare a package for gettext.
-* gettext: (gettext).           GNU gettext utilities.
 * ISO3166: (gettext)Country Codes.
                                 ISO 3166 country codes.
 * ISO639: (gettext)Language Codes.
                                 ISO 639 language codes.
+* xgettext: (gettext)xgettext Invocation.
+                                Extract strings into a PO file.
+* autopoint: (gettext)autopoint Invocation.
+                                Copy gettext infrastructure.
+* envsubst: (gettext)envsubst Invocation.
+                                Expand environment variables.
+* gettext: (gettext).           GNU gettext utilities.
+* gettextize: (gettext)gettextize Invocation.
+                                Prepare a package for gettext.
 * msgattrib: (gettext)msgattrib Invocation.
                                 Select part of a PO file.
 * msgcat: (gettext)msgcat Invocation.
@@ -1790,8 +1795,6 @@ GNU Gettext Utilities
                                 Unify duplicates for PO file.
 * ngettext: (gettext)ngettext Invocation.
                                 Translate a message with plural.
-* xgettext: (gettext)xgettext Invocation.
-                                Extract strings into a PO file.
 
 GNU Libraries
 * Assuan: (assuan).             An IPC library for non-persistent servers.
@@ -1819,11 +1822,12 @@ GNU Utilities
 * gpg-agent: (gnupg).           The secret key daemon.
 * gpg2: (gnupg).                OpenPGP encryption and signing tool.
 * gpgsm: (gnupg).               S/MIME encryption and signing tool.
-* pinentry: (pinentry).         Ask securely for a passphrase or PIN.
+* pinentry: (pinentry).         Securely ask for a passphrase or PIN.
 
 Individual utilities
 * arch: (coreutils)arch invocation.             Print machine hardware name.
 * awk: (gawk)Invoking gawk.                     Text scanning and processing.
+* base32: (coreutils)base32 invocation.         Base32 encode/decode data.
 * base64: (coreutils)base64 invocation.         Base64 encode/decode data.
 * basename: (coreutils)basename invocation.     Strip directory and suffix.
 * cat: (coreutils)cat invocation.               Concatenate and write files.
@@ -1844,9 +1848,9 @@ Individual utilities
 * df: (coreutils)df invocation.                 Report file system disk usage.
 * diff: (diffutils)Invoking diff.               Compare 2 files line by line.
 * diff3: (diffutils)Invoking diff3.             Compare 3 files line by line.
+* dir: (coreutils)dir invocation.               List directories briefly.
 * dircolors: (coreutils)dircolors invocation.   Color setup for ls.
 * dirname: (coreutils)dirname invocation.       Strip last file name component.
-* dir: (coreutils)dir invocation.               List directories briefly.
 * dnsdomainname: (inetutils)dnsdomainname invocation.
                                                 Show DNS domain name.
 * du: (coreutils)du invocation.                 Report on disk usage.
@@ -1896,9 +1900,9 @@ Individual utilities
 * pathchk: (coreutils)pathchk invocation.       Check file name portability.
 * ping: (inetutils)ping invocation.             Packets to network hosts.
 * ping6: (inetutils)ping6 invocation.           Packets to IPv6 network hosts.
+* pr: (coreutils)pr invocation.                 Paginate or columnate files.
 * printenv: (coreutils)printenv invocation.     Print environment variables.
 * printf: (coreutils)printf invocation.         Format and print data.
-* pr: (coreutils)pr invocation.                 Paginate or columnate files.
 * ptx: (coreutils)ptx invocation.               Produce permuted indexes.
 * pwd: (coreutils)pwd invocation.               Print working directory.
 * rcp: (inetutils)rcp invocation.               Remote copy
@@ -1908,8 +1912,8 @@ Individual utilities
 * rexecd: (inetutils)rexecd invocation.         Remote execution server.
 * rlogin: (inetutils)rlogin invocation.         Remote login.
 * rlogind: (inetutils)rlogind invocation.       Remote login server.
-* rmdir: (coreutils)rmdir invocation.           Remove empty directories.
 * rm: (coreutils)rm invocation.                 Remove files.
+* rmdir: (coreutils)rmdir invocation.           Remove empty directories.
 * rsh: (inetutils)rsh invocation.               Remote shell.
 * rshd: (inetutils)rshd invocation.             Remote shell server.
 * runcon: (coreutils)runcon invocation.         Run in specified SELinux CTX.
@@ -1926,7 +1930,7 @@ Individual utilities
 * stdbuf: (coreutils)stdbuf invocation.         Modify stdio buffering.
 * stty: (coreutils)stty invocation.             Print/change terminal settings.
 * sum: (coreutils)sum invocation.               Print traditional checksum.
-* sync: (coreutils)sync invocation.             Synchronize memory and disk.
+* sync: (coreutils)sync invocation.             Synchronize memory to disk.
 * syslogd: (inetutils)syslogd invocation.       Syslog server.
 * tac: (coreutils)tac invocation.               Reverse files.
 * tail: (coreutils)tail invocation.             Output the last part of files.
@@ -1941,10 +1945,10 @@ Individual utilities
 * tftpd: (inetutils)tftpd invocation.           TFTP server.
 * timeout: (coreutils)timeout invocation.       Run with time limit.
 * touch: (coreutils)touch invocation.           Change file timestamps.
+* tr: (coreutils)tr invocation.                 Translate characters.
 * traceroute: (inetutils)traceroute invocation. Trace the route to a host.
 * true: (coreutils)true invocation.             Do nothing, successfully.
 * truncate: (coreutils)truncate invocation.     Shrink/extend size of a file.
-* tr: (coreutils)tr invocation.                 Translate characters.
 * tsort: (coreutils)tsort invocation.           Topological sort.
 * tty: (coreutils)tty invocation.               Print terminal name.
 * uname: (coreutils)uname invocation.           Print system information.
@@ -1957,8 +1961,8 @@ Individual utilities
 * uucpd: (inetutils)uucpd invocation.           Unix to Unix Copy.
 * vdir: (coreutils)vdir invocation.             List directories verbosely.
 * wc: (coreutils)wc invocation.                 Line, word, and byte counts.
-* whoami: (coreutils)whoami invocation.         Print effective user ID.
 * who: (coreutils)who invocation.               Print who is logged in.
+* whoami: (coreutils)whoami invocation.         Print effective user ID.
 * whois: (inetutils)whois invocation.           Whois user interface.
 * xargs: (find)Invoking xargs.                  Operating on many files.
 * yes: (coreutils)yes invocation.               Print a string indefinitely.

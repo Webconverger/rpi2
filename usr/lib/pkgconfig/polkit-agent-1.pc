@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: polkit-agent-1
 Description: PolicyKit Authentication Agent API
-Version: 0.112
+Version: 0.113
 Libs: -L${libdir} -lpolkit-agent-1
 Cflags: -I${includedir}/polkit-1
 Requires: polkit-gobject-1

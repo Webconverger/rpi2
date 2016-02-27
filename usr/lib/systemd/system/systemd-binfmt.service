@@ -24,3 +24,4 @@ ConditionDirectoryNotEmpty=|/run/binfmt.d
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/lib/systemd/systemd-binfmt
+TimeoutSec=90s

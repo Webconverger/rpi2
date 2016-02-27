@@ -9,7 +9,7 @@
 Description=Network Time Synchronization
 Documentation=man:systemd-timesyncd.service(8)
 ConditionCapability=CAP_SYS_TIME
-ConditionVirtualization=no
+ConditionVirtualization=!container
 DefaultDependencies=no
 RequiresMountsFor=/var/lib/systemd/clock
 After=systemd-remount-fs.service systemd-tmpfiles-setup.service systemd-sysusers.service
@@ -27,7 +27,7 @@ PrivateTmp=yes
 PrivateDevices=yes
 ProtectSystem=full
 ProtectHome=yes
-WatchdogSec=1min
+WatchdogSec=3min
 
 [Install]
 WantedBy=sysinit.target

@@ -42,11 +42,12 @@
   <comment xml:lang="sk">Kurzor Windows</comment>
   <comment xml:lang="sl">Datoteka kazalke Windows</comment>
   <comment xml:lang="sq">Kursor Windows</comment>
-  <comment xml:lang="sr">Виндуз курзор</comment>
+  <comment xml:lang="sr">Виндоузов курсор</comment>
   <comment xml:lang="sv">Windows-muspekare</comment>
+  <comment xml:lang="tr">Windows imleci</comment>
   <comment xml:lang="uk">курсор Windows</comment>
   <comment xml:lang="vi">Con chạy Windows</comment>
   <comment xml:lang="zh_CN">Windows 光标</comment>
-  <comment xml:lang="zh_TW">Windows 滑鼠指標</comment>
+  <comment xml:lang="zh_TW">Windows 滑鼠游標</comment>
   <glob pattern="*.cur"/>
 </mime-type>

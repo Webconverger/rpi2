@@ -11,7 +11,7 @@
   <comment xml:lang="de">MATLAB-Skript/-Funktion</comment>
   <comment xml:lang="el">Δέσμη ενεργειών/συνάρτηση MATLAB</comment>
   <comment xml:lang="en_GB">MATLAB script/function</comment>
-  <comment xml:lang="es">script/función de MATLAB</comment>
+  <comment xml:lang="es">secuencia de órdenes/función de MATLAB</comment>
   <comment xml:lang="eu">MATLAB script/funtzioa</comment>
   <comment xml:lang="fi">MATLAB-komentotiedosto/funktio</comment>
   <comment xml:lang="fo">MATLAB boðrøð/funka</comment>
@@ -39,7 +39,9 @@
   <comment xml:lang="sk">Skript/funkcia MATLAB</comment>
   <comment xml:lang="sl">Skriptna datoteka MATLAB</comment>
   <comment xml:lang="sq">Script/Funksion MATLAB</comment>
+  <comment xml:lang="sr">скрипта/функција МАТЛАБ-а</comment>
   <comment xml:lang="sv">MATLAB-skript/funktion</comment>
+  <comment xml:lang="tr">MATLAB betiği/fonksiyonu</comment>
   <comment xml:lang="uk">скрипт/функція MATLAB</comment>
   <comment xml:lang="vi">Văn lệnh/chức năng MATLAB</comment>
   <comment xml:lang="zh_CN">MATLAB 脚本/函数</comment>

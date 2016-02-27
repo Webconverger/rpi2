@@ -10,7 +10,7 @@ typelibdir=${libdir}/girepository-1.0
 Name: GStreamer FFT Library
 Description: FFT implementation
 Requires: gstreamer-1.0
-Version: 1.4.5
+Version: 1.6.3
 Libs: -L${libdir} -lgstfft-1.0 -lm
 Cflags: -I${includedir}
 

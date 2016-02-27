@@ -7,7 +7,7 @@
  *    License or the Artistic License, as specified in the README file.
  *
  * Control ops (cops) are one of the two ops OP_NEXTSTATE and OP_DBSTATE,
- * that (loosely speaking) are separate statements.
+ * that (loosely speaking) are statement separators.
  * They hold information important for lexical state and error reporting.
  * At run time, PL_curcop is set to point to the most recently executed cop,
  * and thus can be used to determine our current state.
@@ -617,6 +617,7 @@ struct block_format {
 	cx->blk_format.gv = gv;						\
 	cx->blk_format.retop = (retop);					\
 	cx->blk_format.dfoutgv = PL_defoutgv;				\
+	cx->blk_u16 = 0;                                                \
 	if (!CvDEPTH(cv)) SvREFCNT_inc_simple_void_NN(cv);		\
 	CvDEPTH(cv)++;							\
 	SvREFCNT_inc_void(cx->blk_format.dfoutgv)
@@ -639,6 +640,8 @@ struct block_format {
 #define POPSUB(cx,sv)							\
     STMT_START {							\
 	const I32 olddepth = cx->blk_sub.olddepth;			\
+        if (!(cx->blk_u16 & CxPOPSUB_DONE)) {                           \
+        cx->blk_u16 |= CxPOPSUB_DONE;                                   \
 	RETURN_PROBE(CvNAMED(cx->blk_sub.cv)				\
 			? HEK_KEY(CvNAME_HEK(cx->blk_sub.cv))		\
 			: GvENAME(CvGV(cx->blk_sub.cv)),		\
@@ -661,6 +664,7 @@ struct block_format {
 		CLEAR_ARGARRAY(cx->blk_sub.argarray);			\
 	    }								\
 	}								\
+        }                                                               \
 	sv = MUTABLE_SV(cx->blk_sub.cv);				\
 	LEAVE_SCOPE(PL_scopestack[cx->blk_oldscopesp-1]);		\
 	if (sv && (CvDEPTH((const CV*)sv) = olddepth))			\
@@ -674,13 +678,16 @@ struct block_format {
 
 #define POPFORMAT(cx)							\
     STMT_START {							\
+        if (!(cx->blk_u16 & CxPOPSUB_DONE)) {                           \
 	CV * const cv = cx->blk_format.cv;				\
 	GV * const dfuot = cx->blk_format.dfoutgv;			\
+        cx->blk_u16 |= CxPOPSUB_DONE;                                   \
 	setdefout(dfuot);						\
 	LEAVE_SCOPE(PL_scopestack[cx->blk_oldscopesp-1]);		\
 	if (!--CvDEPTH(cv))						\
 	    SvREFCNT_dec_NN(cx->blk_format.cv);				\
 	SvREFCNT_dec_NN(dfuot);						\
+        }                                                               \
     } STMT_END
 
 /* eval context */
@@ -761,14 +768,19 @@ struct block_loop {
 	((c)->blk_loop.itervar_u.oldcomppad				\
 	 ? (CxPADLOOP(c) 						\
 	    ? CxITERVAR_PADSV(c)					\
-	    : &GvSV((c)->blk_loop.itervar_u.gv))			\
+	    : isGV((c)->blk_loop.itervar_u.gv)				\
+		? &GvSV((c)->blk_loop.itervar_u.gv)			\
+		: (SV **)&(c)->blk_loop.itervar_u.gv)			\
 	 : (SV**)NULL)
 
 #define CxLABEL(c)	(0 + CopLABEL((c)->blk_oldcop))
 #define CxLABEL_len(c,len)	(0 + CopLABEL_len((c)->blk_oldcop, len))
 #define CxLABEL_len_flags(c,len,flags)	(0 + CopLABEL_len_flags((c)->blk_oldcop, len, flags))
 #define CxHASARGS(c)	(((c)->cx_type & CXp_HASARGS) == CXp_HASARGS)
-#define CxLVAL(c)	(0 + (c)->blk_u16)
+#define CxLVAL(c)	(0 + ((c)->blk_u16 & 0xff))
+/* POPSUB has already been performed on this context frame */
+#define CxPOPSUB_DONE 0x100
+
 
 #define PUSHLOOP_PLAIN(cx, s)						\
 	cx->blk_loop.resetsp = s - PL_stack_base;			\
@@ -880,9 +892,9 @@ struct subst {
     U8		sbu_type;	/* what kind of context this is */
     U8		sbu_rflags;
     U16		sbu_rxtainted;	/* matches struct block */
-    I32		sbu_iters;
-    I32		sbu_maxiters;
     I32		sbu_oldsave;
+    SSize_t	sbu_iters;
+    SSize_t	sbu_maxiters;
     char *	sbu_orig;
     SV *	sbu_dstr;
     SV *	sbu_targ;
@@ -980,6 +992,7 @@ struct context {
 
 /* private flags for CXt_LOOP */
 #define CXp_FOR_DEF	0x10	/* foreach using $_ */
+#define CXp_FOR_LVREF	0x20	/* foreach using \$var */
 #define CxPADLOOP(c)	((c)->blk_loop.my_op->op_targ)
 
 /* private flags for CXt_SUBST */
@@ -1263,11 +1276,5 @@ See L<perlcall/LIGHTWEIGHT CALLBACKS>.
 	multicall_cop = CvSTART(cv);					\
     } STMT_END
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

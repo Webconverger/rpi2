@@ -12,10 +12,15 @@ ConditionCapability=CAP_NET_ADMIN
 DefaultDependencies=no
 # dbus.service can be dropped once on kdbus, and systemd-udevd.service can be
 # dropped once tuntap is moved to netlink
-After=systemd-udevd.service dbus.service network-pre.target systemd-sysusers.service
+After=systemd-udevd.service dbus.service network-pre.target systemd-sysusers.service systemd-sysctl.service
 Before=network.target multi-user.target shutdown.target
 Conflicts=shutdown.target
 Wants=network.target
+
+# On kdbus systems we pull in the busname explicitly, because it
+# carries policy that allows the daemon to acquire its name.
+Wants=org.freedesktop.network1.busname
+After=org.freedesktop.network1.busname
 
 [Service]
 Type=notify
@@ -25,7 +30,7 @@ ExecStart=/usr/lib/systemd/systemd-networkd
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER
 ProtectSystem=full
 ProtectHome=yes
-WatchdogSec=1min
+WatchdogSec=3min
 
 [Install]
 WantedBy=multi-user.target

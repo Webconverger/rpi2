@@ -26,7 +26,7 @@
   <comment xml:lang="it">Documento PostScript (compresso con gzip)</comment>
   <comment xml:lang="ja">PostScript ドキュメント (gzip 圧縮)</comment>
   <comment xml:lang="kk">PostScript құжаты (gzip-пен сығылған)</comment>
-  <comment xml:lang="ko">포스트스크립트 문서 (GZIP 압축)</comment>
+  <comment xml:lang="ko">PostScript 문서(GZIP 압축)</comment>
   <comment xml:lang="lt">PostScript dokumentas (suglaudintas su gzip)</comment>
   <comment xml:lang="lv">PostScript dokuments (saspiests ar gzip)</comment>
   <comment xml:lang="ms">Dokumen PostScript (dimampatkan-gzip)</comment>
@@ -41,8 +41,9 @@
   <comment xml:lang="sk">Dokument PostScript (komprimovaný pomocou gzip)</comment>
   <comment xml:lang="sl">Dokument PostScript (stisnjen z gzip)</comment>
   <comment xml:lang="sq">Dokument PostScript (i kompresuar me gzip)</comment>
-  <comment xml:lang="sr">Постскрипт документ (компресована gzip-ом)</comment>
+  <comment xml:lang="sr">Постскрипт документ (запакован гзип-ом)</comment>
   <comment xml:lang="sv">Postscript-dokument (gzip-komprimerat)</comment>
+  <comment xml:lang="tr">PostScript belgesi (gzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">документ PostScript (стиснене gzip)</comment>
   <comment xml:lang="vi">Tài liệu PostScript (đã nén gzip)</comment>
   <comment xml:lang="zh_CN">PostScript 文档(gzip 压缩)</comment>

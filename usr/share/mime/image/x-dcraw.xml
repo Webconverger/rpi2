@@ -25,7 +25,7 @@
   <comment xml:lang="it">Immagine raw digitale</comment>
   <comment xml:lang="ja">デジタル raw 画像</comment>
   <comment xml:lang="kk">өңделмеген сандық суреттер</comment>
-  <comment xml:lang="ko">디지털 원본 이미지</comment>
+  <comment xml:lang="ko">디지털 원본 사진</comment>
   <comment xml:lang="lt">skaitmeninis neapdorotas paveikslėlis</comment>
   <comment xml:lang="lv">digitāls jēlattēls</comment>
   <comment xml:lang="nb">digitalt raw-bilde</comment>
@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Digitálny surový obrázok</comment>
   <comment xml:lang="sl">surova digitalna slika</comment>
   <comment xml:lang="sq">Figurë raw dixhitale</comment>
+  <comment xml:lang="sr">дигитална сирова слика</comment>
   <comment xml:lang="sv">digital råbild</comment>
+  <comment xml:lang="tr">sayısal ham görüntü</comment>
   <comment xml:lang="uk">зображення цифрового негатива</comment>
   <comment xml:lang="vi">ảnh thô số</comment>
   <comment xml:lang="zh_CN">数字化原始图像</comment>

@@ -10,8 +10,8 @@ includedir=${prefix}/include
 Name: libssh2
 URL: http://www.libssh2.org/
 Description: Library for SSH-based communication
-Version: 1.4.3
-Requires.private: libssl,libcrypto
-Libs: -L${libdir} -lssh2  
+Version: 1.6.0
+Requires.private: libssl,libcrypto,zlib
+Libs: -L${libdir} -lssh2 -Wl,-O1,--sort-common,--as-needed,-z,relro 
 Libs.private: 
 Cflags: -I${includedir}

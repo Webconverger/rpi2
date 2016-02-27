@@ -41,12 +41,13 @@
   <comment xml:lang="sk">Zdrojový kód Erlang</comment>
   <comment xml:lang="sl">Datoteka izvorne kode Erlang</comment>
   <comment xml:lang="sq">Kod burues Erlang</comment>
+  <comment xml:lang="sr">Ерланг изворни ко̂д</comment>
   <comment xml:lang="sv">Erlang-källkod</comment>
   <comment xml:lang="tr">Erlang kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою Erlang</comment>
   <comment xml:lang="vi">Mã nguồn Erlang</comment>
   <comment xml:lang="zh_CN">Erlang 源代码</comment>
-  <comment xml:lang="zh_TW">Erlang 源碼</comment>
+  <comment xml:lang="zh_TW">Erlang 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.erl"/>
 </mime-type>

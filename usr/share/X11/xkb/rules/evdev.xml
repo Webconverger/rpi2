@@ -1295,6 +1295,20 @@
        <vendor>htc</vendor>
      </configItem>
     </model>
+    <model>
+      <configItem>
+       <name>teck227</name>
+       <description>Truly Ergonomic Computer Keyboard Model 227 (Wide Alt keys)</description>
+       <vendor>Megawin Technology</vendor>
+     </configItem>
+    </model>
+    <model>
+      <configItem>
+       <name>teck229</name>
+       <description>Truly Ergonomic Computer Keyboard Model 229 (Standard sized Alt keys, additional Super and Menu key)</description>
+       <vendor>Megawin Technology</vendor>
+     </configItem>
+    </model>
   </modelList>
   <layoutList>
     <layout>
@@ -1382,7 +1396,7 @@
         <variant>
           <configItem>
             <name>dvp</name>
-            <description>English (programmer Dvorak)</description>
+            <description>English (Programmer Dvorak)</description>
           </configItem>
         </variant>
         <variant>
@@ -1786,6 +1800,8 @@
         <description>Bangla</description>
         <languageList>
           <iso639Id>ben</iso639Id>
+          
+          <iso639Id>sat</iso639Id>
         </languageList>
       </configItem>
       <variantList>
@@ -1813,6 +1829,8 @@
             <description>Bangla (India)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1824,6 +1842,8 @@
             <description>Bangla (India, Probhat)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1833,6 +1853,8 @@
             <description>Bangla (India, Baishakhi)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1842,6 +1864,8 @@
             <description>Bangla (India, Bornona)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1851,6 +1875,8 @@
             <description>Bangla (India, Uni Gitanjali)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1860,6 +1886,8 @@
             <description>Bangla (India, Baishakhi Inscript)</description>
             <languageList>
               <iso639Id>ben</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -1968,6 +1996,20 @@
             <description>Oriya</description>
             <languageList>
               <iso639Id>ori</iso639Id>
+              
+              <iso639Id>sat</iso639Id>
+            </languageList>
+          </configItem>
+        </variant>
+        <variant>
+           <configItem>
+            <name>olck</name>
+            
+            <shortDescription>sat</shortDescription>
+            <description>Ol Chiki</description>
+            <languageList>
+              
+              <iso639Id>sat</iso639Id>
             </languageList>
           </configItem>
         </variant>
@@ -2228,6 +2270,12 @@
             <languageList>
               <iso639Id>epo</iso639Id>
             </languageList>
+          </configItem>
+        </variant>
+        <variant>
+          <configItem>
+            <name>thinkpad</name>
+            <description>Portuguese (Brazil, IBM/Lenovo ThinkPad)</description>
           </configItem>
         </variant>
       </variantList>
@@ -2658,6 +2706,17 @@
             <description>Czech (US Dvorak with CZ UCW support)</description>
           </configItem>
         </variant>
+        <variant>
+          <configItem>
+            <name>rus</name>
+            
+            <shortDescription>ru</shortDescription>
+            <description>Russian (Czech, phonetic)</description>
+            <languageList>
+              <iso639Id>rus</iso639Id>
+            </languageList>
+          </configItem>
+        </variant>
       </variantList>
     </layout>
     <layout>
@@ -2960,6 +3019,12 @@
             <description>Finnish (Macintosh)</description>
           </configItem>
         </variant>
+        <variant>
+          <configItem>
+            <name>das</name>
+            <description>Finnish (DAS)</description>
+          </configItem>
+        </variant>
       </variantList>
     </layout>
     <layout>
@@ -3049,6 +3114,12 @@
           <configItem>
             <name>mac</name>
             <description>French (Macintosh)</description>
+          </configItem>
+        </variant>
+        <variant>
+          <configItem>
+            <name>azerty</name>
+            <description>French (Azerty)</description>
           </configItem>
         </variant>
         <variant>
@@ -3831,6 +3902,12 @@
           <configItem>
             <name>sundeadkeys</name>
             <description>Spanish (Latin American, Sun dead keys)</description>
+          </configItem>
+        </variant>
+        <variant>
+          <configItem>
+            <name>dvorak</name>
+            <description>Spanish (Latin American, Dvorak)</description>
           </configItem>
         </variant>
       </variantList>
@@ -4932,6 +5009,13 @@
             </languageList>
           </configItem>
         </variant>
+        <variant>
+          <configItem>
+            <name>us</name>
+            <shortDescription>us</shortDescription>
+            <description>Sinhala (US keyboard with Sinhala letters)</description>
+          </configItem>
+        </variant>
       </variantList>
     </layout>
     <layout>
@@ -5427,6 +5511,8 @@
         <description>Nepali</description>
         <languageList>
           <iso639Id>nep</iso639Id>
+          
+          <iso639Id>sat</iso639Id>
         </languageList>
       </configItem>
     </layout>
@@ -5595,6 +5681,16 @@
         <description>Swahili (Tanzania)</description>
         <languageList>
           <iso639Id>swa</iso639Id>
+        </languageList>
+      </configItem>
+    </layout>
+    <layout>
+      <configItem>
+        <name>tg</name>
+        <shortDescription>fr-tg</shortDescription>
+        <description>French (Togo)</description>
+        <languageList>
+          <iso639Id>fra</iso639Id>
         </languageList>
       </configItem>
     </layout>
@@ -6411,6 +6507,12 @@
       </option>
       <option>
         <configItem>
+          <name>caps:menu</name>
+          <description>Make Caps Lock an additional Menu key</description>
+        </configItem>
+      </option>
+      <option>
+        <configItem>
           <name>caps:shiftlock</name>
           <description>Caps Lock toggles ShiftLock (affects all keys)</description>
         </configItem>
@@ -6490,8 +6592,20 @@
       </option>
       <option>
         <configItem>
+          <name>altwin:swap_lalt_lwin</name>
+          <description>Left Alt is swapped with Left Win</description>
+        </configItem>
+      </option>
+      <option>
+        <configItem>
           <name>altwin:swap_alt_win</name>
           <description>Alt is swapped with Win</description>
+        </configItem>
+      </option>
+      <option>
+        <configItem>
+          <name>altwin:prtsc_rwin</name>
+          <description>Win is mapped to PrtSc (and the usual Win key)</description>
         </configItem>
       </option>
     </group>

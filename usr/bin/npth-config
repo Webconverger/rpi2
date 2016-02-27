@@ -71,7 +71,7 @@ while test $# -gt 0; do
 	    with_glib=yes
 	    ;;
         --version)
-            echo "1.1"
+            echo "1.2"
 	    exit 0
 	    ;;
         --api-version)

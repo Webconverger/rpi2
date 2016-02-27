@@ -884,7 +884,7 @@ $INPUT_RECORD_SEPARATOR in the C<English> module).  It returns the total
 number of characters removed from all its arguments.  It's often used to
 remove the newline from the end of an input record when you're worried
 that the final record may be missing its newline.  When in paragraph
-mode (C<$/ = "">), it removes all trailing newlines from the string.
+mode (C<$/ = ''>), it removes all trailing newlines from the string.
 When in slurp mode (C<$/ = undef>) or fixed-length record mode (C<$/> is
 a reference to an integer or the like; see L<perlvar>) chomp() won't
 remove anything.
@@ -1701,7 +1701,7 @@ but in a different order:
         print "$key=$value\n";
     }
 
-Starting with Perl 5.14, C<each> can take a scalar EXPR, which must hold
+Starting with Perl 5.14, C<each> can take a scalar EXPR, which must hold a
 reference to an unblessed hash or array.  The argument will be dereferenced
 automatically.  This aspect of C<each> is considered highly experimental.
 The exact behaviour may change in a future version of Perl.
@@ -2297,6 +2297,12 @@ same underlying descriptor:
             "not have a real file descriptor\n";
     }
 
+The behavior of C<fileno> on a directory handle depends on the operating
+system.  On a system with dirfd(3) or similar, C<fileno> on a directory
+handle returns the underlying file descriptor associated with the
+handle; on systems with no such support, it returns the undefined value,
+and sets C<$!> (errno).
+
 =item flock FILEHANDLE,OPERATION
 X<flock> X<lock> X<locking>
 
@@ -2716,7 +2722,8 @@ various get routines are as follows:
  $comment,  $gcos,     $dir,       $shell,   $expire ) = getpw*
  # 5        6          7           8         9
 
-(If the entry doesn't exist you get an empty list.)
+(If the entry doesn't exist, the return value is a single meaningless true
+value.)
 
 The exact meaning of the $gcos field varies but it usually contains
 the real name of the user (as opposed to the login name) and other
@@ -3356,9 +3363,9 @@ What gets returned depends on several factors:
 The results follow ASCII rules.  Only the characters C<A-Z> change,
 to C<a-z> respectively.
 
-=item Otherwise, if C<use locale> (but not C<use locale ':not_characters'>) is in effect:
+=item Otherwise, if C<use locale> for C<LC_CTYPE> is in effect:
 
-Respects current LC_CTYPE locale for code points < 256; and uses Unicode
+Respects current C<LC_CTYPE> locale for code points < 256; and uses Unicode
 rules for the remaining code points (this last can only happen if
 the UTF8 flag is also set).  See L<perllocale>.
 
@@ -3372,8 +3379,10 @@ locale), the lower case of U+1E9E is
 itself, because 0xDF may not be LATIN SMALL LETTER SHARP S in the
 current locale, and Perl has no way of knowing if that character even
 exists in the locale, much less what code point it is.  Perl returns
-the input character unchanged, for all instances (and there aren't
-many) where the 255/256 boundary would otherwise be crossed.
+a result that is above 255 (almost always the input character unchanged,
+for all instances (and there aren't many) where the 255/256 boundary
+would otherwise be crossed; and starting in v5.22, it raises a
+L<locale|perldiag/Can't do %s("%s") on non-UTF-8 locale; resolved to "%s".> warning.
 
 =item Otherwise, If EXPR has the UTF8 flag set:
 
@@ -4367,7 +4376,8 @@ existing variable: a package variable of the same name.
 
 This means that when C<use strict 'vars'> is in effect, C<our> lets you use
 a package variable without qualifying it with the package name, but only within
-the lexical scope of the C<our> declaration. This applies immediately--even
+the lexical scope of the C<our>
+declaration.  This applies immediately--even
 within the same statement.
 
     package Foo;
@@ -4523,7 +4533,8 @@ of values, as follows:
     D  A float of long-double precision in native format.
          (Long doubles are available only if your system supports
           long double values _and_ if Perl has been compiled to
-          support those.  Raises an exception otherwise.)
+          support those.  Raises an exception otherwise.
+          Note that there are different long double formats.)
 
     p  A pointer to a null-terminated string.
     P  A pointer to a structure (fixed-length string).
@@ -4858,6 +4869,8 @@ Some systems may have even weirder byte orders such as
    0x56 0x78 0x12 0x34
    0x34 0x12 0x78 0x56
 
+These are called mid-endian, middle-endian, mixed-endian, or just weird.
+
 You can determine your system endianness with this incantation:
 
    printf("%#02x ", $_) for unpack("W*", pack L=>0x12345678); 
@@ -4873,11 +4886,26 @@ or from the command line:
     $ perl -V:byteorder
 
 Byteorders C<"1234"> and C<"12345678"> are little-endian; C<"4321">
-and C<"87654321"> are big-endian.
+and C<"87654321"> are big-endian.  Systems with multiarchitecture binaries
+will have C<"ffff">, signifying that static information doesn't work,
+one must use runtime probing.
 
 For portably packed integers, either use the formats C<n>, C<N>, C<v>, 
 and C<V> or else use the C<< > >> and C<< < >> modifiers described
 immediately below.  See also L<perlport>.
+
+=item *
+
+Also floating point numbers have endianness.  Usually (but not always)
+this agrees with the integer endianness.  Even though most platforms
+these days use the IEEE 754 binary format, there are differences,
+especially if the long doubles are involved.  You can see the
+C<Config> variables C<doublekind> and C<longdblkind> (also C<doublesize>,
+C<longdblsize>): the "kind" values are enums, unlike C<byteorder>.
+
+Portability-wise the best option is probably to keep to the IEEE 754
+64-bit doubles, and of agreed-upon endianness.  Another possibility
+is the C<"%a">) format of C<printf>.
 
 =item *
 
@@ -4945,7 +4973,7 @@ will not in general equal $foo.
 =item *
 
 Pack and unpack can operate in two modes: character mode (C<C0> mode) where
-the packed string is processed per character, and UTF-8 mode (C<U0> mode)
+the packed string is processed per character, and UTF-8 byte mode (C<U0> mode)
 where the packed string is processed in its UTF-8-encoded Unicode form on
 a byte-by-byte basis.  Character mode is the default
 unless the format string starts with C<U>.  You
@@ -5031,6 +5059,13 @@ for complicated pattern matches.
 If TEMPLATE requires more arguments than pack() is given, pack()
 assumes additional C<""> arguments.  If TEMPLATE requires fewer arguments
 than given, extra arguments are ignored.
+
+=item *
+
+Attempting to pack the special floating point values C<Inf> and C<NaN>
+(infinity, also in negative, and not-a-number) into packed integer values
+(like C<"L">) is a fatal error.  The reason for this is that there simply
+isn't any sensible mapping for these special values into integers.
 
 =back
 
@@ -5296,10 +5331,11 @@ LIST are actually parsed as a single list.  The first argument
 of the list will be interpreted as the C<printf> format.  This
 means that C<printf(@_)> will use C<$_[0]> as the format.  See
 L<sprintf|/sprintf FORMAT, LIST> for an
-explanation of the format argument.  If C<use locale> (including
-C<use locale ':not_characters'>) is in effect and
+explanation of the format argument.  If C<use locale> for C<LC_NUMERIC>
+Look for this throught pod
+is in effect and
 POSIX::setlocale() has been called, the character used for the decimal
-separator in formatted floating-point numbers is affected by the LC_NUMERIC
+separator in formatted floating-point numbers is affected by the C<LC_NUMERIC>
 locale setting.  See L<perllocale> and L<POSIX>.
 
 For historical reasons, if you omit the list, C<$_> is used as the format;
@@ -5316,11 +5352,14 @@ error prone.
 =item prototype FUNCTION
 X<prototype>
 
+=item prototype
+
 =for Pod::Functions +5.002 get the prototype (if any) of a subroutine
 
 Returns the prototype of a function as a string (or C<undef> if the
 function has no prototype).  FUNCTION is a reference to, or the name of,
-the function whose prototype you want to retrieve.
+the function whose prototype you want to retrieve.  If FUNCTION is omitted,
+$_ is used.
 
 If FUNCTION is a string starting with C<CORE::>, the rest is taken as a
 name for a Perl builtin.  If the builtin's arguments
@@ -6785,7 +6824,7 @@ Examples:
     # same thing, but much more efficiently;
     # we'll build auxiliary indices instead
     # for speed
-    my @nums = @caps = ();
+    my (@nums, @caps);
     for (@old) {
         push @nums, ( /=(\d+)/ ? $1 : undef );
         push @caps, fc($_);
@@ -6862,14 +6901,22 @@ eliminate any C<NaN>s from the input list.
 
     @result = sort { $a <=> $b } grep { $_ == $_ } @input;
 
-=item splice ARRAY or EXPR,OFFSET,LENGTH,LIST
+=item splice ARRAY,OFFSET,LENGTH,LIST
 X<splice>
 
-=item splice ARRAY or EXPR,OFFSET,LENGTH
+=item splice ARRAY,OFFSET,LENGTH
 
-=item splice ARRAY or EXPR,OFFSET
+=item splice ARRAY,OFFSET
 
-=item splice ARRAY or EXPR
+=item splice ARRAY
+
+=item splice EXPR,OFFSET,LENGTH,LIST
+
+=item splice EXPR,OFFSET,LENGTH
+
+=item splice EXPR,OFFSET
+
+=item splice EXPR
 
 =for Pod::Functions add or remove elements anywhere in an array
 
@@ -6961,7 +7008,8 @@ uses empty string matches as separators to produce the output
 list of its component characters.
 
 As a special case for C<split>, the empty pattern given in
-L<match operator|perlop/"m/PATTERN/msixpodualgc"> syntax (C<//>) specifically matches the empty string, which is contrary to its usual
+L<match operator|perlop/"m/PATTERN/msixpodualngc"> syntax (C<//>)
+specifically matches the empty string, which is contrary to its usual
 interpretation as the last successful match.
 
 If PATTERN is C</^/>, then it is treated as if it used the
@@ -7135,6 +7183,8 @@ In addition, Perl permits the following widely-supported conversions:
    %p    a pointer (outputs the Perl value's address in hexadecimal)
    %n    special: *stores* the number of characters output so far
          into the next argument in the parameter list
+   %a    hexadecimal floating point
+   %A    like %a, but using upper-case letters
 
 Finally, for backward (and we do mean "backward") compatibility, Perl
 permits these unnecessary but widely-supported conversions:
@@ -7149,7 +7199,9 @@ Note that the number of exponent digits in the scientific notation produced
 by C<%e>, C<%E>, C<%g> and C<%G> for numbers with the modulus of the
 exponent less than 100 is system-dependent: it may be three or less
 (zero-padded as necessary).  In other words, 1.23 times ten to the
-99th may be either "1.23e99" or "1.23e099".
+99th may be either "1.23e99" or "1.23e099".  Similarly for C<%a> and C<%A>:
+the exponent or the hexadecimal digits may float: especially the
+"long doubles" Perl configuration option may cause surprises.
 
 Between the C<%> and the format letter, you may specify several
 additional attributes controlling the interpretation of the format.
@@ -7429,7 +7481,7 @@ index, the C<$> may need escaping:
 If C<use locale> (including C<use locale 'not_characters'>) is in effect
 and POSIX::setlocale() has been called,
 the character used for the decimal separator in formatted floating-point
-numbers is affected by the LC_NUMERIC locale.  See L<perllocale>
+numbers is affected by the C<LC_NUMERIC> locale.  See L<perllocale>
 and L<POSIX>.
 
 =item sqrt EXPR
@@ -7671,14 +7723,18 @@ X<study>
 
 =for Pod::Functions optimize input data for repeated searches
 
-Takes extra time to study SCALAR (C<$_> if unspecified) in anticipation of
-doing many pattern matches on the string before it is next modified.
+May take extra time to study SCALAR (C<$_> if unspecified) in anticipation
+of doing many pattern matches on the string before it is next modified.
 This may or may not save time, depending on the nature and number of
 patterns you are searching and the distribution of character
 frequencies in the string to be searched; you probably want to compare
 run times with and without it to see which is faster.  Those loops
 that scan for many short constant strings (including the constant
 parts of more complex patterns) will benefit most.
+
+Note that since Perl version 5.16 this function has been a no-op, but
+this might change in a future release.
+
 (The way C<study> works is this: a linked list of every
 character in the string to be searched is made, so we know, for
 example, where all the C<'k'> characters are.  From each search string,
@@ -7900,6 +7956,8 @@ FILEHANDLE.  If FILEHANDLE is an expression, its value is used as the real
 filehandle wanted; an undefined scalar will be suitably autovivified.  This
 function calls the underlying operating system's I<open>(2) function with the
 parameters FILENAME, MODE, and PERMS.
+
+Returns true on success and C<undef> otherwise.
 
 The possible values and flag bits of the MODE parameter are
 system-dependent; they are available via the standard module C<Fcntl>.  See

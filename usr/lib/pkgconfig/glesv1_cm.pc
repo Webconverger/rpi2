@@ -6,7 +6,7 @@ includedir=${prefix}/include
 Name: glesv1_cm
 Description: Mesa OpenGL ES 1.1 CM library
 Requires.private:
-Version: 10.5.2
+Version: 11.1.2
 Libs: -L${libdir} -lGLESv1_CM
 Libs.private: -lm -lpthread -ldl
 Cflags: -I${includedir}

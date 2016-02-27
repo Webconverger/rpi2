@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: Xi
 Description: X Input Extension Library
-Version: 1.7.4
+Version: 1.7.6
 Requires: inputproto
 Requires.private: x11 xext xfixes
 Cflags: -I${includedir}

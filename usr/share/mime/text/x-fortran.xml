@@ -51,7 +51,7 @@
   <comment xml:lang="uk">вихідний код мовою Fortran</comment>
   <comment xml:lang="vi">Mã nguồn Fortran</comment>
   <comment xml:lang="zh_CN">Fortran 源代码</comment>
-  <comment xml:lang="zh_TW">Fortran 源碼</comment>
+  <comment xml:lang="zh_TW">Fortran 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.f"/>
   <glob pattern="*.f90"/>

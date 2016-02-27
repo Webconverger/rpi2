@@ -44,12 +44,13 @@
   <comment xml:lang="sk">Zdrojový kód Haskell</comment>
   <comment xml:lang="sl">Datoteka izvorne kode Haskell</comment>
   <comment xml:lang="sq">Kod burues Haskell</comment>
-  <comment xml:lang="sr">Haskell изворни ко̂д</comment>
+  <comment xml:lang="sr">Хаскел изворни ко̂д</comment>
   <comment xml:lang="sv">Haskell-källkod</comment>
+  <comment xml:lang="tr">Haskell kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою Haskell</comment>
   <comment xml:lang="vi">Mã nguồn Haskell</comment>
   <comment xml:lang="zh_CN">Haskell 源代码</comment>
-  <comment xml:lang="zh_TW">Haskell 源碼</comment>
+  <comment xml:lang="zh_TW">Haskell 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.hs"/>
 </mime-type>

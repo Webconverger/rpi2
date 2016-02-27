@@ -5,7 +5,7 @@ libdir=${exec_prefix}/lib
 
 Name: libv4l2rds
 Description: v4l2 RDS decode library
-Version: 1.6.2
+Version: 1.6.3
 Libs: -L${libdir} -lv4l2rds
 Libs.private: -lpthread
 Cflags: -I${includedir}

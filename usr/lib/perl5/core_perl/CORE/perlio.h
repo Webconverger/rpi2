@@ -14,7 +14,7 @@
   Interface for perl to IO functions.
   There is a hierarchy of Configure determined #define controls:
    USE_STDIO   - forces PerlIO_xxx() to be #define-d onto stdio functions.
-                 This is used for x2p subdirectory and for conservative
+                 This is used for conservative
                  builds - "just like perl5.00X used to be".
                  This dominates over the others.
 
@@ -86,10 +86,8 @@ typedef PerlIOl *PerlIO;
 #define PerlIO PerlIO
 #define PERLIO_LAYERS 1
 
-/* Making the big PerlIO_funcs vtables const is good (enables placing
- * them in the const section which is good for speed, security, and
- * embeddability) but this cannot be done by default because of
- * backward compatibility. */
+/* PERLIO_FUNCS_CONST is now on by default for efficiency, PERLIO_FUNCS_CONST
+   can be removed 1 day once stable & then PerlIO vtables are permanently RO */
 #ifdef PERLIO_FUNCS_CONST
 #define PERLIO_FUNCS_DECL(funcs) const PerlIO_funcs funcs
 #define PERLIO_FUNCS_CAST(funcs) (PerlIO_funcs*)(funcs)
@@ -369,11 +367,5 @@ END_EXTERN_C
 #endif				/* _PERLIO_H */
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

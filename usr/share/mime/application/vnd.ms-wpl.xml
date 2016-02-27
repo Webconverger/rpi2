@@ -23,7 +23,7 @@
   <comment xml:lang="hu">WPL-lejátszólista</comment>
   <comment xml:lang="ia">Lista de selection WPL</comment>
   <comment xml:lang="id">Senarai putar WPL</comment>
-  <comment xml:lang="it">Scaletta WPL</comment>
+  <comment xml:lang="it">Playlist WPL</comment>
   <comment xml:lang="ja">WPL 再生リスト</comment>
   <comment xml:lang="kk">WPL ойнау тізімі</comment>
   <comment xml:lang="ko">WPL 재생 목록</comment>
@@ -36,7 +36,9 @@
   <comment xml:lang="ru">список воспроизведения WPL</comment>
   <comment xml:lang="sk">Zoznam skladieb WPL</comment>
   <comment xml:lang="sl">Seznam predvajanja WPL</comment>
+  <comment xml:lang="sr">ВПЛ списак нумера</comment>
   <comment xml:lang="sv">WPL-spellista</comment>
+  <comment xml:lang="tr">WPL çalma listesi</comment>
   <comment xml:lang="uk">список відтворення WPL</comment>
   <comment xml:lang="vi">Danh mục nhạc WPL</comment>
   <comment xml:lang="zh_CN">WPL 播放列表</comment>

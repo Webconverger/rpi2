@@ -30,7 +30,7 @@
   <comment xml:lang="ja">CPIO (gzip 圧縮) アーカイブ</comment>
   <comment xml:lang="ka">CPIO არქივი (gzip-ით შეკუმშული)</comment>
   <comment xml:lang="kk">CPIO архиві (gzip-пен сығылған)</comment>
-  <comment xml:lang="ko">CPIO 묶음 파일 (GZIP 압축)</comment>
+  <comment xml:lang="ko">CPIO 묶음 파일(GZIP 압축)</comment>
   <comment xml:lang="lt">CPIO archyvas (suglaudintas su gzip)</comment>
   <comment xml:lang="lv">CPIO arhīvs (saspiests ar gzip)</comment>
   <comment xml:lang="ms">Arkib CPIO (dimampatkan-gzip)</comment>
@@ -45,8 +45,9 @@
   <comment xml:lang="sk">Archív CPIO (komprimovaný pomocou gzip)</comment>
   <comment xml:lang="sl">Datoteka arhiva CPIO (skrčena z gzip)</comment>
   <comment xml:lang="sq">Arkiv CPIO (kompresuar me gzip)</comment>
-  <comment xml:lang="sr">CPIO архива (компресована gzip-ом)</comment>
+  <comment xml:lang="sr">ЦПИО архива (компресована гзип-ом)</comment>
   <comment xml:lang="sv">CPIO-arkiv (gzip-komprimerat)</comment>
+  <comment xml:lang="tr">CPIO arşivi (gzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">архів CPIO (стиснений gzip)</comment>
   <comment xml:lang="vi">Kho nén CPIO (đã nén gzip)</comment>
   <comment xml:lang="zh_CN">CPIO 归档文件(gzip 压缩)</comment>

@@ -42,12 +42,16 @@
   <comment xml:lang="sk">ROM pre Megadrive</comment>
   <comment xml:lang="sl">Bralni pomnilnik Genesis</comment>
   <comment xml:lang="sq">ROM Genesis</comment>
-  <comment xml:lang="sr">Genesis РОМ</comment>
-  <comment xml:lang="sv">Genesis-rom</comment>
+  <comment xml:lang="sr">Мегадрајв РОМ</comment>
+  <comment xml:lang="sv">Mega Drive-rom</comment>
+  <comment xml:lang="tr">Genesis ROM</comment>
   <comment xml:lang="uk">ППП Genesis</comment>
   <comment xml:lang="vi">ROM Genesis</comment>
   <comment xml:lang="zh_CN">Genesis ROM</comment>
   <comment xml:lang="zh_TW">Genesis ROM</comment>
   <generic-icon name="application-x-executable"/>
   <glob pattern="*.gen"/>
+  <glob pattern="*.smd"/>
+  <glob pattern="*.32x"/>
+  <glob pattern="*.mdx"/>
 </mime-type>

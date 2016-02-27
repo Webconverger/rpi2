@@ -5,7 +5,8 @@ includedir=${prefix}/include
 
 Name: Pango Cairo
 Description: Cairo rendering support for Pango
-Version: 1.36.8
-Requires: pango cairo 
+Version: 1.38.1
+Requires: pango cairo
+Requires.private:  pangoft2
 Libs: -L${libdir} -lpangocairo-1.0
 Cflags: -I${includedir}/pango-1.0

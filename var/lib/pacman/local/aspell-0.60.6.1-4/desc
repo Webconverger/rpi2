@@ -1,0 +1,43 @@
+%NAME%
+aspell
+
+%VERSION%
+0.60.6.1-4
+
+%DESC%
+A spell checker designed to eventually replace Ispell
+
+%URL%
+http://aspell.net/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1449797299
+
+%INSTALLDATE%
+1455616612
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+3223552
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+gcc-libs
+ncurses
+
+%OPTDEPENDS%
+perl: to import old dictionaries
+

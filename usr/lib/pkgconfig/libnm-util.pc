@@ -5,8 +5,8 @@ includedir=${prefix}/include
 
 Name: libnm-util
 Description: Convenience library for clients of NetworkManager
-Version: 1.0.0
-Requires: NetworkManager >= 1.0.0 glib-2.0 dbus-glib-1
+Version: 1.0.10
+Requires: NetworkManager >= 1.0.10 glib-2.0 dbus-glib-1
 Cflags: -I${includedir}/NetworkManager
 Libs: -L${libdir} -lnm-util
 

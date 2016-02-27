@@ -124,7 +124,7 @@ Produce verbose warning diagnostics
 
 =item encoding
 
-Allows you to write your script in non-ascii or non-utf8
+Allows you to write your script in non-ASCII and non-UTF-8
 
 =item encoding::warnings
 
@@ -148,11 +148,7 @@ Control the filetest permission operators
 
 =item if
 
-C<use> a Perl module if a condition holds
-
-=item inc::latest
-
-Use modules bundled in inc/ if they are newer than installed ones
+C<use> a Perl module if a condition holds (also can C<no> a module)
 
 =item integer
 
@@ -173,6 +169,10 @@ Use or avoid POSIX locales for built-in operations
 =item mro
 
 Method Resolution Order
+
+=item ok
+
+Alternative to Test::More::use_ok
 
 =item open
 
@@ -237,10 +237,6 @@ Perl extension for Version Objects
 =item vmsish
 
 Control VMS-specific language features
-
-=item warnings
-
-Control optional warnings
 
 =item warnings::register
 
@@ -321,6 +317,10 @@ Walk Perl syntax tree, printing debug info about ops
 
 Perl compiler backend to produce perl code
 
+=item B::Op_private
+
+ OP op_private flag definitions
+
 =item B::Showlex
 
 Show lexical variables used in functions or files
@@ -344,42 +344,6 @@ Family-neutral IP socket supporting both IPv4 and IPv6
 =item C<Socket>
 
 Networking constants and support functions
-
-=item CGI
-
-Handle Common Gateway Interface requests and responses
-
-=item CGI::Apache
-
-Backward compatibility module for CGI.pm
-
-=item CGI::Carp
-
-CGI routines for writing to the HTTPD (or other) error log
-
-=item CGI::Cookie
-
-Interface to HTTP Cookies
-
-=item CGI::Fast
-
-CGI Interface for Fast CGI
-
-=item CGI::Pretty
-
-Module to produce nicely formatted HTML code
-
-=item CGI::Push
-
-Simple Interface to Server Push
-
-=item CGI::Switch
-
-Backward compatibility module for defunct CGI::Switch
-
-=item CGI::Util
-
-Internal utilities used by CGI module
 
 =item CORE
 
@@ -429,6 +393,30 @@ An optional feature provided by a CPAN distribution
 
 History of CPAN Meta Spec changes
 
+=item CPAN::Meta::History::Meta_1_0
+
+Version 1.0 metadata specification for META.yml
+
+=item CPAN::Meta::History::Meta_1_1
+
+Version 1.1 metadata specification for META.yml
+
+=item CPAN::Meta::History::Meta_1_2
+
+Version 1.2 metadata specification for META.yml
+
+=item CPAN::Meta::History::Meta_1_3
+
+Version 1.3 metadata specification for META.yml
+
+=item CPAN::Meta::History::Meta_1_4
+
+Version 1.4 metadata specification for META.yml
+
+=item CPAN::Meta::Merge
+
+Merging CPAN Meta fragments
+
 =item CPAN::Meta::Prereqs
 
 A set of distribution prerequisites by phase and type
@@ -452,6 +440,14 @@ Read and write a subset of YAML for CPAN Meta files
 =item CPAN::Nox
 
 Wrapper around CPAN.pm without using any XS module
+
+=item CPAN::Plugin
+
+Base class for CPAN shell extensions
+
+=item CPAN::Plugin::Specfile
+
+Proof of concept implementation of a trivial CPAN::Plugin
 
 =item CPAN::Queue
 
@@ -828,6 +824,10 @@ Wrapper around Config.pm
 =item ExtUtils::MakeMaker::FAQ
 
 Frequently Asked Questions About MakeMaker
+
+=item ExtUtils::MakeMaker::Locale
+
+Bundled Encode::Locale
 
 =item ExtUtils::MakeMaker::Tutorial
 
@@ -1361,98 +1361,6 @@ Glue to provide EXISTS for SDBM_File for Storable use
 
 Store Memoized data in Storable database
 
-=item Module::Build
-
-Build and install Perl modules
-
-=item Module::Build::API
-
-API Reference for Module Authors
-
-=item Module::Build::Authoring
-
-Authoring Module::Build modules
-
-=item Module::Build::Base
-
-Default methods for Module::Build
-
-=item Module::Build::Bundling
-
-How to bundle Module::Build with a distribution
-
-=item Module::Build::Compat
-
-Compatibility with ExtUtils::MakeMaker
-
-=item Module::Build::ConfigData
-
-Configuration for Module::Build
-
-=item Module::Build::Cookbook
-
-Examples of Module::Build Usage
-
-=item Module::Build::ModuleInfo
-
-DEPRECATED
-
-=item Module::Build::Notes
-
-Create persistent distribution configuration modules
-
-=item Module::Build::PPMMaker
-
-Perl Package Manager file creation
-
-=item Module::Build::Platform::Default
-
-Stub class for unknown platforms
-
-=item Module::Build::Platform::MacOS
-
-Builder class for MacOS platforms
-
-=item Module::Build::Platform::Unix
-
-Builder class for Unix platforms
-
-=item Module::Build::Platform::VMS
-
-Builder class for VMS platforms
-
-=item Module::Build::Platform::VOS
-
-Builder class for VOS platforms
-
-=item Module::Build::Platform::Windows
-
-Builder class for Windows platforms
-
-=item Module::Build::Platform::aix
-
-Builder class for AIX platform
-
-=item Module::Build::Platform::cygwin
-
-Builder class for Cygwin platform
-
-=item Module::Build::Platform::darwin
-
-Builder class for Mac OS X platform
-
-=item Module::Build::Platform::os2
-
-Builder class for OS/2 platform
-
-=item Module::Build::Version
-
-DEPRECATED
-
-=item Module::Build::YAML
-
-DEPRECATED
-
 =item Module::CoreList
 
 What modules shipped with versions of perl
@@ -1500,6 +1408,10 @@ Attempt to evaluate the current host's internet name and domain
 =item Net::FTP
 
 FTP Client class
+
+=item Net::FTP::dataconn
+
+FTP Client data connection class
 
 =item Net::NNTP
 
@@ -1560,10 +1472,6 @@ Disable named opcodes when compiling perl code
 =item POSIX
 
 Perl interface to IEEE Std 1003.1
-
-=item Package::Constants
-
-List all constants declared in a package
 
 =item Params::Check
 
@@ -1829,6 +1737,10 @@ Load functions only on demand
 
 Persistence for Perl data structures
 
+=item Sub::Util
+
+A selection of utility subroutines for subs and CODE references
+
 =item Symbol
 
 Manipulate Perl symbols and their names
@@ -2041,6 +1953,10 @@ Provides a simple framework for writing test scripts
 
 Backend for building test libraries
 
+=item Test::Builder::IO::Scalar
+
+A copy of IO::Scalar for Test::Builder
+
 =item Test::Builder::Module
 
 Base class for test modules
@@ -2069,9 +1985,25 @@ Yet another framework for writing test scripts
 
 Basic utilities for writing tests.
 
+=item Test::Tester
+
+Ease testing test modules built with Test::Builder
+
+=item Test::Tester::Capture
+
+Help testing test modules built with Test::Builder
+
+=item Test::Tester::CaptureRunner
+
+Help testing test modules built with Test::Builder
+
 =item Test::Tutorial
 
 A tutorial about writing really basic tests
+
+=item Test::use::ok
+
+Alternative to Test::More::use_ok
 
 =item Text::Abbrev
 
@@ -2264,6 +2196,18 @@ Module to test the XS typemaps distributed with perl
 =item XSLoader
 
 Dynamically load C libraries into Perl code
+
+=item autodie::Scope::Guard
+
+Wrapper class for calling subs at end of scope
+
+=item autodie::Scope::GuardStack
+
+ Hook stack for managing scopes via %^H
+
+=item autodie::ScopeUtil
+
+Utilities for managing %^H scopes
 
 =item version::Internals
 

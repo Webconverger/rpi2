@@ -42,12 +42,13 @@
   <comment xml:lang="sk">Zdrojový kód Objective-C</comment>
   <comment xml:lang="sl">Datoteka izvorne kode Objective-C</comment>
   <comment xml:lang="sq">Kod burues C objekt</comment>
-  <comment xml:lang="sr">Објектни-C изворни ко̂д</comment>
+  <comment xml:lang="sr">Објектни-Ц изворни ко̂д</comment>
   <comment xml:lang="sv">Objective-C-källkod</comment>
+  <comment xml:lang="tr">Objective-C kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою Objective-C</comment>
   <comment xml:lang="vi">Mã nguồn Objective-C</comment>
   <comment xml:lang="zh_CN">Objective-C 源代码</comment>
-  <comment xml:lang="zh_TW">Objective-C 源碼</comment>
+  <comment xml:lang="zh_TW">Objective-C 原始碼</comment>
   <sub-class-of type="text/x-csrc"/>
   <glob pattern="*.m"/>
 </mime-type>

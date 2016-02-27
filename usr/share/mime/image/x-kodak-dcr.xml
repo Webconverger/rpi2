@@ -25,7 +25,7 @@
   <comment xml:lang="it">Immagine raw Kodak DCR</comment>
   <comment xml:lang="ja">Kodak DCR raw 画像</comment>
   <comment xml:lang="kk">Kodak DCR өңделмеген суреті</comment>
-  <comment xml:lang="ko">코닥 DCR 원본 이미지</comment>
+  <comment xml:lang="ko">코닥 DCR RAW 사진</comment>
   <comment xml:lang="lt">Kodak DCR neapdorotas paveikslėlis</comment>
   <comment xml:lang="lv">Kodak DCR jēlattēls</comment>
   <comment xml:lang="nb">Kodak DCR raw-bilde</comment>
@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Surový obrázok Kodak DCR</comment>
   <comment xml:lang="sl">Surova slikovna datoteka Kodak DCR</comment>
   <comment xml:lang="sq">Figurë raw Kodak DCR</comment>
+  <comment xml:lang="sr">Кодак ДЦР сирова слика</comment>
   <comment xml:lang="sv">Kodak DCR-råbild</comment>
+  <comment xml:lang="tr">Kodak DCR ham görüntüsü</comment>
   <comment xml:lang="uk">цифровий негатив DCR Kodak</comment>
   <comment xml:lang="vi">Ảnh thô Kodak DCR</comment>
   <comment xml:lang="zh_CN">Kodak DCR 原始图像</comment>

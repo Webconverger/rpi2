@@ -1,0 +1,36 @@
+%NAME%
+libbsd
+
+%VERSION%
+0.8.2-2
+
+%DESC%
+Provides useful functions commonly found on BSD systems like strlcpy()
+
+%URL%
+http://libbsd.freedesktop.org
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1454895307
+
+%INSTALLDATE%
+1455617152
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu2@archlinuxarm.org>
+
+%SIZE%
+361472
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+glibc
+

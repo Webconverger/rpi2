@@ -44,12 +44,12 @@
   <comment xml:lang="sk">Stránka Pomocníka</comment>
   <comment xml:lang="sl">stran pomoči</comment>
   <comment xml:lang="sq">Faqe ndihme</comment>
-  <comment xml:lang="sr">страна помоћи</comment>
+  <comment xml:lang="sr">страница помоћи</comment>
   <comment xml:lang="sv">hjälpsida</comment>
   <comment xml:lang="tr">yardım sayfası</comment>
   <comment xml:lang="uk">сторінка довідки</comment>
   <comment xml:lang="vi">trang trợ giúp</comment>
   <comment xml:lang="zh_CN">帮助页面</comment>
-  <comment xml:lang="zh_TW">幫助頁面</comment>
+  <comment xml:lang="zh_TW">求助頁面</comment>
   <sub-class-of type="text/plain"/>
 </mime-type>

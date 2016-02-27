@@ -1,0 +1,42 @@
+%NAME%
+youtube-dl
+
+%VERSION%
+2016.01.09-1
+
+%DESC%
+A small command-line program to download videos from YouTube.com and a few more sites
+
+%URL%
+http://rg3.github.io/youtube-dl/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1452350509
+
+%INSTALLDATE%
+1455617709
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu4@archlinuxarm.org>
+
+%SIZE%
+8300544
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+python
+python-setuptools
+
+%OPTDEPENDS%
+ffmpeg: for video post-processing
+rtmpdump: for rtmp streams support
+atomicparsley: for embedding thumbnails into m4a files
+

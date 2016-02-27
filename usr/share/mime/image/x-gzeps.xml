@@ -27,7 +27,7 @@
   <comment xml:lang="ja">EPS 画像 (gzip 圧縮)</comment>
   <comment xml:lang="ka">EPS გამოსახულება (gzip-ით შეკუმშული)</comment>
   <comment xml:lang="kk">EPS суреті (gzip-пен сығылған)</comment>
-  <comment xml:lang="ko">EPS 그림 (GZIP 압축)</comment>
+  <comment xml:lang="ko">EPS 그림(GZIP 압축)</comment>
   <comment xml:lang="lt">EPS paveikslėlis (suglaudintas su gzip)</comment>
   <comment xml:lang="lv">EPS attēls (saspiests ar gzip)</comment>
   <comment xml:lang="nb">EPS-bilde (gzip-komprimert)</comment>
@@ -40,6 +40,7 @@
   <comment xml:lang="sk">Obrázok EPS (komprimovaný pomocou gzip)</comment>
   <comment xml:lang="sl">Slikovna datoteka EPS (stisnjena z gzip)</comment>
   <comment xml:lang="sq">Figurë EPS (e kompresuar me gzip)</comment>
+  <comment xml:lang="sr">ЕПС слика (запакована гзип-ом)</comment>
   <comment xml:lang="sv">EPS-bild (gzip-komprimerad)</comment>
   <comment xml:lang="tr">EPS görüntüsü (gzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">зображення EPS (стиснене gzip)</comment>

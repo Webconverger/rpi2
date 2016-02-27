@@ -2,7 +2,7 @@
 
 package XSLoader;
 
-$VERSION = "0.17";
+$VERSION = "0.20";
 
 #use strict;
 
@@ -17,7 +17,8 @@ package XSLoader;
 sub load {
     package DynaLoader;
 
-    my ($module, $modlibname) = caller();
+    my ($caller, $modlibname) = caller();
+    my $module = $caller;
 
     if (@_) {
         $module = $_[0];
@@ -35,7 +36,7 @@ sub load {
     my $modfname = $modparts[-1];
 
     my $modpname = join('/',@modparts);
-    my $c = @modparts;
+    my $c = () = split(/::/,$caller,-1);
     $modlibname =~ s,[\\/][^\\/]+$,, while $c--;    # Q&D basename
     my $file = "$modlibname/auto/$modpname/$modfname.so";
 
@@ -48,9 +49,10 @@ sub load {
 #       print STDERR "BS: $bs ($^O, $dlsrc)\n" if $dl_debug;
         eval { do $bs; };
         warn "$bs: $@\n" if $@;
+	goto \&XSLoader::bootstrap_inherit;
     }
 
-    goto \&XSLoader::bootstrap_inherit if not -f $file or -s $bs;
+    goto \&XSLoader::bootstrap_inherit if not -f $file;
 
     my $bootname = "boot_$module";
     $bootname =~ s/\W/_/g;

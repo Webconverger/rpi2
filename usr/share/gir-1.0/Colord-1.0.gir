@@ -8693,7 +8693,7 @@ Matrix Method by Yoshihiro Ohno and Jonathan E. Hardis, 1997.</doc>
       <doc xml:space="preserve">The compile-time major version</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="9" c:type="CD_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="12" c:type="CD_MICRO_VERSION">
       <doc xml:space="preserve">The compile-time micro version</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -11427,6 +11427,10 @@ Do not use it in GUI applications.</doc>
       <member name="colorhug2"
               value="24"
               c:identifier="CD_SENSOR_KIND_COLORHUG2">
+      </member>
+      <member name="spyder5" value="25" c:identifier="CD_SENSOR_KIND_SPYDER5">
+      </member>
+      <member name="spark" value="26" c:identifier="CD_SENSOR_KIND_SPARK">
       </member>
     </enumeration>
     <record name="SensorPrivate" c:type="CdSensorPrivate" disguised="1">

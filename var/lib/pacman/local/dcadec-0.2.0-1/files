@@ -1,0 +1,17 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/dcadec-hd
+usr/include/
+usr/include/libdcadec/
+usr/include/libdcadec/dca_context.h
+usr/include/libdcadec/dca_frame.h
+usr/include/libdcadec/dca_stream.h
+usr/include/libdcadec/dca_waveout.h
+usr/lib/
+usr/lib/libdcadec.so
+usr/lib/libdcadec.so.0
+usr/lib/libdcadec.so.0.1.0
+usr/lib/pkgconfig/
+usr/lib/pkgconfig/dcadec.pc
+

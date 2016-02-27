@@ -24,7 +24,7 @@
   <comment xml:lang="it">Feed di distribuzione OPML</comment>
   <comment xml:lang="ja">OPML 配信フィード</comment>
   <comment xml:lang="kk">OPML жаңалықтар таспасы</comment>
-  <comment xml:lang="ko">OPML 묶음 feed</comment>
+  <comment xml:lang="ko">OPML 묶음 피드</comment>
   <comment xml:lang="lt">OPML sindikacijos kanalas</comment>
   <comment xml:lang="lv">OPML sindikāta barotne</comment>
   <comment xml:lang="nb">OPML syndikeringsstrøm</comment>
@@ -37,7 +37,9 @@
   <comment xml:lang="sk">Kanál OPML</comment>
   <comment xml:lang="sl">Sindikalni vir OPML</comment>
   <comment xml:lang="sq">Feed për përhapje OPML</comment>
+  <comment xml:lang="sr">ОМПЛ довод синдикализације</comment>
   <comment xml:lang="sv">OPML-syndikeringskanal</comment>
+  <comment xml:lang="tr">OPML besleme kaynağı</comment>
   <comment xml:lang="uk">трансляція подач OPML</comment>
   <comment xml:lang="vi">Nguồn tin tức OPML</comment>
   <comment xml:lang="zh_CN">OPML 聚合种子</comment>

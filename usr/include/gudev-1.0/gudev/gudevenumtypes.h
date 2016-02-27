@@ -8,7 +8,7 @@
 
 G_BEGIN_DECLS
 
-/* enumerations from "src/gudev/gudevenums.h" */
+/* enumerations from "gudev/gudevenums.h" */
 GType g_udev_device_type_get_type (void) G_GNUC_CONST;
 #define G_TYPE_UDEV_DEVICE_TYPE (g_udev_device_type_get_type ())
 G_END_DECLS

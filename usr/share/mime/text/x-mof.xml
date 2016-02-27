@@ -24,7 +24,7 @@
   <comment xml:lang="it">Managed Object Format</comment>
   <comment xml:lang="ja">管理オブジェクトフォーマット</comment>
   <comment xml:lang="kk">Басқарылатын объект пішімі</comment>
-  <comment xml:lang="ko">관리되는 오브젝트 형식</comment>
+  <comment xml:lang="ko">관리되는 객체 형식</comment>
   <comment xml:lang="lt">Sutvarkytų objektų formatas</comment>
   <comment xml:lang="lv">Pārvaldītu objektu formāts</comment>
   <comment xml:lang="nb">Managed Object Format</comment>
@@ -37,7 +37,9 @@
   <comment xml:lang="sk">Formát Managed Object</comment>
   <comment xml:lang="sl">Datoteka Managed Object</comment>
   <comment xml:lang="sq">Managed Object Format</comment>
+  <comment xml:lang="sr">запис управљаног објекта</comment>
   <comment xml:lang="sv">Managed Object Format</comment>
+  <comment xml:lang="tr">Yönetilen Nesne Biçimi</comment>
   <comment xml:lang="uk">формат керування об’єктами</comment>
   <comment xml:lang="vi">Định dạng Đối tượng đã Quản lý</comment>
   <comment xml:lang="zh_CN">托管对象格式</comment>

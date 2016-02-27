@@ -54,8 +54,8 @@ extern int rtnl_dump_filter_l(struct rtnl_handle *rth,
 			      const struct rtnl_dump_filter_arg *arg);
 extern int rtnl_dump_filter(struct rtnl_handle *rth, rtnl_filter_t filter,
 			    void *arg);
-extern int rtnl_talk(struct rtnl_handle *rtnl, struct nlmsghdr *n, pid_t peer,
-		     unsigned groups, struct nlmsghdr *answer)
+extern int rtnl_talk(struct rtnl_handle *rtnl, struct nlmsghdr *n,
+		     struct nlmsghdr *answer, size_t len)
 	__attribute__((warn_unused_result));
 extern int rtnl_send(struct rtnl_handle *rth, const void *buf, int)
 	__attribute__((warn_unused_result));
@@ -156,6 +156,14 @@ extern int rtnl_from_file(FILE *, rtnl_filter_t handler,
 #endif
 #ifndef NDTA_PAYLOAD
 #define NDTA_PAYLOAD(n) NLMSG_PAYLOAD(n,sizeof(struct ndtmsg))
+#endif
+
+#ifndef NETNS_RTA
+#define NETNS_RTA(r) \
+	((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct rtgenmsg))))
+#endif
+#ifndef NETNS_PAYLOAD
+#define NETNS_PAYLOAD(n)	NLMSG_PAYLOAD(n,sizeof(struct rtgenmsg))
 #endif
 
 /* User defined nlmsg_type which is used mostly for logging netlink

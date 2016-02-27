@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: cairo-xlib
 Description: Xlib surface backend for cairo graphics library
-Version: 1.14.2
+Version: 1.14.6
 
 Requires: cairo x11 xext
 Libs:  

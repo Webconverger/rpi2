@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -65,6 +65,9 @@ __BEGIN_DECLS
 
 /* The utilities on GNU systems also correspond to this version.  */
 #define _POSIX2_VERSION	__POSIX2_THIS_VERSION
+
+/* This symbol was required until the 2001 edition of POSIX.  */
+#define	_POSIX2_C_VERSION	__POSIX2_THIS_VERSION
 
 /* If defined, the implementation supports the
    C Language Bindings Option.  */
@@ -880,7 +883,7 @@ extern int gethostname (char *__name, size_t __len) __THROW __nonnull ((1));
 #endif
 
 
-#if defined __USE_MISC || (defined __USE_XOPEN && !defined __USE_UNIX98)
+#if defined __USE_MISC
 /* Set the name of the current host to NAME, which is LEN bytes long.
    This call is restricted to the super-user.  */
 extern int sethostname (const char *__name, size_t __len)
@@ -935,7 +938,7 @@ extern void setusershell (void) __THROW; /* Rewind and re-read the file.  */
    terminal.  If NOCHDIR is zero, do `chdir ("/")'.  If NOCLOSE is zero,
    redirects stdin, stdout, and stderr to /dev/null.  */
 extern int daemon (int __nochdir, int __noclose) __THROW __wur;
-#endif /* Use misc || X/Open.  */
+#endif /* Use misc.  */
 
 
 #if defined __USE_MISC || (defined __USE_XOPEN && !defined __USE_XOPEN2K)

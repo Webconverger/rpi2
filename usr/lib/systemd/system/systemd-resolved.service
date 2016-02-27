@@ -8,7 +8,7 @@
 [Unit]
 Description=Network Name Resolution
 Documentation=man:systemd-resolved.service(8)
-After=systemd-networkd.service network.service
+After=systemd-networkd.service network.target
 
 # On kdbus systems we pull in the busname explicitly, because it
 # carries policy that allows the daemon to acquire its name.
@@ -23,7 +23,7 @@ ExecStart=/usr/lib/systemd/systemd-resolved
 CapabilityBoundingSet=CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER
 ProtectSystem=full
 ProtectHome=yes
-WatchdogSec=1min
+WatchdogSec=3min
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,45 @@
+%NAME%
+libxml2
+
+%VERSION%
+2.9.3-1
+
+%DESC%
+XML parsing library, version 2
+
+%URL%
+http://www.xmlsoft.org/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1449672143
+
+%INSTALLDATE%
+1455616573
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+8576000
+
+%REASON%
+1
+
+%LICENSE%
+MIT
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+zlib
+readline
+ncurses
+xz
+
+%OPTDEPENDS%
+python2: python bindings to libxml
+

@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Požiadavka na certifikát PKCS#10</comment>
   <comment xml:lang="sl">Datoteka potrdila PKCS#10</comment>
   <comment xml:lang="sq">Kërkesë çertifikimi PKCS#10</comment>
+  <comment xml:lang="sr">ПКЦС#10 зхатев уверења</comment>
   <comment xml:lang="sv">PKCS#10-certifikatbegäran</comment>
+  <comment xml:lang="tr">PKCS#10 sertifika isteği</comment>
   <comment xml:lang="uk">комплект сертифікатів PKCS#10</comment>
   <comment xml:lang="vi">Yêu cầu chứng nhận PKCS#10</comment>
   <comment xml:lang="zh_CN">PKCS#10 认证请求</comment>

@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>libkmod Reference Manual: libkmod-module</title>
+<title>libkmod-module: libkmod Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="libkmod Reference Manual">
 <link rel="up" href="ch01.html" title="libkmod">
 <link rel="prev" href="libkmod-libkmod-config.html" title="libkmod-config">
 <link rel="next" href="libkmod-libkmod-loaded.html" title="libkmod-loaded">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -421,7 +421,6 @@ completed.</p>
 methods failed, which is basically due to memory allocation fail. If module
 is not found, it still returns 0, but <em class="parameter"><code>list</code></em>
 is an empty list.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -475,7 +474,6 @@ kmod_module are done.</p>
 <a name="id-1.2.5.6.3.8"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise. It fails if name is not a valid
 module name or if memory allocation failed.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -529,7 +527,6 @@ directory. Otherwise, give an absolute path.</p>
 <a name="id-1.2.5.6.4.8"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise. It fails if file does not exist, if
 it's not a valid file for a kmod_module or if memory allocation failed.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -557,7 +554,6 @@ kmod_module_ref (<em class="parameter"><code><span class="type">struct kmod_modu
 <a name="id-1.2.5.6.5.6"></a><h4>Returns</h4>
 <p> the passed <em class="parameter"><code>module</code></em>
 with its refcount incremented.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -588,7 +584,6 @@ resources are released.</p>
 is NULL or if the module was released. Otherwise it
 returns the passed <em class="parameter"><code>mod</code></em>
 with its refcount decremented.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -617,7 +612,6 @@ taken by the list itself.</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.7.6"></a><h4>Returns</h4>
 <p> 0</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -664,7 +658,6 @@ KMOD_INSERT_FORCE_MODVERSION: ignore symbol version hashes.</p></td>
 <a name="id-1.2.5.6.8.6"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 on failure. If module is already loaded it
 returns -EEXIST.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -757,7 +750,6 @@ output or in dry-run mode.</p></td>
 <p> 0 on success, &gt; 0 if stopped by a reason given in <em class="parameter"><code>flags</code></em>
 or &lt; 0 on
 failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -796,7 +788,6 @@ delete_module(2).</p></td>
 <div class="refsect3">
 <a name="id-1.2.5.6.10.6"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -828,7 +819,6 @@ modules.</p>
 <a name="id-1.2.5.6.11.6"></a><h4>Returns</h4>
 <p> NULL on failure or the kmod_module contained in this list entry
 with its refcount incremented.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -860,7 +850,6 @@ return the already searched list of modules.</p>
 <a name="id-1.2.5.6.12.6"></a><h4>Returns</h4>
 <p> NULL on failure. Otherwise it returns a list of kmod modules
 that can be released by calling <a class="link" href="libkmod-libkmod-module.html#kmod-module-unref-list" title="kmod_module_unref_list ()"><code class="function">kmod_module_unref_list()</code></a>.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -910,7 +899,6 @@ should be unreferenced with <a class="link" href="libkmod-libkmod-module.html#km
 <div class="refsect3">
 <a name="id-1.2.5.6.13.7"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -964,7 +952,6 @@ KMOD_FILTER_BUILTIN: filter builtin modules out.</p></td>
 <p> 0 on success or &lt; 0 otherwise. <em class="parameter"><code>output</code></em>
 is saved with the updated
 list.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1011,7 +998,6 @@ and save it in <em class="parameter"><code>output</code></em>
 <p> 0 on success or &lt; 0 otherwise. <em class="parameter"><code>output</code></em>
 is saved with the updated
 list.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1046,7 +1032,6 @@ string.</p>
 <p> a string with all install commands separated by semicolons. This
 string is owned by <em class="parameter"><code>mod</code></em>
 , do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1081,7 +1066,6 @@ string.</p>
 <p> a string with all remove commands separated by semicolons. This
 string is owned by <em class="parameter"><code>mod</code></em>
 , do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1110,7 +1094,6 @@ it's always normalized (dashes are replaced with underscores).</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.18.6"></a><h4>Returns</h4>
 <p> the name of this kmod module.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1142,7 +1125,6 @@ this module in configuration and subsequent calls return the cached string.</p>
 <p> a string with all the options separated by spaces. This string is
 owned by <em class="parameter"><code>mod</code></em>
 , do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1172,7 +1154,6 @@ under context's dirname.</p>
 <a name="id-1.2.5.6.20.6"></a><h4>Returns</h4>
 <p> the path of this kmod module or NULL if such information is not
 available.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1213,7 +1194,6 @@ kmod_module_get_dependency_symbols (<em class="parameter"><code>const <span clas
 <div class="refsect3">
 <a name="id-1.2.5.6.21.7"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1242,7 +1222,6 @@ kmod_module_dependency_symbol_get_bind
 <a name="id-1.2.5.6.22.6"></a><h4>Returns</h4>
 <p> the bind of this kmod module dependency_symbol on success
 or &lt; 0 on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1270,7 +1249,6 @@ kmod_module_dependency_symbol_get_crc (<em class="parameter"><code>const <span c
 <a name="id-1.2.5.6.23.6"></a><h4>Returns</h4>
 <p> the crc of this kmod module dependency_symbol on success or NULL on
 failure. The string is owned by the dependency_symbol, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1299,7 +1277,6 @@ kmod_module_dependency_symbol_get_symbol
 <a name="id-1.2.5.6.24.6"></a><h4>Returns</h4>
 <p> the symbol of this kmod module dependency_symbols on success or NULL
 on failure. The string is owned by the dependency_symbols, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1356,7 +1333,6 @@ can be obtained by calling <a class="link" href="libkmod-libkmod-module.html#kmo
 <div class="refsect3">
 <a name="id-1.2.5.6.26.7"></a><h4>Returns</h4>
 <p> a new list of kmod module sections on success or NULL on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1409,7 +1385,6 @@ kmod_module_section_get_address (<em class="parameter"><code>const <span class="
 <a name="id-1.2.5.6.28.7"></a><h4>Returns</h4>
 <p> the address of this kmod module section on success or ULONG_MAX
 on failure.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1455,7 +1430,6 @@ kmod_module_get_symbols (<em class="parameter"><code>const <span class="type">st
 <div class="refsect3">
 <a name="id-1.2.5.6.30.7"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1483,7 +1457,6 @@ kmod_module_symbol_get_crc (<em class="parameter"><code>const <span class="type"
 <a name="id-1.2.5.6.31.6"></a><h4>Returns</h4>
 <p> the crc of this kmod module symbol on success or NULL on
 failure. The string is owned by the symbol, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1511,7 +1484,6 @@ kmod_module_symbol_get_symbol (<em class="parameter"><code>const <span class="ty
 <a name="id-1.2.5.6.32.6"></a><h4>Returns</h4>
 <p> the symbol of this kmod module symbols on success or NULL
 on failure. The string is owned by the symbols, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1574,7 +1546,6 @@ kmod_module_get_versions (<em class="parameter"><code>const <span class="type">s
 <div class="refsect3">
 <a name="id-1.2.5.6.34.7"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1602,7 +1573,6 @@ kmod_module_version_get_crc (<em class="parameter"><code>const <span class="type
 <a name="id-1.2.5.6.35.6"></a><h4>Returns</h4>
 <p> the crc of this kmod module version on success or NULL on
 failure. The string is owned by the version, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1630,7 +1600,6 @@ kmod_module_version_get_symbol (<em class="parameter"><code>const <span class="t
 <a name="id-1.2.5.6.36.6"></a><h4>Returns</h4>
 <p> the symbol of this kmod module versions on success or NULL
 on failure. The string is owned by the versions, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1697,7 +1666,6 @@ sig_key and sig_hashalgo.</p>
 <div class="refsect3">
 <a name="id-1.2.5.6.38.7"></a><h4>Returns</h4>
 <p> 0 on success or &lt; 0 otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1748,7 +1716,6 @@ kmod_module_info_get_key (<em class="parameter"><code>const <span class="type">s
 <a name="id-1.2.5.6.40.6"></a><h4>Returns</h4>
 <p> the key of this kmod module info on success or NULL on
 failure. The string is owned by the info, do not free it.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -1776,7 +1743,6 @@ kmod_module_info_get_value (<em class="parameter"><code>const <span class="type"
 <a name="id-1.2.5.6.41.6"></a><h4>Returns</h4>
 <p> the value of this kmod module info on success or NULL on
 failure. The string is owned by the info, do not free it.</p>
-<p></p>
 </div>
 </div>
 </div>
@@ -1790,7 +1756,6 @@ failure. The string is owned by the info, do not free it.</p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.24</div>
 </body>
 </html>

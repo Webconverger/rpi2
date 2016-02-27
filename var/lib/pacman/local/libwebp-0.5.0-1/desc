@@ -1,0 +1,45 @@
+%NAME%
+libwebp
+
+%VERSION%
+0.5.0-1
+
+%DESC%
+WebP library and conversion tools
+
+%URL%
+https://developers.google.com/speed/webp/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1451410812
+
+%INSTALLDATE%
+1455616729
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+720896
+
+%REASON%
+1
+
+%LICENSE%
+BSD
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libpng
+libjpeg
+libtiff
+giflib
+
+%OPTDEPENDS%
+freeglut: vwebp viewer
+

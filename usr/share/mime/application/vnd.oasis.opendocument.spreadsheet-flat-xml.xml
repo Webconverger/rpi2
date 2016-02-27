@@ -25,7 +25,7 @@
   <comment xml:lang="ja">ODS スプレッドシート (Flat XML)</comment>
   <comment xml:lang="ka">ODS ცხრილი (Flat XML)</comment>
   <comment xml:lang="kk">ODS электрондық кестесі (Тек XML)</comment>
-  <comment xml:lang="ko">ODS 스프레드시트 (단일 XML)</comment>
+  <comment xml:lang="ko">ODS 스프레드시트(단일 XML)</comment>
   <comment xml:lang="lt">ODS skaičialentė (Flat XML)</comment>
   <comment xml:lang="lv">ODS izklājlapa (plakans XML)</comment>
   <comment xml:lang="nl">ODS spreadsheet (Flat XML)</comment>
@@ -35,7 +35,9 @@
   <comment xml:lang="ru">электронная таблица ODS (простой XML)</comment>
   <comment xml:lang="sk">Zošit ODS (čisté XML)</comment>
   <comment xml:lang="sl">Preglednica ODS (nepovezan XML)</comment>
+  <comment xml:lang="sr">ОДС spreadsheet (Обични ИксМЛ)</comment>
   <comment xml:lang="sv">ODS-kalkylblad (platt XML)</comment>
+  <comment xml:lang="tr">ODS sunumu (Düz XML)</comment>
   <comment xml:lang="uk">ел. таблиця ODS (Flat XML)</comment>
   <comment xml:lang="zh_CN">ODS 工作簿(Flat XML)</comment>
   <comment xml:lang="zh_TW">ODS 試算表 (Flat XML)</comment>

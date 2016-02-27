@@ -9,10 +9,10 @@ use Config;
 use strict;
 
 "$Config{'archname'}-$Config{'osvers'}" eq
-"armv7l-linux-thread-multi-3.10.63-6-arch" or
-	die "Errno architecture (armv7l-linux-thread-multi-3.10.63-6-arch) does not match executable architecture ($Config{'archname'}-$Config{'osvers'})";
+"armv7l-linux-thread-multi-3.10.82-8-arch" or
+	die "Errno architecture (armv7l-linux-thread-multi-3.10.82-8-arch) does not match executable architecture ($Config{'archname'}-$Config{'osvers'})";
 
-our $VERSION = "1.20_05";
+our $VERSION = "1.23";
 $VERSION = eval $VERSION;
 our @ISA = 'Exporter';
 

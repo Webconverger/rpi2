@@ -6,6 +6,6 @@ dridriverdir=/usr/lib/xorg/modules/dri
 
 Name: dri
 Description: Direct Rendering Infrastructure
-Version: 10.5.2
-Requires.private: libdrm >= 2.4.38
+Version: 11.1.2
+Requires.private: libdrm >= 2.4.60
 Cflags: -I${includedir}

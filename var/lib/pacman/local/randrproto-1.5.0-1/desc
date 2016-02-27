@@ -1,0 +1,36 @@
+%NAME%
+randrproto
+
+%VERSION%
+1.5.0-1
+
+%DESC%
+X11 RandR extension wire protocol
+
+%URL%
+http://xorg.freedesktop.org/
+
+%ARCH%
+any
+
+%BUILDDATE%
+1432223161
+
+%INSTALLDATE%
+1455616988
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu2@archlinuxarm.org>
+
+%SIZE%
+189440
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

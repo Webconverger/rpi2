@@ -15,6 +15,7 @@
   <comment xml:lang="gl">Son AAC</comment>
   <comment xml:lang="he">שמע AAC</comment>
   <comment xml:lang="hu">AAC hang</comment>
+  <comment xml:lang="ia">Audio ACC</comment>
   <comment xml:lang="id">Audio AAC</comment>
   <comment xml:lang="it">Audio AAC</comment>
   <comment xml:lang="ja">AAC オーディオ</comment>
@@ -24,7 +25,11 @@
   <comment xml:lang="pl">Dźwięk AAC</comment>
   <comment xml:lang="pt_BR">Áudio AAC</comment>
   <comment xml:lang="ru">аудио AAC</comment>
+  <comment xml:lang="sk">Zvuk AAC</comment>
   <comment xml:lang="sl">Zvok AAC</comment>
+  <comment xml:lang="sr">ААЦ звук</comment>
+  <comment xml:lang="sv">AAC-ljud</comment>
+  <comment xml:lang="tr">AAC sesi</comment>
   <comment xml:lang="uk">звукові дані AAC</comment>
   <comment xml:lang="zh_CN">AAC 音频</comment>
   <comment xml:lang="zh_TW">AAC 音訊</comment>

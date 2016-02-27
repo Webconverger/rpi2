@@ -1,5 +1,5 @@
 /* O_*, F_*, FD_* bit values for Linux.
-   Copyright (C) 2001-2014 Free Software Foundation, Inc.
+   Copyright (C) 2001-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -97,7 +97,7 @@
 # define __O_DSYNC	 010000
 #endif
 #ifndef __O_TMPFILE
-# define __O_TMPFILE   020200000
+# define __O_TMPFILE   (020000000 | __O_DIRECTORY)
 #endif
 
 #ifndef F_GETLK

@@ -38,14 +38,14 @@
     /* arylen '#' Array length ($#ary) */
     want_vtbl_arylen | PERL_MAGIC_VALUE_MAGIC,
     0,
-    /* rhash '%' extra data for restricted hashes */
+    /* rhash '%' Extra data for restricted hashes */
     magic_vtable_max | PERL_MAGIC_VALUE_MAGIC,
-    /* proto '&' my sub prototype CV */
-    magic_vtable_max,
     0,
     0,
     0,
     0,
+    /* debugvar '*' $DB::single, signal, trace vars */
+    want_vtbl_debugvar,
     0,
     0,
     0,
@@ -62,15 +62,15 @@
     0,
     0,
     0,
-    /* symtab ':' extra data for symbol tables */
+    /* symtab ':' Extra data for symbol tables */
     magic_vtable_max | PERL_MAGIC_VALUE_MAGIC,
     0,
-    /* backref '<' for weak ref data */
+    /* backref '<' For weak ref data */
     want_vtbl_backref | PERL_MAGIC_READONLY_ACCEPTABLE | PERL_MAGIC_VALUE_MAGIC,
     0,
     0,
     0,
-    /* arylen_p '@' to move arylen out of XPVAV */
+    /* arylen_p '@' To move arylen out of XPVAV */
     magic_vtable_max | PERL_MAGIC_VALUE_MAGIC,
     0,
     /* bm 'B' Boyer-Moore (fast string search) */
@@ -109,8 +109,9 @@
     0,
     0,
     0,
-    0,
-    /* checkcall ']' inlining/mutation of call to this CV */
+    /* lvref '\' Lvalue reference constructor */
+    want_vtbl_lvref,
+    /* checkcall ']' Inlining/mutation of call to this CV */
     want_vtbl_checkcall | PERL_MAGIC_VALUE_MAGIC,
     0,
     0,
@@ -144,7 +145,7 @@
     want_vtbl_packelem,
     /* tiedscalar 'q' Tied scalar or handle */
     want_vtbl_packelem,
-    /* qr 'r' precompiled qr// regex */
+    /* qr 'r' Precompiled qr// regex */
     want_vtbl_regexp | PERL_MAGIC_READONLY_ACCEPTABLE | PERL_MAGIC_VALUE_MAGIC,
     /* sigelem 's' %SIG hash element */
     want_vtbl_sigelem,
@@ -164,7 +165,7 @@
     0,
     0,
     /* ext '~' Available for use by extensions */
-    magic_vtable_max,
+    magic_vtable_max | PERL_MAGIC_READONLY_ACCEPTABLE,
     0,
     0,
     0,

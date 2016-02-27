@@ -3,7 +3,7 @@
 
 package Devel::Peek;
 
-$VERSION = '1.16';
+$VERSION = '1.22';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -62,6 +62,16 @@ sub debug_flags (;$) {
   }
   $^D = $num if defined $arg;
   $out
+}
+
+sub B::Deparse::pp_Devel_Peek_Dump {
+  my ($deparse,$op,$cx) = @_;
+  my @kids = $deparse->deparse($op->first, 6);
+  my $sib = $op->first->sibling;
+  if (ref $sib ne 'B::NULL') {
+    push @kids, $deparse->deparse($sib, 6);
+  }
+  return "Devel::Peek::Dump(" . join(", ", @kids) . ")";
 }
 
 1;

@@ -9,5 +9,5 @@ configdir=/etc/NetworkManager
 Name: NetworkManager
 Description: System for maintaining active network connection
 Requires:
-Version: 1.0.0
+Version: 1.0.10
 Cflags: -I${includedir}/NetworkManager

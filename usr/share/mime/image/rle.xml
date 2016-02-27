@@ -37,7 +37,9 @@
   <comment xml:lang="sk">Bitmapový obrázok Run Length Encoded</comment>
   <comment xml:lang="sl">Zaporedno kodirana bitna slika (RLE)</comment>
   <comment xml:lang="sq">Figurë bitmap RLE (Run Length Encoded)</comment>
+  <comment xml:lang="sr">битмап слика кодирана дужином скупине</comment>
   <comment xml:lang="sv">Körlängdskodad bitmappbild</comment>
+  <comment xml:lang="tr">Run Length Encoded bit eşlem görüntüsü</comment>
   <comment xml:lang="uk">растрове зображення RLE</comment>
   <comment xml:lang="vi">Ảnh mảng mã hóa chiều dài chạy (RLE)</comment>
   <comment xml:lang="zh_CN">游程编码位图</comment>

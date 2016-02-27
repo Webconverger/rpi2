@@ -12,6 +12,9 @@ perlos390 - building and installing Perl for OS/390 and z/OS
 This document will help you Configure, build, test and install Perl
 on OS/390 (aka z/OS) Unix System Services.
 
+B<This document needs to be updated, but we don't know what it should say.
+Please email comments to L<perlbug@perl.org|mailto:perlbug@perl.org>.>
+
 =head1 DESCRIPTION
 
 This is a fully ported Perl for OS/390 Version 2 Release 3, 5, 6, 7,
@@ -132,7 +135,7 @@ is nothing to worry about at all.
 Some of the parser default template files in /samples are needed in /etc.
 In particular be sure that you at least copy /samples/yyparse.c to /etc
 before running Perl's Configure.  This step ensures successful extraction
-of EBCDIC versions of parser files such as perly.c, perly.h, and x2p/a2p.c.
+of EBCDIC versions of parser files such as perly.c and perly.h.
 This has to be done before running Configure the first time.  If you failed
 to do so then the easiest way to re-Configure Perl is to delete your
 misconfigured build root and re-extract the source from the tar ball.

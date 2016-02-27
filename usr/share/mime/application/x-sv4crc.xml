@@ -27,7 +27,7 @@
   <comment xml:lang="it">Archivio SV4 CPIO (con CRC)</comment>
   <comment xml:lang="ja">SV4 CPIO アーカイブ (CRC 有り)</comment>
   <comment xml:lang="kk">SV4 CPIO архиві (CRC бар)</comment>
-  <comment xml:lang="ko">SV4 CPIO 묶음 파일 (CRC 포함)</comment>
+  <comment xml:lang="ko">SV4 CPIO 묶음 파일(CRC 포함)</comment>
   <comment xml:lang="lt">SV4 CPII archyvas (su CRC)</comment>
   <comment xml:lang="lv">SV4 CPIO arhīvs (ar CRC)</comment>
   <comment xml:lang="ms">Arkib CPIO SV4 (dengan CRC)</comment>
@@ -41,6 +41,7 @@
   <comment xml:lang="sk">Archív SV4 CPIO (s CRC)</comment>
   <comment xml:lang="sl">Datoteka arhiva SV4 CPIO (z razpršilom CRC)</comment>
   <comment xml:lang="sq">Arkiv SV4 CPIO (me CRC)</comment>
+  <comment xml:lang="sr">СВ4 ЦПИО архива (са ЦРЦ-ом)</comment>
   <comment xml:lang="sv">SV4 CPIO-arkiv (med CRC)</comment>
   <comment xml:lang="tr">SV4 CPIO arşivi (CRC ile)</comment>
   <comment xml:lang="uk">архів SV4 CPIO (з CRC)</comment>

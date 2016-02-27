@@ -687,6 +687,146 @@ See also webkit_back_forward_list_item_get_original_uri().</doc>
   designer. WebKit will cache a moderate number of resources.</doc>
       </member>
     </enumeration>
+    <class name="ColorChooserRequest"
+           c:symbol-prefix="color_chooser_request"
+           c:type="WebKitColorChooserRequest"
+           parent="GObject.Object"
+           glib:type-name="WebKitColorChooserRequest"
+           glib:get-type="webkit_color_chooser_request_get_type"
+           glib:type-struct="ColorChooserRequestClass">
+      <method name="cancel"
+              c:identifier="webkit_color_chooser_request_cancel"
+              version="2.8">
+        <doc xml:space="preserve">Cancels @request and the input element changes to use the initial color
+it has before the request started.
+The signal #WebKitColorChooserRequest::finished
+is emitted to notify that the request has finished.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitColorChooserRequest</doc>
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="finish"
+              c:identifier="webkit_color_chooser_request_finish"
+              version="2.8">
+        <doc xml:space="preserve">Finishes @request and the input element keeps the current value of
+#WebKitColorChooserRequest:rgba.
+The signal #WebKitColorChooserRequest::finished
+is emitted to notify that the request has finished.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitColorChooserRequest</doc>
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_element_rectangle"
+              c:identifier="webkit_color_chooser_request_get_element_rectangle"
+              version="2.8">
+        <doc xml:space="preserve">Gets the bounding box of the color input element.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitColorChooserRequest</doc>
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </instance-parameter>
+          <parameter name="rect"
+                     direction="out"
+                     caller-allocates="1"
+                     transfer-ownership="none">
+            <doc xml:space="preserve">a #GdkRectangle to fill in with the element area</doc>
+            <type name="Gdk.Rectangle" c:type="GdkRectangle*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_rgba"
+              c:identifier="webkit_color_chooser_request_get_rgba"
+              version="2.8">
+        <doc xml:space="preserve">Gets the current #GdkRGBA color of @request</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitColorChooserRequest</doc>
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </instance-parameter>
+          <parameter name="rgba"
+                     direction="out"
+                     caller-allocates="1"
+                     transfer-ownership="none">
+            <doc xml:space="preserve">a #GdkRGBA to fill in with the current color.</doc>
+            <type name="Gdk.RGBA" c:type="GdkRGBA*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_rgba"
+              c:identifier="webkit_color_chooser_request_set_rgba"
+              version="2.8">
+        <doc xml:space="preserve">Sets the current #GdkRGBA color of @request</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitFileChooserRequest</doc>
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </instance-parameter>
+          <parameter name="rgba" transfer-ownership="none">
+            <doc xml:space="preserve">a pointer #GdkRGBA</doc>
+            <type name="Gdk.RGBA" c:type="const GdkRGBA*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="rgba"
+                writable="1"
+                construct="1"
+                transfer-ownership="none">
+        <type name="Gdk.RGBA"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ColorChooserRequestPrivate"
+              c:type="WebKitColorChooserRequestPrivate*"/>
+      </field>
+      <glib:signal name="finished" when="last" version="2.8">
+        <doc xml:space="preserve">Emitted when the @request finishes. This signal can be emitted because the
+user completed the @request calling webkit_color_chooser_request_finish(),
+or cancelled it with webkit_color_chooser_request_cancel() or because the
+color input element is removed from the DOM.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+    </class>
+    <record name="ColorChooserRequestClass"
+            c:type="WebKitColorChooserRequestClass"
+            glib:is-gtype-struct-for="ColorChooserRequest">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="ColorChooserRequestPrivate"
+            c:type="WebKitColorChooserRequestPrivate"
+            disguised="1">
+    </record>
     <class name="ContextMenu"
            c:symbol-prefix="context_menu"
            c:type="WebKitContextMenu"
@@ -804,6 +944,23 @@ See also webkit_context_menu_new()</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_user_data"
+              c:identifier="webkit_context_menu_get_user_data"
+              version="2.8">
+        <doc xml:space="preserve">Gets the user data of @menu.
+This function can be used from the UI Process to get user data previously set
+from the Web Process with webkit_context_menu_set_user_data().</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the user data of @menu, or %NULL if @menu doesn't have user data</doc>
+          <type name="GLib.Variant" c:type="GVariant*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="menu" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitContextMenu</doc>
+            <type name="ContextMenu" c:type="WebKitContextMenu*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="insert" c:identifier="webkit_context_menu_insert">
         <doc xml:space="preserve">Inserts @item into the @menu at the given position.
 If @position is negative, or is larger than the number of items
@@ -908,6 +1065,26 @@ See also webkit_context_menu_remove_all() to remove all items.</doc>
             <doc xml:space="preserve">a #WebKitContextMenu</doc>
             <type name="ContextMenu" c:type="WebKitContextMenu*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_user_data"
+              c:identifier="webkit_context_menu_set_user_data"
+              version="2.8">
+        <doc xml:space="preserve">Sets user data to @menu.
+This function can be used from a Web Process extension to set user data
+that can be retrieved from the UI Process using webkit_context_menu_get_user_data().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="menu" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitContextMenu</doc>
+            <type name="ContextMenu" c:type="WebKitContextMenu*"/>
+          </instance-parameter>
+          <parameter name="user_data" transfer-ownership="none">
+            <doc xml:space="preserve">a #GVariant</doc>
+            <type name="GLib.Variant" c:type="GVariant*"/>
+          </parameter>
         </parameters>
       </method>
       <field name="parent">
@@ -2293,6 +2470,17 @@ possible to copy to the clipboard when there is an active selection
 inside the #WebKitWebView.</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="EDITING_COMMAND_CREATE_LINK"
+              value="CreateLink"
+              c:type="WEBKIT_EDITING_COMMAND_CREATE_LINK"
+              version="2.10">
+      <doc xml:space="preserve">The create link command. Creates a link elment thst is inserted at
+the current cursor position. If there's a selection, the selected text
+will be used as the link text, otherwise the URL itself will be used.
+It receives the link URL as argument. This command should be executed
+with webkit_web_view_execute_editing_command_with_argument()</doc>
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="EDITING_COMMAND_CUT"
               value="Cut"
               c:type="WEBKIT_EDITING_COMMAND_CUT">
@@ -2302,6 +2490,16 @@ You can check whether it's possible to execute the command with
 webkit_web_view_can_execute_editing_command(). In general it's
 possible to cut to the clipboard when the #WebKitWebView content is
 editable and there is an active selection.</doc>
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="EDITING_COMMAND_INSERT_IMAGE"
+              value="InsertImage"
+              c:type="WEBKIT_EDITING_COMMAND_INSERT_IMAGE"
+              version="2.10">
+      <doc xml:space="preserve">The insert image command. Creates an image element that is inserted at
+the current cursor position. It receives an URI as argument,
+that is used as the image source. This command should be executed with
+webkit_web_view_execute_editing_command_with_argument().</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <constant name="EDITING_COMMAND_PASTE"
@@ -2344,6 +2542,122 @@ webkit_web_view_can_execute_editing_command(). It's only possible
 to undo a command after a previously executed editing operation.</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <class name="EditorState"
+           c:symbol-prefix="editor_state"
+           c:type="WebKitEditorState"
+           parent="GObject.Object"
+           glib:type-name="WebKitEditorState"
+           glib:get-type="webkit_editor_state_get_type"
+           glib:type-struct="EditorStateClass">
+      <method name="get_typing_attributes"
+              c:identifier="webkit_editor_state_get_typing_attributes"
+              version="2.10">
+        <doc xml:space="preserve">Gets the typing attributes at the current cursor position.
+If there is a selection, this returns the typing attributes
+of the the selected text. Note that in case of a selection,
+typing attributes are considered active only when they are
+present throughout the selection.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a bitmask of #WebKitEditorTypingAttributes flags</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="editor_state" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitEditorState</doc>
+            <type name="EditorState" c:type="WebKitEditorState*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="typing-attributes"
+                version="2.10"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Bitmask of #WebKitEditorTypingAttributes flags.
+See webkit_editor_state_get_typing_attributes() for more information.</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv">
+        <type name="EditorStatePrivate" c:type="WebKitEditorStatePrivate*"/>
+      </field>
+    </class>
+    <record name="EditorStateClass"
+            c:type="WebKitEditorStateClass"
+            glib:is-gtype-struct-for="EditorState">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="_webkit_reserved0" introspectable="0">
+        <callback name="_webkit_reserved0">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved1" introspectable="0">
+        <callback name="_webkit_reserved1">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved2" introspectable="0">
+        <callback name="_webkit_reserved2">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved3" introspectable="0">
+        <callback name="_webkit_reserved3">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+    </record>
+    <record name="EditorStatePrivate"
+            c:type="WebKitEditorStatePrivate"
+            disguised="1">
+    </record>
+    <bitfield name="EditorTypingAttributes"
+              version="2.10"
+              glib:type-name="WebKitEditorTypingAttributes"
+              glib:get-type="webkit_editor_typing_attributes_get_type"
+              c:type="WebKitEditorTypingAttributes">
+      <doc xml:space="preserve">Enum values with flags representing typing attributes.</doc>
+      <member name="none"
+              value="2"
+              c:identifier="WEBKIT_EDITOR_TYPING_ATTRIBUTE_NONE"
+              glib:nick="none">
+        <doc xml:space="preserve">No typing attrubutes.</doc>
+      </member>
+      <member name="bold"
+              value="4"
+              c:identifier="WEBKIT_EDITOR_TYPING_ATTRIBUTE_BOLD"
+              glib:nick="bold">
+        <doc xml:space="preserve">Bold typing attribute.</doc>
+      </member>
+      <member name="italic"
+              value="8"
+              c:identifier="WEBKIT_EDITOR_TYPING_ATTRIBUTE_ITALIC"
+              glib:nick="italic">
+        <doc xml:space="preserve">Italic typing attribute.</doc>
+      </member>
+      <member name="underline"
+              value="16"
+              c:identifier="WEBKIT_EDITOR_TYPING_ATTRIBUTE_UNDERLINE"
+              glib:nick="underline">
+        <doc xml:space="preserve">Underline typing attribute.</doc>
+      </member>
+      <member name="strikethrough"
+              value="32"
+              c:identifier="WEBKIT_EDITOR_TYPING_ATTRIBUTE_STRIKETHROUGH"
+              glib:nick="strikethrough">
+        <doc xml:space="preserve">Strikethrough typing attribute.</doc>
+      </member>
+    </bitfield>
     <class name="FaviconDatabase"
            c:symbol-prefix="favicon_database"
            c:type="WebKitFaviconDatabase"
@@ -3338,6 +3652,23 @@ associated to @request.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="context_is_selection"
+              c:identifier="webkit_hit_test_result_context_is_selection"
+              version="2.8">
+        <doc xml:space="preserve">Gets whether %WEBKIT_HIT_TEST_RESULT_CONTEXT_SELECTION flag is present in
+#WebKitHitTestResult:context.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if there's a selected element at the coordinates of the @hit_test_result,
+   or %FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="hit_test_result" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitHitTestResult</doc>
+            <type name="HitTestResult" c:type="WebKitHitTestResult*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_context"
               c:identifier="webkit_hit_test_result_get_context">
         <doc xml:space="preserve">Gets the value of the #WebKitHitTestResult:context property.</doc>
@@ -3561,6 +3892,12 @@ is present in #WebKitHitTestResult:context</doc>
               glib:nick="scrollbar">
         <doc xml:space="preserve">a scrollbar element.</doc>
       </member>
+      <member name="selection"
+              value="128"
+              c:identifier="WEBKIT_HIT_TEST_RESULT_CONTEXT_SELECTION"
+              glib:nick="selection">
+        <doc xml:space="preserve">a selected element. Since 2.8</doc>
+      </member>
     </bitfield>
     <record name="HitTestResultPrivate"
             c:type="WebKitHitTestResultPrivate"
@@ -3589,6 +3926,77 @@ detected by trying to display any kind of resource (e.g. an image)
 from an untrusted source.</doc>
       </member>
     </enumeration>
+    <class name="InstallMissingMediaPluginsPermissionRequest"
+           c:symbol-prefix="install_missing_media_plugins_permission_request"
+           c:type="WebKitInstallMissingMediaPluginsPermissionRequest"
+           parent="GObject.Object"
+           glib:type-name="WebKitInstallMissingMediaPluginsPermissionRequest"
+           glib:get-type="webkit_install_missing_media_plugins_permission_request_get_type"
+           glib:type-struct="InstallMissingMediaPluginsPermissionRequestClass">
+      <implements name="PermissionRequest"/>
+      <method name="get_description"
+              c:identifier="webkit_install_missing_media_plugins_permission_request_get_description"
+              version="2.10">
+        <doc xml:space="preserve">Gets the description about the missing plugins provided by the media backend when a media couldn't be played.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a string with the description provided by the media backend.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitInstallMissingMediaPluginsPermissionRequest</doc>
+            <type name="InstallMissingMediaPluginsPermissionRequest"
+                  c:type="WebKitInstallMissingMediaPluginsPermissionRequest*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv">
+        <type name="InstallMissingMediaPluginsPermissionRequestPrivate"
+              c:type="WebKitInstallMissingMediaPluginsPermissionRequestPrivate*"/>
+      </field>
+    </class>
+    <record name="InstallMissingMediaPluginsPermissionRequestClass"
+            c:type="WebKitInstallMissingMediaPluginsPermissionRequestClass"
+            glib:is-gtype-struct-for="InstallMissingMediaPluginsPermissionRequest">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="_webkit_reserved0" introspectable="0">
+        <callback name="_webkit_reserved0">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved1" introspectable="0">
+        <callback name="_webkit_reserved1">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved2" introspectable="0">
+        <callback name="_webkit_reserved2">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved3" introspectable="0">
+        <callback name="_webkit_reserved3">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+    </record>
+    <record name="InstallMissingMediaPluginsPermissionRequestPrivate"
+            c:type="WebKitInstallMissingMediaPluginsPermissionRequestPrivate"
+            disguised="1">
+    </record>
     <enumeration name="JavascriptError"
                  glib:type-name="WebKitJavascriptError"
                  glib:get-type="webkit_javascript_error_get_type"
@@ -3718,13 +4126,13 @@ application compile time, rather than from the library linked
 against at application run time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="5" c:type="WEBKIT_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="7" c:type="WEBKIT_MICRO_VERSION">
       <doc xml:space="preserve">Like webkit_get_micro_version(), but from the headers used at
 application compile time, rather than from the library linked
 against at application run time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" value="6" c:type="WEBKIT_MINOR_VERSION">
+    <constant name="MINOR_VERSION" value="10" c:type="WEBKIT_MINOR_VERSION">
       <doc xml:space="preserve">Like webkit_get_minor_version(), but from the headers used at
 application compile time, rather than from the library linked
 against at application run time.</doc>
@@ -3878,7 +4286,7 @@ the navigation was not started by a mouse event.</doc>
       <method name="get_navigation_type"
               c:identifier="webkit_navigation_action_get_navigation_type"
               version="2.6">
-        <doc xml:space="preserve">Rtuen the type of action that triggered the navigation.</doc>
+        <doc xml:space="preserve">Return the type of action that triggered the navigation.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #WebKitNavigationType</doc>
           <type name="NavigationType" c:type="WebKitNavigationType"/>
@@ -4218,6 +4626,180 @@ navigation.</doc>
         </return-value>
       </function>
     </enumeration>
+    <class name="Notification"
+           c:symbol-prefix="notification"
+           c:type="WebKitNotification"
+           parent="GObject.Object"
+           glib:type-name="WebKitNotification"
+           glib:get-type="webkit_notification_get_type"
+           glib:type-struct="NotificationClass">
+      <method name="close"
+              c:identifier="webkit_notification_close"
+              version="2.8">
+        <doc xml:space="preserve">Closes the notification.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="notification" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitNotification</doc>
+            <type name="Notification" c:type="WebKitNotification*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_body"
+              c:identifier="webkit_notification_get_body"
+              version="2.8">
+        <doc xml:space="preserve">Obtains the body for the notification.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the body for the notification</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="notification" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitNotification</doc>
+            <type name="Notification" c:type="WebKitNotification*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_id"
+              c:identifier="webkit_notification_get_id"
+              version="2.8">
+        <doc xml:space="preserve">Obtains the unique id for the notification.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the unique id for the notification</doc>
+          <type name="guint64" c:type="guint64"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="notification" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitNotification</doc>
+            <type name="Notification" c:type="WebKitNotification*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_title"
+              c:identifier="webkit_notification_get_title"
+              version="2.8">
+        <doc xml:space="preserve">Obtains the title for the notification.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the title for the notification</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="notification" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitNotification</doc>
+            <type name="Notification" c:type="WebKitNotification*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="body" version="2.8" transfer-ownership="none">
+        <doc xml:space="preserve">The body for the notification.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="id" version="2.8" transfer-ownership="none">
+        <doc xml:space="preserve">The unique id for the notification.</doc>
+        <type name="guint64" c:type="guint64"/>
+      </property>
+      <property name="title" version="2.8" transfer-ownership="none">
+        <doc xml:space="preserve">The title for the notification.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv">
+        <type name="NotificationPrivate" c:type="WebKitNotificationPrivate*"/>
+      </field>
+      <glib:signal name="closed" when="last" version="2.8">
+        <doc xml:space="preserve">Emitted when a notification has been withdrawn.
+
+The default handler will close the notification using libnotify, if built with
+support for it.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+    </class>
+    <record name="NotificationClass"
+            c:type="WebKitNotificationClass"
+            glib:is-gtype-struct-for="Notification">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="_webkit_reserved0" introspectable="0">
+        <callback name="_webkit_reserved0">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved1" introspectable="0">
+        <callback name="_webkit_reserved1">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved2" introspectable="0">
+        <callback name="_webkit_reserved2">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved3" introspectable="0">
+        <callback name="_webkit_reserved3">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved4" introspectable="0">
+        <callback name="_webkit_reserved4">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved5" introspectable="0">
+        <callback name="_webkit_reserved5">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+    </record>
+    <class name="NotificationPermissionRequest"
+           c:symbol-prefix="notification_permission_request"
+           c:type="WebKitNotificationPermissionRequest"
+           parent="GObject.Object"
+           glib:type-name="WebKitNotificationPermissionRequest"
+           glib:get-type="webkit_notification_permission_request_get_type"
+           glib:type-struct="NotificationPermissionRequestClass">
+      <implements name="PermissionRequest"/>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="NotificationPermissionRequestPrivate"
+              c:type="WebKitNotificationPermissionRequestPrivate*"/>
+      </field>
+    </class>
+    <record name="NotificationPermissionRequestClass"
+            c:type="WebKitNotificationPermissionRequestClass"
+            glib:is-gtype-struct-for="NotificationPermissionRequest">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="NotificationPermissionRequestPrivate"
+            c:type="WebKitNotificationPermissionRequestPrivate"
+            disguised="1">
+    </record>
+    <record name="NotificationPrivate"
+            c:type="WebKitNotificationPrivate"
+            disguised="1">
+    </record>
     <interface name="PermissionRequest"
                c:symbol-prefix="permission_request"
                c:type="WebKitPermissionRequest"
@@ -5514,6 +6096,21 @@ be manually attached to a #WebKitWebView.</doc>
           </parameter>
         </parameters>
       </constructor>
+      <method name="get_allow_file_access_from_file_urls"
+              c:identifier="webkit_settings_get_allow_file_access_from_file_urls"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitSettings:allow-file-access-from-file-urls property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE If file access from file URLs is allowed or %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="settings" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitSettings</doc>
+            <type name="Settings" c:type="WebKitSettings*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_allow_modal_dialogs"
               c:identifier="webkit_settings_get_allow_modal_dialogs">
         <doc xml:space="preserve">Get the #WebKitSettings:allow-modal-dialogs property.</doc>
@@ -6190,6 +6787,24 @@ otherwise.</doc>
             <doc xml:space="preserve">a #WebKitSettings</doc>
             <type name="Settings" c:type="WebKitSettings*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_allow_file_access_from_file_urls"
+              c:identifier="webkit_settings_set_allow_file_access_from_file_urls"
+              version="2.10">
+        <doc xml:space="preserve">Set the #WebKitSettings:allow-file-access-from-file-urls property.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="settings" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitSettings</doc>
+            <type name="Settings" c:type="WebKitSettings*"/>
+          </instance-parameter>
+          <parameter name="allowed" transfer-ownership="none">
+            <doc xml:space="preserve">Value to be set</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
         </parameters>
       </method>
       <method name="set_allow_modal_dialogs"
@@ -7042,6 +7657,18 @@ the version is given, the default engine version is used with the given applicat
           </parameter>
         </parameters>
       </method>
+      <property name="allow-file-access-from-file-urls"
+                version="2.10"
+                writable="1"
+                construct="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether file access is allowed from file URLs. By default, when
+something is loaded in a #WebKitWebView using a file URI, cross
+origin requests to other file resources are not allowed. This
+setting allows you to change that behaviour, so that it would be
+possible to do a XMLHttpRequest of a local file, for example.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <property name="allow-modal-dialogs"
                 writable="1"
                 construct="1"
@@ -7549,6 +8176,13 @@ from a #WebKitWebView.</doc>
               glib:nick="include-selection-highlighting">
         <doc xml:space="preserve">Whether to include in the
 snapshot the highlight of the selected content.</doc>
+      </member>
+      <member name="transparent_background"
+              value="2"
+              c:identifier="WEBKIT_SNAPSHOT_OPTIONS_TRANSPARENT_BACKGROUND"
+              glib:nick="transparent-background">
+        <doc xml:space="preserve">Do not fill the background with white before
+rendering the snapshot. Since 2.8</doc>
       </member>
     </bitfield>
     <enumeration name="SnapshotRegion"
@@ -8128,6 +8762,44 @@ The same #WebKitUserStyleSheet can be reused with multiple
           </parameter>
         </parameters>
       </method>
+      <method name="register_script_message_handler"
+              c:identifier="webkit_user_content_manager_register_script_message_handler"
+              version="2.8">
+        <doc xml:space="preserve">Registers a new user script message handler. After it is registered,
+scripts can use `window.webkit.messageHandlers.&amp;lt;name&amp;gt;.postMessage(value)`
+to send messages. Those messages are received by connecting handlers
+to the #WebKitUserContentManager::script-message-received signal. The
+handler name is used as the detail of the signal. To avoid race
+conditions between registering the handler name, and starting to
+receive the signals, it is recommended to connect to the signal
+*before* registering the handler name:
+
+&lt;informalexample&gt;&lt;programlisting&gt;
+WebKitWebView *view = webkit_web_view_new ();
+WebKitUserContentManager *manager = webkit_web_view_get_user_content_manager ();
+g_signal_connect (manager, "script-message-received::foobar",
+                  G_CALLBACK (handle_script_message), NULL);
+webkit_user_content_manager_register_script_message_handler (manager, "foobar");
+&lt;/programlisting&gt;&lt;/informalexample&gt;
+
+Registering a script message handler will fail if the requested
+name has been already registered before.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if message handler was registered successfully, or %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">A #WebKitUserContentManager</doc>
+            <type name="UserContentManager"
+                  c:type="WebKitUserContentManager*"/>
+          </instance-parameter>
+          <parameter name="name" transfer-ownership="none">
+            <doc xml:space="preserve">Name of the script message channel</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="remove_all_scripts"
               c:identifier="webkit_user_content_manager_remove_all_scripts"
               version="2.6">
@@ -8158,6 +8830,32 @@ The same #WebKitUserStyleSheet can be reused with multiple
           </instance-parameter>
         </parameters>
       </method>
+      <method name="unregister_script_message_handler"
+              c:identifier="webkit_user_content_manager_unregister_script_message_handler"
+              version="2.8">
+        <doc xml:space="preserve">Unregisters a previously registered message handler.
+
+Note that this does *not* disconnect handlers for the
+#WebKitUserContentManager::script-message-received signal,
+they will be kept connected, but the signal will not be emitted
+unless the handler name is registered again.
+
+See also webkit_user_content_manager_register_script_message_handler()</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">A #WebKitUserContentManager</doc>
+            <type name="UserContentManager"
+                  c:type="WebKitUserContentManager*"/>
+          </instance-parameter>
+          <parameter name="name" transfer-ownership="none">
+            <doc xml:space="preserve">Name of the script message channel</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
       <field name="parent">
         <type name="GObject.Object" c:type="GObject"/>
       </field>
@@ -8165,6 +8863,24 @@ The same #WebKitUserStyleSheet can be reused with multiple
         <type name="UserContentManagerPrivate"
               c:type="WebKitUserContentManagerPrivate*"/>
       </field>
+      <glib:signal name="script-message-received"
+                   when="last"
+                   detailed="1"
+                   version="2.8">
+        <doc xml:space="preserve">This signal is emitted when JavaScript in a web view calls
+&lt;code&gt;window.webkit.messageHandlers.&amp;lt;name&amp;gt;.postMessage()&lt;/code&gt;, after registering
+&lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; using
+webkit_user_content_manager_register_script_message_handler()</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="js_result" transfer-ownership="none">
+            <doc xml:space="preserve">the #WebKitJavascriptResult holding the value received from the JavaScript world.</doc>
+            <type name="JavascriptResult"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
     </class>
     <record name="UserContentManagerClass"
             c:type="WebKitUserContentManagerClass"
@@ -8205,6 +8921,67 @@ The same #WebKitUserStyleSheet can be reused with multiple
             c:type="WebKitUserContentManagerPrivate"
             disguised="1">
     </record>
+    <class name="UserMediaPermissionRequest"
+           c:symbol-prefix="user_media_permission_request"
+           c:type="WebKitUserMediaPermissionRequest"
+           parent="GObject.Object"
+           glib:type-name="WebKitUserMediaPermissionRequest"
+           glib:get-type="webkit_user_media_permission_request_get_type"
+           glib:type-struct="UserMediaPermissionRequestClass">
+      <implements name="PermissionRequest"/>
+      <property name="is-for-audio-device" transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <property name="is-for-video-device" transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="UserMediaPermissionRequestPrivate"
+              c:type="WebKitUserMediaPermissionRequestPrivate*"/>
+      </field>
+    </class>
+    <record name="UserMediaPermissionRequestClass"
+            c:type="WebKitUserMediaPermissionRequestClass"
+            glib:is-gtype-struct-for="UserMediaPermissionRequest">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="_webkit_reserved0" introspectable="0">
+        <callback name="_webkit_reserved0">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved1" introspectable="0">
+        <callback name="_webkit_reserved1">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved2" introspectable="0">
+        <callback name="_webkit_reserved2">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved3" introspectable="0">
+        <callback name="_webkit_reserved3">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+    </record>
+    <record name="UserMediaPermissionRequestPrivate"
+            c:type="WebKitUserMediaPermissionRequestPrivate"
+            disguised="1">
+    </record>
     <record name="UserScript"
             c:type="WebKitUserScript"
             glib:type-name="WebKitUserScript"
@@ -8221,7 +8998,7 @@ URI patterns must be of the form `[protocol]://[host]/[path]`, where the
 *host* and *path* components can contain the wildcard character (`*`) to
 represent zero or more other characters.</doc>
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A new #WebKitScript</doc>
+          <doc xml:space="preserve">A new #WebKitUserScript</doc>
           <type name="UserScript" c:type="WebKitUserScript*"/>
         </return-value>
         <parameters>
@@ -8430,6 +9207,31 @@ called from any thread.</doc>
            glib:type-name="WebKitWebContext"
            glib:get-type="webkit_web_context_get_type"
            glib:type-struct="WebContextClass">
+      <constructor name="new"
+                   c:identifier="webkit_web_context_new"
+                   version="2.8">
+        <doc xml:space="preserve">Create a new #WebKitWebContext</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a newly created #WebKitWebContext</doc>
+          <type name="WebContext" c:type="WebKitWebContext*"/>
+        </return-value>
+      </constructor>
+      <constructor name="new_with_website_data_manager"
+                   c:identifier="webkit_web_context_new_with_website_data_manager"
+                   version="2.10">
+        <doc xml:space="preserve">Create a new #WebKitWebContext with a #WebKitWebsiteDataManager.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a newly created #WebKitWebContext</doc>
+          <type name="WebContext" c:type="WebKitWebContext*"/>
+        </return-value>
+        <parameters>
+          <parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </parameter>
+        </parameters>
+      </constructor>
       <function name="get_default"
                 c:identifier="webkit_web_context_get_default">
         <doc xml:space="preserve">Gets the default web context</doc>
@@ -8438,6 +9240,29 @@ called from any thread.</doc>
           <type name="WebContext" c:type="WebKitWebContext*"/>
         </return-value>
       </function>
+      <virtual-method name="download_started">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="context" transfer-ownership="none">
+            <type name="WebContext" c:type="WebKitWebContext*"/>
+          </instance-parameter>
+          <parameter name="download" transfer-ownership="none">
+            <type name="Download" c:type="WebKitDownload*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="initialize_web_extensions">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="context" transfer-ownership="none">
+            <type name="WebContext" c:type="WebKitWebContext*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
       <method name="allow_tls_certificate_for_host"
               c:identifier="webkit_web_context_allow_tls_certificate_for_host"
               version="2.6">
@@ -8700,6 +9525,36 @@ details on the format of the languages in the list.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_web_process_count_limit"
+              c:identifier="webkit_web_context_get_web_process_count_limit"
+              version="2.10">
+        <doc xml:space="preserve">Gets the maximum number of web processes that can be created at the same time for the @context.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the maximum limit of web processes, or 0 if there isn't a limit.</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="context" transfer-ownership="none">
+            <doc xml:space="preserve">the #WebKitWebContext</doc>
+            <type name="WebContext" c:type="WebKitWebContext*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_website_data_manager"
+              c:identifier="webkit_web_context_get_website_data_manager"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager of @context.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+          <type name="WebsiteDataManager" c:type="WebKitWebsiteDataManager*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="context" transfer-ownership="none">
+            <doc xml:space="preserve">the #WebKitWebContext</doc>
+            <type name="WebContext" c:type="WebKitWebContext*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="prefetch_dns"
               c:identifier="webkit_web_context_prefetch_dns">
         <doc xml:space="preserve">Resolve the domain name of the given @hostname in advance, so that if a URI
@@ -8847,10 +9702,17 @@ specifying %WEBKIT_CACHE_MODEL_DOCUMENT_VIEWER. The default value is
         </parameters>
       </method>
       <method name="set_disk_cache_directory"
-              c:identifier="webkit_web_context_set_disk_cache_directory">
+              c:identifier="webkit_web_context_set_disk_cache_directory"
+              deprecated="1"
+              deprecated-version="2.10.">
         <doc xml:space="preserve">Set the directory where disk cache files will be stored
 This method must be called before loading anything in this context, otherwise
-it will not have any effect.</doc>
+it will not have any effect.
+
+Note that this method overrides the directory set in the #WebKitWebsiteDataManager,
+but it doesn't change the value returned by webkit_website_data_manager_get_disk_cache_directory()
+since the #WebKitWebsiteDataManager is immutable.</doc>
+        <doc-deprecated xml:space="preserve">Use webkit_web_context_new_with_website_data_manager() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -8937,7 +9799,7 @@ hangs or crashes, only the WebViews using it stop working, while
 the rest of the WebViews in the application will still function
 normally.
 
-This method **must be called before any other functions**,
+This method **must be called before any web process has been created**,
 as early as possible in your application. Calling it later will make
 your application crash.</doc>
         <return-value transfer-ownership="none">
@@ -9062,6 +9924,48 @@ before anything is loaded.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="set_web_process_count_limit"
+              c:identifier="webkit_web_context_set_web_process_count_limit"
+              version="2.10">
+        <doc xml:space="preserve">Sets the maximum number of web processes that can be created at the same time for the @context.
+The default value is 0 and means no limit.
+
+This method **must be called before any web process has been created**,
+as early as possible in your application. Calling it later will make
+your application crash.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="context" transfer-ownership="none">
+            <doc xml:space="preserve">the #WebKitWebContext</doc>
+            <type name="WebContext" c:type="WebKitWebContext*"/>
+          </instance-parameter>
+          <parameter name="limit" transfer-ownership="none">
+            <doc xml:space="preserve">the maximum number of web processes</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="local-storage-directory"
+                version="2.8"
+                deprecated="1"
+                deprecated-version="2.10."
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where local storage data will be saved.</doc>
+        <doc-deprecated xml:space="preserve">Use #WebKitWebsiteDataManager:local-storage-directory instead.</doc-deprecated>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="website-data-manager"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The #WebKitWebsiteDataManager associated with this context.</doc>
+        <type name="WebsiteDataManager"/>
+      </property>
       <field name="parent">
         <type name="GObject.Object" c:type="GObject"/>
       </field>
@@ -9095,6 +9999,33 @@ and webkit_web_context_set_web_extensions_directory().</doc>
             glib:is-gtype-struct-for="WebContext">
       <field name="parent">
         <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="download_started">
+        <callback name="download_started">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="context" transfer-ownership="none">
+              <type name="WebContext" c:type="WebKitWebContext*"/>
+            </parameter>
+            <parameter name="download" transfer-ownership="none">
+              <type name="Download" c:type="WebKitDownload*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="initialize_web_extensions">
+        <callback name="initialize_web_extensions">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="context" transfer-ownership="none">
+              <type name="WebContext" c:type="WebKitWebContext*"/>
+            </parameter>
+          </parameters>
+        </callback>
       </field>
       <field name="_webkit_reserved0" introspectable="0">
         <callback name="_webkit_reserved0">
@@ -9133,20 +10064,6 @@ and webkit_web_context_set_web_extensions_directory().</doc>
       </field>
       <field name="_webkit_reserved5" introspectable="0">
         <callback name="_webkit_reserved5">
-          <return-value transfer-ownership="none">
-            <type name="none" c:type="void"/>
-          </return-value>
-        </callback>
-      </field>
-      <field name="_webkit_reserved6" introspectable="0">
-        <callback name="_webkit_reserved6">
-          <return-value transfer-ownership="none">
-            <type name="none" c:type="void"/>
-          </return-value>
-        </callback>
-      </field>
-      <field name="_webkit_reserved7" introspectable="0">
-        <callback name="_webkit_reserved7">
           <return-value transfer-ownership="none">
             <type name="none" c:type="void"/>
           </return-value>
@@ -9218,6 +10135,23 @@ returns 0.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_can_attach"
+              c:identifier="webkit_web_inspector_get_can_attach"
+              version="2.8">
+        <doc xml:space="preserve">Whether the @inspector can be attached to the same window that contains
+the inspected view.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if there is enough room for the inspector view inside the
+    window that contains the inspected view, or %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="inspector" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebInspector</doc>
+            <type name="WebInspector" c:type="WebKitWebInspector*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_inspected_uri"
               c:identifier="webkit_web_inspector_get_inspected_uri">
         <doc xml:space="preserve">Get the URI that is currently being inspected. This can be %NULL if
@@ -9281,6 +10215,11 @@ the inspected view.</doc>
       <property name="attached-height" transfer-ownership="none">
         <doc xml:space="preserve">The height that the inspector view should have when it is attached.</doc>
         <type name="guint" c:type="guint"/>
+      </property>
+      <property name="can-attach" version="2.8" transfer-ownership="none">
+        <doc xml:space="preserve">Whether the @inspector can be attached to the same window that contains
+the inspected view.</doc>
+        <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="inspected-uri" transfer-ownership="none">
         <doc xml:space="preserve">The URI that is currently being inspected.</doc>
@@ -9560,6 +10499,22 @@ load operation.</doc>
           <parameter name="error" transfer-ownership="none">
             <doc xml:space="preserve">the #GError that was triggered</doc>
             <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="failed-with-tls-errors" when="last" version="2.8">
+        <doc xml:space="preserve">This signal is emitted when a TLS error occurs during the resource load operation.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="certificate" transfer-ownership="none">
+            <doc xml:space="preserve">a #GTlsCertificate</doc>
+            <type name="Gio.TlsCertificate"/>
+          </parameter>
+          <parameter name="errors" transfer-ownership="none">
+            <doc xml:space="preserve">a #GTlsCertificateFlags with the verification status of @certificate</doc>
+            <type name="Gio.TlsCertificateFlags"/>
           </parameter>
         </parameters>
       </glib:signal>
@@ -9964,6 +10919,20 @@ in the view by the user content manager.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
+      <virtual-method name="run_color_chooser">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="request" transfer-ownership="none">
+            <type name="ColorChooserRequest"
+                  c:type="WebKitColorChooserRequest*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
       <virtual-method name="run_file_chooser">
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
@@ -9988,6 +10957,19 @@ in the view by the user content manager.</doc>
           </instance-parameter>
           <parameter name="dialog" transfer-ownership="none">
             <type name="ScriptDialog" c:type="WebKitScriptDialog*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="show_notification">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="notification" transfer-ownership="none">
+            <type name="Notification" c:type="WebKitNotification*"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -10156,6 +11138,30 @@ it's possible to execute the command.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="execute_editing_command_with_argument"
+              c:identifier="webkit_web_view_execute_editing_command_with_argument"
+              version="2.10">
+        <doc xml:space="preserve">Request to execute the given @command with @argument for @web_view. You can use
+webkit_web_view_can_execute_editing_command() to check whether
+it's possible to execute the command.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="command" transfer-ownership="none">
+            <doc xml:space="preserve">the command to execute</doc>
+            <type name="utf8" c:type="const char*"/>
+          </parameter>
+          <parameter name="argument" transfer-ownership="none">
+            <doc xml:space="preserve">the command argument</doc>
+            <type name="utf8" c:type="const char*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="get_back_forward_list"
               c:identifier="webkit_web_view_get_back_forward_list">
         <doc xml:space="preserve">Obtains the #WebKitBackForwardList associated with the given #WebKitWebView. The
@@ -10169,6 +11175,29 @@ it's possible to execute the command.</doc>
             <doc xml:space="preserve">a #WebKitWebView</doc>
             <type name="WebView" c:type="WebKitWebView*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_background_color"
+              c:identifier="webkit_web_view_get_background_color"
+              version="2.8">
+        <doc xml:space="preserve">Gets the color that is used to draw the @web_view background before
+the actual contents are rendered.
+For more information see also webkit_web_view_set_background_color()</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="rgba"
+                     direction="out"
+                     caller-allocates="1"
+                     transfer-ownership="none">
+            <doc xml:space="preserve">a #GdkRGBA to fill in with the background color</doc>
+            <type name="Gdk.RGBA" c:type="GdkRGBA*"/>
+          </parameter>
         </parameters>
       </method>
       <method name="get_context" c:identifier="webkit_web_view_get_context">
@@ -10191,6 +11220,21 @@ it's possible to execute the command.</doc>
           <doc xml:space="preserve">the current custom character encoding name or %NULL if no
    custom character encoding has been set.</doc>
           <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_editor_state"
+              c:identifier="webkit_web_view_get_editor_state"
+              version="2.10">
+        <doc xml:space="preserve">Gets the web editor state of @web_view.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the #WebKitEditorState of the view</doc>
+          <type name="EditorState" c:type="WebKitEditorState*"/>
         </return-value>
         <parameters>
           <instance-parameter name="web_view" transfer-ownership="none">
@@ -10422,10 +11466,10 @@ server, so you can connect to #WebKitWebView::load-changed and call this functio
 when it's emitted with %WEBKIT_LOAD_COMMITTED event.
 
 Note that this function provides no information about the security of the web
-page if the current #WebKitTLSErrorsPolicy is %WEBKIT_TLS_ERRORS_POLICY_IGNORE,
+page if the current #WebKitTLSErrorsPolicy is @WEBKIT_TLS_ERRORS_POLICY_IGNORE,
 as subresources of the page may be controlled by an attacker. This function
 may safely be used to determine the security status of the current page only
-if the current #WebKitTLSErrorsPolicy is %WEBKIT_TLS_ERRORS_POLICY_FAIL, in
+if the current #WebKitTLSErrorsPolicy is @WEBKIT_TLS_ERRORS_POLICY_FAIL, in
 which case subresources that fail certificate verification will be blocked.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the @web_view connection uses HTTPS and a response has been received
@@ -10611,6 +11655,16 @@ You can monitor the load operation by connecting to
           </parameter>
         </parameters>
       </method>
+      <method name="is_editable" c:identifier="webkit_web_view_is_editable">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="is_loading" c:identifier="webkit_web_view_is_loading">
         <doc xml:space="preserve">Gets the value of the #WebKitWebView:is-loading property.
 You can monitor when a #WebKitWebView is loading a page by connecting to
@@ -10620,6 +11674,25 @@ details about the status of the load operation, for example to start a spinner
 when the view is loading a page and stop it when it finishes.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if @web_view is loading a page or %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_playing_audio"
+              c:identifier="webkit_web_view_is_playing_audio"
+              version="2.8">
+        <doc xml:space="preserve">Gets the value of the #WebKitWebView:is-playing-audio property.
+You can monitor when a page in a #WebKitWebView is playing audio by
+connecting to the notify::is-playing-audio signal of @web_view. This
+is useful when the application wants to provide visual feedback when a
+page is producing sound.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if a page in @web_view is playing audio or %FALSE otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -11146,6 +12219,51 @@ operation.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="set_background_color"
+              c:identifier="webkit_web_view_set_background_color"
+              version="2.8">
+        <doc xml:space="preserve">Sets the color that will be used to draw the @web_view background before
+the actual contents are rendered. Note that if the web page loaded in @web_view
+specifies a background color, it will take precedence over the @rgba color.
+By default the @web_view background color is opaque white.
+If the @rgba color is not fully opaque, the parent window must have a RGBA visual and
+#GtkWidget:app-paintable property set to %TRUE, for the transparencies to work.
+
+&lt;informalexample&gt;&lt;programlisting&gt;
+static void browser_window_set_background_color (BrowserWindow *window,
+                                                 const GdkRGBA *rgba)
+{
+    WebKitWebView *web_view;
+
+    if (rgba-&gt;alpha &lt; 1) {
+        GdkScreen *screen = gtk_window_get_screen (GTK_WINDOW (window));
+        GdkVisual *rgba_visual = gdk_screen_get_rgba_visual (screen);
+
+        if (!rgba_visual)
+             return;
+
+        gtk_widget_set_visual (GTK_WIDGET (window), rgba_visual);
+        gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
+    }
+
+    web_view = browser_window_get_web_view (window);
+    webkit_web_view_set_background_color (web_view, rgba);
+}
+&lt;/programlisting&gt;&lt;/informalexample&gt;</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="rgba" transfer-ownership="none">
+            <doc xml:space="preserve">a #GdkRGBA</doc>
+            <type name="Gdk.RGBA" c:type="const GdkRGBA*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_custom_charset"
               c:identifier="webkit_web_view_set_custom_charset">
         <doc xml:space="preserve">Sets the current custom character encoding override of @web_view. The custom
@@ -11167,6 +12285,33 @@ encoding override.</doc>
                      allow-none="1">
             <doc xml:space="preserve">a character encoding name or %NULL</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_editable"
+              c:identifier="webkit_web_view_set_editable"
+              version="2.8">
+        <doc xml:space="preserve">Sets whether the user is allowed to edit the HTML document.
+
+If @editable is %TRUE, @web_view allows the user to edit the HTML document. If
+@editable is %FALSE, an element in @web_view's document can only be edited if the
+CONTENTEDITABLE attribute has been set on the element or one of its parent
+elements. By default a #WebKitWebView is not editable.
+
+Normally, a HTML document is not editable unless the elements within the
+document are editable. This function provides a way to make the contents
+of a #WebKitWebView editable without altering the document or DOM structure.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="web_view" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebView</doc>
+            <type name="WebView" c:type="WebKitWebView*"/>
+          </instance-parameter>
+          <parameter name="editable" transfer-ownership="none">
+            <doc xml:space="preserve">a #gboolean indicating the editable state</doc>
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
@@ -11224,6 +12369,14 @@ If there is a loading operation in progress, it will be cancelled and
           </instance-parameter>
         </parameters>
       </method>
+      <property name="editable"
+                version="2.8"
+                writable="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether the pages loaded inside #WebKitWebView are editable. For more
+information see webkit_web_view_set_editable().</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <property name="estimated-load-progress" transfer-ownership="none">
         <doc xml:space="preserve">An estimate of the percent completion for the current loading operation.
 This value will range from 0.0 to 1.0 and, once a load completes,
@@ -11246,6 +12399,15 @@ See webkit_web_view_get_favicon() for more details.</doc>
 at that point the active URI is the requested one.
 When the load operation finishes the property is set to %FALSE before
 #WebKitWebView::load-changed is emitted with %WEBKIT_LOAD_FINISHED.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <property name="is-playing-audio"
+                version="2.8"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether the #WebKitWebView is currently playing audio from a page.
+This property becomes %TRUE as soon as web content starts playing any
+kind of audio. When a page is no longer playing any kind of sound,
+the property is set back to %FALSE.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="related-view"
@@ -11711,9 +12873,10 @@ last reference is removed on a #WebKitPermissionRequest and the
 request has not been handled, webkit_permission_request_deny()
 will be the default action.
 
-By default, if the signal is not handled,
-webkit_permission_request_deny() will be called over the
-#WebKitPermissionRequest.</doc>
+If the signal is not handled, the @request will be completed automatically
+by the specific #WebKitPermissionRequest that could allow or deny it. Check the
+documentation of classes implementing #WebKitPermissionRequest interface to know
+their default action.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE to stop other handlers from being invoked for the event.
   %FALSE to propagate the event further.</doc>
@@ -11790,6 +12953,32 @@ mainloop will be run to block user interaction in the parent
           <type name="none" c:type="void"/>
         </return-value>
       </glib:signal>
+      <glib:signal name="run-color-chooser" when="last" version="2.8">
+        <doc xml:space="preserve">This signal is emitted when the user interacts with a &amp;lt;input
+type='color' /&amp;gt; HTML element, requesting from WebKit to show
+a dialog to select a color. To let the application know the details of
+the color chooser, as well as to allow the client application to either
+cancel the request or perform an actual color selection, the signal will
+pass an instance of the #WebKitColorChooserRequest in the @request
+argument.
+
+It is possible to handle this request asynchronously by increasing the
+reference count of the request.
+
+The default signal handler will asynchronously run a regular
+#GtkColorChooser for the user to interact with.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE to stop other handlers from being invoked for the event.
+  %FALSE to propagate the event further.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="request" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitColorChooserRequest</doc>
+            <type name="ColorChooserRequest"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
       <glib:signal name="run-file-chooser" when="last">
         <doc xml:space="preserve">This signal is emitted when the user interacts with a &amp;lt;input
 type='file' /&amp;gt; HTML element, requesting from WebKit to show
@@ -11841,6 +13030,24 @@ on the dialog type:
           <parameter name="dialog" transfer-ownership="none">
             <doc xml:space="preserve">the #WebKitScriptDialog to show</doc>
             <type name="ScriptDialog"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="show-notification" when="last" version="2.8">
+        <doc xml:space="preserve">This signal is emitted when a notification should be presented to the
+user. The @notification is kept alive until either: 1) the web page cancels it
+or 2) a navigation happens.
+
+The default handler will emit a notification using libnotify, if built with
+support for it.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE to stop other handlers from being invoked. %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="notification" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitNotification</doc>
+            <type name="Notification"/>
           </parameter>
         </parameters>
       </glib:signal>
@@ -12279,6 +13486,37 @@ form has not been submitted, webkit_form_submission_request_submit() will be cal
           </parameters>
         </callback>
       </field>
+      <field name="show_notification">
+        <callback name="show_notification">
+          <return-value transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="web_view" transfer-ownership="none">
+              <type name="WebView" c:type="WebKitWebView*"/>
+            </parameter>
+            <parameter name="notification" transfer-ownership="none">
+              <type name="Notification" c:type="WebKitNotification*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="run_color_chooser">
+        <callback name="run_color_chooser">
+          <return-value transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="web_view" transfer-ownership="none">
+              <type name="WebView" c:type="WebKitWebView*"/>
+            </parameter>
+            <parameter name="request" transfer-ownership="none">
+              <type name="ColorChooserRequest"
+                    c:type="WebKitColorChooserRequest*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_webkit_reserved0" introspectable="0">
         <callback name="_webkit_reserved0">
           <return-value transfer-ownership="none">
@@ -12307,22 +13545,255 @@ form has not been submitted, webkit_form_submission_request_submit() will be cal
           </return-value>
         </callback>
       </field>
-      <field name="_webkit_reserved4" introspectable="0">
-        <callback name="_webkit_reserved4">
+    </record>
+    <record name="WebViewPrivate" c:type="WebKitWebViewPrivate" disguised="1">
+    </record>
+    <class name="WebsiteDataManager"
+           c:symbol-prefix="website_data_manager"
+           c:type="WebKitWebsiteDataManager"
+           parent="GObject.Object"
+           glib:type-name="WebKitWebsiteDataManager"
+           glib:get-type="webkit_website_data_manager_get_type"
+           glib:type-struct="WebsiteDataManagerClass">
+      <constructor name="new"
+                   c:identifier="webkit_website_data_manager_new"
+                   version="2.10"
+                   introspectable="0">
+        <doc xml:space="preserve">Creates a new #WebKitWebsiteDataManager with the given options. It must
+be passed as construction parameter of a #WebKitWebContext.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the newly created #WebKitWebsiteDataManager</doc>
+          <type name="WebsiteDataManager" c:type="WebKitWebsiteDataManager*"/>
+        </return-value>
+        <parameters>
+          <parameter name="first_option_name" transfer-ownership="none">
+            <doc xml:space="preserve">name of the first option to set</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <doc xml:space="preserve">value of first option, followed by more options, %NULL-terminated</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="get_base_cache_directory"
+              c:identifier="webkit_website_data_manager_get_base_cache_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:base-cache-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the base directory for Website cache, or %NULL if
+   #WebKitWebsiteDataManager:base-cache-directory was not provided.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_base_data_directory"
+              c:identifier="webkit_website_data_manager_get_base_data_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:base-data-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the base directory for Website data, or %NULL if
+   #WebKitWebsiteDataManager:base-data-directory was not provided.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_disk_cache_directory"
+              c:identifier="webkit_website_data_manager_get_disk_cache_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:disk-cache-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the directory where HTTP disk cache is stored.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_indexeddb_directory"
+              c:identifier="webkit_website_data_manager_get_indexeddb_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:indexeddb-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the directory where IndexedDB databases are stored.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_local_storage_directory"
+              c:identifier="webkit_website_data_manager_get_local_storage_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:local-storage-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the directory where local storage data is stored.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_offline_application_cache_directory"
+              c:identifier="webkit_website_data_manager_get_offline_application_cache_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:offline-application-cache-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the directory where offline web application cache is stored.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_websql_directory"
+              c:identifier="webkit_website_data_manager_get_websql_directory"
+              version="2.10">
+        <doc xml:space="preserve">Get the #WebKitWebsiteDataManager:websql-directory property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the directory where WebSQL databases are stored.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="manager" transfer-ownership="none">
+            <doc xml:space="preserve">a #WebKitWebsiteDataManager</doc>
+            <type name="WebsiteDataManager"
+                  c:type="WebKitWebsiteDataManager*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="base-cache-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The base directory for Website cache. This is used as a base directory
+for any Website cache when no specific cache directory has been provided.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="base-data-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The base directory for Website data. This is used as a base directory
+for any Website data when no specific data directory has been provided.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="disk-cache-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where HTTP disk cache will be stored.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="indexeddb-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where IndexedDB databases will be stored.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="local-storage-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where local storage data will be stored.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="offline-application-cache-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where offline web application cache will be stored.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="websql-directory"
+                version="2.10"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">The directory where WebSQL databases will be stored.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv">
+        <type name="WebsiteDataManagerPrivate"
+              c:type="WebKitWebsiteDataManagerPrivate*"/>
+      </field>
+    </class>
+    <record name="WebsiteDataManagerClass"
+            c:type="WebKitWebsiteDataManagerClass"
+            glib:is-gtype-struct-for="WebsiteDataManager">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="_webkit_reserved0" introspectable="0">
+        <callback name="_webkit_reserved0">
           <return-value transfer-ownership="none">
             <type name="none" c:type="void"/>
           </return-value>
         </callback>
       </field>
-      <field name="_webkit_reserved5" introspectable="0">
-        <callback name="_webkit_reserved5">
+      <field name="_webkit_reserved1" introspectable="0">
+        <callback name="_webkit_reserved1">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved2" introspectable="0">
+        <callback name="_webkit_reserved2">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+        </callback>
+      </field>
+      <field name="_webkit_reserved3" introspectable="0">
+        <callback name="_webkit_reserved3">
           <return-value transfer-ownership="none">
             <type name="none" c:type="void"/>
           </return-value>
         </callback>
       </field>
     </record>
-    <record name="WebViewPrivate" c:type="WebKitWebViewPrivate" disguised="1">
+    <record name="WebsiteDataManagerPrivate"
+            c:type="WebKitWebsiteDataManagerPrivate"
+            disguised="1">
     </record>
     <class name="WindowProperties"
            c:symbol-prefix="window_properties"
@@ -12467,7 +13938,7 @@ form has not been submitted, webkit_form_submission_request_submit() will be cal
                 writable="1"
                 construct-only="1"
                 transfer-ownership="none">
-        <type name="cairo.RectangleInt"/>
+        <type name="Gdk.Rectangle"/>
       </property>
       <property name="locationbar-visible"
                 writable="1"
@@ -12646,6 +14117,36 @@ have included when compiling your code.</doc>
       <return-value transfer-ownership="none">
         <type name="GLib.Quark" c:type="GQuark"/>
       </return-value>
+    </function>
+    <function name="user_media_permission_is_for_audio_device"
+              c:identifier="webkit_user_media_permission_is_for_audio_device"
+              version="2.8">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if access to an audio device was requested.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="request" transfer-ownership="none">
+          <doc xml:space="preserve">a #WebKitUserMediaPermissionRequest</doc>
+          <type name="UserMediaPermissionRequest"
+                c:type="WebKitUserMediaPermissionRequest*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="user_media_permission_is_for_video_device"
+              c:identifier="webkit_user_media_permission_is_for_video_device"
+              version="2.8">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if access to a video device was requested.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="request" transfer-ownership="none">
+          <doc xml:space="preserve">a #WebKitUserMediaPermissionRequest</doc>
+          <type name="UserMediaPermissionRequest"
+                c:type="WebKitUserMediaPermissionRequest*"/>
+        </parameter>
+      </parameters>
     </function>
   </namespace>
 </repository>

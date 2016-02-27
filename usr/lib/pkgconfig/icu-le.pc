@@ -17,19 +17,19 @@ baselibs = -lpthread -ldl -lm
 #sbindir = /usr/bin
 #mandir = /usr/share/man
 #sysconfdir = /etc
-UNICODE_VERSION=7.0
+UNICODE_VERSION=8.0
 ICUPREFIX=icu
 ICULIBSUFFIX=
 LIBICU=lib${ICUPREFIX}
 #SHAREDLIBCFLAGS=-fPIC
-pkglibdir=${libdir}/icu${ICULIBSUFFIX}/54.1
-#pkgdatadir=${datadir}/icu${ICULIBSUFFIX}/54.1
-ICUDATA_NAME = icudt54l
+pkglibdir=${libdir}/icu${ICULIBSUFFIX}/56.1
+#pkgdatadir=${datadir}/icu${ICULIBSUFFIX}/56.1
+ICUDATA_NAME = icudt56l
 #ICUPKGDATA_DIR=${exec_prefix}/lib
 #ICUDATA_DIR=${pkgdatadir}
 ICUDESC=International Components for Unicode
 
-Version: 54.1
+Version: 56.1
 Cflags: -I${includedir}
 # end of icu.pc.in
 Description: International Components for Unicode: Layout library

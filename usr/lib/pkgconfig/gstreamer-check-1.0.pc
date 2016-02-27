@@ -10,6 +10,6 @@ typelibdir=${libdir}/girepository-1.0
 Name: GStreamer check unit testing
 Description: Unit testing helper library for GStreamer modules
 Requires: gstreamer-1.0
-Version: 1.4.5
+Version: 1.6.3
 Libs: -L${libdir} -lgstcheck-1.0 -lm
 Cflags: -I${includedir}

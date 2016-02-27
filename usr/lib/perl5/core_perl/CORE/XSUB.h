@@ -14,7 +14,7 @@
 /* first, some documentation for xsubpp-generated items */
 
 /*
-=head1 Variables created by C<xsubpp> and C<xsubpp> internal functions
+=head1 C<xsubpp> variables and internal functions
 
 =for apidoc Amn|char*|CLASS
 Variable which is setup by C<xsubpp> to indicate the 
@@ -170,6 +170,24 @@ is a lexical $_ in scope.
 #else
 #  define dXSARGS \
 	dSP; dAXMARK; dITEMS
+/* These 3 macros are replacements for dXSARGS macro only in bootstrap.
+   They factor out common code in every BOOT XSUB. Computation of vars mark
+   and items will optimize away in most BOOT functions. Var ax can never be
+   optimized away since BOOT must return &PL_sv_yes by default from xsubpp.
+   Note these macros are not drop in replacements for dXSARGS since they set
+   PL_xsubfilename. */
+#  define dXSBOOTARGSXSAPIVERCHK  \
+	I32 ax = XS_BOTHVERSION_SETXSUBFN_POPMARK_BOOTCHECK;	\
+	SV **mark = PL_stack_base + ax; dSP; dITEMS
+#  define dXSBOOTARGSAPIVERCHK  \
+	I32 ax = XS_APIVERSION_SETXSUBFN_POPMARK_BOOTCHECK;	\
+	SV **mark = PL_stack_base + ax; dSP; dITEMS
+/* dXSBOOTARGSNOVERCHK has no API in xsubpp to choose it so do
+#undef dXSBOOTARGSXSAPIVERCHK
+#define dXSBOOTARGSXSAPIVERCHK dXSBOOTARGSNOVERCHK */
+#  define dXSBOOTARGSNOVERCHK  \
+	I32 ax = XS_SETXSUBFN_POPMARK;  \
+	SV **mark = PL_stack_base + ax; dSP; dITEMS
 #endif
 
 #define dXSTARG SV * const targ = ((PL_op->op_private & OPpENTERSUB_HASTARG) \
@@ -274,7 +292,7 @@ C<xsubpp>.  See L<perlxs/"The VERSIONCHECK: Keyword">.
 Macro to verify that the perl api version an XS module has been compiled against
 matches the api version of the perl interpreter it's being loaded into.
 
-=head1 Simple Exception Handling Macros
+=head1 Exception Handling (simple) Macros
 
 =for apidoc Ams||dXCPT
 Set up necessary local variables for exception handling.
@@ -325,13 +343,57 @@ Rethrows a previously caught exception.  See L<perlguts/"Exception Handling">.
 
 #ifdef XS_VERSION
 #  define XS_VERSION_BOOTCHECK						\
-    Perl_xs_version_bootcheck(aTHX_ items, ax, STR_WITH_LEN(XS_VERSION))
+    Perl_xs_handshake(HS_KEY(FALSE, FALSE, "", XS_VERSION), HS_CXT, __FILE__,	\
+        items, ax, XS_VERSION)
 #else
 #  define XS_VERSION_BOOTCHECK
 #endif
 
 #define XS_APIVERSION_BOOTCHECK						\
-    Perl_xs_apiversion_bootcheck(aTHX_ ST(0), STR_WITH_LEN("v" PERL_API_VERSION_STRING))
+    Perl_xs_handshake(HS_KEY(FALSE, FALSE, "v" PERL_API_VERSION_STRING, ""),	\
+        HS_CXT, __FILE__, items, ax, "v" PERL_API_VERSION_STRING)
+/* public API, this is a combination of XS_VERSION_BOOTCHECK and
+   XS_APIVERSION_BOOTCHECK in 1, and is backportable */
+#ifdef XS_VERSION
+#  define XS_BOTHVERSION_BOOTCHECK						\
+    Perl_xs_handshake(HS_KEY(FALSE, FALSE, "v" PERL_API_VERSION_STRING, XS_VERSION),	\
+        HS_CXT, __FILE__, items, ax, "v" PERL_API_VERSION_STRING, XS_VERSION)
+#else
+/* should this be a #error? if you want both checked, you better supply XS_VERSION right? */
+#  define XS_BOTHVERSION_BOOTCHECK XS_APIVERSION_BOOTCHECK
+#endif
+
+/* private API */
+#define XS_APIVERSION_POPMARK_BOOTCHECK					\
+    Perl_xs_handshake(HS_KEY(FALSE, TRUE, "v" PERL_API_VERSION_STRING, ""),	\
+        HS_CXT, __FILE__, "v" PERL_API_VERSION_STRING)
+#ifdef XS_VERSION
+#  define XS_BOTHVERSION_POPMARK_BOOTCHECK					\
+    Perl_xs_handshake(HS_KEY(FALSE, TRUE, "v" PERL_API_VERSION_STRING, XS_VERSION),	\
+        HS_CXT, __FILE__, "v" PERL_API_VERSION_STRING, XS_VERSION)
+#else
+/* should this be a #error? if you want both checked, you better supply XS_VERSION right? */
+#  define XS_BOTHVERSION_POPMARK_BOOTCHECK XS_APIVERSION_POPMARK_BOOTCHECK
+#endif
+
+#define XS_APIVERSION_SETXSUBFN_POPMARK_BOOTCHECK				\
+    Perl_xs_handshake(HS_KEY(TRUE, TRUE, "v" PERL_API_VERSION_STRING, ""),	\
+        HS_CXT, __FILE__, "v" PERL_API_VERSION_STRING)
+#ifdef XS_VERSION
+#  define XS_BOTHVERSION_SETXSUBFN_POPMARK_BOOTCHECK				  \
+    Perl_xs_handshake(HS_KEY(TRUE, TRUE, "v" PERL_API_VERSION_STRING, XS_VERSION),\
+        HS_CXT, __FILE__, "v" PERL_API_VERSION_STRING, XS_VERSION)
+#else
+/* should this be a #error? if you want both checked, you better supply XS_VERSION right? */
+#  define XS_BOTHVERSION_SETXSUBFN_POPMARK_BOOTCHECK XS_APIVERSION_SETXSUBFN_POPMARK_BOOTCHECK
+#endif
+
+/* For a normal bootstrap without API or XS version checking.
+   Useful for static XS modules or debugging/testing scenarios.
+   If this macro gets heavily used in the future, it should separated into
+   a separate function independent of Perl_xs_handshake for efficiency */
+#define XS_SETXSUBFN_POPMARK \
+    Perl_xs_handshake(HS_KEY(TRUE, TRUE, "", "") | HSf_NOCHK, HS_CXT, __FILE__)
 
 #ifdef NO_XSLOCKS
 #  define dXCPT             dJMPENV; int rEtV = 0
@@ -352,7 +414,7 @@ Rethrows a previously caught exception.  See L<perlguts/"Exception Handling">.
 	        RETVAL = sv_mortalcopy(db_type) ;		\
 	    ST(0) = RETVAL ;					\
 	    if (db_type && (code == &PL_sv_undef)) {		\
-                SvREFCNT_dec(db_type) ;				\
+	        SvREFCNT_dec_NN(db_type) ;			\
 	        db_type = NULL ;				\
 	    }							\
 	    else if (code) {					\
@@ -652,11 +714,5 @@ Rethrows a previously caught exception.  See L<perlguts/"Exception Handling">.
 #endif /* _INC_PERL_XSUB_H */		/* include guard */
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

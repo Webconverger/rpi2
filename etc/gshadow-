@@ -45,3 +45,4 @@ systemd-journal-remote:!!::
 git:!::
 avahi:!::
 polkitd:!::
+colord:!::

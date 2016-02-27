@@ -25,7 +25,7 @@
   <comment xml:lang="it">Documento PDF (compresso con bzip)</comment>
   <comment xml:lang="ja">PDF ドキュメント (bzip 圧縮)</comment>
   <comment xml:lang="kk">PDF құжаты (bzip-пен сығылған)</comment>
-  <comment xml:lang="ko">PDF 문서 (BZIP 압축)</comment>
+  <comment xml:lang="ko">PDF 문서(BZIP 압축)</comment>
   <comment xml:lang="lt">PDF dokumentas (suglaudintas su bzip)</comment>
   <comment xml:lang="lv">PDF dokuments (saspiests ar bzip)</comment>
   <comment xml:lang="nb">PDF-dokument (bzip-komprimert)</comment>
@@ -38,6 +38,7 @@
   <comment xml:lang="sk">Dokument PDF (komprimovaný pomocou bzip)</comment>
   <comment xml:lang="sl">Dokument PDF (stisnjen z bzip)</comment>
   <comment xml:lang="sq">Dokument PDF (i kompresuar me bzip)</comment>
+  <comment xml:lang="sr">ПДФ документ (запакован бзипом)</comment>
   <comment xml:lang="sv">PDF-dokument (bzip-komprimerat)</comment>
   <comment xml:lang="tr">PDF belgesi (bzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">документ PDF (стиснений bzip)</comment>

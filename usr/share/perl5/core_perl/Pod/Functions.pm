@@ -54,7 +54,7 @@ L<perlfunc/"Perl Functions by Category"> section.
 
 =cut
 
-our $VERSION = '1.08';
+our $VERSION = '1.09';
 
 require Exporter;
 

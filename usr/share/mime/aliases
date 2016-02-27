@@ -81,6 +81,7 @@ application/x-palm-database application/vnd.palm
 application/x-pcap application/vnd.tcpdump.pcap
 application/x-pdf application/pdf
 application/x-photoshop image/vnd.adobe.photoshop
+application/x-pkcs12 application/pkcs12
 application/x-quicktimeplayer application/x-quicktime-media-link
 application/x-rar-compressed application/x-rar
 application/x-redhat-package-manager application/x-rpm
@@ -166,6 +167,7 @@ image/x-ico image/vnd.microsoft.icon
 image/x-icon image/vnd.microsoft.icon
 image/x-iff image/x-ilbm
 image/x-jpeg2000-image image/jp2
+image/x-pcx image/vnd.zbrush.pcx
 image/x-photoshop image/vnd.adobe.photoshop
 image/x-psd image/vnd.adobe.photoshop
 image/x-win-metafile image/x-wmf

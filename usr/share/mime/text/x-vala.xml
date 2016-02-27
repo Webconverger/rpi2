@@ -40,12 +40,13 @@
   <comment xml:lang="sk">Zdrojový kód Vala</comment>
   <comment xml:lang="sl">Datoteka izvorne kode Vala</comment>
   <comment xml:lang="sq">Kod burues Vala</comment>
+  <comment xml:lang="sr">Вала изворни ко̂д</comment>
   <comment xml:lang="sv">Vala-källkod</comment>
   <comment xml:lang="tr">Vala kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою Vala</comment>
   <comment xml:lang="vi">Mã nguồn Vala</comment>
   <comment xml:lang="zh_CN">Vala 源代码</comment>
-  <comment xml:lang="zh_TW">Vala 源碼</comment>
+  <comment xml:lang="zh_TW">Vala 原始碼</comment>
   <sub-class-of type="text/x-csrc"/>
   <glob pattern="*.vala"/>
   <glob pattern="*.vapi"/>

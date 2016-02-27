@@ -1,0 +1,62 @@
+%NAME%
+avahi
+
+%VERSION%
+0.6.32rc-4
+
+%DESC%
+Multicast DNS-SD / Zeroconf Suite
+
+%URL%
+http://git.0pointer.net/avahi.git
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1453339086
+
+%INSTALLDATE%
+1455616615
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu1@archlinuxarm.org>
+
+%SIZE%
+2515968
+
+%REASON%
+1
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+expat
+libdaemon
+glib2
+libcap
+gdbm
+dbus
+
+%OPTDEPENDS%
+gtk3: avahi-discover-standalone, bshell, bssh, bvnc
+gtk2: gtk2 bindings
+qt4: qt4 bindings
+pygtk: avahi-bookmarks, avahi-discover
+python2-twisted: avahi-bookmarks
+mono: mono bindings
+python2-dbus: avahi-discover
+nss-mdns: NSS support for mDNS
+
+%CONFLICTS%
+howl
+mdnsresponder
+
+%PROVIDES%
+howl
+mdnsresponder
+

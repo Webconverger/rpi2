@@ -36,14 +36,15 @@
   <comment xml:lang="nn">skrivebordsoppsettfil</comment>
   <comment xml:lang="pl">Plik konfiguracji środowiska</comment>
   <comment xml:lang="pt">ficheiro de configuração de área de trabalho</comment>
-  <comment xml:lang="pt_BR">Arquivo de configuração de área de trabalho</comment>
+  <comment xml:lang="pt_BR">Arquivo de configuração desktop</comment>
   <comment xml:lang="ro">fișier de configurare al desktopului</comment>
   <comment xml:lang="ru">файл настроек рабочего стола</comment>
   <comment xml:lang="sk">Súbor nastavení pracovnej plochy</comment>
   <comment xml:lang="sl">nastavitvena datoteka namizja</comment>
   <comment xml:lang="sq">File konfigurimi desktop</comment>
-  <comment xml:lang="sr">датотека за подешавања радне површи</comment>
+  <comment xml:lang="sr">датотека подешавања радне површи</comment>
   <comment xml:lang="sv">skrivbordskonfigurationsfil</comment>
+  <comment xml:lang="tr">masa üstü yapılandırma dosyası</comment>
   <comment xml:lang="uk">файл конфігурації стільниці</comment>
   <comment xml:lang="vi">tập tin cấu hình môi trường</comment>
   <comment xml:lang="zh_CN">桌面配置文件</comment>

@@ -17,8 +17,14 @@
           </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-types"></a>6.18.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
       Only the <code class="option">session</code> module type is provided.
     </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-return_values"></a>6.18.4. RETURN VALUES</h3></div></div></div><p>
-      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
-              An error occurred during session management.
+      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+              The loginuid value is set and auditd is running if check requested.
+            </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
+              The /proc/self/loginuid file is not present on the system or the
+              login process runs inside uid namespace and kernel does not support
+              overwriting loginuid.
+            </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
+              Any other error prevented setting loginuid or auditd is not running.
             </p></dd></dl></div><p>
     </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-examples"></a>6.18.5. EXAMPLES</h3></div></div></div><pre class="programlisting">
 #%PAM-1.0

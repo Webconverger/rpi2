@@ -5,6 +5,6 @@ libdir=${exec_prefix}/lib
 
 Name: libdvbv5
 Description: DVBv5 utility library
-Version: 1.6.2
+Version: 1.6.3
 Libs: -L${libdir} -ldvbv5
 Cflags: -I${includedir}

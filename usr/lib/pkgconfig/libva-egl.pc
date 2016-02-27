@@ -7,7 +7,7 @@ display=egl
 Name: libva-${display}
 Description: Userspace Video Acceleration (VA) ${display} interface
 Requires: libva
-Version: 0.37.0
+Version: 0.38.1
 Libs: -L${libdir} -lva-${display}
 Cflags: -I${includedir}
 

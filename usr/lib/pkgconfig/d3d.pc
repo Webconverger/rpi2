@@ -7,5 +7,5 @@ moduledir=${exec_prefix}/lib/d3d
 Name: d3d
 Description: Native D3D driver modules
 Version: 1.0.0
-Requires.private: libdrm >= 2.4.38
+Requires.private: libdrm >= 2.4.60
 Cflags: -I${includedir}

@@ -33,8 +33,11 @@
   <comment xml:lang="pt_BR">Fluxo de transporte de MPEG-2</comment>
   <comment xml:lang="ro">Flux transport MPEG-2</comment>
   <comment xml:lang="ru">транспортный поток MPEG-2</comment>
+  <comment xml:lang="sk">MPEG-2 Transport Stream</comment>
   <comment xml:lang="sl">Pretočni vir prenosega MPEG</comment>
+  <comment xml:lang="sr">МПЕГ-2 ток преноса</comment>
   <comment xml:lang="sv">MPEG-2 transportström</comment>
+  <comment xml:lang="tr">MPEG-2 aktarım akışı</comment>
   <comment xml:lang="uk">потік передавання даних MPEG-2</comment>
   <comment xml:lang="zh_CN">MPEG-2 传输流</comment>
   <comment xml:lang="zh_TW">MPEG-2 傳輸串流</comment>

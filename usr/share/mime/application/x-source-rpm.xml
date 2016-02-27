@@ -15,6 +15,7 @@
   <comment xml:lang="gl">Paquete RPM de fontes</comment>
   <comment xml:lang="he">חבילת מקור RPM</comment>
   <comment xml:lang="hu">Forrás RPM-csomag</comment>
+  <comment xml:lang="ia">Pacchetto de fonte RPM</comment>
   <comment xml:lang="id">Paket RPM sumber</comment>
   <comment xml:lang="it">Pacchetto sorgente RPM</comment>
   <comment xml:lang="ja">ソース RPM パッケージ</comment>
@@ -24,7 +25,11 @@
   <comment xml:lang="pl">Źródłowy pakiet RPM</comment>
   <comment xml:lang="pt_BR">Pacote fonte RPM</comment>
   <comment xml:lang="ru">пакет RPM с исходным кодом</comment>
+  <comment xml:lang="sk">Zdrojový balík RPM</comment>
   <comment xml:lang="sl">Paket izvorne kode RPM</comment>
+  <comment xml:lang="sr">изворни РПМ пакет</comment>
+  <comment xml:lang="sv">Käll-RPM-paket</comment>
+  <comment xml:lang="tr">Kaynak RPM paketi</comment>
   <comment xml:lang="uk">пакунок RPM з початковим кодом</comment>
   <comment xml:lang="zh_CN">源码 RPM 软件包</comment>
   <comment xml:lang="zh_TW">Source RPM 軟體包</comment>

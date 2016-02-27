@@ -29,7 +29,7 @@
   <comment xml:lang="it">Pagina di manuale (compressa)</comment>
   <comment xml:lang="ja">(圧縮) man ページ</comment>
   <comment xml:lang="kk">әдістемелік парағы (сығылған)</comment>
-  <comment xml:lang="ko">man 페이지 (압축)</comment>
+  <comment xml:lang="ko">man 페이지(압축)</comment>
   <comment xml:lang="lt">žinyno puslapis (suglaudintas)</comment>
   <comment xml:lang="lv">rokasgrāmatas lapa (saspiesta)</comment>
   <comment xml:lang="ms">Halaman manual (termampat)</comment>
@@ -44,8 +44,9 @@
   <comment xml:lang="sk">Manuálová stránka (komprimovaná)</comment>
   <comment xml:lang="sl">stran priročnika (stisnjena)</comment>
   <comment xml:lang="sq">Faqe manuali (e kompresuar)</comment>
-  <comment xml:lang="sr">страна упутства (компресована)</comment>
+  <comment xml:lang="sr">страница упутства (запакована)</comment>
   <comment xml:lang="sv">manualsida (komprimerad)</comment>
+  <comment xml:lang="tr">kılavuz dosyası (sıkıştırılmış)</comment>
   <comment xml:lang="uk">сторінка посібника (стиснена)</comment>
   <comment xml:lang="vi">trang hướng dẫn (đã nén)</comment>
   <comment xml:lang="zh_CN">手册页 (压缩)</comment>

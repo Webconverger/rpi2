@@ -17,6 +17,7 @@
   <comment xml:lang="he">כתוביות WebVTT</comment>
   <comment xml:lang="hr">WebVTT titlovi</comment>
   <comment xml:lang="hu">WebVTT feliratok</comment>
+  <comment xml:lang="ia">Subtitulos WebVTT</comment>
   <comment xml:lang="id">Subtitel WebVTT</comment>
   <comment xml:lang="it">Sottotitoli WebVTT</comment>
   <comment xml:lang="ja">WebVTT サブタイトル</comment>
@@ -28,8 +29,11 @@
   <comment xml:lang="pl">Napisy WebVTT</comment>
   <comment xml:lang="pt_BR">Legendas WebVTT</comment>
   <comment xml:lang="ru">субтитры WebVTT</comment>
+  <comment xml:lang="sk">Titulky WebVTT</comment>
   <comment xml:lang="sl">Podnapisi WebVTT</comment>
+  <comment xml:lang="sr">Веб ВТТ преводи</comment>
   <comment xml:lang="sv">WebVTT-undertexter</comment>
+  <comment xml:lang="tr">WebVTT altyazıları</comment>
   <comment xml:lang="uk">субтитри WebVTT</comment>
   <comment xml:lang="zh_CN">WebVTT 字幕</comment>
   <comment xml:lang="zh_TW">WebVTT 字幕</comment>

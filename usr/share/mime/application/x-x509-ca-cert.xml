@@ -43,8 +43,9 @@
   <comment xml:lang="sk">Certifikát X.509 kódovaný ako DER/PEM/Netscape</comment>
   <comment xml:lang="sl">Datoteka potrdila DER/PEM/Netscape X.509</comment>
   <comment xml:lang="sq">Çertifikatë DER/PEM/Netscape-encoded X.509</comment>
-  <comment xml:lang="sr">DER, PEM или Нетскејп кодирани сертификат X.509</comment>
+  <comment xml:lang="sr">ДЕР/ПЕМ/Нетскејп кодирано уверење Икс.509</comment>
   <comment xml:lang="sv">DER/PEM/Netscape-kodat X.509-certifikat</comment>
+  <comment xml:lang="tr">DER/PEM/Netscape-kodlanmış X.509 sertfikası</comment>
   <comment xml:lang="uk">сертифікат X.509 у форматі DER/PEM/Netscape</comment>
   <comment xml:lang="vi">Chứng nhận X.509 mã hoá bằng Netscape/PEM/DER</comment>
   <comment xml:lang="zh_CN">DER/PEM/Netscape-encoded X.509 证书</comment>

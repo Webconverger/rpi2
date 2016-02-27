@@ -49,7 +49,7 @@
   <comment xml:lang="uk">вихідний код мовою Ada</comment>
   <comment xml:lang="vi">Mã nguồn Ada</comment>
   <comment xml:lang="zh_CN">Ada 源代码</comment>
-  <comment xml:lang="zh_TW">Ada 源碼</comment>
+  <comment xml:lang="zh_TW">Ada 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.adb"/>
   <glob pattern="*.ads"/>

@@ -25,7 +25,7 @@
   <comment xml:lang="it">Documento PDF (compresso con gzip)</comment>
   <comment xml:lang="ja">PDF ドキュメント (gzip 圧縮)</comment>
   <comment xml:lang="kk">PDF құжаты (gzip-пен сығылған)</comment>
-  <comment xml:lang="ko">PDF 문서 (GZIP 압축)</comment>
+  <comment xml:lang="ko">PDF 문서(GZIP 압축)</comment>
   <comment xml:lang="lt">PDF dokumentas (suglaudintas su gzip)</comment>
   <comment xml:lang="lv">PDF dokuments (saspiests ar gzip)</comment>
   <comment xml:lang="nb">PDF-dokument (gzip-komprimert)</comment>
@@ -38,6 +38,7 @@
   <comment xml:lang="sk">Dokument PDF (komprimovaný pomocou gzip)</comment>
   <comment xml:lang="sl">Dokument PDF (stisnjen z gzip)</comment>
   <comment xml:lang="sq">Dokument PDF (i kompresuar me gzip)</comment>
+  <comment xml:lang="sr">ПДФ документ (запакован гзип-ом)</comment>
   <comment xml:lang="sv">PDF-dokument (gzip-komprimerat)</comment>
   <comment xml:lang="tr">PDF belgesi (gzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">документ PDF (стиснений gzip)</comment>

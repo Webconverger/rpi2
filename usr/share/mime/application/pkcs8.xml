@@ -34,7 +34,9 @@
   <comment xml:lang="ru">личный ключ PKCS#8</comment>
   <comment xml:lang="sk">Súkromný kľúč PKCS#8</comment>
   <comment xml:lang="sl">Datoteka osebnega ključa PKCS#8</comment>
+  <comment xml:lang="sr">ПКЦС#8 лични кључ</comment>
   <comment xml:lang="sv">Privat PKCS#8-nyckel</comment>
+  <comment xml:lang="tr">PKCS#8 özel anahtarı</comment>
   <comment xml:lang="uk">закритий ключ PKCS#8</comment>
   <comment xml:lang="zh_CN">PKCS#8 私钥</comment>
   <comment xml:lang="zh_TW">PKCS#8 私人金鑰</comment>

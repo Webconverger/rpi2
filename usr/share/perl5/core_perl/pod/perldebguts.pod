@@ -525,7 +525,7 @@ C<(??{ code })>.
 =item C<anchored(TYPE)>
 
 If the pattern may match only at a handful of places, with C<TYPE>
-being C<BOL>, C<MBOL>, or C<GPOS>.  See the table below.
+being C<SBOL>, C<MBOL>, or C<GPOS>.  See the table below.
 
 =back
 
@@ -559,39 +559,45 @@ will be lost.
  END             no         End of program.
  SUCCEED         no         Return from a subroutine, basically.
 
- # Anchors:
+ # Line Start Anchors:
+ SBOL            no         Match "" at beginning of line: /^/, /\A/
+ MBOL            no         Same, assuming multiline: /^/m
 
- BOL             no         Match "" at beginning of line.
- MBOL            no         Same, assuming multiline.
- SBOL            no         Same, assuming singleline.
- EOS             no         Match "" at end of string.
- EOL             no         Match "" at end of line.
- MEOL            no         Same, assuming multiline.
- SEOL            no         Same, assuming singleline.
- BOUND           no         Match "" at any word boundary using native
-                            charset rules for non-utf8
- BOUNDL          no         Match "" at any locale word boundary
- BOUNDU          no         Match "" at any word boundary using Unicode
-                            rules
- BOUNDA          no         Match "" at any word boundary using ASCII
-                            rules
- NBOUND          no         Match "" at any word non-boundary using
-                            native charset rules for non-utf8
- NBOUNDL         no         Match "" at any locale word non-boundary
- NBOUNDU         no         Match "" at any word non-boundary using
-                            Unicode rules
- NBOUNDA         no         Match "" at any word non-boundary using
-                            ASCII rules
+ # Line End Anchors:
+ SEOL            no         Match "" at end of line: /$/
+ MEOL            no         Same, assuming multiline: /$/m
+ EOS             no         Match "" at end of string: /\z/
+
+ # Match Start Anchors:
  GPOS            no         Matches where last m//g left off.
 
- # [Special] alternatives:
+ # Word Boundary Opcodes:
+ BOUND           no         Like BOUNDA for non-utf8, otherwise match ""
+                            between any Unicode \w\W or \W\w
+ BOUNDL          no         Like BOUND/BOUNDU, but \w and \W are defined
+                            by current locale
+ BOUNDU          no         Match "" at any boundary of a given type
+                            using Unicode rules
+ BOUNDA          no         Match "" at any boundary between \w\W or
+                            \W\w, where \w is [_a-zA-Z0-9]
+ NBOUND          no         Like NBOUNDA for non-utf8, otherwise match
+                            "" between any Unicode \w\w or \W\W
+ NBOUNDL         no         Like NBOUND/NBOUNDU, but \w and \W are
+                            defined by current locale
+ NBOUNDU         no         Match "" at any non-boundary of a given type
+                            using using Unicode rules
+ NBOUNDA         no         Match "" betweeen any \w\w or \W\W, where \w
+                            is [_a-zA-Z0-9]
 
+ # [Special] alternatives:
  REG_ANY         no         Match any one character (except newline).
  SANY            no         Match any one character.
  CANY            no         Match any one byte.
- ANYOF           sv         Match character in (or not in) this class,
+ ANYOF           sv 1       Match character in (or not in) this class,
                             single char match only
+ ANYOFL          sv 1       Like ANYOF, but /l is in effect
 
+ # POSIX Character Classes:
  POSIXD          none       Some [[:class:]] under /d; the FLAGS field
                             gives which one
  POSIXL          none       Some [[:class:]] under /l; the FLAGS field
@@ -620,16 +626,10 @@ will be lost.
  #
  BRANCH          node       Match this alternative, or the next...
 
- # Back pointer
-
- # BACK          Normal "next" pointers all implicitly point forward;
- #               BACK exists to make loop structures possible.
- # not used
- BACK            no         Match "", "next" ptr points backward.
-
  # Literals
 
  EXACT           str        Match this string (preceded by length).
+ EXACTL          str        Like EXACT, but /l is in effect.
  EXACTF          str        Match this non-UTF-8 string (not guaranteed
                             to be folded) using /id rules (w/len).
  EXACTFL         str        Match this string (not guaranteed to be
@@ -639,9 +639,13 @@ will be lost.
                             UTF-8) using /iu rules (w/len).
  EXACTFA         str        Match this string (not guaranteed to be
                             folded) using /iaa rules (w/len).
+
  EXACTFU_SS      str        Match this string (folded iff in UTF-8,
                             length in folding may change even if not in
                             UTF-8) using /iu rules (w/len).
+ EXACTFLU8       str        Rare cirucmstances: like EXACTFU, but is
+                            under /l, UTF-8, folded, and everything in
+                            it is above 255.
  EXACTFA_NO_TRIE str        Match this string (which is not trie-able;
                             not guaranteed to be folded) using /iaa
                             rules (w/len).
@@ -656,7 +660,7 @@ will be lost.
  # Loops
 
  # STAR,PLUS    '?', and complex '*' and '+', are implemented as
- #               circular BRANCH structures using BACK.  Simple cases
+ #               circular BRANCH structures.  Simple cases
  #               (one character per match) are implemented with STAR
  #               and PLUS for speed and to minimize recursive plunges.
  #
@@ -700,20 +704,21 @@ will be lost.
                             unicode rules for non-utf8, no mixing ASCII,
                             non-ASCII
 
+ # Support for long RE
+ LONGJMP         off 1 1    Jump far away.
+ BRANCHJ         off 1 1    BRANCH with long offset.
+
+ # Special Case Regops
  IFMATCH         off 1 2    Succeeds if the following matches.
  UNLESSM         off 1 2    Fails if the following matches.
  SUSPEND         off 1 1    "Independent" sub-RE.
  IFTHEN          off 1 1    Switch, should be preceded by switcher.
  GROUPP          num 1      Whether the group matched.
 
- # Support for long RE
-
- LONGJMP         off 1 1    Jump far away.
- BRANCHJ         off 1 1    BRANCH with long offset.
-
  # The heavy worker
 
- EVAL            evl 1      Execute some Perl code.
+ EVAL            evl/flags  Execute some Perl code.
+                 2L
 
  # Modifiers
 

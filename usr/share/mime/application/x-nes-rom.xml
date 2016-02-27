@@ -43,7 +43,7 @@
   <comment xml:lang="sk">ROM pre NES</comment>
   <comment xml:lang="sl">Bralni pomnilnik NES</comment>
   <comment xml:lang="sq">ROM NES</comment>
-  <comment xml:lang="sr">NES ром</comment>
+  <comment xml:lang="sr">НЕС РОМ</comment>
   <comment xml:lang="sv">NES-rom</comment>
   <comment xml:lang="tr">NES ROM</comment>
   <comment xml:lang="uk">ППП NES</comment>
@@ -52,4 +52,7 @@
   <comment xml:lang="zh_TW">任天堂 ROM</comment>
   <generic-icon name="application-x-executable"/>
   <glob pattern="*.nes"/>
+  <glob pattern="*.nez"/>
+  <glob pattern="*.unf"/>
+  <glob pattern="*.unif"/>
 </mime-type>

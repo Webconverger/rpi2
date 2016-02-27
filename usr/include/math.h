@@ -1,5 +1,5 @@
 /* Declarations for math functions.
-   Copyright (C) 1991-2014 Free Software Foundation, Inc.
+   Copyright (C) 1991-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -27,6 +27,9 @@
 
 __BEGIN_DECLS
 
+/* Get machine-dependent vector math functions declarations.  */
+#include <bits/math-vector.h>
+
 /* Get machine-dependent HUGE_VAL value (returned on overflow).
    On all IEEE754 machines, this is +Infinity.  */
 #include <bits/huge_val.h>
@@ -48,6 +51,16 @@ __BEGIN_DECLS
    actual math functions.  These macros are used for those prototypes,
    so we can easily declare each function as both `name' and `__name',
    and can declare the float versions `namef' and `__namef'.  */
+
+#define __SIMD_DECL(function) __CONCAT (__DECL_SIMD_, function)
+
+#define __MATHCALL_VEC(function, suffix, args) 	\
+  __SIMD_DECL (__MATH_PRECNAME (function, suffix)) \
+  __MATHCALL (function, suffix, args)
+
+#define __MATHDECL_VEC(type, function,suffix, args) \
+  __SIMD_DECL (__MATH_PRECNAME (function, suffix)) \
+  __MATHDECL(type, function,suffix, args)
 
 #define __MATHCALL(function,suffix, args)	\
   __MATHDECL (_Mdouble_,function,suffix, args)
@@ -92,7 +105,8 @@ __BEGIN_DECLS
 # undef	__MATH_PRECNAME
 
 # if !(defined __NO_LONG_DOUBLE_MATH && defined _LIBC) \
-     || defined __LDBL_COMPAT
+     || defined __LDBL_COMPAT \
+     || defined _LIBC_TEST
 #  ifdef __LDBL_COMPAT
 
 #   ifdef __USE_ISOC99

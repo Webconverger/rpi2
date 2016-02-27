@@ -24,7 +24,7 @@
   <comment xml:lang="it">Riconoscimenti autori</comment>
   <comment xml:lang="ja">ソフトウェア作者クレジット</comment>
   <comment xml:lang="kk">бағдарлама авторлары</comment>
-  <comment xml:lang="ko">저작자 크레딧</comment>
+  <comment xml:lang="ko">작성자 정보</comment>
   <comment xml:lang="lt">padėkos autoriams</comment>
   <comment xml:lang="lv">veidotāji</comment>
   <comment xml:lang="nb">liste med bidragsytere</comment>
@@ -37,7 +37,9 @@
   <comment xml:lang="sk">Autorské zásluhy</comment>
   <comment xml:lang="sl">avtorske zasluge</comment>
   <comment xml:lang="sq">Kreditë e autorëve</comment>
+  <comment xml:lang="sr">заслуге аутора</comment>
   <comment xml:lang="sv">författarlista</comment>
+  <comment xml:lang="tr">yazar bilgileri</comment>
   <comment xml:lang="uk">подяки авторам програми</comment>
   <comment xml:lang="vi">công trạng tác giả</comment>
   <comment xml:lang="zh_CN">软件作者致谢</comment>

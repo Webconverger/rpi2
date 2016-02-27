@@ -564,9 +564,9 @@ be kept as clean as possible.
   dist/Cwd/Changes ext/Compress-Raw-Zlib/Changes
   ext/Compress-Raw-Zlib/README ext/Compress-Zlib/Changes
   ext/DB_File/Changes ext/Encode/Changes ext/Sys-Syslog/Changes
-  ext/Time-HiRes/Changes ext/Win32API-File/Changes lib/CGI/Changes
+  ext/Time-HiRes/Changes ext/Win32API-File/Changes
   lib/ExtUtils/CBuilder/Changes lib/ExtUtils/Changes lib/ExtUtils/NOTES
-  lib/ExtUtils/PATCHING lib/ExtUtils/README lib/Module/Build/Changes
+  lib/ExtUtils/PATCHING lib/ExtUtils/README
   lib/Net/Ping/Changes lib/Test/Harness/Changes
   lib/Term/ANSIColor/ChangeLog lib/Term/ANSIColor/README README.symbian
   symbian/TODO
@@ -664,7 +664,6 @@ be kept as clean as possible.
                         - _open_osfhandle not implemented under Cygwin
   ext/Win32CORE/Win32CORE.pm
                         - History of Win32CORE under Cygwin
-  lib/CGI.pm            - binmode and path separator
   lib/Cwd.pm            - hook to internal Cwd::cwd
   lib/ExtUtils/CBuilder/Platform/cygwin.pm
                         - use gcc for ld, and link to libperl.dll.a
@@ -684,10 +683,6 @@ be kept as clean as possible.
   lib/File/Spec/Win32.pm - References a message on cygwin.com
   lib/File/Spec.pm      - Pulls in lib/File/Spec/Cygwin.pm
   lib/File/Temp.pm      - no directory sticky bit
-  lib/Module/Build/Compat.pm - Comment references 'make' under Cygwin
-  lib/Module/Build/Platform/cygwin.pm
-                        - Use '.' for man page separator
-  lib/Module/Build.pm   - Cygwin is Unix-like
   lib/Module/CoreList.pm - List of all module files and versions
   lib/Net/Domain.pm     - No domainname command under Cygwin
   lib/Net/Netrc.pm      - Bypass using stat() under Cygwin
@@ -730,7 +725,6 @@ be kept as clean as possible.
   lib/File/Path.t
   lib/File/Spec/t/crossplatform.t
   lib/File/Spec/t/Spec.t
-  lib/Module/Build/t/destinations.t
   lib/Net/hostent.t
   lib/Net/Ping/t/110_icmp_inst.t
   lib/Net/Ping/t/500_ping_icmp.t

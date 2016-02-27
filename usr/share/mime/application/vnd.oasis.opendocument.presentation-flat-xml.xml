@@ -25,7 +25,7 @@
   <comment xml:lang="ja">ODP プレゼンテーション (Flat XML)</comment>
   <comment xml:lang="ka">ODP პრეზენტაცია (Flat XML)</comment>
   <comment xml:lang="kk">ODP презентациясы (Тек XML)</comment>
-  <comment xml:lang="ko">ODP 프리젠테이션 (단일 XML)</comment>
+  <comment xml:lang="ko">ODP 프레젠테이션(단일 XML)</comment>
   <comment xml:lang="lt">ODP pateiktis (Flat XML)</comment>
   <comment xml:lang="lv">ODP prezentācija (plakans XML)</comment>
   <comment xml:lang="nl">ODP presentatie (Flat XML)</comment>
@@ -35,7 +35,9 @@
   <comment xml:lang="ru">презентация ODP (простой XML)</comment>
   <comment xml:lang="sk">Prezentácia ODP (čisté XML)</comment>
   <comment xml:lang="sl">Predstavitev ODP (nepovezan XML)</comment>
+  <comment xml:lang="sr">ОДП презентација (Обични ИксМЛ)</comment>
   <comment xml:lang="sv">ODP-presentation (platt XML)</comment>
+  <comment xml:lang="tr">ODP sunumu (Düz XML)</comment>
   <comment xml:lang="uk">презентація ODP (Flat XML)</comment>
   <comment xml:lang="zh_CN">ODP 演示文稿(Flat XML)</comment>
   <comment xml:lang="zh_TW">ODP 範本 (Flat XML)</comment>

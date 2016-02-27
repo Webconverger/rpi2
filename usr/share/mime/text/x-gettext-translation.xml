@@ -22,6 +22,7 @@
   <comment xml:lang="he">קובץ תרגום</comment>
   <comment xml:lang="hr">datoteka prijevoda</comment>
   <comment xml:lang="hu">fordítási fájl</comment>
+  <comment xml:lang="ia">File de traduction</comment>
   <comment xml:lang="id">berkas terjemahan</comment>
   <comment xml:lang="it">File traduzione</comment>
   <comment xml:lang="ja">翻訳ファイル</comment>
@@ -40,7 +41,9 @@
   <comment xml:lang="sk">Súbor prekladu</comment>
   <comment xml:lang="sl">datoteka prevoda programa</comment>
   <comment xml:lang="sq">File përkthimesh</comment>
+  <comment xml:lang="sr">датотека превода</comment>
   <comment xml:lang="sv">översättningsfil</comment>
+  <comment xml:lang="tr">çeviri dosyası</comment>
   <comment xml:lang="uk">файл перекладу</comment>
   <comment xml:lang="vi">tập tin dịch</comment>
   <comment xml:lang="zh_CN">消息翻译文件</comment>

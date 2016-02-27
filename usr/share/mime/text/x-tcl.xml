@@ -12,7 +12,7 @@
   <comment xml:lang="el">Δέσμη ενεργειών Tcl</comment>
   <comment xml:lang="en_GB">Tcl script</comment>
   <comment xml:lang="eo">Tcl-skripto</comment>
-  <comment xml:lang="es">script en Tcl</comment>
+  <comment xml:lang="es">secuencia de órdenes en Tcl</comment>
   <comment xml:lang="eu">Tcl script-a</comment>
   <comment xml:lang="fi">Tcl-komentotiedosto</comment>
   <comment xml:lang="fo">Tcl boðrøð</comment>
@@ -42,8 +42,9 @@
   <comment xml:lang="sk">Skript Tcl</comment>
   <comment xml:lang="sl">Skriptna datoteka Tcl</comment>
   <comment xml:lang="sq">Script Tcl</comment>
-  <comment xml:lang="sr">Tcl скрипта</comment>
+  <comment xml:lang="sr">Тцл скрипта</comment>
   <comment xml:lang="sv">Tcl-skript</comment>
+  <comment xml:lang="tr">Tcl betiği</comment>
   <comment xml:lang="uk">скрипт Tcl</comment>
   <comment xml:lang="vi">Văn lệnh Tcl</comment>
   <comment xml:lang="zh_CN">Tcl 脚本</comment>

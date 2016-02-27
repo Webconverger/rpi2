@@ -14,7 +14,7 @@
   <comment xml:lang="eo">genera tipara dosiero</comment>
   <comment xml:lang="es">tipo de letra genérico</comment>
   <comment xml:lang="eu">letra-tipo orokorra</comment>
-  <comment xml:lang="fi">yleinen kirjasintiedosto</comment>
+  <comment xml:lang="fi">yleinen fonttitiedosto</comment>
   <comment xml:lang="fo">felagsstavasniðsfíla</comment>
   <comment xml:lang="fr">fichier de polices générique</comment>
   <comment xml:lang="ga">comhad cló ginearálta</comment>
@@ -42,8 +42,9 @@
   <comment xml:lang="sk">Obyčajný súbor písma</comment>
   <comment xml:lang="sl">izvorna datoteka pisave</comment>
   <comment xml:lang="sq">File lloj gërme i përgjithshëm</comment>
-  <comment xml:lang="sr">општа датотека фонта</comment>
+  <comment xml:lang="sr">општа датотека слова</comment>
   <comment xml:lang="sv">allmän typsnittsfil</comment>
+  <comment xml:lang="tr">genel yazı tipi dosyası</comment>
   <comment xml:lang="uk">загальний файл шрифту</comment>
   <comment xml:lang="vi">tập tin phông giống loài</comment>
   <comment xml:lang="zh_CN">通用字体文件</comment>

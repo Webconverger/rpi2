@@ -25,8 +25,9 @@ C<W>) is the scalar variable whose name is the single character
 control-C<W>.  This is better than typing a literal control-C<W>
 into your program.
 
-Since Perl v5.6.0, Perl variable names may be alphanumeric
-strings that begin with control characters (or better yet, a caret).
+Since Perl v5.6.0, Perl variable names may be alphanumeric strings that
+begin with a caret (or a control character, but this form is
+deprecated).
 These variables must be written in the form C<${^Foo}>; the braces
 are not optional.  C<${^Foo}> denotes the scalar variable whose
 name is a control-C<F> followed by two C<o>'s.  These variables are
@@ -166,7 +167,7 @@ X<@_> X<@ARG>
 
 Within a subroutine the array C<@_> contains the parameters passed to
 that subroutine.  Inside a subroutine, C<@_> is the default array for
-the array operators C<push>, C<pop>, C<shift>, and C<unshift>.
+the array operators C<pop> and C<shift>.
 
 See L<perlsub>.
 
@@ -433,6 +434,45 @@ Previously, only child processes received stringified values:
 This happens because you can't really share arbitrary data structures with
 foreign processes.
 
+=item $OLD_PERL_VERSION
+
+=item $]
+X<$]> X<$OLD_PERL_VERSION>
+
+The revision, version, and subversion of the Perl interpreter, represented
+as a decimal of the form 5.XXXYYY, where XXX is the version / 1e3 and YYY
+is the subversion / 1e6.  For example, Perl v5.10.1 would be "5.010001".
+
+This variable can be used to determine whether the Perl interpreter
+executing a script is in the right range of versions:
+
+    warn "No PerlIO!\n" if $] lt '5.008';
+
+When comparing C<$]>, string comparison operators are B<highly
+recommended>.  The inherent limitations of binary floating point
+representation can sometimes lead to incorrect comparisons for some
+numbers on some architectures.
+
+See also the documentation of C<use VERSION> and C<require VERSION>
+for a convenient way to fail if the running Perl interpreter is too old.
+
+See L</$^V> for a representation of the Perl version as a L<version>
+object, which allows more flexible string comparisons.
+
+The main advantage of C<$]> over C<$^V> is that it works the same on any
+version of Perl.  The disadvantages are that it can't easily be compared
+to versions in other formats (e.g. literal v-strings, "v1.2.3" or
+version objects) and numeric comparisons can occasionally fail; it's good
+for string literal version checks and bad for comparing to a variable
+that hasn't been sanity-checked.
+
+The C<$OLD_PERL_VERSION> form was added in Perl v5.20.0 for historical
+reasons but its use is discouraged. (If your reason to use C<$]> is to
+run code on old perls then referring to it as C<$OLD_PERL_VERSION> would
+be self-defeating.)
+
+Mnemonic: Is this version of perl in the right bracket?
+
 =item $SYSTEM_FD_MAX
 
 =item $^F
@@ -657,30 +697,35 @@ and B<-C> filetests are based on this value.
 X<$^V> X<$PERL_VERSION>
 
 The revision, version, and subversion of the Perl interpreter,
-represented as a C<version> object.
+represented as a L<version> object.
 
 This variable first appeared in perl v5.6.0; earlier versions of perl
 will see an undefined value.  Before perl v5.10.0 C<$^V> was represented
-as a v-string.
+as a v-string rather than a L<version> object.
 
 C<$^V> can be used to determine whether the Perl interpreter executing
 a script is in the right range of versions.  For example:
 
     warn "Hashes not randomized!\n" if !$^V or $^V lt v5.8.1
 
-To convert C<$^V> into its string representation use C<sprintf()>'s
-C<"%vd"> conversion:
+While version objects overload stringification, to portably convert
+C<$^V> into its string representation, use C<sprintf()>'s C<"%vd">
+conversion, which works for both v-strings or version objects:
 
     printf "version is v%vd\n", $^V;  # Perl's version
 
 See the documentation of C<use VERSION> and C<require VERSION>
 for a convenient way to fail if the running Perl interpreter is too old.
 
-See also C<$]> for an older representation of the Perl version.
+See also C<$]> for a decimal representation of the Perl version.
 
-This variable was added in Perl v5.6.0.
+The main advantage of C<$^V> over C<$]> is that, for Perl v5.10.0 or
+later, it overloads operators, allowing easy comparison against other
+version representations (e.g. decimal, literal v-string, "v1.2.3", or
+objects).  The disadvantage is that prior to v5.10.0, it was only a
+literal v-string, which can't be easily printed or compared.
 
-Mnemonic: use ^V for Version Control.
+Mnemonic: use ^V for a version object.
 
 =item ${^WIN32_SLOPPY_STAT}
 X<${^WIN32_SLOPPY_STAT}> X<sitecustomize> X<sitecustomize.pl>
@@ -1766,10 +1811,6 @@ It can be used immediately before invoking the C<die()> operator,
 to set the exit value, or to inspect the system error string
 corresponding to error I<n>, or to restore C<$!> to a meaningful state.
 
-Note that when stringified, the text is always returned as if both
-S<L<C<"use locale">|perllocale>> and S<L<C<"use bytes">|bytes>> are in
-effect.  This is likely to change in v5.22.
-
 Mnemonic: What just went bang?
 
 =item %OS_ERROR
@@ -1783,10 +1824,12 @@ Each element of C<%!> has a true value only if C<$!> is set to that
 value.  For example, C<$!{ENOENT}> is true if and only if the current
 value of C<$!> is C<ENOENT>; that is, if the most recent error was "No
 such file or directory" (or its moral equivalent: not all operating
-systems give that exact error, and certainly not all languages).  To
-check if a particular key is meaningful on your system, use C<exists
-$!{the_key}>; for a list of legal keys, use C<keys %!>.  See L<Errno>
-for more information, and also see L</$!>.
+systems give that exact error, and certainly not all languages).  The
+specific true value is not guaranteed, but in the past has generally
+been the numeric value of C<$!>.  To check if a particular key is
+meaningful on your system, use C<exists $!{the_key}>; for a list of legal
+keys, use C<keys %!>.  See L<Errno> for more information, and also see
+L</$!>.
 
 This variable was added in Perl 5.005.
 
@@ -1875,10 +1918,34 @@ Mnemonic: value of B<-D> switch.
 =item ${^ENCODING}
 X<${^ENCODING}>
 
+DEPRECATED!!!
+
 The I<object reference> to the C<Encode> object that is used to convert
 the source code to Unicode.  Thanks to this variable your Perl script
-does not have to be written in UTF-8.  Default is I<undef>.  The direct
-manipulation of this variable is highly discouraged.
+does not have to be written in UTF-8.  Default is C<undef>.
+
+Setting this variable to any other value than C<undef> is deprecated due
+to fundamental defects in its design and implementation.  It is planned
+to remove it from a future Perl version.  Its purpose was to allow your
+non-ASCII Perl scripts to not have to be written in UTF-8; this was
+useful before editors that worked on UTF-8 encoded text were common, but
+that was long ago.  It causes problems, such as affecting the operation
+of other modules that aren't expecting it, causing general mayhem.  Its
+use can lead to segfaults.
+
+If you need something like this functionality, you should use the
+L<encoding> pragma, which is also deprecated, but has fewer nasty side
+effects.
+
+If you are coming here because code of yours is being adversely affected
+by someone's use of this variable, you can usually work around it by
+doing this:
+
+ local ${^ENCODING};
+
+near the beginning of the functions that are getting broken.  This
+undefines the variable during the scope of execution of the including
+function.
 
 This variable was added in Perl 5.8.2.
 
@@ -2043,7 +2110,9 @@ X<%^H>
 
 The C<%^H> hash provides the same scoping semantic as C<$^H>.  This makes
 it useful for implementation of lexically scoped pragmas.  See
-L<perlpragma>.
+L<perlpragma>.   All the entries are stringified when accessed at
+runtime, so only simple values can be accommodated.  This means no
+pointers to objects, for example.
 
 When putting items into C<%^H>, in order to avoid conflicting with other
 users of the hash there is a convention regarding which keys to use.
@@ -2247,26 +2316,6 @@ other value will produce an error.
 Mnemonic: [ begins subscripts.
 
 Deprecated in Perl v5.12.0.
-
-=item $]
-X<$]>
-
-See L</$^V> for a more modern representation of the Perl version that allows
-accurate string comparisons.
-
-The version + patchlevel / 1000 of the Perl interpreter.  This variable
-can be used to determine whether the Perl interpreter executing a
-script is in the right range of versions:
-
-    warn "No PerlIO!\n" if $] lt '5.008';
-
-The floating point representation can sometimes lead to inaccurate
-numeric comparisons, so string comparisons are recommended.
-
-See also the documentation of C<use VERSION> and C<require VERSION>
-for a convenient way to fail if the running Perl interpreter is too old.
-
-Mnemonic: Is this version of perl in the right bracket?
 
 =back
 

@@ -24,6 +24,7 @@
   <comment xml:lang="he">ארכיון מעטפת</comment>
   <comment xml:lang="hr">arhiva ljuske</comment>
   <comment xml:lang="hu">héjarchívum</comment>
+  <comment xml:lang="ia">Archivo de shell</comment>
   <comment xml:lang="id">arsip shell</comment>
   <comment xml:lang="it">Archivio shell</comment>
   <comment xml:lang="ja">シェルアーカイブ</comment>
@@ -43,8 +44,9 @@
   <comment xml:lang="sk">Archív shellu</comment>
   <comment xml:lang="sl">lupinski arhiv</comment>
   <comment xml:lang="sq">Arkiv shell</comment>
-  <comment xml:lang="sr">Архива љуске (SHAR)</comment>
+  <comment xml:lang="sr">архива љуске</comment>
   <comment xml:lang="sv">skalarkiv</comment>
+  <comment xml:lang="tr">kabuk arşivi</comment>
   <comment xml:lang="uk">архів оболонки</comment>
   <comment xml:lang="vi">kho trình bao</comment>
   <comment xml:lang="zh_CN">shell 归档文件</comment>

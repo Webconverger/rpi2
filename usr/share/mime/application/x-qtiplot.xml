@@ -10,10 +10,12 @@
   <comment xml:lang="en_GB">QtiPlot document</comment>
   <comment xml:lang="es">documento de QtiPlot</comment>
   <comment xml:lang="eu">QtiPlot dokumentua</comment>
+  <comment xml:lang="fi">QtiPlot-asiakirja</comment>
   <comment xml:lang="fr">document QtiPlot</comment>
   <comment xml:lang="gl">Documento de QtiPilot</comment>
   <comment xml:lang="he">מסמך QtiPlot</comment>
   <comment xml:lang="hu">QtiPlot dokumentum</comment>
+  <comment xml:lang="ia">Documento QtiPlot</comment>
   <comment xml:lang="id">Dokumen QtiPlot</comment>
   <comment xml:lang="it">Documento QtiPlot</comment>
   <comment xml:lang="ja">QtiPlot ドキュメント</comment>
@@ -23,7 +25,11 @@
   <comment xml:lang="pl">Dokument QtiPlot</comment>
   <comment xml:lang="pt_BR">Documento do QtiPlot</comment>
   <comment xml:lang="ru">документ QtiPlot</comment>
+  <comment xml:lang="sk">Dokument QtiPlot</comment>
   <comment xml:lang="sl">Dokument QtiPlot</comment>
+  <comment xml:lang="sr">КутиПлот документ</comment>
+  <comment xml:lang="sv">QtiPlot-dokument</comment>
+  <comment xml:lang="tr">QtiPlot belgesi</comment>
   <comment xml:lang="uk">документ QtiPlot</comment>
   <comment xml:lang="zh_CN">QtiPlot 文档</comment>
   <comment xml:lang="zh_TW">QtiPlot 文件</comment>

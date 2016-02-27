@@ -22,6 +22,7 @@
   <comment xml:lang="he">טלאי שנדחה</comment>
   <comment xml:lang="hr">odbijena zakrpa</comment>
   <comment xml:lang="hu">visszautasított folt</comment>
+  <comment xml:lang="ia">Patch rejectate</comment>
   <comment xml:lang="id">patch ditolak</comment>
   <comment xml:lang="it">Patch rifiutata</comment>
   <comment xml:lang="ja">拒否されたパッチ</comment>
@@ -43,6 +44,7 @@
   <comment xml:lang="sq">Patch i kthyer mbrapsht</comment>
   <comment xml:lang="sr">одбијена закрпа</comment>
   <comment xml:lang="sv">avvisad programfix</comment>
+  <comment xml:lang="tr">reddedilmiş yama</comment>
   <comment xml:lang="uk">відхилена латка</comment>
   <comment xml:lang="vi">đắp vá bị từ chối</comment>
   <comment xml:lang="zh_CN">拒绝的补丁</comment>

@@ -182,6 +182,7 @@ static gint     TypeName##_private_offset; \
 \
 _G_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
 \
+G_GNUC_UNUSED \
 static inline gpointer \
 type_name##_get_instance_private (TypeName *self) \
 { \
@@ -240,6 +241,20 @@ type_name##_register_type (GTypeModule *type_module) \
   g_type_module_add_interface (type_module, g_define_type_id, TYPE_IFACE, &g_implement_interface_info); \
 }
 
+/**
+ * G_ADD_PRIVATE_DYNAMIC:
+ * @TypeName: the name of the type in CamelCase
+ *
+ * A convenience macro to ease adding private data to instances of a new dynamic
+ * type in the @_C_ section of G_DEFINE_DYNAMIC_TYPE_EXTENDED(). See
+ * G_ADD_PRIVATE() for details, it is similar but for static types.
+ *
+ * Note that this macro can only be used together with the
+ * G_DEFINE_DYNAMIC_TYPE_EXTENDED macros, since it depends on variable
+ * names from that macro.
+ *
+ * Since: 2.38
+ */
 #define G_ADD_PRIVATE_DYNAMIC(TypeName)         { \
   TypeName##_private_offset = sizeof (TypeName##Private); \
 }

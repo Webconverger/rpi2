@@ -25,7 +25,7 @@
   <comment xml:lang="it">Notazione partita a scacchi PGN</comment>
   <comment xml:lang="ja">PGN チェスゲーム記録</comment>
   <comment xml:lang="kk">PGN шахмат ойыны</comment>
-  <comment xml:lang="ko">PGN 체스게임 기보</comment>
+  <comment xml:lang="ko">PGN 체스 게임 기보</comment>
   <comment xml:lang="lt">PGN šachmatų žaidimo žymėjimas</comment>
   <comment xml:lang="lv">PGN šaha spēles notācija</comment>
   <comment xml:lang="nb">PGN sjakkspillnotasjon</comment>
@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Šachová notácia PGN</comment>
   <comment xml:lang="sl">Datoteka opomb šahovske igre PGN</comment>
   <comment xml:lang="sq">Njoftim loje shahu PGN</comment>
+  <comment xml:lang="sr">ПГН забелешка шаховске игре</comment>
   <comment xml:lang="sv">PGN-schackpartinotation</comment>
+  <comment xml:lang="tr">PGN satranç oyun gösterimi</comment>
   <comment xml:lang="uk">запис гри у шахи PGN</comment>
   <comment xml:lang="vi">Cách ghi lượt chơi cờ PGN</comment>
   <comment xml:lang="zh_CN">PGN 象棋游戏注记</comment>

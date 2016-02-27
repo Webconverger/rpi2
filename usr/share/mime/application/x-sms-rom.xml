@@ -39,7 +39,9 @@
   <comment xml:lang="sk">ROM pre Sega Master System/Game Gear</comment>
   <comment xml:lang="sl">Bralni pomnilnik Sega Master System/Game Gear</comment>
   <comment xml:lang="sq">ROM Sega Master System/Game Gear</comment>
+  <comment xml:lang="sr">Сега Мастер Систем/Гејм Гир РОМ</comment>
   <comment xml:lang="sv">Sega Master System/Game Gear-rom</comment>
+  <comment xml:lang="tr">Sega Ana Sistemi/Game Gear ROM</comment>
   <comment xml:lang="uk">ППП Sega Master System/Game Gear</comment>
   <comment xml:lang="vi">ROM Sega Master System/Game Gear</comment>
   <comment xml:lang="zh_CN">Sega Master System/Game Gear ROM</comment>
@@ -47,4 +49,5 @@
   <generic-icon name="application-x-executable"/>
   <glob pattern="*.sms"/>
   <glob pattern="*.gg"/>
+  <glob pattern="*.sg"/>
 </mime-type>

@@ -1,0 +1,36 @@
+%NAME%
+vim-runtime
+
+%VERSION%
+7.4.1294-1
+
+%DESC%
+Runtime for vim and gvim
+
+%URL%
+http://www.vim.org
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1455150904
+
+%INSTALLDATE%
+1455617643
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu3@archlinuxarm.org>
+
+%SIZE%
+26791936
+
+%REASON%
+1
+
+%LICENSE%
+custom:vim
+
+%VALIDATION%
+sha256
+

@@ -26,7 +26,7 @@
   <comment xml:lang="it">Lettore audio portabile</comment>
   <comment xml:lang="ja">ポータブルオーディオプレイヤー</comment>
   <comment xml:lang="kk">тасымалы аудио плеер</comment>
-  <comment xml:lang="ko">휴대용 오디오 플레이어</comment>
+  <comment xml:lang="ko">휴대용 오디오 재생기</comment>
   <comment xml:lang="lt">nešiojamasis garso leistuvas</comment>
   <comment xml:lang="lv">portatīvais audio atskaņotājs</comment>
   <comment xml:lang="nl">draagbare audiospeler</comment>
@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Prenosný hudobný prehrávač</comment>
   <comment xml:lang="sl">prenosni predvajalnik zvoka</comment>
   <comment xml:lang="sq">Lexues audio portativ</comment>
+  <comment xml:lang="sr">преносна музичка справица</comment>
   <comment xml:lang="sv">bärbar ljudspelare</comment>
+  <comment xml:lang="tr">taşınabilir ses oynatıcısı</comment>
   <comment xml:lang="uk">портативний аудіопрогравач</comment>
   <comment xml:lang="vi">bộ phát nhạc di động</comment>
   <comment xml:lang="zh_CN">便携式音频播放器</comment>

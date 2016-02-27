@@ -1,4 +1,4 @@
-root:$6$muN9.m7C$CXF38sfHhA1wV7m7UrRkvKzTxbz7WHHl5bh.dbzfHRr38Ai5uGkgCFrynJczBr/tHy8QZJIrpHIyh1fyvmLH/.:16526::::::
+root:$6$8RF5vV1E$i2jNTO6jXHkguR3JX.gOCXXvTuRCO8gNwRe.NIJ0dXSdIS9iRDOg.GFhgMzsv8u2xAIavm46l3CTN7OxyewbA/:16527::::::
 bin:x:14871::::::
 daemon:x:14871::::::
 mail:x:14871::::::
@@ -17,3 +17,4 @@ systemd-journal-remote:!!:16526::::::
 git:!:16527::::::
 avahi:!:16527::::::
 polkitd:!:16527:0:99999:7:::
+colord:!:16527:0:99999:7:::

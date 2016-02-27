@@ -16,7 +16,7 @@ This manual documents what a system-administrator needs to know about the
 Linux-PAM library. It covers the correct syntax of the PAM configuration file
 and discusses strategies for maintaining a secure system.
 
--------------------------------------------------------------------------------
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Introduction
 2. Some comments on the text
@@ -81,7 +81,7 @@ and discusses strategies for maintaining a secure system.
 8. Author/acknowledgments
 9. Copyright information for this document
 
-Chapter 1. Introduction
+Chapter 1. Introduction
 
 Linux-PAM (Pluggable Authentication Modules for Linux) is a suite of shared
 libraries that enable the local system administrator to choose how applications
@@ -117,7 +117,7 @@ themselves will usually be located in the directory /lib/security or /lib64/
 security and take the form of dynamically loadable object files (see dlopen(3)
 ).
 
-Chapter 2. Some comments on the text
+Chapter 2. Some comments on the text
 
 Before proceeding to read the rest of this document, it should be noted that
 the text assumes that certain files are placed in certain directories. Where
@@ -136,7 +136,7 @@ PAM, and some other implementations of UN*X, these files can be found in /usr/
 lib/security. Please be careful to perform the necessary transcription when
 using the examples from the text.
 
-Chapter 3. Overview
+Chapter 3. Overview
 
 For the uninitiated, we begin by considering an example. We take an application
 that grants some service to users; login is one such program. Login does two
@@ -219,7 +219,7 @@ appropriate PAM functions. If you do not have access to the source code, and
 the binary does not have the PAM functions included, then it is not possible to
 use PAM.
 
-Chapter 4. The Linux-PAM configuration file
+Chapter 4. The Linux-PAM configuration file
 
 When a PAM aware privilege granting application is started, it activates its
 attachment to the PAM-API. This activation performs a number of tasks, the most
@@ -231,7 +231,7 @@ These files list the PAMs that will do the authentication tasks required by
 this service, and the appropriate behavior of the PAM-API in the event that
 individual PAMs fail.
 
-4.1. Configuration file syntax
+4.1. Configuration file syntax
 
 The syntax of the /etc/pam.conf configuration file is as follows. The file is
 made up of a list of rules, each rule is typically placed on a single line, but
@@ -457,7 +457,7 @@ correctly, will generally tend (erring on the side of caution) to make the
 authentication process fail. A corresponding error is written to the system log
 files with a call to syslog(3).
 
-4.2. Directory based configuration
+4.2. Directory based configuration
 
 More flexible than the single configuration file is it to configure libpam via
 the contents of the /etc/pam.d/ directory. In this case the directory is filled
@@ -474,7 +474,7 @@ The only difference being that the service-name is not present. The
 service-name is of course the name of the given configuration file. For
 example, /etc/pam.d/login contains the configuration for the login service.
 
-4.3. Example configuration file entries
+4.3. Example configuration file entries
 
 In this section, we give some examples of entries that can be present in the 
 Linux-PAM configuration file. As a first attempt at configuring your system you
@@ -549,9 +549,9 @@ session  required       pam_unix.so
 
 In general this will provide a starting place for most applications.
 
-Chapter 5. Security issues
+Chapter 5. Security issues
 
-5.1. If something goes wrong
+5.1. If something goes wrong
 
 Linux-PAM has the potential to seriously change the security of your system.
 You can choose to have no security or absolute security (no access permitted).
@@ -565,7 +565,7 @@ etc/pam.conf. This will lock you out of your own system!
 To recover, your best bet is to restore the system from a backup or boot the
 system into a rescue system and correct things from there.
 
-5.2. Avoid having a weak `other' configuration
+5.2. Avoid having a weak `other' configuration
 
 It is not a good thing to have a weak default (other) entry. This service is
 the default configuration for all PAM aware applications and if it is weak,
@@ -587,40 +587,43 @@ session   required   pam_deny.so
 session   required   pam_warn.so
 
 
-Chapter 6. A reference guide for available modules
+Chapter 6. A reference guide for available modules
 
 Here, we collect together the descriptions of the various modules coming with
 Linux-PAM.
 
-6.1. pam_access - logdaemon style login access control
+6.1. pam_access - logdaemon style login access control
 
 pam_access.so [ debug ] [ nodefgroup ] [ noaudit ] [ accessfile=file ] [
 fieldsep=sep ] [ listsep=sep ]
 
-6.1.1. DESCRIPTION
+6.1.1. DESCRIPTION
 
 The pam_access PAM module is mainly for access management. It provides
 logdaemon style login access control based on login names, host or domain
-names, internet addresses or network numbers, or on terminal line names in case
-of non-networked logins.
+names, internet addresses or network numbers, or on terminal line names, X
+$DISPLAY values, or PAM service names in case of non-networked logins.
 
 By default rules for access management are taken from config file /etc/security
 /access.conf if you don't specify another file.
 
 If Linux PAM is compiled with audit support the module will report when it
-denies access based on origin (host or tty).
+denies access based on origin (host, tty, etc.).
 
-6.1.2. DESCRIPTION
+6.1.2. DESCRIPTION
 
 The /etc/security/access.conf file specifies (user/group, host), (user/group,
-network/netmask) or (user/group, tty) combinations for which a login will be
-either accepted or refused.
+network/netmask), (user/group, tty), (user/group, X-$DISPLAY-value), or (user/
+group, pam-service-name) combinations for which a login will be either accepted
+or refused.
 
 When someone logs in, the file access.conf is scanned for the first entry that
 matches the (user/group, host) or (user/group, network/netmask) combination,
 or, in case of non-networked logins, the first entry that matches the (user/
-group, tty) combination. The permissions field of that table entry determines
-whether the login will be accepted or refused.
+group, tty) combination, or in the case of non-networked logins without a tty,
+the first entry that matches the (user/group, X-$DISPLAY-value) or (user/group,
+pam-service-name/) combination. The permissions field of that table entry
+determines whether the login will be accepted or refused.
 
 Each line of the login access control table has three fields separated by a ":"
 character (colon):
@@ -636,16 +639,21 @@ entries from group entries, group entries should be written with brackets, e.g.
 (group).
 
 The third field, the origins field, should be a list of one or more tty names
-(for non-networked logins), host names, domain names (begin with "."), host
-addresses, internet network numbers (end with "."), internet network addresses
-with network mask (where network mask can be a decimal number or an internet
-address also), ALL (which always matches) or LOCAL. LOCAL keyword matches if
-and only if the PAM_RHOST is not set and <origin> field is thus set from 
-PAM_TTY or PAM_SERVICE". If supported by the system you can use @netgroupname
-in host or user patterns. The @@netgroupname syntax is supported in the user
-pattern only and it makes the local system hostname to be passed to the
-netgroup match call in addition to the user name. This might not work correctly
-on some libc implementations causing the match to always fail.
+(for non-networked logins), X $DISPLAY values or PAM service names (for
+non-networked logins without a tty), host names, domain names (begin with "."),
+host addresses, internet network numbers (end with "."), internet network
+addresses with network mask (where network mask can be a decimal number or an
+internet address also), ALL (which always matches) or LOCAL. The LOCAL keyword
+matches if and only if pam_get_item(3), when called with an item_type of 
+PAM_RHOST, returns NULL or an empty string (and therefore the origins field is
+compared against the return value of pam_get_item(3) called with an item_type
+of PAM_TTY or, absent that, PAM_SERVICE).
+
+If supported by the system you can use @netgroupname in host or user patterns.
+The @@netgroupname syntax is supported in the user pattern only and it makes
+the local system hostname to be passed to the netgroup match call in addition
+to the user name. This might not work correctly on some libc implementations
+causing the match to always fail.
 
 The EXCEPT operator makes it possible to write very compact rules.
 
@@ -657,7 +665,7 @@ of a user.
 The "#" character at start of line (no space at front) can be used to mark this
 line as a comment line.
 
-6.1.3. OPTIONS
+6.1.3. OPTIONS
 
 accessfile=/path/to/access.conf
 
@@ -700,11 +708,11 @@ nodefgroup
     against the group database. The backwards compatible default is to try the
     group database match even for tokens not enclosed in parentheses.
 
-6.1.4. MODULE TYPES PROVIDED
+6.1.4. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.1.5. RETURN VALUES
+6.1.5. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -726,13 +734,13 @@ PAM_USER_UNKNOWN
 
     The user is not known to the system.
 
-6.1.6. FILES
+6.1.6. FILES
 
 /etc/security/access.conf
 
     Default configuration file
 
-6.1.7. EXAMPLES
+6.1.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 access.conf.
@@ -793,7 +801,7 @@ All other users should be denied to get access from all sources.
 
 - : ALL : ALL
 
-6.1.8. AUTHORS
+6.1.8. AUTHORS
 
 The logdaemon style login access control scheme was designed and implemented by
 Wietse Venema. The pam_access PAM module was developed by Alexei Nogin
@@ -801,11 +809,11 @@ Wietse Venema. The pam_access PAM module was developed by Alexei Nogin
 feature was developed and provided by Mike Becher
 <mike.becher@lrz-muenchen.de>.
 
-6.2. pam_cracklib - checks the password against dictionary words
+6.2. pam_cracklib - checks the password against dictionary words
 
 pam_cracklib.so [ ... ]
 
-6.2.1. DESCRIPTION
+6.2.1. DESCRIPTION
 
 This module can be plugged into the password stack of a given application to
 provide some plug-in strength-checking for passwords.
@@ -874,7 +882,7 @@ minimum size of a password. One can then allow more credit for different kinds
 of characters but accept that the new password may share most of these
 characters with the old password.
 
-6.2.2. OPTIONS
+6.2.2. OPTIONS
 
 debug
 
@@ -1006,11 +1014,11 @@ dictpath=/path/to/dict
 
     Path to the cracklib dictionaries.
 
-6.2.3. MODULE TYPES PROVIDED
+6.2.3. MODULE TYPES PROVIDED
 
 Only the password module type is provided.
 
-6.2.4. RETURN VALUES
+6.2.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -1031,7 +1039,7 @@ PAM_SERVICE_ERR
 
     A internal error occurred.
 
-6.2.5. EXAMPLES
+6.2.5. EXAMPLES
 
 For an example of the use of this module, we show how it may be stacked with
 the password component of pam_unix(8)
@@ -1075,23 +1083,23 @@ password  required pam_cracklib.so \
 password  required pam_unix.so use_authtok nullok md5
 
 
-6.2.6. AUTHOR
+6.2.6. AUTHOR
 
 pam_cracklib was written by Cristian Gafton <gafton@redhat.com>
 
-6.3. pam_debug - debug the PAM stack
+6.3. pam_debug - debug the PAM stack
 
 pam_debug.so [ auth=value ] [ cred=value ] [ acct=value ] [ prechauthtok=value
 ] [ chauthtok=value ] [ auth=value ] [ open_session=value ] [ close_session=
 value ]
 
-6.3.1. DESCRIPTION
+6.3.1. DESCRIPTION
 
 The pam_debug PAM module is intended as a debugging aide for determining how
 the PAM stack is operating. This module returns what its module arguments tell
 it to return.
 
-6.3.2. OPTIONS
+6.3.2. OPTIONS
 
 auth=value
 
@@ -1131,18 +1139,18 @@ authtok_err, authtok_recover_err, authtok_lock_busy, authtok_disable_aging,
 try_again, ignore, abort, authtok_expired, module_unknown, bad_item,
 conv_again, incomplete.
 
-6.3.3. MODULE TYPES PROVIDED
+6.3.3. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.3.4. RETURN VALUES
+6.3.4. RETURN VALUES
 
 PAM_SUCCESS
 
     Default return code if no other value was specified, else specified return
     value.
 
-6.3.5. EXAMPLES
+6.3.5. EXAMPLES
 
 auth    requisite       pam_permit.so
 auth    [success=2 default=ok]  pam_debug.so auth=perm_denied cred=success
@@ -1152,29 +1160,29 @@ auth    optional        pam_debug.so auth=perm_denied cred=perm_denied
 auth    sufficient      pam_debug.so auth=success cred=success
 
 
-6.3.6. AUTHOR
+6.3.6. AUTHOR
 
 pam_debug was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.4. pam_deny - locking-out PAM module
+6.4. pam_deny - locking-out PAM module
 
 pam_deny.so
 
-6.4.1. DESCRIPTION
+6.4.1. DESCRIPTION
 
 This module can be used to deny access. It always indicates a failure to the
 application through the PAM framework. It might be suitable for using for
 default (the OTHER) entries.
 
-6.4.2. OPTIONS
+6.4.2. OPTIONS
 
 This module does not recognise any options.
 
-6.4.3. MODULE TYPES PROVIDED
+6.4.3. MODULE TYPES PROVIDED
 
 All module types (account, auth, password and session) are provided.
 
-6.4.4. RETURN VALUES
+6.4.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -1192,7 +1200,7 @@ PAM_SESSION_ERR
 
     This is returned by the session service.
 
-6.4.5. EXAMPLES
+6.4.5. EXAMPLES
 
 #%PAM-1.0
 #
@@ -1209,15 +1217,15 @@ other session  required       pam_warn.so
 other session  required       pam_deny.so
 
 
-6.4.6. AUTHOR
+6.4.6. AUTHOR
 
 pam_deny was written by Andrew G. Morgan <morgan@kernel.org>
 
-6.5. pam_echo - print text messages
+6.5. pam_echo - print text messages
 
 pam_echo.so [ file=/path/message ]
 
-6.5.1. DESCRIPTION
+6.5.1. DESCRIPTION
 
 The pam_echo PAM module is for printing text messages to inform user about
 special things. Sequences starting with the % character are interpreted in the
@@ -1250,18 +1258,18 @@ following way:
 All other sequences beginning with % expands to the characters following the %
 character.
 
-6.5.2. OPTIONS
+6.5.2. OPTIONS
 
 file=/path/message
 
     The content of the file /path/message will be printed with the PAM
     conversion function as PAM_TEXT_INFO.
 
-6.5.3. MODULE TYPES PROVIDED
+6.5.3. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.5.4. RETURN VALUES
+6.5.4. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -1276,7 +1284,7 @@ PAM_IGNORE
     PAM_SILENT flag was given or message file does not exist, no message
     printed.
 
-6.5.5. EXAMPLES
+6.5.5. EXAMPLES
 
 For an example of the use of this module, we show how it may be used to print
 information about good passwords:
@@ -1285,33 +1293,37 @@ password optional pam_echo.so file=/usr/share/doc/good-password.txt
 password required pam_unix.so
 
 
-6.5.6. AUTHOR
+6.5.6. AUTHOR
 
 Thorsten Kukuk <kukuk@thkukuk.de>
 
-6.6. pam_env - set/unset environment variables
+6.6. pam_env - set/unset environment variables
 
 pam_env.so [ debug ] [ conffile=conf-file ] [ envfile=env-file ] [ readenv=0|1
 ] [ user_envfile=env-file ] [ user_readenv=0|1 ]
 
-6.6.1. DESCRIPTION
+6.6.1. DESCRIPTION
 
 The pam_env PAM module allows the (un)setting of environment variables.
 Supported is the use of previously set environment variables as well as 
 PAM_ITEMs such as PAM_RHOST.
 
-By default rules for (un)setting of variables is taken from the config file /
-etc/security/pam_env.conf if no other file is specified.
+By default rules for (un)setting of variables are taken from the config file /
+etc/security/pam_env.conf. An alternate file can be specified with the conffile
+option.
 
-This module can also parse a file with simple KEY=VAL pairs on separate lines
-(/etc/environment by default). You can change the default file to parse, with
-the envfile flag and turn it on or off by setting the readenv flag to 1 or 0
-respectively.
+Second a file (/etc/environment by default) with simple KEY=VAL pairs on
+separate lines will be read. With the envfile option an alternate file can be
+specified. And with the readenv option this can be completly disabled.
+
+Third it will read a user configuration file ($HOME/.pam_environment by
+default). The default file file can be changed with the user_envfile option and
+it can be turned on and off with the user_readenv option.
 
 Since setting of PAM environment variables can have side effects to other
 modules, this module should be the last one on the stack.
 
-6.6.2. DESCRIPTION
+6.6.2. DESCRIPTION
 
 The /etc/security/pam_env.conf file specifies the environment variables to be
 set, unset or modified by pam_env(8). When someone logs in, this file is read
@@ -1327,18 +1339,19 @@ not used, "" is assumed and no override will be done.
 VARIABLE [DEFAULT=[value]] [OVERRIDE=[value]]
 
 (Possibly non-existent) environment variables may be used in values using the $
-{string} syntax and (possibly non-existent) PAM_ITEMs may be used in values
-using the @{string} syntax. Both the $ and @ characters can be backslash
-escaped to be used as literal values values can be delimited with "", escaped "
-not supported. Note that many environment variables that you would like to use
-may not be set by the time the module is called. For example, HOME is used
-below several times, but many PAM applications don't make it available by the
-time you need it.
+{string} syntax and (possibly non-existent) PAM_ITEMs as well as HOME and SHELL
+may be used in values using the @{string} syntax. Both the $ and @ characters
+can be backslash escaped to be used as literal values values can be delimited
+with "", escaped " not supported. Note that many environment variables that you
+would like to use may not be set by the time the module is called. For example,
+${HOME} is used below several times, but many PAM applications don't make it
+available by the time you need it. The special variables @{HOME} and @{SHELL}
+are expanded to the values for the user from his passwd entry.
 
 The "#" character at start of line (no space at front) can be used to mark this
 line as a comment line.
 
-6.6.3. OPTIONS
+6.6.3. OPTIONS
 
 conffile=/path/to/pam_env.conf
 
@@ -1352,8 +1365,10 @@ debug
 
 envfile=/path/to/environment
 
-    Indicate an alternative environment file to override the default. This can
-    be useful when different services need different environments.
+    Indicate an alternative environment file to override the default. The
+    syntax are simple KEY=VAL pairs on separate lines. The export instruction
+    can be specified for bash compatibility, but will be ignored. This can be
+    useful when different services need different environments.
 
 readenv=0|1
 
@@ -1362,20 +1377,21 @@ readenv=0|1
 
 user_envfile=filename
 
-    Indicate an alternative .pam_environment file to override the default. This
-    can be useful when different services need different environments. The
-    filename is relative to the user home directory.
+    Indicate an alternative .pam_environment file to override the default.The
+    syntax is the same as for /etc/environment. The filename is relative to the
+    user home directory. This can be useful when different services need
+    different environments.
 
 user_readenv=0|1
 
     Turns on or off the reading of the user specific environment file. 0 is
     off, 1 is on. By default this option is on.
 
-6.6.4. MODULE TYPES PROVIDED
+6.6.4. MODULE TYPES PROVIDED
 
 The auth and session module types are provided.
 
-6.6.5. RETURN VALUES
+6.6.5. RETURN VALUES
 
 PAM_ABORT
 
@@ -1393,7 +1409,7 @@ PAM_SUCCESS
 
     Environment variables were set.
 
-6.6.6. FILES
+6.6.6. FILES
 
 /etc/security/pam_env.conf
 
@@ -1407,7 +1423,7 @@ $HOME/.pam_environment
 
     User specific environment file
 
-6.6.7. EXAMPLES
+6.6.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 pam_env.conf.
@@ -1431,6 +1447,7 @@ Now some simple variables
       NNTPSERVER     DEFAULT=localhost
       PATH           DEFAULT=${HOME}/bin:/usr/local/bin:/bin\
       :/usr/bin:/usr/local/bin/X11:/usr/bin/X11
+      XDG_DATA_HOME  @{HOME}/share/
 
 
 Silly examples of escaped variables, just to show how they work.
@@ -1441,16 +1458,16 @@ Silly examples of escaped variables, just to show how they work.
       ATSIGN         DEFAULT=""      OVERRIDE=\@
 
 
-6.6.8. AUTHOR
+6.6.8. AUTHOR
 
 pam_env was written by Dave Kinchlea <kinch@kinch.ark.com>.
 
-6.7. pam_exec - call an external command
+6.7. pam_exec - call an external command
 
 pam_exec.so [ debug ] [ expose_authtok ] [ seteuid ] [ quiet ] [ stdout ] [ log
 =file ] [ type=type ] command [ ... ]
 
-6.7.1. DESCRIPTION
+6.7.1. DESCRIPTION
 
 pam_exec is a PAM module that can be used to run an external command.
 
@@ -1463,7 +1480,7 @@ open_session and close_session.
 Commands called by pam_exec need to be aware of that the user can have controll
 over the environment.
 
-6.7.2. OPTIONS
+6.7.2. OPTIONS
 
 debug
 
@@ -1472,7 +1489,8 @@ debug
 expose_authtok
 
     During authentication the calling command can read the password from stdin
-    (3).
+    (3). Only first PAM_MAX_RESP_SIZE bytes of a password are provided to the
+    command.
 
 log=file
 
@@ -1500,11 +1518,11 @@ seteuid
     user ID of the calling process. Specifying this option means the command is
     run with the effective user ID.
 
-6.7.3. MODULE TYPES PROVIDED
+6.7.3. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.7.4. RETURN VALUES
+6.7.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -1523,7 +1541,7 @@ PAM_IGNORE
     pam_setcred was called, which does not execute the command. Or, the value
     given for the type= parameter did not match the module type.
 
-6.7.5. EXAMPLES
+6.7.5. EXAMPLES
 
 Add the following line to /etc/pam.d/passwd to rebuild the NIS database after
 each local password change:
@@ -1537,16 +1555,16 @@ make -C /var/yp
 
 with effective user ID.
 
-6.7.6. AUTHOR
+6.7.6. AUTHOR
 
 pam_exec was written by Thorsten Kukuk <kukuk@thkukuk.de> and Josh Triplett
 <josh@joshtriplett.org>.
 
-6.8. pam_faildelay - change the delay on failure per-application
+6.8. pam_faildelay - change the delay on failure per-application
 
 pam_faildelay.so [ debug ] [ delay=microseconds ]
 
-6.8.1. DESCRIPTION
+6.8.1. DESCRIPTION
 
 pam_faildelay is a PAM module that can be used to set the delay on failure
 per-application.
@@ -1554,7 +1572,7 @@ per-application.
 If no delay is given, pam_faildelay will use the value of FAIL_DELAY from /etc/
 login.defs.
 
-6.8.2. OPTIONS
+6.8.2. OPTIONS
 
 debug
 
@@ -1564,11 +1582,11 @@ delay=N
 
     Set the delay on failure to N microseconds.
 
-6.8.3. MODULE TYPES PROVIDED
+6.8.3. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.8.4. RETURN VALUES
+6.8.4. RETURN VALUES
 
 PAM_IGNORE
 
@@ -1578,22 +1596,22 @@ PAM_SYSTEM_ERR
 
     The specified delay was not valid.
 
-6.8.5. EXAMPLES
+6.8.5. EXAMPLES
 
 The following example will set the delay on failure to 10 seconds:
 
 auth  optional  pam_faildelay.so  delay=10000000
 
 
-6.8.6. AUTHOR
+6.8.6. AUTHOR
 
 pam_faildelay was written by Darren Tucker <dtucker@zip.com.au>.
 
-6.9. pam_filter - filter module
+6.9. pam_filter - filter module
 
 pam_filter.so [ debug ] [ new_term ] [ non_term ] run1|run2 filter [ ... ]
 
-6.9.1. DESCRIPTION
+6.9.1. DESCRIPTION
 
 This module is intended to be a platform for providing access to all of the
 input/output that passes between the user and the application. It is only
@@ -1609,7 +1627,7 @@ The filter is always execv(2) with the privilege of the calling application and
 not that of the user. For this reason it cannot usually be killed by the user
 without closing their session.
 
-6.9.2. OPTIONS
+6.9.2. OPTIONS
 
 debug
 
@@ -1655,11 +1673,11 @@ filter
     The full pathname of the filter to be run and any command line arguments
     that the filter might expect.
 
-6.9.3. MODULE TYPES PROVIDED
+6.9.3. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.9.4. RETURN VALUES
+6.9.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -1669,7 +1687,7 @@ PAM_ABORT
 
     Critical error, immediate abort.
 
-6.9.5. EXAMPLES
+6.9.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to see how to configure login to
 transpose upper and lower case letters once the user has logged in:
@@ -1677,15 +1695,15 @@ transpose upper and lower case letters once the user has logged in:
         session required pam_filter.so run1 /lib/security/pam_filter/upperLOWER
 
 
-6.9.6. AUTHOR
+6.9.6. AUTHOR
 
 pam_filter was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.10. pam_ftp - module for anonymous access
+6.10. pam_ftp - module for anonymous access
 
 pam_ftp.so [ debug ] [ ignore ] [ users=XXX,YYY, ...]
 
-6.10.1. DESCRIPTION
+6.10.1. DESCRIPTION
 
 pam_ftp is a PAM module which provides a pluggable anonymous ftp mode of
 access.
@@ -1698,7 +1716,7 @@ module sets the PAM_AUTHTOK item with the entered password and fails.
 
 This module is not safe and easily spoofable.
 
-6.10.2. OPTIONS
+6.10.2. OPTIONS
 
 debug
 
@@ -1714,11 +1732,11 @@ ftp=XXX,YYY,...
     list of users: XXX,YYY,.... Should the applicant enter one of these
     usernames the returned username is set to the first in the list: XXX.
 
-6.10.3. MODULE TYPES PROVIDED
+6.10.3. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.10.4. RETURN VALUES
+6.10.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -1728,7 +1746,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.10.5. EXAMPLES
+6.10.5. EXAMPLES
 
 Add the following line to /etc/pam.d/ftpd to handle ftp style anonymous login:
 
@@ -1743,15 +1761,15 @@ auth    required    pam_listfile.so \
            onerr=succeed item=user sense=deny file=/etc/ftpusers
 
 
-6.10.6. AUTHOR
+6.10.6. AUTHOR
 
 pam_ftp was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.11. pam_group - module to modify group access
+6.11. pam_group - module to modify group access
 
 pam_group.so
 
-6.11.1. DESCRIPTION
+6.11.1. DESCRIPTION
 
 The pam_group PAM module does not authenticate the user, but instead it grants
 group memberships (in the credential setting phase of the authentication
@@ -1775,7 +1793,7 @@ The pam_group module functions in parallel with the /etc/group file. If the
 user is granted any groups based on the behavior of this module, they are
 granted in addition to those entries /etc/group (or equivalent).
 
-6.11.2. DESCRIPTION
+6.11.2. DESCRIPTION
 
 The pam_group PAM module does not authenticate the user, but instead it grants
 group memberships (in the credential setting phase of the authentication
@@ -1824,15 +1842,15 @@ satisfied by the user's request.
 For a rule to be active, ALL of service+ttys+users must be satisfied by the
 applying process.
 
-6.11.3. OPTIONS
+6.11.3. OPTIONS
 
 This module does not recognise any options.
 
-6.11.4. MODULE TYPES PROVIDED
+6.11.4. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.11.5. RETURN VALUES
+6.11.5. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -1858,13 +1876,13 @@ PAM_USER_UNKNOWN
 
     The user is not known to the system.
 
-6.11.6. FILES
+6.11.6. FILES
 
 /etc/security/group.conf
 
     Default configuration file
 
-6.11.7. EXAMPLES
+6.11.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 group.conf.
@@ -1874,10 +1892,11 @@ floppy (through membership of the floppy group)
 
 xsh;tty*&!ttyp*;us;Al0000-2400;floppy
 
-Running 'xsh' on tty* (any ttyXXX device), the user 'sword' is given access to
-games (through membership of the floppy group) after work hours.
+Running 'xsh' on tty* (any ttyXXX device), the users 'sword', 'pike' and
+'shield' are given access to games (through membership of the floppy group)
+after work hours.
 
-xsh; tty* ;sword;!Wk0900-1800;games, sound
+xsh; tty* ;sword|pike|shield;!Wk0900-1800;games, sound
 xsh; tty* ;*;Al0900-1800;floppy
 
 
@@ -1887,15 +1906,15 @@ any time) to the group 'plugdev'
 xsh; tty* ;%admin;Al0000-2400;plugdev
 
 
-6.11.8. AUTHORS
+6.11.8. AUTHORS
 
 pam_group was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.12. pam_issue - add issue file to user prompt
+6.12. pam_issue - add issue file to user prompt
 
 pam_issue.so [ noesc ] [ issue=issue-file-name ]
 
-6.12.1. DESCRIPTION
+6.12.1. DESCRIPTION
 
 pam_issue is a PAM module to prepend an issue file to the username prompt. It
 also by default parses escape codes in the issue file similar to some common
@@ -1948,7 +1967,7 @@ Recognized escapes:
 
     operating system version and build date (uname -v)
 
-6.12.2. OPTIONS
+6.12.2. OPTIONS
 
 noesc
 
@@ -1958,11 +1977,11 @@ issue=issue-file-name
 
     The file to output if not using the default.
 
-6.12.3. MODULE TYPES PROVIDED
+6.12.3. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.12.4. RETURN VALUES
+6.12.4. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -1980,7 +1999,7 @@ PAM_SUCCESS
 
     The new prompt was set successfully.
 
-6.12.5. EXAMPLES
+6.12.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to set the user specific issue at
 login:
@@ -1988,15 +2007,15 @@ login:
         auth optional pam_issue.so issue=/etc/issue
 
 
-6.12.6. AUTHOR
+6.12.6. AUTHOR
 
 pam_issue was written by Ben Collins <bcollins@debian.org>.
 
-6.13. pam_keyinit - display the keyinit file
+6.13. pam_keyinit - display the keyinit file
 
 pam_keyinit.so [ debug ] [ force ] [ revoke ]
 
-6.13.1. DESCRIPTION
+6.13.1. DESCRIPTION
 
 The pam_keyinit PAM module ensures that the invoking process has a session
 keyring other than the user default session keyring.
@@ -2028,7 +2047,7 @@ obtained from:
 
 Keyutils
 
-6.13.2. OPTIONS
+6.13.2. OPTIONS
 
 debug
 
@@ -2045,11 +2064,11 @@ revoke
     invoking process exits if the session keyring was created for this process
     in the first place.
 
-6.13.3. MODULE TYPES PROVIDED
+6.13.3. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.13.4. RETURN VALUES
+6.13.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -2080,7 +2099,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.13.5. EXAMPLES
+6.13.5. EXAMPLES
 
 Add this line to your login entries to start each login session with its own
 session keyring:
@@ -2091,16 +2110,16 @@ session  required  pam_keyinit.so
 This will prevent keys from one session leaking into another session for the
 same user.
 
-6.13.6. AUTHOR
+6.13.6. AUTHOR
 
 pam_keyinit was written by David Howells, <dhowells@redhat.com>.
 
-6.14. pam_lastlog - display date of last login
+6.14. pam_lastlog - display date of last login
 
 pam_lastlog.so [ debug ] [ silent ] [ never ] [ nodate ] [ nohost ] [ noterm ]
 [ nowtmp ] [ noupdate ] [ showfailed ] [ inactive=<days> ]
 
-6.14.1. DESCRIPTION
+6.14.1. DESCRIPTION
 
 pam_lastlog is a PAM module to display a line of information about the last
 login of the user. In addition, the module maintains the /var/log/lastlog file.
@@ -2112,7 +2131,7 @@ If the module is called in the auth or account phase, the accounts that were
 not used recently enough will be disallowed to log in. The check is not
 performed for the root account so the root is never locked out.
 
-6.14.2. OPTIONS
+6.14.2. OPTIONS
 
 debug
 
@@ -2160,13 +2179,13 @@ inactive=<days>
     number of days after the last login of the user when the user will be
     locked out by the module. The default value is 90.
 
-6.14.3. MODULE TYPES PROVIDED
+6.14.3. MODULE TYPES PROVIDED
 
 The auth and account module type allows to lock out users which did not login
 recently enough. The session module type is provided for displaying the
 information about the last login and/or updating the lastlog and wtmp files.
 
-6.14.4. RETURN VALUES
+6.14.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -2189,7 +2208,7 @@ PAM_IGNORE
     There was an error during reading the lastlog file in the auth or account
     phase and thus inactivity of the user cannot be determined.
 
-6.14.5. EXAMPLES
+6.14.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to display the last login time of an
 user:
@@ -2203,18 +2222,18 @@ following line can be used:
     auth  required  pam_lastlog.so inactive=50
 
 
-6.14.6. AUTHOR
+6.14.6. AUTHOR
 
 pam_lastlog was written by Andrew G. Morgan <morgan@kernel.org>.
 
-Inactive account lock out added by Tom?? Mr?z <tm@t8m.info>.
+Inactive account lock out added by Tomáš Mráz <tm@t8m.info>.
 
-6.15. pam_limits - limit resources
+6.15. pam_limits - limit resources
 
 pam_limits.so [ conf=/path/to/limits.conf ] [ debug ] [ set_all ] [ utmp_early
 ] [ noaudit ]
 
-6.15.1. DESCRIPTION
+6.15.1. DESCRIPTION
 
 The pam_limits PAM module sets limits on the system resources that can be
 obtained in a user-session. Users of uid=0 are affected by this limits, too.
@@ -2232,7 +2251,7 @@ The module must not be called by a multithreaded application.
 If Linux PAM is compiled with audit support the module will report when it
 denies access based on limit of maximum number of concurrent login sessions.
 
-6.15.2. DESCRIPTION
+6.15.2. DESCRIPTION
 
 The pam_limits.so module applies ulimit limits, nice priority and number of
 simultaneous login sessions limit to user login sessions. This description of
@@ -2246,29 +2265,29 @@ The syntax of the lines is as follows:
 The fields listed above should be filled as follows:
 
 <domain>
-      + a username
+      □ a username
 
-      + a groupname, with @group syntax. This should not be confused with
+      □ a groupname, with @group syntax. This should not be confused with
         netgroups.
 
-      + the wildcard *, for default entry.
+      □ the wildcard *, for default entry.
 
-      + the wildcard %, for maxlogins limit only, can also be used with %group
+      □ the wildcard %, for maxlogins limit only, can also be used with %group
         syntax. If the % wildcard is used alone it is identical to using * with
         maxsyslogins limit. With a group specified after % it limits the total
         number of logins of all users that are member of the group.
 
-      + an uid range specified as <min_uid>:<max_uid>. If min_uid is omitted,
+      □ an uid range specified as <min_uid>:<max_uid>. If min_uid is omitted,
         the match is exact for the max_uid. If max_uid is omitted, all uids
         greater than or equal min_uid match.
 
-      + a gid range specified as @<min_gid>:<max_gid>. If min_gid is omitted,
+      □ a gid range specified as @<min_gid>:<max_gid>. If min_gid is omitted,
         the match is exact for the max_gid. If max_gid is omitted, all gids
         greater than or equal min_gid match. For the exact match all groups
         including the user's supplementary groups are examined. For the range
         matches only the user's primary group is examined.
 
-      + a gid specified as %:<gid> applicable to maxlogins limit only. It
+      □ a gid specified as %:<gid> applicable to maxlogins limit only. It
         limits the total number of logins of all users that are member of the
         group with the specified gid.
 
@@ -2315,7 +2334,7 @@ The fields listed above should be filled as follows:
 
     nofile
 
-        maximum number of open files
+        maximum number of open file descriptors
 
     rss
 
@@ -2339,11 +2358,14 @@ The fields listed above should be filled as follows:
 
     maxlogins
 
-        maximum number of logins for this user except for this with uid=0
+        maximum number of logins for this user (this limit does not apply to
+        user with uid=0)
 
     maxsyslogins
 
-        maximum number of all logins on system
+        maximum number of all logins on system; user is not allowed to log-in
+        if total number of all user logins is greater than specified number
+        (this limit does not apply to user with uid=0)
 
     priority
 
@@ -2397,7 +2419,7 @@ after which the rest of the line is ignored.
 The pam_limits module does report configuration problems found in its
 configuration file and errors via syslog(3).
 
-6.15.3. OPTIONS
+6.15.3. OPTIONS
 
 conf=/path/to/limits.conf
 
@@ -2425,11 +2447,11 @@ noaudit
 
     Do not report exceeded maximum logins count to the audit subsystem.
 
-6.15.4. MODULE TYPES PROVIDED
+6.15.4. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.15.5. RETURN VALUES
+6.15.5. RETURN VALUES
 
 PAM_ABORT
 
@@ -2459,13 +2481,13 @@ PAM_USER_UNKNOWN
 
     The user is not known to the system.
 
-6.15.6. FILES
+6.15.6. FILES
 
 /etc/security/limits.conf
 
     Default configuration file
 
-6.15.7. EXAMPLES
+6.15.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 limits.conf.
@@ -2482,16 +2504,16 @@ ftp             hard    nproc           0
 600:700         hard    locks           10
 
 
-6.15.8. AUTHORS
+6.15.8. AUTHORS
 
 pam_limits was initially written by Cristian Gafton <gafton@redhat.com>
 
-6.16. pam_listfile - deny or allow services based on an arbitrary file
+6.16. pam_listfile - deny or allow services based on an arbitrary file
 
 pam_listfile.so item=[tty|user|rhost|ruser|group|shell] sense=[allow|deny] file
 =/path/filename onerr=[succeed|fail] [ apply=[user|@group] ] [ quiet ]
 
-6.16.1. DESCRIPTION
+6.16.1. DESCRIPTION
 
 pam_listfile is a PAM module which provides a way to deny or allow services
 based on an arbitrary file.
@@ -2521,7 +2543,7 @@ default behavior.
 
 No credentials are awarded by this module.
 
-6.16.2. OPTIONS
+6.16.2. OPTIONS
 
 item=[tty|user|rhost|ruser|group|shell]
 
@@ -2552,11 +2574,11 @@ quiet
     Do not treat service refusals or missing list files as errors that need to
     be logged.
 
-6.16.3. MODULE TYPES PROVIDED
+6.16.3. MODULE TYPES PROVIDED
 
 All module types (auth, account, password and session) are provided.
 
-6.16.4. RETURN VALUES
+6.16.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -2578,7 +2600,7 @@ PAM_SUCCESS
 
     Success.
 
-6.16.5. EXAMPLES
+6.16.5. EXAMPLES
 
 Classic 'ftpusers' authentication can be implemented with this entry in /etc/
 pam.d/ftpd:
@@ -2609,16 +2631,16 @@ to lock out root, make sure that when you do this, you leave a way for root to
 log in, either by listing root in /etc/loginusers, or by listing a user who is
 able to su to the root account.
 
-6.16.6. AUTHOR
+6.16.6. AUTHOR
 
 pam_listfile was written by Michael K. Johnson <johnsonm@redhat.com> and Elliot
 Lee <sopwith@cuc.edu>.
 
-6.17. pam_localuser - require users to be listed in /etc/passwd
+6.17. pam_localuser - require users to be listed in /etc/passwd
 
 pam_localuser.so [ debug ] [ file=/path/passwd ]
 
-6.17.1. DESCRIPTION
+6.17.1. DESCRIPTION
 
 pam_localuser is a PAM module to help implementing site-wide login policies,
 where they typically include a subset of the network's users and a few accounts
@@ -2629,7 +2651,7 @@ and/or a subset of the network's users.
 This could also be implemented using pam_listfile.so and a very short awk
 script invoked by cron, but it's common enough to have been separated out.
 
-6.17.2. OPTIONS
+6.17.2. OPTIONS
 
 debug
 
@@ -2639,11 +2661,11 @@ file=/path/passwd
 
     Use a file other than /etc/passwd.
 
-6.17.3. MODULE TYPES PROVIDED
+6.17.3. MODULE TYPES PROVIDED
 
 All module types (account, auth, password and session) are provided.
 
-6.17.4. RETURN VALUES
+6.17.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -2657,7 +2679,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.17.5. EXAMPLES
+6.17.5. EXAMPLES
 
 Add the following line to /etc/pam.d/su to allow only local users in group
 wheel to use su.
@@ -2666,15 +2688,15 @@ account sufficient pam_localuser.so
 account required pam_wheel.so
 
 
-6.17.6. AUTHOR
+6.17.6. AUTHOR
 
 pam_localuser was written by Nalin Dahyabhai <nalin@redhat.com>.
 
-6.18. pam_loginuid - record user's login uid to the process attribute
+6.18. pam_loginuid - record user's login uid to the process attribute
 
 pam_loginuid.so [ require_auditd ]
 
-6.18.1. DESCRIPTION
+6.18.1. DESCRIPTION
 
 The pam_loginuid module sets the loginuid process attribute for the process
 that was authenticated. This is necessary for applications to be correctly
@@ -2684,24 +2706,34 @@ applications besides these. You should not use it for applications like sudo or
 su as that defeats the purpose by changing the loginuid to the account they
 just switched to.
 
-6.18.2. OPTIONS
+6.18.2. OPTIONS
 
 require_auditd
 
     This option, when given, will cause this module to query the audit daemon
     status and deny logins if it is not running.
 
-6.18.3. MODULE TYPES PROVIDED
+6.18.3. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.18.4. RETURN VALUES
+6.18.4. RETURN VALUES
+
+PAM_SUCCESS
+
+    The loginuid value is set and auditd is running if check requested.
+
+PAM_IGNORE
+
+    The /proc/self/loginuid file is not present on the system or the login
+    process runs inside uid namespace and kernel does not support overwriting
+    loginuid.
 
 PAM_SESSION_ERR
 
-    An error occurred during session management.
+    Any other error prevented setting loginuid or auditd is not running.
 
-6.18.5. EXAMPLES
+6.18.5. EXAMPLES
 
 #%PAM-1.0
 auth       required     pam_unix.so
@@ -2712,16 +2744,16 @@ session    required     pam_unix.so
 session    required     pam_loginuid.so
 
 
-6.18.6. AUTHOR
+6.18.6. AUTHOR
 
 pam_loginuid was written by Steve Grubb <sgrubb@redhat.com>
 
-6.19. pam_mail - inform about available mail
+6.19. pam_mail - inform about available mail
 
 pam_mail.so [ close ] [ debug ] [ dir=maildir ] [ empty ] [ hash=count ] [
 noenv ] [ nopen ] [ quiet ] [ standard ]
 
-6.19.1. DESCRIPTION
+6.19.1. DESCRIPTION
 
 The pam_mail PAM module provides the "you have new mail" service to the user.
 It can be plugged into any application that has credential or session hooks. It
@@ -2732,7 +2764,7 @@ to the user's mail directory.
 If the mail spool file (be it /var/mail/$USER or a pathname given with the dir=
 parameter) is a directory then pam_mail assumes it is in the Maildir format.
 
-6.19.2. OPTIONS
+6.19.2. OPTIONS
 
 close
 
@@ -2744,7 +2776,7 @@ debug
 
 dir=maildir
 
-    Look for the users' mail in an alternative location defined by maildir/
+    Look for the user's mail in an alternative location defined by maildir/
     <login>. The default location for mail is /var/mail/<login>. Note, if the
     supplied maildir is prefixed by a '~', the directory is interpreted as
     indicating a file in the user's home directory.
@@ -2776,12 +2808,12 @@ standard
     Old style "You have..." format which doesn't show the mail spool being
     used. This also implies "empty".
 
-6.19.3. MODULE TYPES PROVIDED
+6.19.3. MODULE TYPES PROVIDED
 
 The session and auth (on establishment and deletion of credentials) module
 types are provided.
 
-6.19.4. RETURN VALUES
+6.19.4. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -2799,7 +2831,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.19.5. EXAMPLES
+6.19.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to indicate that the user has new
 mail when they login to the system.
@@ -2807,15 +2839,15 @@ mail when they login to the system.
 session  optional  pam_mail.so standard
 
 
-6.19.6. AUTHOR
+6.19.6. AUTHOR
 
 pam_mail was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.20. pam_mkhomedir - create users home directory
+6.20. pam_mkhomedir - create users home directory
 
 pam_mkhomedir.so [ silent ] [ umask=mode ] [ skel=skeldir ]
 
-6.20.1. DESCRIPTION
+6.20.1. DESCRIPTION
 
 The pam_mkhomedir PAM module will create a users home directory if it does not
 exist when the session begins. This allows users to be present in central
@@ -2826,7 +2858,7 @@ the creation.
 
 The new users home directory will not be removed after logout of the user.
 
-6.20.2. OPTIONS
+6.20.2. OPTIONS
 
 silent
 
@@ -2841,11 +2873,11 @@ skel=/path/to/skel/directory
 
     Indicate an alternative skel directory to override the default /etc/skel.
 
-6.20.3. MODULE TYPES PROVIDED
+6.20.3. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.20.4. RETURN VALUES
+6.20.4. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -2868,7 +2900,7 @@ PAM_SUCCESS
 
     Environment variables were set.
 
-6.20.5. EXAMPLES
+6.20.5. EXAMPLES
 
 A sample /etc/pam.d/login file:
 
@@ -2885,55 +2917,55 @@ A sample /etc/pam.d/login file:
   session    optional    pam_mail.so standard
 
 
-6.20.6. AUTHOR
+6.20.6. AUTHOR
 
 pam_mkhomedir was written by Jason Gunthorpe <jgg@debian.org>.
 
-6.21. pam_motd - display the motd file
+6.21. pam_motd - display the motd file
 
 pam_motd.so [ motd=/path/filename ]
 
-6.21.1. DESCRIPTION
+6.21.1. DESCRIPTION
 
 pam_motd is a PAM module that can be used to display arbitrary motd (message of
 the day) files after a successful login. By default the /etc/motd file is
 shown. The message size is limited to 64KB.
 
-6.21.2. OPTIONS
+6.21.2. OPTIONS
 
 motd=/path/filename
 
     The /path/filename file is displayed as message of the day.
 
-6.21.3. MODULE TYPES PROVIDED
+6.21.3. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.21.4. RETURN VALUES
+6.21.4. RETURN VALUES
 
 PAM_IGNORE
 
     This is the only return value of this module.
 
-6.21.5. EXAMPLES
+6.21.5. EXAMPLES
 
 The suggested usage for /etc/pam.d/login is:
 
 session  optional  pam_motd.so  motd=/etc/motd
 
 
-6.21.6. AUTHOR
+6.21.6. AUTHOR
 
 pam_motd was written by Ben Collins <bcollins@debian.org>.
 
-6.22. pam_namespace - setup a private namespace
+6.22. pam_namespace - setup a private namespace
 
 pam_namespace.so [ debug ] [ unmnt_remnt ] [ unmnt_only ] [ require_selinux ] [
 gen_hash ] [ ignore_config_error ] [ ignore_instance_parent_mode ] [
 unmount_on_close ] [ use_current_context ] [ use_default_context ] [
 mount_private ]
 
-6.22.1. DESCRIPTION
+6.22.1. DESCRIPTION
 
 The pam_namespace PAM module sets up a private namespace for a session with
 polyinstantiated directories. A polyinstantiated directory provides a different
@@ -2954,7 +2986,7 @@ For additional information on shared-subtree feature, please refer to the mount
 (8) man page and the shared-subtree description at http://lwn.net/Articles/
 159077 and http://lwn.net/Articles/159092.
 
-6.22.2. DESCRIPTION
+6.22.2. DESCRIPTION
 
 The pam_namespace.so module allows setup of private namespaces with
 polyinstantiated directories. Directories can be polyinstantiated based on user
@@ -3039,7 +3071,7 @@ whole string is too long the end of it is replaced with md5sum of itself. Also
 when command line option gen_hash is used the whole string is replaced with
 md5sum of itself.
 
-6.22.3. OPTIONS
+6.22.3. OPTIONS
 
 debug
 
@@ -3119,12 +3151,12 @@ mount_private
     the parent namespace if this option is used or when the shared / mount
     point is autodetected.
 
-6.22.4. MODULE TYPES PROVIDED
+6.22.4. MODULE TYPES PROVIDED
 
 Only the session module type is provided. The module must not be called from
 multithreaded processes.
 
-6.22.5. RETURN VALUES
+6.22.5. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -3138,7 +3170,7 @@ PAM_SESSION_ERR
 
     Unexpected namespace configuration error occurred.
 
-6.22.6. FILES
+6.22.6. FILES
 
 /etc/security/namespace.conf
 
@@ -3152,32 +3184,32 @@ PAM_SESSION_ERR
 
     Init script for instance directories
 
-6.22.7. EXAMPLES
+6.22.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 namespace.conf.
 
 
-      # The following three lines will polyinstantiate /tmp,
-      # /var/tmp and user's home directories. /tmp and /var/tmp
-      # will be polyinstantiated based on the security level
-      # as well as user name, whereas home directory will be
-      # polyinstantiated based on the full security context and user name.
-      # Polyinstantiation will not be performed for user root
-      # and adm for directories /tmp and /var/tmp, whereas home
-      # directories will be polyinstantiated for all users.
-      #
-      # Note that instance directories do not have to reside inside
-      # the polyinstantiated directory. In the examples below,
-      # instances of /tmp will be created in /tmp-inst directory,
-      # where as instances of /var/tmp and users home directories
-      # will reside within the directories that are being
-      # polyinstantiated.
-      #
-      /tmp     /tmp-inst/               level      root,adm
-      /var/tmp /var/tmp/tmp-inst/    level      root,adm
-      $HOME    $HOME/$USER.inst/inst- context
-    
+      # The following three lines will polyinstantiate /tmp,
+      # /var/tmp and user's home directories. /tmp and /var/tmp
+      # will be polyinstantiated based on the security level
+      # as well as user name, whereas home directory will be
+      # polyinstantiated based on the full security context and user name.
+      # Polyinstantiation will not be performed for user root
+      # and adm for directories /tmp and /var/tmp, whereas home
+      # directories will be polyinstantiated for all users.
+      #
+      # Note that instance directories do not have to reside inside
+      # the polyinstantiated directory. In the examples below,
+      # instances of /tmp will be created in /tmp-inst directory,
+      # where as instances of /var/tmp and users home directories
+      # will reside within the directories that are being
+      # polyinstantiated.
+      #
+      /tmp     /tmp-inst/               level      root,adm
+      /var/tmp /var/tmp/tmp-inst/    level      root,adm
+      $HOME    $HOME/$USER.inst/inst- context
+    
 
 For the <service>s you need polyinstantiation (login for example) put the
 following line in /etc/pam.d/<service> as the last line for session group:
@@ -3186,7 +3218,7 @@ session required pam_namespace.so [arguments]
 
 This module also depends on pam_selinux.so setting the context.
 
-6.22.8. AUTHORS
+6.22.8. AUTHORS
 
 The namespace setup scheme was designed by Stephen Smalley, Janak Desai and
 Chad Sellers. The pam_namespace PAM module was developed by Janak Desai
@@ -3194,18 +3226,18 @@ Chad Sellers. The pam_namespace PAM module was developed by Janak Desai
 <sgrubb@redhat.com>. Additional improvements by Xavier Toth <txtoth@gmail.com>
 and Tomas Mraz <tmraz@redhat.com>.
 
-6.23. pam_nologin - prevent non-root users from login
+6.23. pam_nologin - prevent non-root users from login
 
 pam_nologin.so [ file=/path/nologin ] [ successok ]
 
-6.23.1. DESCRIPTION
+6.23.1. DESCRIPTION
 
 pam_nologin is a PAM module that prevents users from logging into the system
 when /var/run/nologin or /etc/nologin exists. The contents of the file are
 displayed to the user. The pam_nologin module has no effect on the root user's
 ability to log in.
 
-6.23.2. OPTIONS
+6.23.2. OPTIONS
 
 file=/path/nologin
 
@@ -3215,11 +3247,11 @@ successok
 
     Return PAM_SUCCESS if no file exists, the default is PAM_IGNORE.
 
-6.23.3. MODULE TYPES PROVIDED
+6.23.3. MODULE TYPES PROVIDED
 
 The auth and acct module types are provided.
 
-6.23.4. RETURN VALUES
+6.23.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -3242,22 +3274,22 @@ PAM_USER_UNKNOWN
 
     User not known to the underlying authentication module.
 
-6.23.5. EXAMPLES
+6.23.5. EXAMPLES
 
 The suggested usage for /etc/pam.d/login is:
 
 auth  required  pam_nologin.so
 
 
-6.23.6. AUTHOR
+6.23.6. AUTHOR
 
 pam_nologin was written by Michael K. Johnson <johnsonm@redhat.com>.
 
-6.24. pam_permit - the promiscuous module
+6.24. pam_permit - the promiscuous module
 
 pam_permit.so
 
-6.24.1. DESCRIPTION
+6.24.1. DESCRIPTION
 
 pam_permit is a PAM module that always permit access. It does nothing else.
 
@@ -3267,21 +3299,21 @@ if this name is unknown.
 
 This module is very dangerous. It should be used with extreme caution.
 
-6.24.2. OPTIONS
+6.24.2. OPTIONS
 
 This module does not recognise any options.
 
-6.24.3. MODULE TYPES PROVIDED
+6.24.3. MODULE TYPES PROVIDED
 
 The auth, account, password and session module types are provided.
 
-6.24.4. RETURN VALUES
+6.24.4. RETURN VALUES
 
 PAM_SUCCESS
 
     This module always returns this value.
 
-6.24.5. EXAMPLES
+6.24.5. EXAMPLES
 
 Add this line to your other login entries to disable account management, but
 continue to permit users to log in.
@@ -3289,16 +3321,16 @@ continue to permit users to log in.
 account  required  pam_permit.so
 
 
-6.24.6. AUTHOR
+6.24.6. AUTHOR
 
 pam_permit was written by Andrew G. Morgan, <morgan@kernel.org>.
 
-6.25. pam_pwhistory - grant access using .pwhistory file
+6.25. pam_pwhistory - grant access using .pwhistory file
 
 pam_pwhistory.so [ debug ] [ use_authtok ] [ enforce_for_root ] [ remember=N ]
 [ retry=N ] [ authtok_type=STRING ]
 
-6.25.1. DESCRIPTION
+6.25.1. DESCRIPTION
 
 This module saves the last passwords for each user in order to force password
 change history and keep the user from alternating between the same password too
@@ -3309,7 +3341,7 @@ much sense to use this module in conjunction with NIS or LDAP, since the old
 passwords are stored on the local machine and are not available on another
 machine for password history checking.
 
-6.25.2. OPTIONS
+6.25.2. OPTIONS
 
 debug
 
@@ -3339,11 +3371,11 @@ authtok_type=STRING
 
     See pam_get_authtok(3) for more details.
 
-6.25.3. MODULE TYPES PROVIDED
+6.25.3. MODULE TYPES PROVIDED
 
 Only the password module type is provided.
 
-6.25.4. RETURN VALUES
+6.25.4. RETURN VALUES
 
 PAM_AUTHTOK_ERR
 
@@ -3362,13 +3394,13 @@ PAM_USER_UNKNOWN
 
     User is not known to system.
 
-6.25.5. FILES
+6.25.5. FILES
 
 /etc/security/opasswd
 
     File with password history
 
-6.25.6. EXAMPLES
+6.25.6. EXAMPLES
 
 An example password section would be:
 
@@ -3385,15 +3417,15 @@ password     required       pam_pwhistory.so   use_authtok
 password     required       pam_unix.so        use_authtok
 
 
-6.25.7. AUTHOR
+6.25.7. AUTHOR
 
 pam_pwhistory was written by Thorsten Kukuk <kukuk@thkukuk.de>
 
-6.26. pam_rhosts - grant access using .rhosts file
+6.26. pam_rhosts - grant access using .rhosts file
 
 pam_rhosts.so
 
-6.26.1. DESCRIPTION
+6.26.1. DESCRIPTION
 
 This module performs the standard network authentication for services, as used
 by traditional implementations of rlogin and rsh etc.
@@ -3414,7 +3446,7 @@ module they must set these items prior to calling pam_authenticate(). The
 module is not capable of independently probing the network connection for such
 information.
 
-6.26.2. OPTIONS
+6.26.2. OPTIONS
 
 debug
 
@@ -3428,11 +3460,11 @@ superuser=account
 
     Handle account as root.
 
-6.26.3. MODULE TYPES PROVIDED
+6.26.3. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.26.4. RETURN VALUES
+6.26.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -3443,7 +3475,7 @@ PAM_USER_UNKNOWN
 
     User is not known to system.
 
-6.26.5. EXAMPLES
+6.26.5. EXAMPLES
 
 To grant a remote user access by /etc/hosts.equiv or .rhosts for rsh add the
 following lines to /etc/pam.d/rsh:
@@ -3456,32 +3488,32 @@ auth     required       pam_env.so
 auth     required       pam_unix.so
 
 
-6.26.6. AUTHOR
+6.26.6. AUTHOR
 
 pam_rhosts was written by Thorsten Kukuk <kukuk@thkukuk.de>
 
-6.27. pam_rootok - gain only root access
+6.27. pam_rootok - gain only root access
 
 pam_rootok.so [ debug ]
 
-6.27.1. DESCRIPTION
+6.27.1. DESCRIPTION
 
 pam_rootok is a PAM module that authenticates the user if their UID is 0.
 Applications that are created setuid-root generally retain the UID of the user
 but run with the authority of an enhanced effective-UID. It is the real UID
 that is checked.
 
-6.27.2. OPTIONS
+6.27.2. OPTIONS
 
 debug
 
     Print debug information.
 
-6.27.3. MODULE TYPES PROVIDED
+6.27.3. MODULE TYPES PROVIDED
 
 The auth, acct and password module types are provided.
 
-6.27.4. RETURN VALUES
+6.27.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -3491,7 +3523,7 @@ PAM_AUTH_ERR
 
     The UID is not 0.
 
-6.27.5. EXAMPLES
+6.27.5. EXAMPLES
 
 In the case of the su(1) application the historical usage is to permit the
 superuser to adopt the identity of a lesser user without the use of a password.
@@ -3503,15 +3535,15 @@ auth  sufficient   pam_rootok.so
 auth  required     pam_unix.so
 
 
-6.27.6. AUTHOR
+6.27.6. AUTHOR
 
 pam_rootok was written by Andrew G. Morgan, <morgan@kernel.org>.
 
-6.28. pam_securetty - limit root login to special devices
+6.28. pam_securetty - limit root login to special devices
 
 pam_securetty.so [ debug ]
 
-6.28.1. DESCRIPTION
+6.28.1. DESCRIPTION
 
 pam_securetty is a PAM module that allows root logins only if the user is
 logging in on a "secure" tty, as defined by the listing in /etc/securetty.
@@ -3526,7 +3558,7 @@ fills in the PAM_TTY item correctly.
 For canonical usage, should be listed as a required authentication method
 before any sufficient authentication methods.
 
-6.28.2. OPTIONS
+6.28.2. OPTIONS
 
 debug
 
@@ -3538,11 +3570,11 @@ noconsole
     specified on the kernel command line or by the sys file, if it is not also
     specified in the /etc/securetty file.
 
-6.28.3. MODULE TYPES PROVIDED
+6.28.3. MODULE TYPES PROVIDED
 
 Only the auth module type is provided.
 
-6.28.4. RETURN VALUES
+6.28.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -3571,22 +3603,22 @@ PAM_USER_UNKNOWN
     whether the user had a UID of 0. Therefore, the results of running this
     module are ignored.
 
-6.28.5. EXAMPLES
+6.28.5. EXAMPLES
 
 auth  required  pam_securetty.so
 auth  required  pam_unix.so
 
 
-6.28.6. AUTHOR
+6.28.6. AUTHOR
 
 pam_securetty was written by Elliot Lee <sopwith@cuc.edu>.
 
-6.29. pam_selinux - set the default security context
+6.29. pam_selinux - set the default security context
 
 pam_selinux.so [ open ] [ close ] [ restore ] [ nottys ] [ debug ] [ verbose ]
 [ select_context ] [ env_params ] [ use_current_range ]
 
-6.29.1. DESCRIPTION
+6.29.1. DESCRIPTION
 
 pam_selinux is a PAM module that sets up the default SELinux security context
 for the next executed process.
@@ -3606,7 +3638,7 @@ be placed after such modules in the PAM stack, and pam_selinux.so close should
 be placed before them. When such a placement is not feasible, pam_selinux.so
 restore could be used to temporary restore original security contexts.
 
-6.29.2. OPTIONS
+6.29.2. OPTIONS
 
 open
 
@@ -3656,11 +3688,11 @@ use_current_range
     instead of the default level. Also suppresses asking of the sensitivity
     level from the user or obtaining it from PAM environment.
 
-6.29.3. MODULE TYPES PROVIDED
+6.29.3. MODULE TYPES PROVIDED
 
 Only the session module type is provided.
 
-6.29.4. RETURN VALUES
+6.29.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -3678,37 +3710,37 @@ PAM_BUF_ERR
 
     Memory allocation error.
 
-6.29.5. EXAMPLES
+6.29.5. EXAMPLES
 
 auth     required  pam_unix.so
 session  required  pam_permit.so
 session  optional  pam_selinux.so
 
 
-6.29.6. AUTHOR
+6.29.6. AUTHOR
 
 pam_selinux was written by Dan Walsh <dwalsh@redhat.com>.
 
-6.30. pam_shells - check for valid login shell
+6.30. pam_shells - check for valid login shell
 
 pam_shells.so
 
-6.30.1. DESCRIPTION
+6.30.1. DESCRIPTION
 
-pam_shells is a PAM module that only allows access to the system if the users
+pam_shells is a PAM module that only allows access to the system if the user's
 shell is listed in /etc/shells.
 
 It also checks if /etc/shells is a plain file and not world writable.
 
-6.30.2. OPTIONS
+6.30.2. OPTIONS
 
 This module does not recognise any options.
 
-6.30.3. MODULE TYPES PROVIDED
+6.30.3. MODULE TYPES PROVIDED
 
 The auth and account module types are provided.
 
-6.30.4. RETURN VALUES
+6.30.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -3716,26 +3748,26 @@ PAM_AUTH_ERR
 
 PAM_SUCCESS
 
-    The users login shell was listed as valid shell in /etc/shells.
+    The user's login shell was listed as valid shell in /etc/shells.
 
 PAM_SERVICE_ERR
 
     The module was not able to get the name of the user.
 
-6.30.5. EXAMPLES
+6.30.5. EXAMPLES
 
 auth  required  pam_shells.so
 
 
-6.30.6. AUTHOR
+6.30.6. AUTHOR
 
 pam_shells was written by Erik Troan <ewt@redhat.com>.
 
-6.31. pam_succeed_if - test account characteristics
+6.31. pam_succeed_if - test account characteristics
 
 pam_succeed_if.so [flag...] [condition...]
 
-6.31.1. DESCRIPTION
+6.31.1. DESCRIPTION
 
 pam_succeed_if.so is designed to succeed or fail authentication based on
 characteristics of the account belonging to the user being authenticated or
@@ -3745,7 +3777,7 @@ based on this test.
 The module should be given one or more conditions as module arguments, and
 authentication will succeed only if all of the conditions are met.
 
-6.31.2. OPTIONS
+6.31.2. OPTIONS
 
 The following flags are supported:
 
@@ -3843,11 +3875,11 @@ user notinnetgr group
 
     (user,host) is not in given netgroup.
 
-6.31.3. MODULE TYPES PROVIDED
+6.31.3. MODULE TYPES PROVIDED
 
 All module types (account, auth, password and session) are provided.
 
-6.31.4. RETURN VALUES
+6.31.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -3861,7 +3893,7 @@ PAM_SERVICE_ERR
 
     A service error occurred or the arguments can't be parsed correctly.
 
-6.31.5. EXAMPLES
+6.31.5. EXAMPLES
 
 To emulate the behaviour of pam_wheel, except there is no fallback to group 0:
 
@@ -3875,11 +3907,11 @@ type [default=1 success=ignore] pam_succeed_if.so quiet uid > 500
 type required othermodule.so arguments...
 
 
-6.31.6. AUTHOR
+6.31.6. AUTHOR
 
 Nalin Dahyabhai <nalin@redhat.com>
 
-6.32. pam_tally - login counter (tallying) module
+6.32. pam_tally - login counter (tallying) module
 
 pam_tally.so [ file=/path/to/counter ] [ onerr=[fail|succeed] ] [ magic_root ]
 [ even_deny_root_account ] [ deny=n ] [ lock_time=n ] [ unlock_time=n ] [
@@ -3888,7 +3920,7 @@ per_user ] [ no_lock_time ] [ no_reset ] [ audit ] [ silent ] [ no_log_info ]
 pam_tally [ --file /path/to/counter ] [ --user username ] [ --reset[=n] ] [
 --quiet ]
 
-6.32.1. DESCRIPTION
+6.32.1. DESCRIPTION
 
 This module maintains a count of attempted accesses, can reset count on
 success, can deny access if too many attempts fail.
@@ -3899,18 +3931,18 @@ reason pam_tally is deprecated and will be removed in a future release.
 pam_tally comes in two parts: pam_tally.so and pam_tally. The former is the PAM
 module and the latter, a stand-alone program. pam_tally is an (optional)
 application which can be used to interrogate and manipulate the counter file.
-It can display users' counts, set individual counts, or clear all counts.
-Setting artificially high counts may be useful for blocking users without
-changing their passwords. For example, one might find it useful to clear all
-counts every midnight from a cron job. The faillog(8) command can be used
-instead of pam_tally to to maintain the counter file.
+It can display user counts, set individual counts, or clear all counts. Setting
+artificially high counts may be useful for blocking users without changing
+their passwords. For example, one might find it useful to clear all counts
+every midnight from a cron job. The faillog(8) command can be used instead of
+pam_tally to to maintain the counter file.
 
 Normally, failed attempts to access root will not cause the root account to
 become blocked, to prevent denial-of-service: if your users aren't given shell
 accounts and root may only login via su or at the machine console (not telnet/
 rsh, etc), this is safe.
 
-6.32.2. OPTIONS
+6.32.2. OPTIONS
 
 GLOBAL OPTIONS
 
@@ -4004,11 +4036,11 @@ ACCOUNT OPTIONS
 
         Don't reset count on successful entry, only decrement.
 
-6.32.3. MODULE TYPES PROVIDED
+6.32.3. MODULE TYPES PROVIDED
 
 The auth and account module types are provided.
 
-6.32.4. RETURN VALUES
+6.32.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -4023,7 +4055,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.32.5. EXAMPLES
+6.32.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to lock the account after too many
 failed logins. The number of allowed fails is specified by /var/log/faillog and
@@ -4042,11 +4074,11 @@ session  required       pam_lastlog.so nowtmp
 session  optional       pam_mail.so standard
 
 
-6.32.6. AUTHOR
+6.32.6. AUTHOR
 
 pam_tally was written by Tim Baverstock and Tomas Mraz.
 
-6.33. pam_tally2 - login counter (tallying) module
+6.33. pam_tally2 - login counter (tallying) module
 
 pam_tally2.so [ file=/path/to/counter ] [ onerr=[fail|succeed] ] [ magic_root ]
 [ even_deny_root ] [ deny=n ] [ lock_time=n ] [ unlock_time=n ] [
@@ -4055,7 +4087,7 @@ root_unlock_time=n ] [ serialize ] [ audit ] [ silent ] [ no_log_info ]
 pam_tally2 [ --file /path/to/counter ] [ --user username ] [ --reset[=n] ] [
 --quiet ]
 
-6.33.1. DESCRIPTION
+6.33.1. DESCRIPTION
 
 This module maintains a count of attempted accesses, can reset count on
 success, can deny access if too many attempts fail.
@@ -4063,17 +4095,17 @@ success, can deny access if too many attempts fail.
 pam_tally2 comes in two parts: pam_tally2.so and pam_tally2. The former is the
 PAM module and the latter, a stand-alone program. pam_tally2 is an (optional)
 application which can be used to interrogate and manipulate the counter file.
-It can display users' counts, set individual counts, or clear all counts.
-Setting artificially high counts may be useful for blocking users without
-changing their passwords. For example, one might find it useful to clear all
-counts every midnight from a cron job.
+It can display user counts, set individual counts, or clear all counts. Setting
+artificially high counts may be useful for blocking users without changing
+their passwords. For example, one might find it useful to clear all counts
+every midnight from a cron job.
 
 Normally, failed attempts to access root will not cause the root account to
 become blocked, to prevent denial-of-service: if your users aren't given shell
 accounts and root may only login via su or at the machine console (not telnet/
 rsh, etc), this is safe.
 
-6.33.2. OPTIONS
+6.33.2. OPTIONS
 
 GLOBAL OPTIONS
 
@@ -4164,11 +4196,11 @@ ACCOUNT OPTIONS
         changed. The sysadmin should use this for user launched services, like 
         su, otherwise this argument should be omitted.
 
-6.33.3. MODULE TYPES PROVIDED
+6.33.3. MODULE TYPES PROVIDED
 
 The auth and account module types are provided.
 
-6.33.4. RETURN VALUES
+6.33.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -4183,7 +4215,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.33.5. NOTES
+6.33.5. NOTES
 
 pam_tally2 is not compatible with the old pam_tally faillog file format. This
 is caused by requirement of compatibility of the tallylog file format between
@@ -4195,7 +4227,7 @@ impossible to share PAM configuration with such services the following
 workaround is used: If the data file cannot be opened because of insufficient
 permissions (EACCES) the module returns PAM_IGNORE.
 
-6.33.6. EXAMPLES
+6.33.6. EXAMPLES
 
 Add the following line to /etc/pam.d/login to lock the account after 4 failed
 logins. Root account will be locked as well. The accounts will be automatically
@@ -4215,21 +4247,21 @@ session  required       pam_lastlog.so nowtmp
 session  optional       pam_mail.so standard
 
 
-6.33.7. FILES
+6.33.7. FILES
 
 /var/log/tallylog
 
     failure count logging file
 
-6.33.8. AUTHOR
+6.33.8. AUTHOR
 
 pam_tally2 was written by Tim Baverstock and Tomas Mraz.
 
-6.34. pam_time - time controled access
+6.34. pam_time - time controled access
 
 pam_time.so [ debug ] [ noaudit ]
 
-6.34.1. DESCRIPTION
+6.34.1. DESCRIPTION
 
 The pam_time PAM module does not authenticate the user, but instead it
 restricts access to a system and or specific applications at various times of
@@ -4244,7 +4276,7 @@ time.conf.
 If Linux PAM is compiled with audit support the module will report when it
 denies access.
 
-6.34.2. DESCRIPTION
+6.34.2. DESCRIPTION
 
 The pam_time PAM module does not authenticate the user, but instead it
 restricts access to a system and or specific applications at various times of
@@ -4298,7 +4330,7 @@ to be remedied.
 
 Poorly formatted rules are logged as errors using syslog(3).
 
-6.34.3. OPTIONS
+6.34.3. OPTIONS
 
 debug
 
@@ -4308,11 +4340,11 @@ noaudit
 
     Do not report logins at disallowed time to the audit subsystem.
 
-6.34.4. MODULE TYPES PROVIDED
+6.34.4. MODULE TYPES PROVIDED
 
 Only the account type is provided.
 
-6.34.5. RETURN VALUES
+6.34.5. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -4334,13 +4366,13 @@ PAM_USER_UNKNOWN
 
     The user is not known to the system.
 
-6.34.6. FILES
+6.34.6. FILES
 
 /etc/security/time.conf
 
     Default configuration file
 
-6.34.7. EXAMPLES
+6.34.7. EXAMPLES
 
 These are some example lines which might be specified in /etc/security/
 time.conf.
@@ -4356,16 +4388,17 @@ This rule does not apply to the user waster:
 games ; * ; !waster ; Wd0000-2400 | Wk1800-0800
 
 
-6.34.8. AUTHOR
+6.34.8. AUTHOR
 
 pam_time was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.35. pam_timestamp - authenticate using cached successful authentication
+6.35. pam_timestamp - authenticate using cached successful authentication
 attempts
 
-pam_timestamp.so [ timestamp_timeout=number ] [ verbose ] [ debug ]
+pam_timestamp.so [ timestampdir=directory ] [ timestamp_timeout=number ] [
+verbose ] [ debug ]
 
-6.35.1. DESCRIPTION
+6.35.1. DESCRIPTION
 
 In a nutshell, pam_timestamp caches successful authentication attempts, and
 allows you to use a recent successful attempt as the basis for authentication.
@@ -4376,7 +4409,11 @@ created in the timestampdir directory for the user. When an application
 attempts to authenticate the user, a pam_timestamp will treat a sufficiently
 recent timestamp file as grounds for succeeding.
 
-6.35.2. OPTIONS
+6.35.2. OPTIONS
+
+timestampdir=directory
+
+    Specify an alternate directory where pam_timestamp creates timestamp files.
 
 timestamp_timeout=number
 
@@ -4391,11 +4428,11 @@ debug
 
     Turns on debugging messages sent to syslog(3).
 
-6.35.3. MODULE TYPES PROVIDED
+6.35.3. MODULE TYPES PROVIDED
 
 The auth and session module types are provided.
 
-6.35.4. RETURN VALUES
+6.35.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -4410,13 +4447,13 @@ PAM_SESSION_ERR
 
     Timestamp file could not be created or updated.
 
-6.35.5. NOTES
+6.35.5. NOTES
 
 Users can get confused when they are not always asked for passwords when
 running a given program. Some users reflexively begin typing information before
 noticing that it is not being asked for.
 
-6.35.6. EXAMPLES
+6.35.6. EXAMPLES
 
 auth sufficient pam_timestamp.so verbose
 auth required   pam_unix.so
@@ -4425,21 +4462,21 @@ session required pam_unix.so
 session optional pam_timestamp.so
 
 
-6.35.7. FILES
+6.35.7. FILES
 
-/var/run/sudo/...
+/var/run/pam_timestamp/...
 
     timestamp files and directories
 
-6.35.8. AUTHOR
+6.35.8. AUTHOR
 
 pam_timestamp was written by Nalin Dahyabhai.
 
-6.36. pam_umask - set the file mode creation mask
+6.36. pam_umask - set the file mode creation mask
 
 pam_umask.so [ debug ] [ silent ] [ usergroups ] [ umask=mask ]
 
-6.36.1. DESCRIPTION
+6.36.1. DESCRIPTION
 
 pam_umask is a PAM module to set the file mode creation mask of the current
 environment. The umask affects the default permissions assigned to newly
@@ -4448,20 +4485,20 @@ created files.
 The PAM module tries to get the umask value from the following places in the
 following order:
 
-  * umask= argument
+  • umask= argument
 
-  * umask= entry in the user's GECOS field
+  • umask= entry in the user's GECOS field
 
-  * UMASK= entry from /etc/default/login
+  • UMASK= entry from /etc/default/login
 
-  * UMASK entry from /etc/login.defs
+  • UMASK entry from /etc/login.defs
 
 The GECOS field is split on comma ',' characters. The module also in addition
 to the umask= entry recognizes pri= entry, which sets the nice priority value
 for the session, and ulimit= entry, which sets the maximum size of files the
 processes in the session can create.
 
-6.36.2. OPTIONS
+6.36.2. OPTIONS
 
 debug
 
@@ -4482,11 +4519,11 @@ umask=mask
     Sets the calling process's file mode creation mask (umask) to mask & 0777.
     The value is interpreted as Octal.
 
-6.36.3. MODULE TYPES PROVIDED
+6.36.3. MODULE TYPES PROVIDED
 
 Only the session type is provided.
 
-6.36.4. RETURN VALUES
+6.36.4. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -4500,7 +4537,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.36.5. EXAMPLES
+6.36.5. EXAMPLES
 
 Add the following line to /etc/pam.d/login to set the user specific umask at
 login:
@@ -4508,15 +4545,15 @@ login:
         session optional pam_umask.so umask=0022
 
 
-6.36.6. AUTHOR
+6.36.6. AUTHOR
 
 pam_umask was written by Thorsten Kukuk <kukuk@thkukuk.de>.
 
-6.37. pam_unix - traditional password authentication
+6.37. pam_unix - traditional password authentication
 
 pam_unix.so [ ... ]
 
-6.37.1. DESCRIPTION
+6.37.1. DESCRIPTION
 
 This is the standard Unix authentication module. It uses standard calls from
 the system's libraries to retrieve and set account information as well as
@@ -4548,6 +4585,10 @@ child they didn't know was fork()d. The noreap module argument can be used to
 suppress this temporary shielding and may be needed for use with certain
 applications.
 
+The maximum length of a password supported by the pam_unix module via the
+helper binary is PAM_MAX_RESP_SIZE - currently 512 bytes. The rest of the
+password provided by the conversation function to the module will be ignored.
+
 The password component of this module performs the task of updating the user's
 password. The default encryption hash is taken from the ENCRYPT_METHOD variable
 from /etc/login.defs
@@ -4558,7 +4599,7 @@ system.
 Remaining arguments, supported by others functions of this module, are silently
 ignored. Other arguments are logged as errors through syslog(3).
 
-6.37.2. OPTIONS
+6.37.2. OPTIONS
 
 debug
 
@@ -4567,6 +4608,11 @@ debug
 audit
 
     A little more extreme than debug.
+
+quiet
+
+    Turns off informational messages namely messages about session open and
+    close via syslog(3).
 
 nullok
 
@@ -4665,17 +4711,17 @@ minlen=n
 
 Invalid arguments are logged with syslog(3).
 
-6.37.3. MODULE TYPES PROVIDED
+6.37.3. MODULE TYPES PROVIDED
 
 All module types (account, auth, password and session) are provided.
 
-6.37.4. RETURN VALUES
+6.37.4. RETURN VALUES
 
 PAM_IGNORE
 
     Ignore this module.
 
-6.37.5. EXAMPLES
+6.37.5. EXAMPLES
 
 An example usage for /etc/pam.d/login would be:
 
@@ -4683,29 +4729,29 @@ An example usage for /etc/pam.d/login would be:
 auth       required   pam_unix.so
 # Ensure users account and password are still active
 account    required   pam_unix.so
-# Change the users password, but at first check the strength
+# Change the user's password, but at first check the strength
 # with pam_cracklib(8)
 password   required   pam_cracklib.so retry=3 minlen=6 difok=3
 password   required   pam_unix.so use_authtok nullok md5
 session    required   pam_unix.so
 
 
-6.37.6. AUTHOR
+6.37.6. AUTHOR
 
 pam_unix was written by various people.
 
-6.38. pam_userdb - authenticate against a db database
+6.38. pam_userdb - authenticate against a db database
 
 pam_userdb.so db=/path/database [ debug ] [ crypt=[crypt|none] ] [ icase ] [
 dump ] [ try_first_pass ] [ use_first_pass ] [ unknown_ok ] [ key_only ]
 
-6.38.1. DESCRIPTION
+6.38.1. DESCRIPTION
 
 The pam_userdb module is used to verify a username/password pair against values
 stored in a Berkeley DB database. The database is indexed by the username, and
 the data fields corresponding to the username keys are the passwords.
 
-6.38.2. OPTIONS
+6.38.2. OPTIONS
 
 crypt=[crypt|none]
 
@@ -4717,7 +4763,8 @@ crypt=[crypt|none]
 db=/path/database
 
     Use the /path/database database for performing lookup. There is no default;
-    the module will return PAM_IGNORE if no database is provided.
+    the module will return PAM_IGNORE if no database is provided. Note that the
+    path to the database file should be specified without the .db suffix.
 
 debug
 
@@ -4760,11 +4807,11 @@ key_only
     user is valid. this is useful in cases where the username may not be unique
     but the username and password pair are.
 
-6.38.3. MODULE TYPES PROVIDED
+6.38.3. MODULE TYPES PROVIDED
 
 The auth and account module types are provided.
 
-6.38.4. RETURN VALUES
+6.38.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -4794,41 +4841,41 @@ PAM_USER_UNKNOWN
 
     User not known to the underlying authentication module.
 
-6.38.5. EXAMPLES
+6.38.5. EXAMPLES
 
-auth  sufficient pam_userdb.so icase db=/etc/dbtest.db
+auth  sufficient pam_userdb.so icase db=/etc/dbtest
 
 
-6.38.6. AUTHOR
+6.38.6. AUTHOR
 
 pam_userdb was written by Cristian Gafton >gafton@redhat.com<.
 
-6.39. pam_warn - logs all PAM items
+6.39. pam_warn - logs all PAM items
 
 pam_warn.so
 
-6.39.1. DESCRIPTION
+6.39.1. DESCRIPTION
 
 pam_warn is a PAM module that logs the service, terminal, user, remote user and
 remote host to syslog(3). The items are not probed for, but instead obtained
 from the standard PAM items. The module always returns PAM_IGNORE, indicating
 that it does not want to affect the authentication process.
 
-6.39.2. OPTIONS
+6.39.2. OPTIONS
 
 This module does not recognise any options.
 
-6.39.3. MODULE TYPES PROVIDED
+6.39.3. MODULE TYPES PROVIDED
 
 The auth, account, password and session module types are provided.
 
-6.39.4. RETURN VALUES
+6.39.4. RETURN VALUES
 
 PAM_IGNORE
 
     This module always returns PAM_IGNORE.
 
-6.39.5. EXAMPLES
+6.39.5. EXAMPLES
 
 #%PAM-1.0
 #
@@ -4845,23 +4892,23 @@ other session  required       pam_warn.so
 other session  required       pam_deny.so
 
 
-6.39.6. AUTHOR
+6.39.6. AUTHOR
 
 pam_warn was written by Andrew G. Morgan <morgan@kernel.org>.
 
-6.40. pam_wheel - only permit root access to members of group wheel
+6.40. pam_wheel - only permit root access to members of group wheel
 
 pam_wheel.so [ debug ] [ deny ] [ group=name ] [ root_only ] [ trust ] [
 use_uid ]
 
-6.40.1. DESCRIPTION
+6.40.1. DESCRIPTION
 
 The pam_wheel PAM module is used to enforce the so-called wheel group. By
 default it permits root access to the system if the applicant user is a member
 of the wheel group. If no group with this name exist, the module is using the
 group with the group-ID 0.
 
-6.40.2. OPTIONS
+6.40.2. OPTIONS
 
 debug
 
@@ -4897,11 +4944,11 @@ use_uid
     of the original one (useful when jumping with su from one account to
     another for example).
 
-6.40.3. MODULE TYPES PROVIDED
+6.40.3. MODULE TYPES PROVIDED
 
 The auth and account module types are provided.
 
-6.40.4. RETURN VALUES
+6.40.4. RETURN VALUES
 
 PAM_AUTH_ERR
 
@@ -4931,7 +4978,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.40.5. EXAMPLES
+6.40.5. EXAMPLES
 
 The root account gains access by default (rootok), only wheel members can
 become root (wheel) but Unix authenticate non-root applicants.
@@ -4941,16 +4988,16 @@ su      auth     required       pam_wheel.so
 su      auth     required       pam_unix.so
 
 
-6.40.6. AUTHOR
+6.40.6. AUTHOR
 
 pam_wheel was written by Cristian Gafton <gafton@redhat.com>.
 
-6.41. pam_xauth - forward xauth keys between users
+6.41. pam_xauth - forward xauth keys between users
 
 pam_xauth.so [ debug ] [ xauthpath=/path/to/xauth ] [ systemuser=UID ] [
 targetuser=UID ]
 
-6.41.1. DESCRIPTION
+6.41.1. DESCRIPTION
 
 The pam_xauth PAM module is designed to forward xauth keys (sometimes referred
 to as "cookies") between users.
@@ -4986,7 +5033,7 @@ cookies to other users.
 Both the import and export files support wildcards (such as *). Both the import
 and export files can be empty, signifying that no users are allowed.
 
-6.41.2. OPTIONS
+6.41.2. OPTIONS
 
 debug
 
@@ -5007,11 +5054,11 @@ targetuser=UID
 
     Specify a single target UID which is exempt from the systemuser check.
 
-6.41.3. MODULE TYPES PROVIDED
+6.41.3. MODULE TYPES PROVIDED
 
 Only the session type is provided.
 
-6.41.4. RETURN VALUES
+6.41.4. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -5033,7 +5080,7 @@ PAM_USER_UNKNOWN
 
     User not known.
 
-6.41.5. EXAMPLES
+6.41.5. EXAMPLES
 
 Add the following line to /etc/pam.d/su to forward xauth keys between users
 when calling su:
@@ -5041,22 +5088,22 @@ when calling su:
 session  optional  pam_xauth.so
 
 
-6.41.6. AUTHOR
+6.41.6. AUTHOR
 
 pam_xauth was written by Nalin Dahyabhai <nalin@redhat.com>, based on original
 version by Michael K. Johnson <johnsonm@redhat.com>.
 
-Chapter 7. See also
+Chapter 7. See also
 
-  * The Linux-PAM Application Writers' Guide.
+  • The Linux-PAM Application Writers' Guide.
 
-  * The Linux-PAM Module Writers' Guide.
+  • The Linux-PAM Module Writers' Guide.
 
-  * The V. Samar and R. Schemers (SunSoft), ``UNIFIED LOGIN WITH PLUGGABLE
+  • The V. Samar and R. Schemers (SunSoft), ``UNIFIED LOGIN WITH PLUGGABLE
     AUTHENTICATION MODULES'', Open Software Foundation Request For Comments
     86.0, October 1995.
 
-Chapter 8. Author/acknowledgments
+Chapter 8. Author/acknowledgments
 
 This document was written by Andrew G. Morgan (morgan@kernel.org) with many
 contributions from Chris Adams, Peter Allgeyer, Tim Baverstock, Tim Berger,
@@ -5075,7 +5122,7 @@ Lai for their advice. At an early stage in the development of Linux-PAM, Sun
 graciously made the documentation for their implementation of PAM available.
 This act greatly accelerated the development of Linux-PAM.
 
-Chapter 9. Copyright information for this document
+Chapter 9. Copyright information for this document
 
 Copyright (c) 2006 Thorsten Kukuk <kukuk@thkukuk.de>
 Copyright (c) 1996-2002 Andrew G. Morgan <morgan@kernel.org>

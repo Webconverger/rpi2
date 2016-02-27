@@ -44,13 +44,13 @@
   <comment xml:lang="sk">Zdrojový kód Scheme</comment>
   <comment xml:lang="sl">Datoteka izvorne kode Scheme</comment>
   <comment xml:lang="sq">Kod burues Scheme</comment>
-  <comment xml:lang="sr">Scheme изворни ко̂д</comment>
+  <comment xml:lang="sr">Шемски изворни ко̂д</comment>
   <comment xml:lang="sv">Scheme-källkod</comment>
   <comment xml:lang="tr">Scheme kaynak kodu</comment>
   <comment xml:lang="uk">вихідний файл мовою Scheme</comment>
   <comment xml:lang="vi">Mã nguồn Scheme</comment>
   <comment xml:lang="zh_CN">Scheme 源代码</comment>
-  <comment xml:lang="zh_TW">Scheme 源碼</comment>
+  <comment xml:lang="zh_TW">Scheme 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <glob pattern="*.scm"/>
   <glob pattern="*.ss"/>

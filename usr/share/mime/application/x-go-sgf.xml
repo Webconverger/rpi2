@@ -26,7 +26,7 @@
   <comment xml:lang="it">Registrazione SGF</comment>
   <comment xml:lang="ja">SGF レコード</comment>
   <comment xml:lang="kk">SGF жазбасы</comment>
-  <comment xml:lang="ko">SGF 기록파일</comment>
+  <comment xml:lang="ko">SGF 기록 파일</comment>
   <comment xml:lang="lt">SGF įrašas</comment>
   <comment xml:lang="lv">SGF ieraksts</comment>
   <comment xml:lang="nb">SGF-oppføring</comment>
@@ -39,6 +39,7 @@
   <comment xml:lang="sk">Záznam SGF</comment>
   <comment xml:lang="sl">Datoteka shranjene igre SGF</comment>
   <comment xml:lang="sq">Regjistrim SGF</comment>
+  <comment xml:lang="sr">СГФ запис</comment>
   <comment xml:lang="sv">SGF-protokoll</comment>
   <comment xml:lang="tr">SGF kaydı</comment>
   <comment xml:lang="uk">запис SGF</comment>

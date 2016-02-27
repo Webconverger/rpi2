@@ -1,4 +1,4 @@
-  /* Copyright (C) 1996-2014 Free Software Foundation, Inc.
+  /* Copyright (C) 1996-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -561,8 +561,8 @@ extern int rresvport_af (int *__alport, sa_family_t __af);
 #endif
 
 
-/* Extension from POSIX.1g.  */
-#ifdef	__USE_POSIX
+/* Extension from POSIX.1:2001.  */
+#ifdef __USE_XOPEN2K
 /* Structure to contain information about address of a service provider.  */
 struct addrinfo
 {

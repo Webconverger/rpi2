@@ -140,6 +140,12 @@
             <description>German (Aus der Neo-Welt)</description>
           </configItem>
         </variant>
+        <variant>
+          <configItem>
+            <name>koy</name>
+            <description>German (KOY)</description>
+          </configItem>
+        </variant>
       </variantList>
     </layout>
     <layout>

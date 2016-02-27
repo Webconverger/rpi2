@@ -25,7 +25,7 @@
   <comment xml:lang="it">Disegno Office</comment>
   <comment xml:lang="ja">Office ドロー</comment>
   <comment xml:lang="kk">Office суреті</comment>
-  <comment xml:lang="ko">오피스 드로잉</comment>
+  <comment xml:lang="ko">오피스 그리기</comment>
   <comment xml:lang="lt">Office piešinys</comment>
   <comment xml:lang="lv">Office zīmējums</comment>
   <comment xml:lang="nb">Office-tegning</comment>
@@ -38,7 +38,9 @@
   <comment xml:lang="sk">Kresba Office</comment>
   <comment xml:lang="sl">Datoteka risbe Office</comment>
   <comment xml:lang="sq">Vizatim Office</comment>
+  <comment xml:lang="sr">Канцеларијски цртеж</comment>
   <comment xml:lang="sv">Office-teckning</comment>
+  <comment xml:lang="tr">Ofis çizimi</comment>
   <comment xml:lang="uk">малюнок Office</comment>
   <comment xml:lang="vi">Bản vẽ Office</comment>
   <comment xml:lang="zh_CN">Microsoft Office 绘图</comment>

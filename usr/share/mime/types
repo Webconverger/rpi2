@@ -10,7 +10,10 @@ application/gnunet-directory
 application/gzip
 application/illustrator
 application/javascript
+application/jrd+json
 application/json
+application/json-patch+json
+application/ld+json
 application/mac-binhex40
 application/mathematica
 application/mathml+xml
@@ -23,12 +26,14 @@ application/mxf
 application/octet-stream
 application/oda
 application/ogg
+application/owl+xml
 application/oxps
 application/pdf
 application/pgp-encrypted
 application/pgp-keys
 application/pgp-signature
 application/pkcs10
+application/pkcs12
 application/pkcs7-mime
 application/pkcs7-signature
 application/pkcs8
@@ -49,6 +54,7 @@ application/sql
 application/vnd.adobe.flash.movie
 application/vnd.android.package-archive
 application/vnd.apple.mpegurl
+application/vnd.coffeescript
 application/vnd.corel-draw
 application/vnd.debian.binary-package
 application/vnd.emusic-emusic_package
@@ -77,6 +83,12 @@ application/vnd.ms-powerpoint.slideshow.macroEnabled.12
 application/vnd.ms-powerpoint.template.macroEnabled.12
 application/vnd.ms-publisher
 application/vnd.ms-tnef
+application/vnd.ms-visio.drawing.macroEnabled.main+xml
+application/vnd.ms-visio.drawing.main+xml
+application/vnd.ms-visio.stencil.macroEnabled.main+xml
+application/vnd.ms-visio.stencil.main+xml
+application/vnd.ms-visio.template.macroEnabled.main+xml
+application/vnd.ms-visio.template.main+xml
 application/vnd.ms-word.document.macroEnabled.12
 application/vnd.ms-word.template.macroEnabled.12
 application/vnd.ms-works
@@ -139,6 +151,7 @@ application/x-7z-compressed
 application/x-abiword
 application/x-ace
 application/x-alz
+application/x-amiga-disk-format
 application/x-amipro
 application/x-aportisdoc
 application/x-apple-diskimage
@@ -182,6 +195,7 @@ application/x-desktop
 application/x-dia-diagram
 application/x-dia-shape
 application/x-docbook+xml
+application/x-doom-wad
 application/x-dvi
 application/x-e-theme
 application/x-egon
@@ -302,7 +316,6 @@ application/x-pc-engine-rom
 application/x-pef-executable
 application/x-perl
 application/x-php
-application/x-pkcs12
 application/x-pkcs7-certificates
 application/x-planperfect
 application/x-pocket-word
@@ -321,6 +334,7 @@ application/x-riff
 application/x-rpm
 application/x-ruby
 application/x-sami
+application/x-saturn-rom
 application/x-sc
 application/x-shar
 application/x-shared-library-la
@@ -357,6 +371,7 @@ application/x-ufraw
 application/x-ustar
 application/x-wais-source
 application/x-wii-rom
+application/x-wii-wad
 application/x-windows-themepack
 application/x-wpg
 application/x-wwf
@@ -450,12 +465,14 @@ image/svg+xml-compressed
 image/tiff
 image/vnd.adobe.photoshop
 image/vnd.djvu
+image/vnd.djvu+multipage
 image/vnd.dwg
 image/vnd.dxf
 image/vnd.microsoft.icon
 image/vnd.ms-modi
 image/vnd.rn-realpix
 image/vnd.wap.wbmp
+image/vnd.zbrush.pcx
 image/webp
 image/x-3ds
 image/x-adobe-dng
@@ -490,7 +507,6 @@ image/x-nikon-nef
 image/x-olympus-orf
 image/x-panasonic-raw
 image/x-panasonic-raw2
-image/x-pcx
 image/x-pentax-pef
 image/x-photo-cd
 image/x-pict
@@ -545,6 +561,7 @@ text/cache-manifest
 text/calendar
 text/css
 text/csv
+text/csv-schema
 text/enriched
 text/html
 text/htmlh
@@ -552,10 +569,12 @@ text/markdown
 text/plain
 text/rfc822-headers
 text/richtext
+text/rust
 text/sgml
 text/spreadsheet
 text/tab-separated-values
 text/troff
+text/turtle
 text/vcard
 text/vnd.graphviz
 text/vnd.rn-realtext
@@ -602,6 +621,7 @@ text/x-log
 text/x-lua
 text/x-makefile
 text/x-matlab
+text/x-meson
 text/x-microdvd
 text/x-moc
 text/x-modelica

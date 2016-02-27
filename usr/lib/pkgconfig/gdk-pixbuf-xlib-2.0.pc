@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: GdkPixbuf Xlib
 Description: GdkPixbuf rendering for Xlib
-Version: 2.31.3
+Version: 2.32.3
 Requires: gobject-2.0,gmodule-no-export-2.0,gdk-pixbuf-2.0
 Libs: -L${libdir} -lgdk_pixbuf_xlib-2.0
 Cflags: -I${includedir}

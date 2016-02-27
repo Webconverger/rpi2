@@ -89,6 +89,20 @@ typedef struct _GFileInfoClass   GFileInfoClass;
 #define G_FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL "standard::is-virtual"         /* boolean */
 
 /**
+ * G_FILE_ATTRIBUTE_STANDARD_IS_VOLATILE:
+ *
+ * A key in the "standard" namespace for checking if a file is
+ * volatile. This is meant for opaque, non-POSIX-like backends to
+ * indicate that the URI is not persistent. Applications should look
+ * at #G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET for the persistent URI.
+ *
+ * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_BOOLEAN.
+ *
+ * Since: 2.46
+ **/
+#define G_FILE_ATTRIBUTE_STANDARD_IS_VOLATILE "standard::is-volatile"      /* boolean */
+
+/**
  * G_FILE_ATTRIBUTE_STANDARD_NAME:
  *
  * A key in the "standard" namespace for getting the name of the file.
@@ -826,7 +840,7 @@ typedef struct _GFileInfoClass   GFileInfoClass;
  * was trashed. Corresponding #GFileAttributeType is
  * %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING.
  *
- * Since: 2.24.
+ * Since: 2.24
  **/
 #define G_FILE_ATTRIBUTE_TRASH_ORIG_PATH "trash::orig-path"     /* byte string */
 
@@ -838,7 +852,7 @@ typedef struct _GFileInfoClass   GFileInfoClass;
  * was trashed. The format of the returned string is YYYY-MM-DDThh:mm:ss.
  * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_STRING.
  *
- * Since: 2.24.
+ * Since: 2.24
  **/
 #define G_FILE_ATTRIBUTE_TRASH_DELETION_DATE "trash::deletion-date"  /* string */
 

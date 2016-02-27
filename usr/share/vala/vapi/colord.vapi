@@ -926,7 +926,9 @@ namespace Cd {
 		I1_MONITOR,
 		SPYDER4,
 		COLOR_MUNKI_SMILE,
-		COLORHUG2
+		COLORHUG2,
+		SPYDER5,
+		SPARK
 	}
 	[CCode (cheader_filename = "colord.h", cprefix = "CD_SENSOR_STATE_", has_type_id = false)]
 	public enum SensorState {

@@ -44,13 +44,13 @@
   <comment xml:lang="sk">Zdrojový kód WAIS</comment>
   <comment xml:lang="sl">Datoteka izvorne kode WAIS</comment>
   <comment xml:lang="sq">Kod burues WAIS</comment>
-  <comment xml:lang="sr">WAIS изворни ко̂д</comment>
+  <comment xml:lang="sr">ВАИС изворни ко̂д</comment>
   <comment xml:lang="sv">WAIS-källkod</comment>
   <comment xml:lang="tr">WAIS kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою WAIS</comment>
   <comment xml:lang="vi">Mã nguồn WAIS</comment>
   <comment xml:lang="zh_CN">WAIS 源代码</comment>
-  <comment xml:lang="zh_TW">WAIS 源碼</comment>
+  <comment xml:lang="zh_TW">WAIS 原始碼</comment>
   <sub-class-of type="text/plain"/>
   <generic-icon name="text-x-generic"/>
   <glob pattern="*.src"/>

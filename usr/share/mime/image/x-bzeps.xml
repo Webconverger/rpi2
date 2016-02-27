@@ -27,7 +27,7 @@
   <comment xml:lang="ja">EPS 画像 (bzip 圧縮)</comment>
   <comment xml:lang="ka">EPS გამოსახულება (bzip-ით შეკუმშული)</comment>
   <comment xml:lang="kk">EPS суреті (bzip-пен сығылған)</comment>
-  <comment xml:lang="ko">EPS 그림 (BZIP 압축)</comment>
+  <comment xml:lang="ko">EPS 그림(BZIP 압축)</comment>
   <comment xml:lang="lt">EPS paveikslėlis (suglaudintas su bzip)</comment>
   <comment xml:lang="lv">EPS attēls (saspiests ar bzip)</comment>
   <comment xml:lang="nb">EPS-bilde (bzip-komprimert)</comment>
@@ -40,6 +40,7 @@
   <comment xml:lang="sk">Obrázok EPS (komprimovaný pomocou bzip)</comment>
   <comment xml:lang="sl">Slikovna datoteka EPS (stisnjena z bzip)</comment>
   <comment xml:lang="sq">Figurë EPS (e kompresuar me bzip)</comment>
+  <comment xml:lang="sr">ЕПС слика (запакована бзип-ом)</comment>
   <comment xml:lang="sv">EPS-bild (bzip-komprimerad)</comment>
   <comment xml:lang="tr">EPS görüntüsü (bzip ile sıkıştırılmış)</comment>
   <comment xml:lang="uk">зображення EPS (стиснене bzip)</comment>

@@ -60,6 +60,9 @@ PERLVAR(I, markstack,	I32 *)		/* stack_sp locations we're
 PERLVAR(I, markstack_ptr, I32 *)
 PERLVAR(I, markstack_max, I32 *)
 
+PERLVARI(I, sawalias,	bool,	FALSE)	/* must enable common-vars
+					   pessimisation */
+
 #ifdef PERL_HASH_RANDOMIZE_KEYS
 #ifdef USE_PERL_PERTURB_KEYS
 PERLVARI(I, hash_rand_bits_enabled, U8, 1) /* used to randomize hash stuff 0 == no-random, 1 == random, 2 == determinsitic */
@@ -67,6 +70,9 @@ PERLVARI(I, hash_rand_bits_enabled, U8, 1) /* used to randomize hash stuff 0 == 
 PERLVARI(I, hash_rand_bits, UV, 0)      /* used to randomize hash stuff */
 #endif
 PERLVAR(I, strtab,	HV *)		/* shared string table */
+/* prog counter for the currently executing OP_MULTIDEREF Used to signal
+ * to S_find_uninit_var() where we are */
+PERLVAR(I, multideref_pc, UNOP_AUX_item *)
 
 /* Fields used by magic variables such as $@, $/ and so on */
 PERLVAR(I, curpm,	PMOP *)		/* what to do \ interps in REs from */
@@ -109,9 +115,6 @@ PERLVAR(I, mainstack,	AV *)		/* the stack when nothing funny is
 
 /* memory management */
 PERLVAR(I, sv_count,	IV)		/* how many SV* are currently allocated */
-PERLVAR(I, sv_objcount,	IV)		/* DEPRECATED AND UNMAINTAINED.
-                                         * Will be removed in Perl 5.22.
-                                         * Used to be: how many objects are currently allocated. */
 
 PERLVAR(I, sv_root,	SV *)		/* storage for SVs belonging to interp */
 PERLVAR(I, sv_arenaroot, SV *)		/* list of areas for garbage collection */
@@ -146,6 +149,8 @@ C<&PL_sv_yes>.
 PERLVAR(I, sv_undef,	SV)
 PERLVAR(I, sv_no,	SV)
 PERLVAR(I, sv_yes,	SV)
+PERLVAR(I, padname_undef,	PADNAME)
+PERLVAR(I, padname_const,	PADNAME)
 PERLVAR(I, Sv,		SV *)		/* used to hold temporary values */
 
 PERLVAR(I, parser,	yy_parser *)	/* current parser state */
@@ -174,7 +179,7 @@ PERLVAR(I, statgv,	GV *)
 PERLVARI(I, statname,	SV *,	NULL)
 
 #ifdef HAS_TIMES
-/* Will be removed soon after v5.21.0. See RT #121351 */
+/* Will be removed soon after v5.22.1. See RT #121351 */
 PERLVAR(I, timesbuf,	struct tms)
 #endif
 
@@ -233,6 +238,9 @@ PERLVAR(I, exit_flags,	U8)		/* was exit() unexpected, etc. */
 
 PERLVAR(I, utf8locale,	bool)		/* utf8 locale detected */
 PERLVAR(I, in_utf8_CTYPE_locale, bool)
+#ifdef USE_LOCALE_CTYPE
+    PERLVAR(I, warn_locale, SV *)
+#endif
 
 PERLVARA(I, colors,6,	char *)		/* values from PERL_RE_COLORS env var */
 
@@ -313,12 +321,12 @@ PERLVAR(I, envgv,	GV *)
 PERLVAR(I, incgv,	GV *)
 PERLVAR(I, hintgv,	GV *)
 PERLVAR(I, origfilename, char *)
+PERLVARI(I, xsubfilename, const char *, NULL)
 PERLVAR(I, diehook,	SV *)
 PERLVAR(I, warnhook,	SV *)
 
 /* switches */
 PERLVAR(I, patchlevel,	SV *)
-PERLVAR(I, apiversion,	SV *)
 PERLVAR(I, localpatches, const char * const *)
 PERLVARI(I, splitstr,	const char *, " ")
 
@@ -392,6 +400,8 @@ PERLVAR(I, DBsingle,	SV *)		/*  $DB::single */
 PERLVAR(I, DBtrace,	SV *)		/*  $DB::trace  */
 PERLVAR(I, DBsignal,	SV *)		/*  $DB::signal */
 PERLVAR(I, dbargs,	AV *)		/* args to call listed by caller function */
+
+PERLVARA(I, DBcontrol,    DBVARMG_COUNT, IV) /* IV versions of $DB::single, trace, signal */
 
 /* symbol tables */
 PERLVAR(I, debstash,	HV *)		/* symbol table for perldb package */
@@ -534,7 +544,9 @@ PERLVAR(I, subline,	I32)		/* line this subroutine began on */
 PERLVAR(I, min_intro_pending, I32)	/* start of vars to introduce */
 
 PERLVAR(I, max_intro_pending, I32)	/* end of vars to introduce */
-PERLVAR(I, padix,	I32)		/* max used index in current "register" pad */
+PERLVAR(I, padix,	I32)		/* lowest unused index - 1
+					   in current "register" pad */
+PERLVAR(I, constpadix,	I32)		/* lowest unused for constants */
 
 PERLVAR(I, padix_floor,	I32)		/* how low may inner block reset padix */
 
@@ -568,7 +580,7 @@ PERLVARI(I, perl_destruct_level, signed char,	0)
 
 #ifdef USE_LOCALE_NUMERIC
 
-PERLVARI(I, numeric_standard, bool, TRUE)
+PERLVARI(I, numeric_standard, int, TRUE)
 					/* Assume simple numerics */
 PERLVARI(I, numeric_local, bool, TRUE)
 					/* Assume local numerics */
@@ -581,14 +593,13 @@ PERLVAR(I, numeric_radix_sv, SV *)	/* The radix separator if not '.' */
 PERLVAR(I, Latin1,	SV *)
 PERLVAR(I, UpperLatin1,	SV *)   /* Code points 128 - 255 */
 PERLVAR(I, AboveLatin1,	SV *)
+PERLVAR(I, InBitmap,	SV *)
 
 PERLVAR(I, NonL1NonFinalFold,   SV *)
 PERLVAR(I, HasMultiCharFold,   SV *)
 
 /* utf8 character class swashes */
 PERLVAR(I, utf8_mark,	SV *)
-PERLVAR(I, utf8_X_regular_begin, SV *)
-PERLVAR(I, utf8_X_extend, SV *)
 PERLVAR(I, utf8_toupper, SV *)
 PERLVAR(I, utf8_totitle, SV *)
 PERLVAR(I, utf8_tolower, SV *)
@@ -599,6 +610,9 @@ PERLVAR(I, utf8_charname_continue, SV *)
 PERLVARA(I, utf8_swash_ptrs, POSIX_SWASH_COUNT, SV *)
 PERLVARA(I, Posix_ptrs, POSIX_CC_COUNT, SV *)
 PERLVARA(I, XPosix_ptrs, POSIX_CC_COUNT, SV *)
+PERLVAR(I, GCB_invlist, SV *)
+PERLVAR(I, SB_invlist, SV *)
+PERLVAR(I, WB_invlist, SV *)
 
 PERLVAR(I, last_swash_hv, HV *)
 PERLVAR(I, last_swash_tmps, U8 *)
@@ -667,7 +681,8 @@ PERLVARI(I, known_layers, PerlIO_list_t *, NULL)
 PERLVARI(I, def_layerlist, PerlIO_list_t *, NULL)
 #endif
 
-PERLVARI(I, encoding,	SV *,	NULL)	/* character encoding */
+PERLVARI(I, encoding,	SV *,	NULL)	/* $^ENCODING */
+PERLVARI(I, lex_encoding, SV *,	NULL)	/* encoding pragma */
 
 PERLVAR(I, utf8_idstart, SV *)
 PERLVAR(I, utf8_idcont,	SV *)
@@ -736,7 +751,9 @@ PERLVAR(I, debug_pad,	struct perl_debug_pad)	/* always needed because of the re 
 /* Hook for File::Glob */
 PERLVARI(I, globhook,	globhook_t, NULL)
 
-/* The last unconditional member of the interpreter structure when 5.20.2 was
+PERLVARI(I, padlist_generation, U32, 1)	/* id to identify padlist clones */
+
+/* The last unconditional member of the interpreter structure when 5.22.1 was
    released. The offset of the end of this is baked into a global variable in 
    any shared perl library which will allow a sanity test in future perl
    releases.  */
@@ -760,11 +777,6 @@ PERLVAR(I, memory_debug_header, struct perl_memory_debug_header)
 PERLVARI(I, dumper_fd,	int,	-1)
 #endif
 
-#ifdef PERL_MAD
-PERLVARI(I, madskills,	bool,	FALSE)	/* preserve all syntactic info */
-					/* (MAD = Misc Attribute Decoration) */
-PERLVARI(I, xmlfp,	PerlIO *, NULL)
-#endif
 
 #ifdef DEBUG_LEAKING_SCALARS
 PERLVARI(I, sv_serial,	U32,	0)	/* SV serial number, used in sv.c */

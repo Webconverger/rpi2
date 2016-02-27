@@ -12,6 +12,7 @@
   <comment xml:lang="en_GB">KML geographic data</comment>
   <comment xml:lang="es">datos geográficos KML</comment>
   <comment xml:lang="eu">KML datu geografikoak</comment>
+  <comment xml:lang="fi">KML-paikkatieto</comment>
   <comment xml:lang="fo">KML landafrøðilig dáta</comment>
   <comment xml:lang="fr">données géographiques KML</comment>
   <comment xml:lang="ga">sonraí geografacha KML</comment>
@@ -34,7 +35,9 @@
   <comment xml:lang="ru">географические данные KML</comment>
   <comment xml:lang="sk">Zemepisné údaje KML</comment>
   <comment xml:lang="sl">Datoteka geografskih podatkov KML</comment>
+  <comment xml:lang="sr">КМЛ географски подаци</comment>
   <comment xml:lang="sv">KML geografisk data</comment>
+  <comment xml:lang="tr">KML coğrafi verisi</comment>
   <comment xml:lang="uk">географічні дані KML</comment>
   <comment xml:lang="zh_CN">KML 地理数据</comment>
   <comment xml:lang="zh_TW">KML 地理資料</comment>

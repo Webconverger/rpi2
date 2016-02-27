@@ -41,14 +41,15 @@
   <comment xml:lang="sk">Surový obraz CD</comment>
   <comment xml:lang="sl">surovi CD odtis</comment>
   <comment xml:lang="sq">Imazh raw CD</comment>
-  <comment xml:lang="sr">сирови отисак ЦД-а</comment>
+  <comment xml:lang="sr">сирова слика ЦД-а</comment>
   <comment xml:lang="sv">rå cd-avbild</comment>
+  <comment xml:lang="tr">Ham CD görüntüsü</comment>
   <comment xml:lang="uk">образ raw CD</comment>
   <comment xml:lang="vi">ảnh đĩa CD thô</comment>
   <comment xml:lang="zh_CN">原始 CD 映像</comment>
   <comment xml:lang="zh_TW">原生 CD 映像</comment>
   <sub-class-of type="application/x-raw-disk-image"/>
   <alias type="application/x-iso9660-image"/>
-  <glob pattern="*.iso"/>
+  <glob weight="80" pattern="*.iso"/>
   <glob pattern="*.iso9660"/>
 </mime-type>

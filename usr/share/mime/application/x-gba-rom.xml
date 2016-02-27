@@ -40,11 +40,14 @@
   <comment xml:lang="sk">ROM pre Game Boy Advance</comment>
   <comment xml:lang="sl">Bralni pomnilnik Game Boy Advance</comment>
   <comment xml:lang="sq">ROM Game Boy Advance</comment>
+  <comment xml:lang="sr">Гејм Бој Адванс РОМ</comment>
   <comment xml:lang="sv">Game Boy Advance-rom</comment>
+  <comment xml:lang="tr">Game Boy Gelişmiş ROM</comment>
   <comment xml:lang="uk">розширений ППП Game Boy</comment>
   <comment xml:lang="vi">ROM Game Boy Advance</comment>
   <comment xml:lang="zh_CN">Game Boy Advance ROM</comment>
   <comment xml:lang="zh_TW">Game Boy Advance ROM</comment>
   <generic-icon name="application-x-executable"/>
   <glob pattern="*.gba"/>
+  <glob pattern="*.agb"/>
 </mime-type>

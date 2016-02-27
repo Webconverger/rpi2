@@ -7,7 +7,7 @@
   <comment xml:lang="ca">fitxer de calibratge de color IT 8.7</comment>
   <comment xml:lang="cs">soubor kalibrace barev IT 8.7</comment>
   <comment xml:lang="da">IT 8.7 farvekalibreringsfil</comment>
-  <comment xml:lang="de">IT 8.7 Farbkalibrierungsdatei</comment>
+  <comment xml:lang="de">IT 8.7-Farbkalibrierungsdatei</comment>
   <comment xml:lang="el">Αρχείο βαθμονόμησης χρώματος ΙΤ 8.7</comment>
   <comment xml:lang="en_GB">IT 8.7 color calibration file</comment>
   <comment xml:lang="es">archivo de calibración de color IT 8.7</comment>
@@ -33,8 +33,11 @@
   <comment xml:lang="pt_BR">Arquivo de calibração de cor IT 8.7</comment>
   <comment xml:lang="ro">Fișier de calibrare a culorii IT 8.7</comment>
   <comment xml:lang="ru">файл калибровки цвета IT 8.7</comment>
+  <comment xml:lang="sk">Súbor kalibrácie farieb IT 8.7</comment>
   <comment xml:lang="sl">Umeritvena datoteka barve IT 8.7</comment>
+  <comment xml:lang="sr">ИТ 8.7 датотека калибрације боје</comment>
   <comment xml:lang="sv">IT 8.7-färgkalibreringsfil</comment>
+  <comment xml:lang="tr">IT 8.7 renk kalibrasyon dosyası</comment>
   <comment xml:lang="uk">файл калібрування кольорів IT 8.7</comment>
   <comment xml:lang="zh_CN">IT 8.7 色彩校准文件</comment>
   <comment xml:lang="zh_TW">IT 8.7 色彩校正檔</comment>

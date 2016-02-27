@@ -6,7 +6,7 @@
   <comment xml:lang="ca">codi font en VHDL</comment>
   <comment xml:lang="cs">zdrojový kód VHDL</comment>
   <comment xml:lang="da">VHDL-kildekode</comment>
-  <comment xml:lang="de">VHDL-Quellcode</comment>
+  <comment xml:lang="de">VHDL-Quelltext</comment>
   <comment xml:lang="el">Πηγαίος κώδικας VHDL</comment>
   <comment xml:lang="en_GB">VHDL source code</comment>
   <comment xml:lang="eo">VHDL-fontkodo</comment>
@@ -31,11 +31,12 @@
   <comment xml:lang="ru">исходный код VHDL</comment>
   <comment xml:lang="sk">Zdrojový kód VHDL</comment>
   <comment xml:lang="sl">Datoteka izvorne kode VHDL</comment>
+  <comment xml:lang="sr">ВХДЛ изворни код</comment>
   <comment xml:lang="sv">VHDL-källkod</comment>
   <comment xml:lang="tr">VHDL kaynak kodu</comment>
   <comment xml:lang="uk">вихідний код мовою VHDL</comment>
   <comment xml:lang="zh_CN">VHDL 源代码</comment>
-  <comment xml:lang="zh_TW">VHDL 源碼</comment>
+  <comment xml:lang="zh_TW">VHDL 原始碼</comment>
   <acronym>VHDL</acronym>
   <expanded-acronym>Very-High-Speed Integrated Circuit Hardware Description Language</expanded-acronym>
   <sub-class-of type="text/plain"/>

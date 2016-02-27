@@ -8,7 +8,7 @@
   <comment xml:lang="ca">paquet de Windows Installer</comment>
   <comment xml:lang="cs">balíček Windows Installer</comment>
   <comment xml:lang="da">Windows Installer-pakke</comment>
-  <comment xml:lang="de">Windows Installationspaket</comment>
+  <comment xml:lang="de">Windows-Installationspaket</comment>
   <comment xml:lang="el">Πακέτο Windows Installer</comment>
   <comment xml:lang="en_GB">Windows Installer package</comment>
   <comment xml:lang="es">paquete de instalación de Windows</comment>
@@ -32,12 +32,13 @@
   <comment xml:lang="nl">Windows-installatiepakket</comment>
   <comment xml:lang="nn">Windows Installer-pakke</comment>
   <comment xml:lang="pl">Pakiet instalatora Windows</comment>
-  <comment xml:lang="pt_BR">Pacote do instalador do Windows</comment>
+  <comment xml:lang="pt_BR">Pacote do Windows Installer</comment>
   <comment xml:lang="ro">Pachet instalator Windows</comment>
   <comment xml:lang="ru">пакет Windows Installer</comment>
   <comment xml:lang="sk">Balík Windows Installer</comment>
   <comment xml:lang="sl">Datoteka paketa Windows namestilnika</comment>
   <comment xml:lang="sq">Paketë Windows Installer</comment>
+  <comment xml:lang="sr">пакет Виндоузовог инсталатера</comment>
   <comment xml:lang="sv">Windows Installer-paket</comment>
   <comment xml:lang="tr">Windows Installer paketi</comment>
   <comment xml:lang="uk">пакунок Windows Installer</comment>

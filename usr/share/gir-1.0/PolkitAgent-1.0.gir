@@ -29,10 +29,7 @@ implement the @initiate_authentication and @initiate_authentication_finish metho
 
 Typically authentication agents use #PolkitAgentSession to
 authenticate users (via passwords) and communicate back the
-authentication result to the PolicyKit daemon.  This is however not
-requirement. Depending on the system an authentication agent may
-use other means (such as a Yes/No dialog) to obtain sufficient
-evidence that the user is one of the requested identities.
+authentication result to the PolicyKit daemon.
 
 To register a #PolkitAgentListener with the PolicyKit daemon, use
 polkit_agent_listener_register() or
@@ -105,12 +102,14 @@ loop&lt;/link&gt; of the thread that this method is called from.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="8">
@@ -198,12 +197,14 @@ loop&lt;/link&gt; of the thread that this method is called from.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="8">
@@ -280,6 +281,7 @@ polkit_agent_listener_unregister().</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -314,12 +316,16 @@ polkit_agent_listener_unregister().</doc>
             <doc xml:space="preserve">The D-Bus object path to use for the authentication agent or %NULL for the default object path.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="options" transfer-ownership="none" allow-none="1">
+          <parameter name="options"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A #GVariant with options or %NULL.</doc>
             <type name="GLib.Variant" c:type="GVariant*"/>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -376,12 +382,14 @@ polkit_agent_listener_unregister().</doc>
             </parameter>
             <parameter name="cancellable"
                        transfer-ownership="none"
+                       nullable="1"
                        allow-none="1">
               <doc xml:space="preserve">A #GCancellable.</doc>
               <type name="Gio.Cancellable" c:type="GCancellable*"/>
             </parameter>
             <parameter name="callback"
                        transfer-ownership="none"
+                       nullable="1"
                        allow-none="1"
                        scope="async"
                        closure="9">
@@ -692,6 +700,7 @@ current process has no controlling terminal.</doc>
         <parameters>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>

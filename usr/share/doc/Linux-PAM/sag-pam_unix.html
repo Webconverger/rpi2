@@ -38,6 +38,11 @@
       argument can be used to suppress this temporary shielding and may be
       needed for use with certain applications.
     </p><p>
+      The maximum length of a password supported by the pam_unix module
+      via the helper binary is <span class="emphasis"><em>PAM_MAX_RESP_SIZE</em></span>
+      - currently 512 bytes. The rest of the password provided by the
+      conversation function to the module will be ignored.
+    </p><p>
       The password component of this module performs the task of updating
       the user's password. The default encryption hash is taken from the
       <span class="emphasis"><em>ENCRYPT_METHOD</em></span> variable from
@@ -58,6 +63,12 @@
           <code class="option">audit</code>
         </span></dt><dd><p>
             A little more extreme than debug.
+          </p></dd><dt><span class="term">
+          <code class="option">quiet</code>
+        </span></dt><dd><p>
+	    Turns off informational messages namely messages about
+	    session open and close via
+            <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>.
           </p></dd><dt><span class="term">
           <code class="option">nullok</code>
         </span></dt><dd><p>
@@ -178,7 +189,7 @@
 auth       required   pam_unix.so
 # Ensure users account and password are still active
 account    required   pam_unix.so
-# Change the users password, but at first check the strength
+# Change the user's password, but at first check the strength
 # with pam_cracklib(8)
 password   required   pam_cracklib.so retry=3 minlen=6 difok=3
 password   required   pam_unix.so use_authtok nullok md5

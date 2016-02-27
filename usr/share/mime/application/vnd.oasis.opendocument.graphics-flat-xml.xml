@@ -25,7 +25,7 @@
   <comment xml:lang="ja">ODG ドロー (Flat XML)</comment>
   <comment xml:lang="ka">ODG-ის ნახაზი (Flat XML)</comment>
   <comment xml:lang="kk">ODG сызбасы (Тек XML)</comment>
-  <comment xml:lang="ko">ODG 드로잉 (단일 XML)</comment>
+  <comment xml:lang="ko">ODG 드로잉(단일 XML)</comment>
   <comment xml:lang="lt">ODG piešinys (Flat XML)</comment>
   <comment xml:lang="lv">ODG zīmējums (plakans XML)</comment>
   <comment xml:lang="nl">ODG-tekening (Flat XML)</comment>
@@ -35,7 +35,9 @@
   <comment xml:lang="ru">изображение ODG (простой XML)</comment>
   <comment xml:lang="sk">Kresba ODG (čisté XML)</comment>
   <comment xml:lang="sl">Datoteka risbe ODG (nepovezan XML)</comment>
+  <comment xml:lang="sr">ОДГ цртеж (Обичан ИксМЛ)</comment>
   <comment xml:lang="sv">ODG-teckning (platt XML)</comment>
+  <comment xml:lang="tr">ODG çizimi (Düz XML)</comment>
   <comment xml:lang="uk">малюнок ODG (Flat XML)</comment>
   <comment xml:lang="zh_CN">ODG 绘图(Flat XML)</comment>
   <comment xml:lang="zh_TW">ODG 繪圖 (Flat XML)</comment>

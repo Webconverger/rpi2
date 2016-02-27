@@ -1,0 +1,52 @@
+%NAME%
+webkit2gtk
+
+%VERSION%
+2.10.7-1
+
+%DESC%
+GTK+ Web content engine library
+
+%URL%
+http://webkitgtk.org/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1454469539
+
+%INSTALLDATE%
+1455617685
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu6@archlinuxarm.org>
+
+%SIZE%
+72428544
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libxt
+libxslt
+enchant
+geoclue2
+gst-plugins-base-libs
+libsecret
+libwebp
+harfbuzz-icu
+gtk3
+libnotify
+hyphen
+
+%OPTDEPENDS%
+gtk2: Netscape plugin support
+gst-plugins-base: free media decoding
+gst-plugins-good: media decoding
+gst-libav: nonfree media decoding
+

@@ -14,7 +14,7 @@
     
     <description>Create a color managed device</description>
     <description xml:lang="cs">Vytvořit zařízení se správou barev</description>
-    <description xml:lang="da_DK">Opret en color-håndteret enhed</description>
+    <description xml:lang="da">Opret en color-håndteret enhed</description>
     <description xml:lang="de">Ein farbverwaltetes Gerät anlegen</description>
     <description xml:lang="el">Δημιουργία μιας συσκευής διαχείρισης χρωμάτων</description>
     <description xml:lang="en_GB">Create a colour managed device</description>
@@ -30,6 +30,7 @@
     <description xml:lang="ko">색상 관리 장치 만듭니다</description>
     <description xml:lang="lv">Izveidot krāsu pārvaldītu ierīci</description>
     <description xml:lang="nb">Lag en fargestyrt enhet</description>
+    <description xml:lang="nb_NO">Lag en fargestyrt enhet</description>
     <description xml:lang="nl">Maak een kleur gemanaged apparaat aan</description>
     <description xml:lang="pl">Utworzenie urządzenia z zarządzanymi kolorami</description>
     <description xml:lang="pt_BR">Cria um dispositivo gerenciado de cores</description>
@@ -46,7 +47,7 @@
     <description xml:lang="zh_TW">建立色彩管理裝置</description>
     <message>Authentication is required to create a color managed device</message>
     <message xml:lang="cs">Pro vytvoření zařízení se správou barev je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at oprette en color-håndteret enhed</message>
+    <message xml:lang="da">Godkendelse er krævet for at oprette en color-håndteret enhed</message>
     <message xml:lang="de">Legitimierung ist zur Erstellung eines farbverwalteten Geräts notwendig</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να δημιουργήσετε μία συσκευή διαχείρισης χρωμάτων</message>
     <message xml:lang="en_GB">Authentication is required to create a colour managed device</message>
@@ -62,12 +63,13 @@
     <message xml:lang="ko">색상 관리 장치를 만들려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai izveidotu krāsu pārvaldītu ierīci</message>
     <message xml:lang="nb">Autentisering kreves for å lage en fargestyrt enhet</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å lage en fargestyrt enhet</message>
     <message xml:lang="nl">Authenticatie is verplicht om een kleur gemanaged apparaat aan te kunnen maken</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby utworzyć urządzenie z zarządzanymi kolorami</message>
     <message xml:lang="pt_BR">Autenticação é necessária para criar um dispositivo gerenciado de cores</message>
     <message xml:lang="pt_PT">É necessária autenticação para criar um dispositivo gerido pela cor</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a crea un dispozitiv gestionat de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для создания цветоуправляемого устройства</message>
+    <message xml:lang="ru"> Для создания цветоуправляемого устройства необходима аутентификация</message>
     <message xml:lang="sk">Na vytvorenie zariadenia so správou farieb je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za ustvarjanje naprave, s katero lahko je mogoče barvno upravljanje, je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за стварање уређаја управљаног бојом</message>
@@ -89,7 +91,7 @@
     
     <description>Create a color profile</description>
     <description xml:lang="cs">Vytvořit profil barev</description>
-    <description xml:lang="da_DK">Opret en color-profil</description>
+    <description xml:lang="da">Opret en color-profil</description>
     <description xml:lang="de">Ein Farbprofil anlegen</description>
     <description xml:lang="el">Δημιουργία ενός προφίλ χρωμάτων</description>
     <description xml:lang="en_GB">Create a colour profile</description>
@@ -106,6 +108,7 @@
     <description xml:lang="ko">색상 프로파일 만들기</description>
     <description xml:lang="lv">Izveidot krāsu profilu</description>
     <description xml:lang="nb">Opprett fargeprofil</description>
+    <description xml:lang="nb_NO">Opprett fargeprofil</description>
     <description xml:lang="nl">Maak een kleurprofiel aan</description>
     <description xml:lang="pl">Utworzenie profilu kolorów</description>
     <description xml:lang="pt_BR">Cria um perfile de cores</description>
@@ -122,7 +125,7 @@
     <description xml:lang="zh_TW">建立色彩描述檔</description>
     <message>Authentication is required to create a color profile</message>
     <message xml:lang="cs">Pro vytvoření profilu barev je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at oprette en color-profil</message>
+    <message xml:lang="da">Godkendelse er krævet for at oprette en color-profil</message>
     <message xml:lang="de">Legitimierung ist zum Erstellen eines Farbprofils erforderlich</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να δημιουργήσετε ένα προφίλ χρωμάτων</message>
     <message xml:lang="en_GB">Authentication is required to create a colour profile</message>
@@ -138,12 +141,13 @@
     <message xml:lang="ko">색상 프로파일을 만들려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai izveidotu krāsu profilu</message>
     <message xml:lang="nb">Autentisering kreves for å lage en fargeprofil</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å lage en fargeprofil</message>
     <message xml:lang="nl">Authenticatie is verplicht om een kleurprofiel aan te kunnen maken</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby utworzyć profil kolorów</message>
     <message xml:lang="pt_BR">Autenticação é necessária para criar um perfil de cores</message>
     <message xml:lang="pt_PT">É necessária autenticação para criar um perfil de cor</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a crea un profil de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для создания цветового профиля</message>
+    <message xml:lang="ru">Для создания цветового профиля необходима аутентификация</message>
     <message xml:lang="sk">Na vytvorenie profilu farieb je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za ustvarjanje barvnega profila je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за стварање профила боје</message>
@@ -165,7 +169,7 @@
     
     <description>Remove a color managed device</description>
     <description xml:lang="cs">Odstranit zařízení se správou barev</description>
-    <description xml:lang="da_DK">Fjern en color-håndteret enhed</description>
+    <description xml:lang="da">Fjern en color-håndteret enhed</description>
     <description xml:lang="de">Ein farbverwaltetes Gerät entfernen</description>
     <description xml:lang="el">Αφαίρεση μιας συσκευής διαχείρισης χρωμάτων</description>
     <description xml:lang="en_GB">Remove a colour managed device</description>
@@ -181,6 +185,7 @@
     <description xml:lang="ko">색상 관리 장치 제거</description>
     <description xml:lang="lv">Izņemt krāsu pārvaldītu ierīci</description>
     <description xml:lang="nb">Slett en fargestyrt enhet</description>
+    <description xml:lang="nb_NO">Slett en fargestyrt enhet</description>
     <description xml:lang="nl">Verwijder een kleur gemanaged apparaat</description>
     <description xml:lang="pl">Usunięcie urządzenia z zarządzanymi kolorami</description>
     <description xml:lang="pt_BR">Remove um dispositivo gerenciado de cores</description>
@@ -197,7 +202,7 @@
     <description xml:lang="zh_TW">移除色彩管理裝置</description>
     <message>Authentication is required to remove a color managed device</message>
     <message xml:lang="cs">Pro odstranění zařízení se správou barev je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at fjerne en color-håndteret enhed</message>
+    <message xml:lang="da">Godkendelse er krævet for at fjerne en color-håndteret enhed</message>
     <message xml:lang="de">Legitimierung ist zum Entfernen eines farbverwalteten Geräts notwendig</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να αφαιρέσετε μία συσκευή διαχείρισης χρωμάτων</message>
     <message xml:lang="en_GB">Authentication is required to remove a colour managed device</message>
@@ -213,12 +218,13 @@
     <message xml:lang="ko">색상 관리 장치를 제거하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai izņemtu krāsu pārvaldītu ierīci</message>
     <message xml:lang="nb">Autentisering kreves for å fjerne en fargestyrt enhet</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å fjerne en fargestyrt enhet</message>
     <message xml:lang="nl">Authenticatie is verplicht om een kleur gemanaged apparaat te kunnen verwijderen</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby usunąć urządzenie z zarządzanymi kolorami</message>
     <message xml:lang="pt_BR">Autenticação é necessária para remover um dispositivo gerenciado de cores</message>
     <message xml:lang="pt_PT">É necessária autenticação para remover um dispositivo gerido por cores</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a elimina un dispozitiv gestionat de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для удаления цветоуправляемого устройства</message>
+    <message xml:lang="ru">Для удаления цветоуправляемого устройства необходима аутентификация</message>
     <message xml:lang="sk">Na odstránenie zariadenia so správou farieb je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za odstranitev naprave, s katero je mogoče barvno upravljanje, je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за уклањање уређаја управљаног бојом</message>
@@ -240,7 +246,7 @@
     
     <description>Remove a color profile</description>
     <description xml:lang="cs">Odstranit profil barev</description>
-    <description xml:lang="da_DK">Fjerne en color-profil</description>
+    <description xml:lang="da">Fjerne en color-profil</description>
     <description xml:lang="de">Ein Farbprofil entfernen</description>
     <description xml:lang="el">Αφαίρεση χρωματικού προφίλ</description>
     <description xml:lang="en_GB">Remove a colour profile</description>
@@ -256,6 +262,7 @@
     <description xml:lang="ko">색상 프로파일 제거</description>
     <description xml:lang="lv">Izņemt krāsu profilu</description>
     <description xml:lang="nb">Fjerne fargeprofil</description>
+    <description xml:lang="nb_NO">Fjerne fargeprofil</description>
     <description xml:lang="nl">Verwijder een kleurprofiel</description>
     <description xml:lang="pl">Usunięcie profilu kolorów</description>
     <description xml:lang="pt_BR">Remove um perfil de cores</description>
@@ -272,7 +279,7 @@
     <description xml:lang="zh_TW">移除色彩描述檔</description>
     <message>Authentication is required to remove a color profile</message>
     <message xml:lang="cs">Pro odstranění profilu barev je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at fjerne en color-profil</message>
+    <message xml:lang="da">Godkendelse er krævet for at fjerne en color-profil</message>
     <message xml:lang="de">Legitimierung ist zum Entfernen eines Farbprofils erforderlich</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για την αφαίρεση χρωματικού προφίλ</message>
     <message xml:lang="en_GB">Authentication is required to remove a colour profile</message>
@@ -288,12 +295,13 @@
     <message xml:lang="ko">색상 프로파일을 제거하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai izņemtu krāsu profilu</message>
     <message xml:lang="nb">Autentisering kreves for å fjerne en fargeprofil</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å fjerne en fargeprofil</message>
     <message xml:lang="nl">Authenticatie is verplicht om een kleurprofiel te kunnen verwijderen</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby usunąć profil kolorów</message>
     <message xml:lang="pt_BR">Autenticação é necessária para remover um perfil de cores</message>
     <message xml:lang="pt_PT">É necessária autenticação para remover um perfil de cores</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a elimina un profil de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для удаления цветового профиля</message>
+    <message xml:lang="ru">Для удаления цветового профиля необходима аутентификация</message>
     <message xml:lang="sk">Na odstránenie profilu farieb je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za odstranitev barvnega profila je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за уклањање профила боје</message>
@@ -315,7 +323,7 @@
     
     <description>Modify color settings for a device</description>
     <description xml:lang="cs">Upravit nastavení barev pro zařízení</description>
-    <description xml:lang="da_DK">Ændr color-indstillinger for en enhed</description>
+    <description xml:lang="da">Ændr color-indstillinger for en enhed</description>
     <description xml:lang="de">Farbeinstellungen eines Geräts ändern</description>
     <description xml:lang="el">Τροποποιήστε τις ρυθμίσεις χρωμάτων για μια συσκευή</description>
     <description xml:lang="en_GB">Modify colour settings for a device</description>
@@ -331,6 +339,7 @@
     <description xml:lang="ko">장치 색상 설정 수정</description>
     <description xml:lang="lv">Koriģēt krāsu iestatījumus ierīcei</description>
     <description xml:lang="nb">Endre fargeinnstillinger for en enhet</description>
+    <description xml:lang="nb_NO">Endre fargeinnstillinger for en enhet</description>
     <description xml:lang="nl">Pas de kleurinstellingen van een apparaat aan</description>
     <description xml:lang="pl">Modyfikacja ustawień kolorów dla urządzenia</description>
     <description xml:lang="pt_BR">Modifica as configurações de cores de um dispositivo</description>
@@ -347,7 +356,7 @@
     <description xml:lang="zh_TW">修改裝置的色彩設定值</description>
     <message>Authentication is required to modify the color settings for a device</message>
     <message xml:lang="cs">Pro úpravu nastavení barev zařízení je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at ændre color-indstillinger for en enhed</message>
+    <message xml:lang="da">Godkendelse er krævet for at ændre color-indstillinger for en enhed</message>
     <message xml:lang="de">Legitimierung ist zum Bearbeiten der Farbeinstellungen eines Geräts notwendig</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να τροποποιήσετε τις ρυθμίσεις χρωμάτων για μια συσκευή</message>
     <message xml:lang="en_GB">Authentication is required to modify the colour settings for a device</message>
@@ -363,12 +372,13 @@
     <message xml:lang="ko">장치 색상 설정을 수정하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai koriģētu ierīces krāsu iestatījumus</message>
     <message xml:lang="nb">Autentisering kreves for endre fargeinnstillinger for en enhet</message>
+    <message xml:lang="nb_NO">Autentisering kreves for endre fargeinnstillinger for en enhet</message>
     <message xml:lang="nl">Authenticatie is verplicht om de kleurinstellingen voor een apparaat aan te kunnen passen</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zmodyfikować ustawienia kolorów dla urządzenia</message>
     <message xml:lang="pt_BR">Autenticação é necessária para modificar as configurações de cores para um dispositivo</message>
     <message xml:lang="pt_PT">É necessária autenticação para modificar as definições de cor para um dispositivo</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a modifica setările de culoare unui dispozitiv</message>
-    <message xml:lang="ru">Необходима аутентификация для изменения цветовых параметров устройства</message>
+    <message xml:lang="ru">Для изменения цветовых параметров устройства необходима аутентификация</message>
     <message xml:lang="sk">Na úpravu nastavení farieb pre zariadenie je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za spremembo barvnih nastavitev naprave je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за мењање подешавања боје за уређај</message>
@@ -390,7 +400,7 @@
     
     <description>Modify a color profile</description>
     <description xml:lang="cs">Upravit profil barev</description>
-    <description xml:lang="da_DK">Ændr en color-profil</description>
+    <description xml:lang="da">Ændr en color-profil</description>
     <description xml:lang="de">Ein Farbprofil verändern</description>
     <description xml:lang="el">Τροποποιήσετε ένα προφίλ χρωμάτων</description>
     <description xml:lang="en_GB">Modify a colour profile</description>
@@ -407,6 +417,7 @@
     <description xml:lang="ko">색상 프로파일 수정</description>
     <description xml:lang="lv">Koriģēt krāsu profilu</description>
     <description xml:lang="nb">Endre fargeprofil</description>
+    <description xml:lang="nb_NO">Endre fargeprofil</description>
     <description xml:lang="nl">Pas een kleurprofiel aan</description>
     <description xml:lang="pl">Modyfikacja profilu kolorów</description>
     <description xml:lang="pt_BR">Modifica um perfil de cores</description>
@@ -423,7 +434,7 @@
     <description xml:lang="zh_TW">修改色彩描述檔</description>
     <message>Authentication is required to modify a color profile</message>
     <message xml:lang="cs">Pro úpravu profilu barev je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at ændre en color-profil</message>
+    <message xml:lang="da">Godkendelse er krævet for at ændre en color-profil</message>
     <message xml:lang="de">Legitimierung ist zum Ändern eines Farbprofils erforderlich</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να τροποποιήσετε ένα προφίλ χρωμάτων</message>
     <message xml:lang="en_GB">Authentication is required to modify a colour profile</message>
@@ -439,12 +450,13 @@
     <message xml:lang="ko">색상 프로파일을 수정하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai koriģētu krāsu profilu</message>
     <message xml:lang="nb">Autentisering kreves for å endre en fargeprofil</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å endre en fargeprofil</message>
     <message xml:lang="nl">Authenticatie is verplicht om een kleurprofiel aan te kunnen passen</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zmodyfikować profil kolorów</message>
     <message xml:lang="pt_BR">Autenticação é necessária para modificar um perfil de cores</message>
     <message xml:lang="pt_PT">É necessária autenticação para modificar um perfil de cor</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a modifica un profil de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для изменения цветового профиля</message>
+    <message xml:lang="ru">Для изменения цветового профиля необходима аутентификация</message>
     <message xml:lang="sk">Na úpravu profilu farieb je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za spremembo barvnega profila je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за мењање профила боје</message>
@@ -466,7 +478,7 @@
     
     <description>Install system color profiles</description>
     <description xml:lang="cs">Instalovat profily barev pro všechny uživatele</description>
-    <description xml:lang="da_DK">Installer color-profiler for systemet</description>
+    <description xml:lang="da">Installer color-profiler for systemet</description>
     <description xml:lang="de">System-Farbprofile installieren</description>
     <description xml:lang="el">Εγκατάσταση προφίλ χρωμάτων συστήματος</description>
     <description xml:lang="en_GB">Install system colour profiles</description>
@@ -481,6 +493,7 @@
     <description xml:lang="ko">시스템 색상 프로파일 설치</description>
     <description xml:lang="lv">Instalēt sistēmas krāsu profilus</description>
     <description xml:lang="nb">Installer systemfargeprofiler</description>
+    <description xml:lang="nb_NO">Installer systemfargeprofiler</description>
     <description xml:lang="nl">Installeer systeem kleurprofielen</description>
     <description xml:lang="pl">Instalacja systemowych profili kolorów</description>
     <description xml:lang="pt_BR">Instalar perfis de sistema de cor</description>
@@ -496,7 +509,7 @@
     <description xml:lang="zh_TW">安裝系統色彩描述檔</description>
     <message>Authentication is required to install the color profile for all users</message>
     <message xml:lang="cs">Pro instalaci profilu barev pro všechny uživatele je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at installere color-profilen for alle brugere</message>
+    <message xml:lang="da">Godkendelse er krævet for at installere color-profilen for alle brugere</message>
     <message xml:lang="de">Legitmierung ist zum Installieren des Farbprofils für alle Benutzer notwendig</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για την εγκατάσταση του χρωματικού προφίλ για όλους τους χρήστες</message>
     <message xml:lang="en_GB">Authentication is required to install the colour profile for all users</message>
@@ -511,11 +524,12 @@
     <message xml:lang="ko">모든 사용자들이 사용하는 색상 프로파일을 설치하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai instalētu krāsu profilus visiem lietotājiem</message>
     <message xml:lang="nb">Autentisering kreves for å installere fargeprofilen for alle brukere</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å installere fargeprofilen for alle brukere</message>
     <message xml:lang="nl">Authenticatie is verplicht om het kleurprofiel voor alle gebruikers te installeren</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zainstalować profil kolorów dla wszystkich użytkowników</message>
     <message xml:lang="pt_BR">Autenticação é necessária para instalar o perfile de cor para todos usuários</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a instala profilul de culoare pentru toți utilizatorii</message>
-    <message xml:lang="ru">Необходима аутентификация для установки цветового профиля для всех пользователей</message>
+    <message xml:lang="ru">Для установки цветового профиля для всех пользователей необходима аутентификация</message>
     <message xml:lang="sk">Na inštaláciu profilu farieb pre všetkých používateľov je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za namestitev barvnega profila za vse uporabnike je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за инсталирање профила боје за све кориснике</message>
@@ -537,7 +551,7 @@
     
     <description>Inhibit color profile selection</description>
     <description xml:lang="cs">Zabránit výběru profilu barev</description>
-    <description xml:lang="da_DK">Arv farveprofilmarkering</description>
+    <description xml:lang="da">Arv farveprofilmarkering</description>
     <description xml:lang="de">Wahl eines Farbprofils verhindern</description>
     <description xml:lang="el">Αναστολλή επιλογής προφίλ χρωμάτων</description>
     <description xml:lang="en_GB">Inhibit colour profile selection</description>
@@ -551,6 +565,7 @@
     <description xml:lang="ko">색상 프로파일 선택 제한</description>
     <description xml:lang="lv">Nomākt krāsu profila izvēli</description>
     <description xml:lang="nb">Hem valg av fargeprofil</description>
+    <description xml:lang="nb_NO">Hem valg av fargeprofil</description>
     <description xml:lang="nl">Belet selectie van een kleurprofiel</description>
     <description xml:lang="pl">Wstrzymanie wyboru profilu kolorów</description>
     <description xml:lang="pt_BR">Inibir seleção de perfil de cor</description>
@@ -559,17 +574,19 @@
     <description xml:lang="sk">Zakáže výber profilu farieb</description>
     <description xml:lang="sl">Prepreči izbor barvnega profila</description>
     <description xml:lang="sr">Наследи избор профила боје</description>
+    <description xml:lang="sv">Hämma färgprofilval</description>
     <description xml:lang="tr">Renk profil seçimini kısıtla</description>
     <description xml:lang="uk">Заборонити вибір профілю кольорів</description>
     <description xml:lang="zh_CN">禁止选择色彩配置文件</description>
     <description xml:lang="zh_TW">抑制色彩描述檔選取</description>
     <message>Authentication is required to disable profile matching for a device</message>
     <message xml:lang="cs">Pro znemožnění vyhledání profilu pro zařízení je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at deaktivere profilmatchning for en enhed</message>
+    <message xml:lang="da">Godkendelse er krævet for at deaktivere profilmatchning for en enhed</message>
     <message xml:lang="de">Legitmierung ist zum Deaktivieren der Profilübereinstimmungssuche eines Geräts notwendig</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για να απενεργοποιήσετε το προφίλ που ταιριάζει σε μια συσκευή</message>
     <message xml:lang="en_GB">Authentication is required to disable profile matching for a device</message>
     <message xml:lang="es">Se necesita autenticación para desactivar la coincidencia de color para un dispositivo</message>
+    <message xml:lang="fr">Il est nécessaire de s’authentifier pour désactiver la détection de profil pour un périphérique</message>
     <message xml:lang="gl">Requírese autenticación para desactivar un perfíl que coincide cun dispositivo</message>
     <message xml:lang="hu">Hitelesítés szükséges a profilkezelés letiltásához egy eszközhöz</message>
     <message xml:lang="id">Perlu otentikasi untuk mematikan pencocokan profil bagi suatu perangkat</message>
@@ -578,12 +595,13 @@
     <message xml:lang="ko">장치 프로파일 일치를 비활성화 하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai deaktivētu profilu, kas atbilst ierīcei</message>
     <message xml:lang="nb">Autentisering kreves for å deaktivere samsvar mellom profil og enhet</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å deaktivere samsvar mellom profil og enhet</message>
     <message xml:lang="nl">Authenticatie is verplicht om profielmatching voor een apparaat uit te schakelen</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby wyłączyć dopasowywanie kolorów dla urządzenia</message>
     <message xml:lang="pt_BR">Autenticação é necessária para desabilitar correspondência de perfil para um dispositivo</message>
     <message xml:lang="pt_PT">É necessária autenticação para desativar mapeamento de perfis para um dispositivo.</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a dezactiva potrivirea profilului pentru un dispozitiv </message>
-    <message xml:lang="ru">Необходима аутентификация для отключения подбора профилей для устройства</message>
+    <message xml:lang="ru">Для отключения подбора профилей для устройства необходима аутентификация</message>
     <message xml:lang="sk">Na zakázanie profilu zodpovedajúcemu zariadeniu je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za onemogočanje ujemanja profilov za napravo je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за искључивање подударања профила за уређај</message>
@@ -605,7 +623,7 @@
     
     <description>Use color sensor</description>
     <description xml:lang="cs">Použít sondu</description>
-    <description xml:lang="da_DK">Brug en color-sensor</description>
+    <description xml:lang="da">Brug en color-sensor</description>
     <description xml:lang="de">Farbsensor verwenden</description>
     <description xml:lang="el">Χρήση αισθητήρα χρώματος</description>
     <description xml:lang="en_GB">Use colour sensor</description>
@@ -620,6 +638,7 @@
     <description xml:lang="ko">색상 센서 사용</description>
     <description xml:lang="lv">Lietot krāsu sensoru</description>
     <description xml:lang="nb">Bruk fargesensor</description>
+    <description xml:lang="nb_NO">Bruk fargesensor</description>
     <description xml:lang="nl">Gebruik kleur-sensor</description>
     <description xml:lang="pl">Używa czujnika kolorów</description>
     <description xml:lang="pt_BR">Usar sensor de cor</description>
@@ -636,7 +655,7 @@
     <description xml:lang="zh_TW">使用色彩感測器</description>
     <message>Authentication is required to use the color sensor</message>
     <message xml:lang="cs">Pro použití sondy je vyžadováno ověření uživatele</message>
-    <message xml:lang="da_DK">Godkendelse er krævet for at bruge color-sensoren</message>
+    <message xml:lang="da">Godkendelse er krævet for at bruge color-sensoren</message>
     <message xml:lang="de">Legitmierung ist zum Verwenden eines Farbprofils erforderlich</message>
     <message xml:lang="el">Απαιτείται έλεγχος ταυτότητας για τη χρήση του αισθητήρα χρώματος</message>
     <message xml:lang="en_GB">Authentication is required to use the colour sensor</message>
@@ -651,11 +670,12 @@
     <message xml:lang="ko">색상 센서를 사용하려면 인증이 필요합니다</message>
     <message xml:lang="lv">Jāautentificējas, lai izmantotu krāsu sensoru</message>
     <message xml:lang="nb">Autentisering kreves for å benytte fargesensoren</message>
+    <message xml:lang="nb_NO">Autentisering kreves for å benytte fargesensoren</message>
     <message xml:lang="nl">Authenticatie is vereist om de kleur-sensor te kunnen gebruiken</message>
     <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby użyć czujnika kolorów</message>
     <message xml:lang="pt_BR">Autenticação é necessária para usar o sensor de cor</message>
     <message xml:lang="ro">Este necesară autentificarea pentru a folosi senzorul de culoare</message>
-    <message xml:lang="ru">Необходима аутентификация для использования цветового датчика</message>
+    <message xml:lang="ru">Для использования цветового датчика необходима аутентификация</message>
     <message xml:lang="sk">Na použitie farebného senzora je potrebné overenie totožnosti</message>
     <message xml:lang="sl">Za uporabo barvnega tipala je zahtevana overitev</message>
     <message xml:lang="sr">Потребно је потврђивање идентитета за коришћење сензора боје</message>

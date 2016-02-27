@@ -16,7 +16,7 @@
   <comment xml:lang="eo">Tiparo de Adobe FrameMaker</comment>
   <comment xml:lang="es">tipo de letra de Adobe FrameMaker</comment>
   <comment xml:lang="eu">Adobe FrameMaker-en letra-tipoa</comment>
-  <comment xml:lang="fi">Adobe FrameMaker -kirjasin</comment>
+  <comment xml:lang="fi">Adobe FrameMaker -fontti</comment>
   <comment xml:lang="fo">Adobe FrameMaker stavasnið</comment>
   <comment xml:lang="fr">police Adobe FrameMaker</comment>
   <comment xml:lang="ga">cló Adobe FrameMaker</comment>
@@ -26,10 +26,10 @@
   <comment xml:lang="hu">Adobe FrameMaker-betűkészlet</comment>
   <comment xml:lang="ia">Typo de litteras pro Adobe FrameMaker</comment>
   <comment xml:lang="id">Fonta Adobe FrameMaker</comment>
-  <comment xml:lang="it">Tipo carattere Adobe FrameMaker</comment>
+  <comment xml:lang="it">Carattere Adobe FrameMaker</comment>
   <comment xml:lang="ja">Adobe FrameMaker フォント</comment>
   <comment xml:lang="kk">Adobe FrameMaker қарібі</comment>
-  <comment xml:lang="ko">어도비 프레임메이커 글꼴</comment>
+  <comment xml:lang="ko">Adobe 프레임메이커 글꼴</comment>
   <comment xml:lang="lt">Adobe FrameMaker šriftas</comment>
   <comment xml:lang="lv">Adobe FrameMaker fonts</comment>
   <comment xml:lang="ms">Font Adobe FrameMaker</comment>
@@ -44,8 +44,9 @@
   <comment xml:lang="sk">Písmo Adobe FrameMaker</comment>
   <comment xml:lang="sl">Datoteka pisave Adobe FrameMaker</comment>
   <comment xml:lang="sq">Gërma Adobe FrameMaker</comment>
-  <comment xml:lang="sr">Adobe FrameMaker фонт</comment>
+  <comment xml:lang="sr">слова Адобе Фрејм Мејкера</comment>
   <comment xml:lang="sv">Adobe FrameMaker-typsnitt</comment>
+  <comment xml:lang="tr">Adobe FrameMaker yazı tipi</comment>
   <comment xml:lang="uk">шрифт Adobe FrameMaker</comment>
   <comment xml:lang="vi">Phông chữ Adobe FrameMaker</comment>
   <comment xml:lang="zh_CN">Adobe FrameMaker 字体</comment>

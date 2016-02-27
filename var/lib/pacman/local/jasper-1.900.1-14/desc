@@ -1,0 +1,43 @@
+%NAME%
+jasper
+
+%VERSION%
+1.900.1-14
+
+%DESC%
+A software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard
+
+%URL%
+http://www.ece.uvic.ca/~mdadams/jasper/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1440208452
+
+%INSTALLDATE%
+1455616147
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu3@archlinuxarm.org>
+
+%SIZE%
+523264
+
+%REASON%
+1
+
+%LICENSE%
+custom:JasPer2.0
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libjpeg
+
+%OPTDEPENDS%
+freeglut: for jiv support
+glu: for jiv support
+

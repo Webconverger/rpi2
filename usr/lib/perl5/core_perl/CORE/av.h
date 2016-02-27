@@ -73,8 +73,6 @@ Same as C<av_top_index()>.
 #define AvREIFY_on(av)	(SvFLAGS(av) |= SVpav_REIFY)
 #define AvREIFY_off(av)	(SvFLAGS(av) &= ~SVpav_REIFY)
 #define AvREIFY_only(av)	(AvREAL_off(av), SvFLAGS(av) |= SVpav_REIFY)
-#define AvPAD_NAMELIST(av)	(SvFLAGS(av) & SVpad_NAMELIST)
-#define AvPAD_NAMELIST_on(av)	(SvFLAGS(av) |= SVpad_NAMELIST)
 
 
 #define AvREALISH(av)	(SvFLAGS(av) & (SVpav_REAL|SVpav_REIFY))
@@ -98,11 +96,5 @@ Perl equivalent: C<my @array;>.
 #define newAV()	MUTABLE_AV(newSV_type(SVt_PVAV))
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

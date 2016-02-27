@@ -111,6 +111,7 @@
 #include <gio/gsimpleaction.h>
 #include <gio/gsimpleactiongroup.h>
 #include <gio/gsimpleasyncresult.h>
+#include <gio/gsimpleiostream.h>
 #include <gio/gsimplepermission.h>
 #include <gio/gsocketaddressenumerator.h>
 #include <gio/gsocketaddress.h>
@@ -160,6 +161,10 @@
 #include <gio/gmenuexporter.h>
 #include <gio/gdbusmenumodel.h>
 #include <gio/gnotification.h>
+#include <gio/glistmodel.h>
+#include <gio/gliststore.h>
+
+#include <gio/gio-autocleanups.h>
 
 #undef __GIO_GIO_H_INSIDE__
 

@@ -95,10 +95,10 @@
       Running 'xsh' on tty* (any ttyXXX device), the user 'us' is given access
       to the floppy (through membership of the floppy group)
     </p><pre class="programlisting">xsh;tty*&amp;!ttyp*;us;Al0000-2400;floppy</pre><p>
-      Running 'xsh' on tty* (any ttyXXX device), the user 'sword' is given access
-      to games (through membership of the floppy group) after work hours.
+      Running 'xsh' on tty* (any ttyXXX device), the users 'sword', 'pike' and
+      'shield' are given access to games (through membership of the floppy group) after work hours.
     </p><pre class="programlisting">
-xsh; tty* ;sword;!Wk0900-1800;games, sound
+xsh; tty* ;sword|pike|shield;!Wk0900-1800;games, sound
 xsh; tty* ;*;Al0900-1800;floppy
     </pre><p>
       Any member of the group 'admin' running 'xsh' on tty*,

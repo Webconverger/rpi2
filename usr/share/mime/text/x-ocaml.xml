@@ -40,12 +40,13 @@
   <comment xml:lang="sk">Zdrojový kód OCaml</comment>
   <comment xml:lang="sl">Datoteka izvorne kode OCaml</comment>
   <comment xml:lang="sq">Kod burues OCaml</comment>
+  <comment xml:lang="sr">Окемл изворни ко̂д</comment>
   <comment xml:lang="sv">OCaml-källkod</comment>
   <comment xml:lang="tr">OCaml kaynak kodu</comment>
   <comment xml:lang="uk">первинний код мовою OCaml</comment>
   <comment xml:lang="vi">Mã nguồn OCaml</comment>
   <comment xml:lang="zh_CN">OCaml 源代码</comment>
-  <comment xml:lang="zh_TW">OCaml 源碼</comment>
+  <comment xml:lang="zh_TW">OCaml 原始碼</comment>
   <glob pattern="*.ml"/>
   <glob pattern="*.mli"/>
 </mime-type>

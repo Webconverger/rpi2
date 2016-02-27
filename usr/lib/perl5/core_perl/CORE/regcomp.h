@@ -84,9 +84,7 @@
  * but allows patterns to get big without disasters.
  *
  * [The "next" pointer is always aligned on an even
- * boundary, and reads the offset directly as a short.  Also, there is no
- * special test to reverse the sign of BACK pointers since the offset is
- * stored negative.]
+ * boundary, and reads the offset directly as a short.]
  */
 
 /* This is the stuff that used to live in regexp.h that was truly
@@ -140,13 +138,12 @@
 #define PREGf_GPOS_SEEN         0x00000100
 #define PREGf_GPOS_FLOAT        0x00000200
 
-#define PREGf_ANCH_BOL          0x00000400
-#define PREGf_ANCH_MBOL         0x00000800
-#define PREGf_ANCH_SBOL         0x00001000
-#define PREGf_ANCH_GPOS         0x00002000
+#define PREGf_ANCH_MBOL         0x00000400
+#define PREGf_ANCH_SBOL         0x00000800
+#define PREGf_ANCH_GPOS         0x00001000
 
-#define PREGf_ANCH              (PREGf_ANCH_SBOL | PREGf_ANCH_GPOS | \
-                                 PREGf_ANCH_MBOL | PREGf_ANCH_BOL )
+#define PREGf_ANCH              \
+    ( PREGf_ANCH_SBOL | PREGf_ANCH_GPOS | PREGf_ANCH_MBOL )
 
 /* this is where the old regcomp.h started */
 
@@ -184,8 +181,22 @@ struct regnode_2 {
     U16 arg2;
 };
 
+/* This give the number of code points that can be in the bitmap of an ANYOF
+ * node.  The shift number must currently be one of: 8..12.  It can't be less
+ * than 8 (256) because some code relies on it being at least that.  Above 12
+ * (4096), and you start running into warnings that some data structure widths
+ * have been exceeded, though the test suite as of this writing still passes
+ * for up through 16, which is as high as anyone would ever want to go,
+ * encompassing all of the Unicode BMP, and thus including all the economically
+ * important world scripts.  At 12 most of them are: including Arabic,
+ * Cyrillic, Greek, Hebrew, Indian subcontinent, Latin, and Thai; but not Han,
+ * Japanese, nor Korean.  (The regarglen structure in regnodes.h is a U8, and
+ * the trie types TRIEC and AHOCORASICKC are larger than U8 for shift values
+ * below above 12.)  Be sure to benchmark before changing, as larger sizes do
+ * significantly slow down the test suite */
+#define NUM_ANYOF_CODE_POINTS   (1 << 8)
 
-#define ANYOF_BITMAP_SIZE	(256 / 8)   /* 8 bits/Byte */
+#define ANYOF_BITMAP_SIZE	(NUM_ANYOF_CODE_POINTS / 8)   /* 8 bits/Byte */
 
 /* Note that these form structs which are supersets of the next smaller one, by
  * appending fields.  Alignment problems can occur if one of those optional
@@ -203,17 +214,17 @@ struct regnode_charclass {
     U8	flags;
     U8  type;
     U16 next_off;
-    U32 arg1;
+    U32 arg1;                           /* set by set_ANYOF_arg() */
     char bitmap[ANYOF_BITMAP_SIZE];	/* only compile-time */
 };
 
 /* has runtime (locale) \d, \w, ..., [:posix:] classes */
 struct regnode_charclass_class {
-    U8	flags;				/* ANYOF_POSIXL bit must go here */
+    U8	flags;                      /* ANYOF_MATCHES_POSIXL bit must go here */
     U8  type;
     U16 next_off;
     U32 arg1;
-    char bitmap[ANYOF_BITMAP_SIZE];		/* both compile-time */
+    char bitmap[ANYOF_BITMAP_SIZE];		/* both compile-time ... */
     U32 classflags;	                        /* and run-time */
 };
 
@@ -221,18 +232,18 @@ struct regnode_charclass_class {
  * extra SV*, used only during its construction and which is not used by
  * regexec.c.  Note that the 'next_off' field is unused, as the SSC stands
  * alone, so there is never a next node.  Also, there is no alignment issue,
- * becase these are declared or allocated as a complete unit so the compiler
+ * because these are declared or allocated as a complete unit so the compiler
  * takes care of alignment.  This is unlike the other regnodes which are
  * allocated in terms of multiples of a single-argument regnode.  SSC nodes can
  * have a pointer field because there is no alignment issue, and because it is
  * set to NULL after construction, before any cloning of the pattern */
 struct regnode_ssc {
-    U8	flags;				/* ANYOF_POSIXL bit must go here */
+    U8	flags;                      /* ANYOF_MATCHES_POSIXL bit must go here */
     U8  type;
     U16 next_off;
     U32 arg1;
-    char bitmap[ANYOF_BITMAP_SIZE];	/* both compile-time */
-    U32 classflags;	                /* and run-time */
+    char bitmap[ANYOF_BITMAP_SIZE];	/* both compile-time ... */
+    U32 classflags;	                /* ... and run-time */
 
     /* Auxiliary, only used during construction; NULL afterwards: list of code
      * points matched */
@@ -296,7 +307,16 @@ struct regnode_ssc {
 
 #define NEXT_OFF(p) ((p)->next_off)
 #define NODE_ALIGN(node)
-#define NODE_ALIGN_FILL(node) ((node)->flags = 0xde) /* deadbeef */
+/* the following define was set to 0xde in 075abff3
+ * as part of some linting logic. I have set it to 0
+ * as otherwise in every place where we /might/ set flags
+ * we have to set it 0 explicitly, which duplicates
+ * assignments and IMO adds an unacceptable level of
+ * surprise to working in the regex engine. If this
+ * is changed from 0 then at the very least make sure
+ * that SBOL for /^/ sets the flags to 0 explicitly.
+ * -- Yves */
+#define NODE_ALIGN_FILL(node) ((node)->flags = 0)
 
 #define SIZE_ALIGN NODE_ALIGN
 
@@ -339,6 +359,13 @@ struct regnode_ssc {
     (ptr)->type = op;    (ptr)->next_off = 0;   (ptr)++; } STMT_END
 #define FILL_ADVANCE_NODE_ARG(ptr, op, arg) STMT_START { \
     ARG_SET(ptr, arg);  FILL_ADVANCE_NODE(ptr, op); (ptr) += 1; } STMT_END
+#define FILL_ADVANCE_NODE_2L_ARG(ptr, op, arg1, arg2)               \
+                STMT_START {                                        \
+                    ARG_SET(ptr, arg1);                             \
+                    ARG2L_SET(ptr, arg2);                           \
+                    FILL_ADVANCE_NODE(ptr, op);                     \
+                    (ptr) += 2;                                     \
+                } STMT_END
 
 #define REG_MAGIC 0234
 
@@ -346,13 +373,13 @@ struct regnode_ssc {
 #define PASS1 SIZE_ONLY
 #define PASS2 (! SIZE_ONLY)
 
-/* If the bitmap doesn't fully represent what this ANYOF node can match, the
+/* If the bitmap fully represents what this ANYOF node can match, the
  * ARG is set to this special value (since 0, 1, ... are legal, but will never
  * reach this high). */
-#define ANYOF_NONBITMAP_EMPTY	((U32) -1)
+#define ANYOF_ONLY_HAS_BITMAP	((U32) -1)
 
 /* Flags for node->flags of ANYOF.  These are in short supply, with none
- * currently available.  The ABOVE_LATIN1_ALL bit could be freed up
+ * currently available.  The ABOVE_BITMAP_ALL bit could be freed up
  * by resorting to creating a swash containing everything above 255.  This
  * introduces a performance penalty.  An option that wouldn't slow things down
  * would be to split one of the two LOC flags out into a separate
@@ -362,59 +389,65 @@ struct regnode_ssc {
  * probably better than that commit anyway.  But it could be reinstated if we
  * need a bit.  The LOC flags are only for /l nodes; the reverted commit was
  * only for /d, so there are no combinatorial issues.  The LOC flag to use is
- * probably the POSIXL one.
+ * probably the POSIXL one.  Now that there is an ANYOFL (locale) node, another
+ * option would be to make all of those include the POSIXL data structure,
+ * which would get rid of needing a separate POSIXL flag.  But it would
+ * increase the size of all such nodes, so it's probably not as atractive as
+ * having an ANYOF_POSIXL node type.  But if we did do it, note that not all 32
+ * bits of that extra space are used, one bit of that could be set aside for
+ * the LOC_FOLD flag, yielding yet another bit.  This would require extra code
+ * for masking, so again not the most attractive solution.
+ *
  * Several flags are not used in synthetic start class (SSC) nodes, so could be
- * shared should new flags be needed for SSCs, like ANYOF_EMPTY_STRING now. */
+ * shared should new flags be needed for SSCs, like SSC_MATCHES_EMPTY_STRING
+ * now. */
 
 /* regexec.c is expecting this to be in the low bit */
-#define ANYOF_INVERT		 0x01
+#define ANYOF_INVERT		                0x01
 
 /* For the SSC node only, which cannot be inverted, so is shared with that bit.
- * This means "Does this SSC match an empty string?"  This is used only during
- * regex compilation. */
-#define ANYOF_EMPTY_STRING       ANYOF_INVERT
+ * This is used only during regex compilation. */
+#define SSC_MATCHES_EMPTY_STRING                ANYOF_INVERT
 
-/* Are there things that will match only if the target string is encoded in
- * UTF-8?  (This is not set if ANYOF_AOVE_LATIN1_ALL is set) */
-#define ANYOF_UTF8               0x02
+/* Are there things outside the bitmap that will match only if the target
+ * string is encoded in UTF-8?  (This is not set if ANYOF_ABOVE_BITMAP_ALL is
+ * set) */
+#define ANYOF_HAS_UTF8_NONBITMAP_MATCHES        0x02
 
 /* The fold is calculated and stored in the bitmap where possible at compile
  * time.  However under locale, the actual folding varies depending on
  * what the locale is at the time of execution, so it has to be deferred until
  * then */
-#define ANYOF_LOC_FOLD           0x04
+#define ANYOF_LOC_FOLD                          0x04
 
 /* Set if this is a regnode_charclass_posixl vs a regnode_charclass.  This
  * is used for runtime \d, \w, [:posix:], ..., which are used only in locale
  * and the optimizer's synthetic start class.  Non-locale \d, etc are resolved
  * at compile-time */
-#define ANYOF_POSIXL	         0x08
-#define ANYOF_CLASS	         ANYOF_POSIXL
-#define ANYOF_LARGE              ANYOF_POSIXL
+#define ANYOF_MATCHES_POSIXL                    0x08
 
 /* Should we raise a warning if matching against an above-Unicode code point?
  * */
-#define ANYOF_WARN_SUPER        0x10
+#define ANYOF_WARN_SUPER                        0x10
 
 /* Can match something outside the bitmap that isn't in utf8 */
-#define ANYOF_NONBITMAP_NON_UTF8 0x20
+#define ANYOF_HAS_NONBITMAP_NON_UTF8_MATCHES    0x20
 
-/* Matches every code point 0x100 and above*/
-#define ANYOF_ABOVE_LATIN1_ALL	 0x40
-#define ANYOF_UNICODE_ALL	 ANYOF_ABOVE_LATIN1_ALL
+/* Matches every code point NUM_ANYOF_CODE_POINTS and above*/
+#define ANYOF_MATCHES_ALL_ABOVE_BITMAP          0x40
 
 /* Match all Latin1 characters that aren't ASCII when the target string is not
  * in utf8. */
-#define ANYOF_NON_UTF8_NON_ASCII_ALL 0x80
+#define ANYOF_MATCHES_ALL_NON_UTF8_NON_ASCII    0x80
 
 #define ANYOF_FLAGS_ALL		(0xff)
 
-#define ANYOF_LOCALE_FLAGS (ANYOF_LOC_FOLD | ANYOF_POSIXL)
+#define ANYOF_LOCALE_FLAGS (ANYOF_LOC_FOLD | ANYOF_MATCHES_POSIXL)
 
 /* These are the flags that apply to both regular ANYOF nodes and synthetic
  * start class nodes during construction of the SSC.  During finalization of
  * the SSC, other of the flags could be added to it */
-#define ANYOF_COMMON_FLAGS    (ANYOF_WARN_SUPER|ANYOF_UTF8)
+#define ANYOF_COMMON_FLAGS    (ANYOF_WARN_SUPER|ANYOF_HAS_UTF8_NONBITMAP_MATCHES)
 
 /* Character classes for node->classflags of ANYOF */
 /* Should be synchronized with a table in regprop() */
@@ -441,8 +474,6 @@ struct regnode_ssc {
 #define ANYOF_NLOWER   ((ANYOF_LOWER) + 1)
 #define ANYOF_PRINT    ((_CC_PRINT) * 2)
 #define ANYOF_NPRINT   ((ANYOF_PRINT) + 1)
-#define ANYOF_PSXSPC   ((_CC_PSXSPC) * 2)    /* POSIX space: \s plus the vertical tab */
-#define ANYOF_NPSXSPC  ((ANYOF_PSXSPC) + 1)
 #define ANYOF_PUNCT    ((_CC_PUNCT) * 2)
 #define ANYOF_NPUNCT   ((ANYOF_PUNCT) + 1)
 #define ANYOF_SPACE    ((_CC_SPACE) * 2)     /* \s */
@@ -493,13 +524,9 @@ struct regnode_ssc {
 
 /* Utility macros for the bitmap and classes of ANYOF */
 
-#define ANYOF_SIZE		(sizeof(struct regnode_charclass))
-#define ANYOF_POSIXL_SIZE	(sizeof(regnode_charclass_posixl))
-#define ANYOF_CLASS_SIZE	ANYOF_POSIXL_SIZE
-
 #define ANYOF_FLAGS(p)		((p)->flags)
 
-#define ANYOF_BIT(c)		(1 << ((c) & 7))
+#define ANYOF_BIT(c)		(1U << ((c) & 7))
 
 #define ANYOF_POSIXL_SET(p, c)	(((regnode_charclass_posixl*) (p))->classflags |= (1U << (c)))
 #define ANYOF_CLASS_SET(p, c)	ANYOF_POSIXL_SET((p), (c))
@@ -518,7 +545,7 @@ struct regnode_ssc {
 #define ANYOF_CLASS_SETALL(ret) ANYOF_POSIXL_SETALL(ret)
 
 #define ANYOF_POSIXL_TEST_ANY_SET(p)                               \
-        ((ANYOF_FLAGS(p) & ANYOF_POSIXL)                           \
+        ((ANYOF_FLAGS(p) & ANYOF_MATCHES_POSIXL)                           \
 	 && (((regnode_charclass_posixl*)(p))->classflags))
 #define ANYOF_CLASS_TEST_ANY_SET(p) ANYOF_POSIXL_TEST_ANY_SET(p)
 
@@ -531,7 +558,7 @@ struct regnode_ssc {
                         == ((1U << ((ANYOF_POSIXL_MAX) - 1))) - 1)
 
 #define ANYOF_POSIXL_TEST_ALL_SET(p)                                   \
-        ((ANYOF_FLAGS(p) & ANYOF_POSIXL)                               \
+        ((ANYOF_FLAGS(p) & ANYOF_MATCHES_POSIXL)                               \
          && ((regnode_charclass_posixl*) (p))->classflags              \
                         == ((1U << ((ANYOF_POSIXL_MAX) - 1))) - 1)
 
@@ -545,19 +572,15 @@ struct regnode_ssc {
 #define ANYOF_BITMAP_BYTE(p, c)	(ANYOF_BITMAP(p)[(((U8)(c)) >> 3) & 31])
 #define ANYOF_BITMAP_SET(p, c)	(ANYOF_BITMAP_BYTE(p, c) |=  ANYOF_BIT(c))
 #define ANYOF_BITMAP_CLEAR(p,c)	(ANYOF_BITMAP_BYTE(p, c) &= ~ANYOF_BIT(c))
-#define ANYOF_BITMAP_TEST(p, c)	(ANYOF_BITMAP_BYTE(p, c) &   ANYOF_BIT(c))
+#define ANYOF_BITMAP_TEST(p, c)	cBOOL(ANYOF_BITMAP_BYTE(p, c) &   ANYOF_BIT(c))
 
 #define ANYOF_BITMAP_SETALL(p)		\
 	memset (ANYOF_BITMAP(p), 255, ANYOF_BITMAP_SIZE)
 #define ANYOF_BITMAP_CLEARALL(p)	\
 	Zero (ANYOF_BITMAP(p), ANYOF_BITMAP_SIZE)
-/* Check that all 256 bits are all set.  Used in S_cl_is_anything()  */
-#define ANYOF_BITMAP_TESTALLSET(p)	/* Assumes sizeof(p) == 32 */     \
-	memEQ (ANYOF_BITMAP(p), "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377", ANYOF_BITMAP_SIZE)
 
-#define ANYOF_SKIP		((ANYOF_SIZE - 1)/sizeof(regnode))
-#define ANYOF_POSIXL_SKIP	((ANYOF_POSIXL_SIZE - 1)/sizeof(regnode))
-#define ANYOF_CLASS_SKIP	ANYOF_POSIXL_SKIP
+#define ANYOF_SKIP		EXTRA_SIZE(struct regnode_charclass)
+#define ANYOF_POSIXL_SKIP	EXTRA_SIZE(regnode_charclass_posixl)
 
 /*
  * Utility definitions.
@@ -839,6 +862,7 @@ re.pm, especially to the documentation.
 #define RE_DEBUG_COMPILE_TRIE      0x000004
 #define RE_DEBUG_COMPILE_DUMP      0x000008
 #define RE_DEBUG_COMPILE_FLAGS     0x000010
+#define RE_DEBUG_COMPILE_TEST      0x000020
 
 /* Execute */
 #define RE_DEBUG_EXECUTE_MASK      0x00FF00
@@ -874,6 +898,8 @@ re.pm, especially to the documentation.
     if (re_debug_flags & RE_DEBUG_COMPILE_TRIE) x )
 #define DEBUG_FLAGS_r(x) DEBUG_r( \
     if (re_debug_flags & RE_DEBUG_COMPILE_FLAGS) x )
+#define DEBUG_TEST_r(x) DEBUG_r( \
+    if (re_debug_flags & RE_DEBUG_COMPILE_TEST) x )
 /* Execute */
 #define DEBUG_EXECUTE_r(x) DEBUG_r( \
     if (re_debug_flags & RE_DEBUG_EXECUTE_MASK) x  )
@@ -965,12 +991,13 @@ re.pm, especially to the documentation.
 
 #endif /* DEBUG RELATED DEFINES */
 
+typedef enum {
+	TRADITIONAL_BOUND = _CC_WORDCHAR,
+	GCB_BOUND,
+	SB_BOUND,
+	WB_BOUND
+} bound_type;
+
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

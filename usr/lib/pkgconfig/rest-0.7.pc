@@ -6,7 +6,7 @@ apiversion=0.7
 
 Name: rest
 Description: RESTful web api query library
-Version: 0.7.92
+Version: 0.7.93
 Libs: -L${libdir} -lrest-${apiversion}
 Cflags: -I${includedir}/rest-${apiversion}
 Requires: glib-2.0 libsoup-2.4 libxml-2.0

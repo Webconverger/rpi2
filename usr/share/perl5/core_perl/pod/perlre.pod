@@ -16,8 +16,13 @@ operations, plus various examples of the same, see discussions of
 C<m//>, C<s///>, C<qr//> and C<??> in L<perlop/"Regexp Quote-Like
 Operators">.
 
+New in v5.22, L<C<use re 'strict'>|re/'strict' mode> applies stricter
+rules than otherwise when compiling regular expression patterns.  It can
+find things that, while legal, may not be what you intended.
 
 =head2 Modifiers
+
+=head3 Overview
 
 Matching operations can have various modifiers.  Modifiers
 that relate to the interpretation of the regular expression inside
@@ -102,6 +107,27 @@ These modifiers, all new in 5.14, affect which character-set rules
 (Unicode, etc.) are used, as described below in
 L</Character set modifiers>.
 
+=item n
+X</n> X<regex, non-capture> X<regexp, non-capture>
+X<regular expression, non-capture>
+
+Prevent the grouping metacharacters C<()> from capturing. This modifier,
+new in 5.22, will stop C<$1>, C<$2>, etc... from being filled in.
+
+  "hello" =~ /(hi|hello)/;   # $1 is "hello"
+  "hello" =~ /(hi|hello)/n;  # $1 is undef
+
+This is equivalent to putting C<?:> at the beginning of every capturing group:
+
+  "hello" =~ /(?:hi|hello)/; # $1 is undef
+
+C</n> can be negated on a per-group basis. Alternatively, named captures
+may still be used.
+
+  "hello" =~ /(?-n:(hi|hello))/n;   # $1 is "hello"
+  "hello" =~ /(?<greet>hi|hello)/n; # $1 is "hello", $+{greet} is
+                                    # "hello"
+
 =item Other Modifiers
 
 There are a number of flags that can be found at the end of regular
@@ -117,7 +143,7 @@ L<perlretut/"Using regular expressions in Perl"> are:
 
 Substitution-specific modifiers described in
 
-L<perlop/"s/PATTERN/REPLACEMENT/msixpodualgcer"> are:
+L<perlop/"s/PATTERN/REPLACEMENT/msixpodualngcer"> are:
 
   e  - evaluate the right-hand side as an expression
   ee - evaluate the right side as a string then eval the result
@@ -128,11 +154,16 @@ L<perlop/"s/PATTERN/REPLACEMENT/msixpodualgcer"> are:
 
 Regular expression modifiers are usually written in documentation
 as e.g., "the C</x> modifier", even though the delimiter
-in question might not really be a slash.  The modifiers C</imsxadlup>
+in question might not really be a slash.  The modifiers C</imnsxadlup>
 may also be embedded within the regular expression itself using
 the C<(?...)> construct, see L</Extended Patterns> below.
 
-=head3 /x
+=head3 Details on some modifiers
+
+Some of the modifiers require more explanation than given in the
+L</Overview> above.
+
+=head4 /x
 
 C</x> tells
 the regular expression parser to ignore most whitespace that is neither
@@ -181,7 +212,22 @@ in C<\p{...}> there can be spaces that follow the Unicode rules, for which see
 L<perluniprops/Properties accessible through \p{} and \P{}>.
 X</x>
 
-=head3 Character set modifiers
+The set of characters that are deemed whitespace are those that Unicode
+calls "Pattern White Space", namely:
+
+ U+0009 CHARACTER TABULATION
+ U+000A LINE FEED
+ U+000B LINE TABULATION
+ U+000C FORM FEED
+ U+000D CARRIAGE RETURN
+ U+0020 SPACE
+ U+0085 NEXT LINE
+ U+200E LEFT-TO-RIGHT MARK
+ U+200F RIGHT-TO-LEFT MARK
+ U+2028 LINE SEPARATOR
+ U+2029 PARAGRAPH SEPARATOR
+
+=head4 Character set modifiers
 
 C</d>, C</u>, C</a>, and C</l>, available starting in 5.14, are called
 the character set modifiers; they affect the character set rules
@@ -230,8 +276,8 @@ will match "foo" using the locale's rules for case-insensitive matching,
 but the C</l> does not affect how the C<\U> operates.  Most likely you
 want both of them to use locale rules.  To do this, instead compile the
 regular expression within the scope of C<use locale>.  This both
-implicitly adds the C</l> and applies locale rules to the C<\U>.   The
-lesson is to C<use locale> and not C</l> explicitly.
+implicitly adds the C</l>, and applies locale rules to the C<\U>.   The
+lesson is to C<use locale>, and not C</l> explicitly.
 
 Similarly, it would be better to use C<use feature 'unicode_strings'>
 instead of,
@@ -345,9 +391,13 @@ the pattern uses a Unicode name (C<\N{...}>);  or
 
 =item 5
 
-the pattern uses a Unicode property (C<\p{...}>); or
+the pattern uses a Unicode property (C<\p{...}> or C<\P{...}>); or
 
 =item 6
+
+the pattern uses a Unicode break (C<\b{...}> or C<\B{...}>); or
+
+=item 7
 
 the pattern uses L</C<(?[ ])>>
 
@@ -386,8 +436,8 @@ When it appears singly, it causes the sequences C<\d>, C<\s>, C<\w>, and
 the Posix character classes to match only in the ASCII range.  They thus
 revert to their pre-5.6, pre-Unicode meanings.  Under C</a>,  C<\d>
 always means precisely the digits C<"0"> to C<"9">; C<\s> means the five
-characters C<[ \f\n\r\t]>, and starting in Perl v5.18, experimentally,
-the vertical tab; C<\w> means the 63 characters
+characters C<[ \f\n\r\t]>, and starting in Perl v5.18, the vertical tab;
+C<\w> means the 63 characters
 C<[A-Za-z0-9_]>; and likewise, all the Posix classes such as
 C<[[:print:]]> match only the appropriate ASCII-range characters.
 
@@ -541,20 +591,12 @@ X<metacharacter> X<quantifier> X<*> X<+> X<?> X<{n}> X<{n,}> X<{n,m}>
 
 (If a curly bracket occurs in any other context and does not form part of
 a backslashed sequence like C<\x{...}>, it is treated as a regular
-character.  In particular, the lower quantifier bound is not optional,
-and a typo in a quantifier silently causes it to be treated as the
-literal characters.  For example,
-
-    /o{4,a}/
-
-compiles to match the sequence of six characters
-S<C<"o { 4 , a }">>.  It is planned to eventually require literal uses
-of curly brackets to be escaped, say by preceding them with a backslash
-or enclosing them within square brackets, (C<"\{"> or C<"[{]">).  This
-change will allow for future syntax extensions (like making the lower
-bound of a quantifier optional), and better error checking.  In the
-meantime, you should get in the habit of escaping all instances where
-you mean a literal "{".)
+character.  However, a deprecation warning is raised for all such
+occurrences, and in Perl v5.26, literal uses of a curly bracket will be
+required to be escaped, say by preceding them with a backslash (C<"\{">)
+or enclosing them within square brackets  (C<"[{]">).  This change will
+allow for future syntax extensions (like making the lower bound of a
+quantifier optional), and better error checking of quantifiers.)
 
 The "*" quantifier is equivalent to C<{0,}>, the "+"
 quantifier to C<{1,}>, and the "?" quantifier to C<{0,1}>.  n and m are limited
@@ -739,6 +781,8 @@ X<regexp, zero-width assertion>
 X<regular expression, zero-width assertion>
 X<\b> X<\B> X<\A> X<\Z> X<\z> X<\G>
 
+    \b{} Match at Unicode boundary of specified type
+    \B{} Match where corresponding \b{} doesn't match
     \b  Match a word boundary
     \B  Match except at a word boundary
     \A  Match only at beginning of string
@@ -746,6 +790,12 @@ X<\b> X<\B> X<\A> X<\Z> X<\z> X<\G>
     \z  Match only at end of string
     \G  Match only at pos() (e.g. at the end-of-match position
         of prior m//g)
+
+A Unicode boundary (C<\b{}>), available starting in v5.22, is a spot
+between two characters, or before the first character in the string, or
+after the final character in the string where certain criteria defined
+by Unicode are met.  See L<perlrebackslash/\b{}, \b, \B{}, \B> for
+details.
 
 A word boundary (C<\b>) is a spot between two characters
 that has a C<\w> on one side of it and a C<\W> on the other side
@@ -1029,9 +1079,9 @@ a backslash if it appears in the comment.
 
 See L</E<sol>x> for another way to have comments in patterns.
 
-=item C<(?adlupimsx-imsx)>
+=item C<(?adlupimnsx-imnsx)>
 
-=item C<(?^alupimsx)>
+=item C<(?^alupimnsx)>
 X<(?)> X<(?^)>
 
 One or more embedded pattern-match modifiers, to be turned on (or
@@ -1069,7 +1119,7 @@ expressions compiled within the scope of a C<use re>.  See
 L<re/"'/flags' mode">.
 
 Starting in Perl 5.14, a C<"^"> (caret or circumflex accent) immediately
-after the C<"?"> is a shorthand equivalent to C<d-imsx>.  Flags (except
+after the C<"?"> is a shorthand equivalent to C<d-imnsx>.  Flags (except
 C<"d">) may follow the caret to override it.
 But a minus sign is not legal with it.
 
@@ -1087,9 +1137,9 @@ anywhere in a pattern has a global effect.
 =item C<(?:pattern)>
 X<(?:)>
 
-=item C<(?adluimsx-imsx:pattern)>
+=item C<(?adluimnsx-imnsx:pattern)>
 
-=item C<(?^aluimsx:pattern)>
+=item C<(?^aluimnsx:pattern)>
 X<(?^:)>
 
 This is for clustering, not capturing; it groups subexpressions like
@@ -1105,7 +1155,7 @@ but doesn't spit out extra fields.  It's also cheaper not to capture
 characters if you don't need to.
 
 Any letters between C<?> and C<:> act as flags modifiers as with
-C<(?adluimsx-imsx)>.  For example,
+C<(?adluimnsx-imnsx)>.  For example,
 
     /(?s-i:more.*than).*million/i
 
@@ -1113,18 +1163,21 @@ is equivalent to the more verbose
 
     /(?:(?s-i)more.*than).*million/i
 
+Note that any C<(...)> constructs enclosed within this one will still
+capture unless the C</n> modifier is in effect.
+
 Starting in Perl 5.14, a C<"^"> (caret or circumflex accent) immediately
-after the C<"?"> is a shorthand equivalent to C<d-imsx>.  Any positive
+after the C<"?"> is a shorthand equivalent to C<d-imnsx>.  Any positive
 flags (except C<"d">) may follow the caret, so
 
     (?^x:foo)
 
 is equivalent to
 
-    (?x-ims:foo)
+    (?x-imns:foo)
 
 The caret tells Perl that this cluster doesn't inherit the flags of any
-surrounding pattern, but uses the system defaults (C<d-imsx>),
+surrounding pattern, but uses the system defaults (C<d-imnsx>),
 modified by any flags specified.
 
 The caret allows for simpler stringification of compiled regular
@@ -2302,11 +2355,25 @@ classes C<\w>, C<\W>, C<\s>, C<\S>, C<\d>, or C<\D> as endpoints of
 a range, the "-" is understood literally.
 
 Note also that the whole range idea is rather unportable between
-character sets--and even within character sets they may cause results
-you probably didn't expect.  A sound principle is to use only ranges
-that begin from and end at either alphabetics of equal case ([a-e],
-[A-E]), or digits ([0-9]).  Anything else is unsafe.  If in doubt,
-spell out the character sets in full.
+character sets, except for four situations that Perl handles specially.
+Any subset of the ranges C<[A-Z]>, C<[a-z]>, and C<[0-9]> are guaranteed
+to match the expected subset of ASCII characters, no matter what
+character set the platform is running.  The fourth portable way to
+specify ranges is to use the C<\N{...}> syntax to specify either end
+point of the range.  For example, C<[\N{U+04}-\N{U+07}]> means to match
+the Unicode code points C<\N{U+04}>, C<\N{U+05}>, C<\N{U+06}>, and
+C<\N{U+07}>, whatever their native values may be on the platform.  Under
+L<use re 'strict'|re/'strict' mode> or within a L</C<(?[ ])>>, a warning
+is raised, if enabled, and the other end point of a range which has a
+C<\N{...}> endpoint is not portably specified.  For example,
+
+ [\N{U+00}-\x06]    # Warning under "use re 'strict'".
+
+It is hard to understand without digging what exactly matches ranges
+other than subsets of C<[A-Z]>, C<[a-z]>, and C<[0-9]>.  A sound
+principle is to use only ranges that begin from and end at either
+alphabetics of equal case ([a-e], [A-E]), or digits ([0-9]).  Anything
+else is unsafe or unclear.  If in doubt, spell out the range in full.
 
 Characters may be specified using a metacharacter syntax much like that
 used in C: "\n" matches a newline, "\t" a tab, "\r" a carriage return,

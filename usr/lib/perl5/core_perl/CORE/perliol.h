@@ -67,6 +67,14 @@ struct _PerlIO {
     PerlIOl *next;		/* Lower layer */
     PerlIO_funcs *tab;		/* Functions for this layer */
     U32 flags;			/* Various flags for state */
+    int err;			/* Saved errno value */
+#ifdef VMS
+    unsigned os_err;		/* Saved vaxc$errno value */
+#elif defined (OS2)
+    unsigned long os_err;
+#elif defined (WIN32)
+    DWORD os_err;		/* Saved GetLastError() value */
+#endif
     PerlIOl *head;		/* our ultimate parent pointer */
 };
 
@@ -281,11 +289,5 @@ PERL_EXPORT_C IV        PerlIOUtf8_pushed(pTHX_ PerlIO *f, const char *mode, SV 
 #endif				/* _PERLIOL_H */
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

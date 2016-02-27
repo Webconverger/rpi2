@@ -12,7 +12,7 @@
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
- * are also available at http://curl.haxx.se/docs/copyright.html.
+ * are also available at https://curl.haxx.se/docs/copyright.html.
  *
  * You may opt to use, copy, modify, merge, publish, distribute and/or sell
  * copies of the Software, and permit persons to whom the Software is
@@ -36,7 +36,7 @@
  *
  * If you think that something actually needs to be changed, adjusted
  * or fixed in this file, then, report it on the libcurl development
- * mailing list: http://cool.haxx.se/mailman/listinfo/curl-library/
+ * mailing list: https://cool.haxx.se/mailman/listinfo/curl-library/
  *
  * This header file shall only export symbols which are 'curl' or 'CURL'
  * prefixed, otherwise public name space would be polluted.
@@ -133,14 +133,14 @@
 
 /* Configure process defines this to 1 when it finds out that system */
 /* header file stdint.h must be included by the external interface.  */
-#define CURL_PULL_STDINT_H 1
+/* #undef CURL_PULL_STDINT_H */
 #ifdef CURL_PULL_STDINT_H
 #  include <stdint.h>
 #endif
 
 /* Configure process defines this to 1 when it finds out that system  */
 /* header file inttypes.h must be included by the external interface. */
-#define CURL_PULL_INTTYPES_H 1
+/* #undef CURL_PULL_INTTYPES_H */
 #ifdef CURL_PULL_INTTYPES_H
 #  include <inttypes.h>
 #endif
@@ -172,7 +172,7 @@
 typedef CURL_TYPEOF_CURL_SOCKLEN_T curl_socklen_t;
 
 /* Signed integral data type used for curl_off_t. */
-#define CURL_TYPEOF_CURL_OFF_T int64_t
+#define CURL_TYPEOF_CURL_OFF_T long long
 
 /* Data type definition of curl_off_t. */
 typedef CURL_TYPEOF_CURL_OFF_T curl_off_t;

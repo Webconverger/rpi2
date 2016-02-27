@@ -1,0 +1,36 @@
+%NAME%
+iw
+
+%VERSION%
+4.1-1
+
+%DESC%
+nl80211 based CLI configuration utility for wireless devices
+
+%URL%
+http://wireless.kernel.org/en/users/Documentation/iw
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1439727043
+
+%INSTALLDATE%
+1455617151
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu3@archlinuxarm.org>
+
+%SIZE%
+155648
+
+%LICENSE%
+GPL
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libnl
+

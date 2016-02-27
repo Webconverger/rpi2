@@ -43,6 +43,7 @@
   <comment xml:lang="sq">Header mesazhi të kriptuar PGP/MIME</comment>
   <comment xml:lang="sr">ПГП/МИМЕ шифровано заглавље поруке</comment>
   <comment xml:lang="sv">PGP/MIME-krypterat meddelandehuvud</comment>
+  <comment xml:lang="tr">PGP/MIME-şifreli ileti başlığı</comment>
   <comment xml:lang="uk">заголовок шифрованого PGP/MIME повідомлення</comment>
   <comment xml:lang="vi">Phần đầu thông điệp đã mật mã bằng PGP/MIME</comment>
   <comment xml:lang="zh_CN">PGP/MIME 加密的信件头</comment>

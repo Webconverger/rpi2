@@ -5,7 +5,7 @@ includedir=/usr/include
 
 Name: harfbuzz
 Description: HarfBuzz text shaping library GObject integration
-Version: 0.9.40
+Version: 1.1.3
 
 Requires: harfbuzz gobject-2.0 glib-2.0
 Libs: -L${libdir} -lharfbuzz-gobject

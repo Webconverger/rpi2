@@ -2,7 +2,7 @@
 " Language: reStructuredText documentation format
 " Maintainer: Marshall Ward <marshall.ward@gmail.com>
 " Previous Maintainer: Nikolai Weibull <now@bitwi.se>
-" Latest Revision: 2014-10-03
+" Latest Revision: 2016-01-05
 
 if exists("b:current_syntax")
   finish
@@ -12,8 +12,6 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 syn case ignore
-
-syn match   rstSections "^\%(\([=`:.'"~^_*+#-]\)\1\+\n\)\=.\+\n\([=`:.'"~^_*+#-]\)\2\+$"
 
 syn match   rstTransition  /^[=`:.'"~^_*+#-]\{4,}\s*$/
 
@@ -81,7 +79,7 @@ syn region rstHyperlinkTarget matchgroup=rstDirective
 execute 'syn region rstExDirective contained matchgroup=rstDirective' .
       \ ' start=+' . s:ReferenceName . '::\_s+' .
       \ ' skip=+^$+' .
-      \ ' end=+^\s\@!+ contains=@rstCruft'
+      \ ' end=+^\s\@!+ contains=@rstCruft,rstLiteralBlock'
 
 execute 'syn match rstSubstitutionDefinition contained' .
       \ ' /|' . s:ReferenceName . '|\_s\+/ nextgroup=@rstDirectives'
@@ -122,6 +120,8 @@ call s:DefineInlineMarkup('InterpretedTextOrHyperlinkReference', '`', '`', '`_\{
 call s:DefineInlineMarkup('InlineLiteral', '``', "", '``')
 call s:DefineInlineMarkup('SubstitutionReference', '|', '|', '|_\{0,2}')
 call s:DefineInlineMarkup('InlineInternalTargets', '_`', '`', '`')
+
+syn match   rstSections "^\%(\([=`:.'"~^_*+#-]\)\1\+\n\)\=.\+\n\([=`:.'"~^_*+#-]\)\2\+$"
 
 " TODO: Can’t remember why these two can’t be defined like the ones above.
 execute 'syn match rstFootnoteReference contains=@NoSpell' .

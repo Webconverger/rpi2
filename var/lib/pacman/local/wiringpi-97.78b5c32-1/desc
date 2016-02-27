@@ -1,0 +1,33 @@
+%NAME%
+wiringpi
+
+%VERSION%
+97.78b5c32-1
+
+%DESC%
+WiringPi: An implementation of most of the Arduino Wiring functions for the Raspberry Pi
+
+%URL%
+http://wiringpi.com/
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1452650770
+
+%INSTALLDATE%
+1455617685
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu1@archlinuxarm.org>
+
+%SIZE%
+263168
+
+%LICENSE%
+LGPL
+
+%VALIDATION%
+sha256
+

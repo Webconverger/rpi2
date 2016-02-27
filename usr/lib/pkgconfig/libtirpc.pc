@@ -6,6 +6,7 @@ includedir=${prefix}/include
 Name: libtirpc
 Description: Transport Independent RPC Library
 Requires:
-Version: 0.2.5
+Version: 1.0.1
 Libs: -L${exec_prefix}/lib -ltirpc
+Libs.private: -lpthread
 Cflags: -I${prefix}/include/tirpc

@@ -5,18 +5,20 @@
 
 package feature;
 
-our $VERSION = '1.36_01';
+our $VERSION = '1.40';
 
 our %feature = (
     fc              => 'feature_fc',
     say             => 'feature_say',
     state           => 'feature_state',
     switch          => 'feature_switch',
+    bitwise         => 'feature_bitwise',
     evalbytes       => 'feature_evalbytes',
     postderef       => 'feature_postderef',
     array_base      => 'feature_arybase',
     signatures      => 'feature_signatures',
     current_sub     => 'feature___SUB__',
+    refaliasing     => 'feature_refaliasing',
     lexical_subs    => 'feature_lexsubs',
     postderef_qq    => 'feature_postderef_qq',
     unicode_eval    => 'feature_unieval',
@@ -27,7 +29,7 @@ our %feature_bundle = (
     "5.10"    => [qw(array_base say state switch)],
     "5.11"    => [qw(array_base say state switch unicode_strings)],
     "5.15"    => [qw(current_sub evalbytes fc say state switch unicode_eval unicode_strings)],
-    "all"     => [qw(array_base current_sub evalbytes fc lexical_subs postderef postderef_qq say signatures state switch unicode_eval unicode_strings)],
+    "all"     => [qw(array_base bitwise current_sub evalbytes fc lexical_subs postderef postderef_qq refaliasing say signatures state switch unicode_eval unicode_strings)],
     "default" => [qw(array_base)],
 );
 
@@ -39,6 +41,8 @@ $feature_bundle{"5.17"} = $feature_bundle{"5.15"};
 $feature_bundle{"5.18"} = $feature_bundle{"5.15"};
 $feature_bundle{"5.19"} = $feature_bundle{"5.15"};
 $feature_bundle{"5.20"} = $feature_bundle{"5.15"};
+$feature_bundle{"5.21"} = $feature_bundle{"5.15"};
+$feature_bundle{"5.22"} = $feature_bundle{"5.15"};
 $feature_bundle{"5.9.5"} = $feature_bundle{"5.10"};
 
 our $hint_shift   = 26;
@@ -131,6 +135,12 @@ See L<perlsub/"Persistent Private Variables"> for details.
 This feature is available starting with Perl 5.10.
 
 =head2 The 'switch' feature
+
+B<WARNING>: Because the L<smartmatch operator|perlop/"Smartmatch Operator"> is
+experimental, Perl will warn when you use this feature, unless you have
+explicitly disabled the warning:
+
+    no warnings "experimental::smartmatch";
 
 C<use feature 'switch'> tells the compiler to enable the Perl 6
 given/when construct.
@@ -287,6 +297,47 @@ See L<perlsub/Signatures> for details.
 
 This feature is available from Perl 5.20 onwards.
 
+=head2 The 'refaliasing' feature
+
+B<WARNING>: This feature is still experimental and the implementation may
+change in future versions of Perl.  For this reason, Perl will
+warn when you use the feature, unless you have explicitly disabled the
+warning:
+
+    no warnings "experimental::refaliasing";
+
+This enables aliasing via assignment to references:
+
+    \$a = \$b; # $a and $b now point to the same scalar
+    \@a = \@b; #                     to the same array
+    \%a = \%b;
+    \&a = \&b;
+    foreach \%hash (@array_of_hash_refs) {
+        ...
+    }
+
+See L<perlref/Assigning to References> for details.
+
+This feature is available from Perl 5.22 onwards.
+
+=head2 The 'bitwise' feature
+
+B<WARNING>: This feature is still experimental and the implementation may
+change in future versions of Perl.  For this reason, Perl will
+warn when you use the feature, unless you have explicitly disabled the
+warning:
+
+    no warnings "experimental::bitwise";
+
+This makes the four standard bitwise operators (C<& | ^ ~>) treat their
+operands consistently as numbers, and introduces four new dotted operators
+(C<&. |. ^. ~.>) that treat their operands consistently as strings.  The
+same applies to the assignment variants (C<&= |= ^= &.= |.= ^.=>).
+
+See L<perlop/Bitwise String Operators> for details.
+
+This feature is available from Perl 5.22 onwards.
+
 =head1 FEATURE BUNDLES
 
 It's possible to load multiple features together, using
@@ -314,6 +365,9 @@ The following feature bundles are available:
             unicode_eval evalbytes current_sub fc
 
   :5.20     say state switch unicode_strings
+            unicode_eval evalbytes current_sub fc
+
+  :5.22     say state switch unicode_strings
             unicode_eval evalbytes current_sub fc
 
 The C<:default> bundle represents the feature set that is enabled before

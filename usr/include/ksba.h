@@ -1,6 +1,6 @@
 /* ksba.h - X.509 library used by GnuPG
  * Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2010, 2011
- *               2012 g10 Code GmbH
+ *               2012, 2013, 2104, 2015 g10 Code GmbH
  *
  * This file is part of KSBA.
  *

@@ -36,7 +36,7 @@ while test $# -gt 0; do
       echo $exec_prefix
       ;;
     --version)
-      echo 1.4.6
+      echo 1.4.7
       ;;
     --cflags)
       if test /usr/include != /usr/include ; then
@@ -46,7 +46,7 @@ while test $# -gt 0; do
       ;;
     --libs)
       libdirs=-L${exec_prefix}/lib
-      echo $libdirs -lImlib2 
+      echo $libdirs -lImlib2
       ;;
     *)
       echo "${usage}" 1>&2

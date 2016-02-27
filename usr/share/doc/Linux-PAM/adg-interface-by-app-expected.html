@@ -330,7 +330,7 @@
       function  keeps a record of the longest time requested with this
       function. Should
       <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span> fail, the failing return to the application is
-      delayed by an amount of time randomly distributed (by up to 25%)
+      delayed by an amount of time randomly distributed (by up to 50%)
       about this longest value.
     </p><p>
       Independent of success, the delay time is reset to its zero
@@ -384,7 +384,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
       usually this is a password, but could also be a finger print.
     </p><p>
       The PAM service module may request that the user enter their
-      username vio the the conversation mechanism (see
+      username via the conversation mechanism (see
       <span class="citerefentry"><span class="refentrytitle">pam_start</span>(3)</span> and
       <span class="citerefentry"><span class="refentrytitle">pam_conv</span>(3)</span>). The name of the authenticated user
        will be present in the PAM item PAM_USER. This item may be
@@ -408,7 +408,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
           </p></dd><dt><span class="term">PAM_CRED_INSUFFICIENT</span></dt><dd><p>
             For some reason the application does not have sufficient
             credentials to authenticate the user.
-          </p></dd><dt><span class="term">PAM_AUTHINFO_UNVAIL</span></dt><dd><p>
+          </p></dd><dt><span class="term">PAM_AUTHINFO_UNAVAIL</span></dt><dd><p>
             The modules were not able to access the authentication
             information. This might be due to a network or hardware
             failure etc.
@@ -460,7 +460,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
               User is not known to an authentication module.
           </p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_acct_mgmt"></a>3.1.9. Account validation management</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_acct_mgmt</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_acct_mgmt-description"></a>3.1.9.1. DESCRIPTION</h4></div></div></div><p>
       The <code class="function">pam_acct_mgmt</code> function is used to determine
-      if the users account is valid. It checks for authentication token
+      if the user's account is valid. It checks for authentication token
       and account expiration and verifies access restrictions. It is
       typically called after the user has been authenticated.
     </p><p>
@@ -503,7 +503,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SILENT</span></dt><dd><p>
              Do not emit any messages.
           </p></dd><dt><span class="term">PAM_CHANGE_EXPIRED_AUTHTOK</span></dt><dd><p>
-            This argument indicates to the modules that the users
+            This argument indicates to the modules that the user's
             authentication token (password) should only be changed
             if it has expired.
             If this argument is not passed, the application requires

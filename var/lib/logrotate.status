@@ -1,0 +1,3 @@
+logrotate state -- version 2
+"/var/log/wtmp" 2016-2-17-19:0:0
+"/var/log/btmp" 2016-2-17-19:0:0

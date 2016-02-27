@@ -25,7 +25,7 @@
   <comment xml:lang="ja">ODT ドキュメント (Flat XML)</comment>
   <comment xml:lang="ka">ODT დოკუმენტი (Flat XML)</comment>
   <comment xml:lang="kk">ODT құжаты (Тек XML)</comment>
-  <comment xml:lang="ko">ODT 문서 (단일 XML)</comment>
+  <comment xml:lang="ko">ODT 문서(단일 XML)</comment>
   <comment xml:lang="lt">ODT dokumentas (Flat XML)</comment>
   <comment xml:lang="lv">ODT dokuments (plakans XML)</comment>
   <comment xml:lang="nl">ODT document (Flat XML)</comment>
@@ -35,7 +35,9 @@
   <comment xml:lang="ru">документ ODT (простой XML)</comment>
   <comment xml:lang="sk">Dokument ODT (čisté XML)</comment>
   <comment xml:lang="sl">Datoteka dokumenta ODT (nepovezan XML)</comment>
+  <comment xml:lang="sr">ОДТ документ (Обични ИксМЛ)</comment>
   <comment xml:lang="sv">ODT-dokument (platt XML)</comment>
+  <comment xml:lang="tr">ODT belgesi (Düz XML)</comment>
   <comment xml:lang="uk">документ ODT (Flat XML)</comment>
   <comment xml:lang="zh_CN">ODT 文档(Flat XML)</comment>
   <comment xml:lang="zh_TW">ODT 文件 (Flat XML)</comment>

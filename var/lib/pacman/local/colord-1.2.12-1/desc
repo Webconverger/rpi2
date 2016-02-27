@@ -1,0 +1,53 @@
+%NAME%
+colord
+
+%VERSION%
+1.2.12-1
+
+%DESC%
+System daemon for managing color devices
+
+%URL%
+http://www.freedesktop.org/software/colord
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1440701430
+
+%INSTALLDATE%
+1455616709
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu8@archlinuxarm.org>
+
+%SIZE%
+4020224
+
+%REASON%
+1
+
+%LICENSE%
+GPL2
+
+%VALIDATION%
+sha256
+
+%REPLACES%
+shared-color-profiles
+
+%DEPENDS%
+lcms2
+libgusb
+polkit
+sqlite
+systemd
+dconf
+dbus
+libgudev
+
+%OPTDEPENDS%
+sane: scanner support
+argyllcms: color profiling
+

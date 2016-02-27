@@ -42,8 +42,9 @@
   <comment xml:lang="sk">Oddelený podpis S/MIME</comment>
   <comment xml:lang="sl">odpet podpis S/MIME</comment>
   <comment xml:lang="sq">Firmë e shkëputur S/MIME</comment>
-  <comment xml:lang="sr">одвојени S/MIME потпис</comment>
+  <comment xml:lang="sr">одвојени С/МИМЕ потпис</comment>
   <comment xml:lang="sv">frikopplad S/MIME-signatur</comment>
+  <comment xml:lang="tr">müstakil S/MIME imzası</comment>
   <comment xml:lang="uk">відокремлений S/MIME підпис</comment>
   <comment xml:lang="vi">chữ ký S/MIME tách rời</comment>
   <comment xml:lang="zh_CN">分离的 S/MIME 签名</comment>

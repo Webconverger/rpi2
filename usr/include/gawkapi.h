@@ -3,7 +3,7 @@
  */
 
 /* 
- * Copyright (C) 2012-2014 the Free Software Foundation, Inc.
+ * Copyright (C) 2012-2015 the Free Software Foundation, Inc.
  * 
  * This file is part of GAWK, the GNU implementation of the
  * AWK Programming Language.
@@ -142,8 +142,8 @@ typedef struct awk_input {
 	 * so there is no need to set it unless an error occurs.
 	 *
 	 * If an error does occur, the function should return EOF and set
-	 * *errcode to a non-zero value.  In that case, if *errcode does not
-	 * equal -1, gawk will automatically update the ERRNO variable based
+	 * *errcode to a positive value.  In that case, if *errcode is greater
+	 * than zero, gawk will automatically update the ERRNO variable based
 	 * on the value of *errcode (e.g., setting *errcode = errno should do
 	 * the right thing).
 	 */
@@ -846,7 +846,7 @@ make_number(double num, awk_value_t *result)
 extern int dl_load(const gawk_api_t *const api_p, awk_ext_id_t id);
 
 #if 0
-/* Boiler plate code: */
+/* Boilerplate code: */
 int plugin_is_GPL_compatible;
 
 static gawk_api_t *const api;
@@ -865,17 +865,17 @@ static awk_bool_t (*init_func)(void) = NULL;
 /* OR: */
 
 static awk_bool_t
-init_my_module(void)
+init_my_extension(void)
 {
 	...
 }
 
-static awk_bool_t (*init_func)(void) = init_my_module;
+static awk_bool_t (*init_func)(void) = init_my_extension;
 
 dl_load_func(func_table, some_name, "name_space_in_quotes")
 #endif
 
-#define dl_load_func(func_table, module, name_space) \
+#define dl_load_func(func_table, extension, name_space) \
 int dl_load(const gawk_api_t *const api_p, awk_ext_id_t id)  \
 { \
 	size_t i, j; \
@@ -886,7 +886,7 @@ int dl_load(const gawk_api_t *const api_p, awk_ext_id_t id)  \
 \
 	if (api->major_version != GAWK_API_MAJOR_VERSION \
 	    || api->minor_version < GAWK_API_MINOR_VERSION) { \
-		fprintf(stderr, #module ": version mismatch with gawk!\n"); \
+		fprintf(stderr, #extension ": version mismatch with gawk!\n"); \
 		fprintf(stderr, "\tmy version (%d, %d), gawk version (%d, %d)\n", \
 			GAWK_API_MAJOR_VERSION, GAWK_API_MINOR_VERSION, \
 			api->major_version, api->minor_version); \
@@ -898,7 +898,7 @@ int dl_load(const gawk_api_t *const api_p, awk_ext_id_t id)  \
 		if (func_table[i].name == NULL) \
 			break; \
 		if (! add_ext_func(name_space, & func_table[i])) { \
-			warning(ext_id, #module ": could not add %s\n", \
+			warning(ext_id, #extension ": could not add %s\n", \
 					func_table[i].name); \
 			errors++; \
 		} \
@@ -906,7 +906,7 @@ int dl_load(const gawk_api_t *const api_p, awk_ext_id_t id)  \
 \
 	if (init_func != NULL) { \
 		if (! init_func()) { \
-			warning(ext_id, #module ": initialization function failed\n"); \
+			warning(ext_id, #extension ": initialization function failed\n"); \
 			errors++; \
 		} \
 	} \

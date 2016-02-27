@@ -1,0 +1,36 @@
+%NAME%
+raspberrypi-firmware-examples
+
+%VERSION%
+20160216-1
+
+%DESC%
+Firmware example sources for Raspberry Pi
+
+%URL%
+https://github.com/raspberrypi/firmware
+
+%ARCH%
+any
+
+%BUILDDATE%
+1455585041
+
+%INSTALLDATE%
+1455617637
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu5@archlinuxarm.org>
+
+%SIZE%
+33377280
+
+%REASON%
+1
+
+%LICENSE%
+custom
+
+%VALIDATION%
+sha256
+

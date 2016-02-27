@@ -51,6 +51,7 @@
 #define SYS_eventfd __NR_eventfd
 #define SYS_eventfd2 __NR_eventfd2
 #define SYS_execve __NR_execve
+#define SYS_execveat __NR_execveat
 #define SYS_exit __NR_exit
 #define SYS_exit_group __NR_exit_group
 #define SYS_faccessat __NR_faccessat
@@ -398,6 +399,7 @@
 #define SYS_eventfd __NR_eventfd
 #define SYS_eventfd2 __NR_eventfd2
 #define SYS_execve __NR_execve
+#define SYS_execveat __NR_execveat
 #define SYS_exit __NR_exit
 #define SYS_exit_group __NR_exit_group
 #define SYS_faccessat __NR_faccessat

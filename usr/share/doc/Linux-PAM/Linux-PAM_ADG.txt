@@ -19,7 +19,7 @@ functions to be found in libpam_misc library, that can be used in general
 applications. Finally, it contains some comments on PAM related security issues
 for the application developer.
 
--------------------------------------------------------------------------------
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Introduction
 
@@ -78,9 +78,9 @@ for the application developer.
 11. Author/acknowledgments
 12. Copyright information for this document
 
-Chapter 1. Introduction
+Chapter 1. Introduction
 
-1.1. Description
+1.1. Description
 
 Linux-PAM (Pluggable Authentication Modules for Linux) is a library that
 enables the local system administrator to choose how individual applications
@@ -101,7 +101,7 @@ box' that will deal with all aspects of user authentication. 'All aspects'
 includes user verification, account management, session initialization/
 termination and also the resetting of passwords (authentication tokens).
 
-1.2. Synopsis
+1.2. Synopsis
 
 For general applications that wish to use the services provided by Linux-PAM
 the following is a summary of the relevant linking information:
@@ -121,7 +121,7 @@ in the DCE-RFC for PAM and is specific to the Linux-PAM distribution):
 cc -o application .... -lpam -lpam_misc
 
 
-Chapter 2. Overview
+Chapter 2. Overview
 
 Most service-giving applications are restricted. In other words, their service
 is not available to all and every prospective client. Instead, the applying
@@ -198,37 +198,37 @@ such a case the application may choose to attempt to update it with a call to
 pam_chauthtok(), although some applications are not suited to this task (ftp
 for example) and in this case the application should deny access to the user.
 
-PAM is also capable of setting and deleting the users credentials with the call
-pam_setcred(). This function should always be called after the user is
+PAM is also capable of setting and deleting the user's credentials with the
+call pam_setcred(). This function should always be called after the user is
 authenticated and before service is offered to the user. By convention, this
 should be the last call to the PAM library before the PAM session is opened.
 What exactly a credential is, is not well defined. However, some examples are
 given in the glossary below.
 
-Chapter 3.  The public interface to Linux-PAM
+Chapter 3.  The public interface to Linux-PAM
 
 Firstly, the relevant include file for the Linux-PAM library is <security/
 pam_appl.h>. It contains the definitions for a number of functions. After
 listing these functions, we collect some guiding remarks for programmers.
 
-3.1. What can be expected by the application
+3.1. What can be expected by the application
 
-3.1.1. Initialization of PAM transaction
+3.1.1. Initialization of PAM transaction
 
 #include <security/pam_appl.h>
 
-int pam_start( service_name,      
-               user,              
-               pam_conversation,  
-               pamh);             
+int pam_start( service_name,      
+               user,              
+               pam_conversation,  
+               pamh);             
 
 const char *service_name;
 const char *user;
 const struct pam_conv *pam_conversation;
 pam_handle_t **pamh;
- 
+ 
 
-3.1.1.1. DESCRIPTION
+3.1.1.1. DESCRIPTION
 
 The pam_start function creates the PAM context and initiates the PAM
 transaction. It is the first of the PAM functions that needs to be called by an
@@ -260,7 +260,7 @@ functions pam_set_item(3) and pam_get_item(3). The PAM handle cannot be used
 for mulitiple authentications at the same time as long as pam_end was not
 called on it before.
 
-3.1.1.2. RETURN VALUES
+3.1.1.2. RETURN VALUES
 
 PAM_ABORT
 
@@ -279,18 +279,18 @@ PAM_SYSTEM_ERR
     System error, for example a NULL pointer was submitted instead of a pointer
     to data.
 
-3.1.2. Termination of PAM transaction
+3.1.2. Termination of PAM transaction
 
 #include <security/pam_appl.h>
 
-int pam_end( pamh,         
-             pam_status);  
+int pam_end( pamh,         
+             pam_status);  
 
 pam_handle_t *pamh;
 int pam_status;
- 
+ 
 
-3.1.2.1. DESCRIPTION
+3.1.2.1. DESCRIPTION
 
 The pam_end function terminates the PAM transaction and is the last function an
 application should call in the PAM context. Upon return the handle pamh is no
@@ -314,7 +314,7 @@ This function free's all memory for items associated with the pam_set_item(3)
 and pam_get_item(3) functions. Pointers associated with such objects are not
 valid anymore after pam_end was called.
 
-3.1.2.2. RETURN VALUES
+3.1.2.2. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -325,20 +325,20 @@ PAM_SYSTEM_ERR
     System error, for example a NULL pointer was submitted as PAM handle or the
     function was called by a module.
 
-3.1.3. Setting PAM items
+3.1.3. Setting PAM items
 
 #include <security/pam_modules.h>
 
-int pam_set_item(  pamh,       
-                   item_type,  
-                   item);      
+int pam_set_item(  pamh,       
+                   item_type,  
+                   item);      
 
 pam_handle_t *pamh;
 int item_type;
 const void *item;
- 
+ 
 
-3.1.3.1. DESCRIPTION
+3.1.3.1. DESCRIPTION
 
 The pam_set_item function allows applications and PAM service modules to access
 and to update PAM informations of item_type. For this a copy of the object
@@ -448,7 +448,7 @@ Both, PAM_AUTHTOK and PAM_OLDAUTHTOK, will be reseted before returning to the
 application. Which means an application is not able to access the
 authentication tokens.
 
-3.1.3.2. RETURN VALUES
+3.1.3.2. RETURN VALUES
 
 PAM_BAD_ITEM
 
@@ -466,20 +466,20 @@ PAM_SYSTEM_ERR
 
     The pam_handle_t passed as first argument was invalid.
 
-3.1.4. Getting PAM items
+3.1.4. Getting PAM items
 
 #include <security/pam_modules.h>
 
-int pam_get_item(  pamh,       
-                   item_type,  
-                   item);      
+int pam_get_item(  pamh,       
+                   item_type,  
+                   item);      
 
 const pam_handle_t *pamh;
 int item_type;
 const void **item;
- 
+ 
 
-3.1.4.1. DESCRIPTION
+3.1.4.1. DESCRIPTION
 
 The pam_get_item function allows applications and PAM service modules to access
 and retrieve PAM informations of item_type. Upon successful return, item
@@ -586,7 +586,7 @@ this function, but instead perform a call to pam_get_user(3).
 Only a service module is privileged to read the authentication tokens,
 PAM_AUTHTOK and PAM_OLDAUTHTOK.
 
-3.1.4.2. RETURN VALUES
+3.1.4.2. RETURN VALUES
 
 PAM_BAD_ITEM
 
@@ -608,46 +608,46 @@ PAM_SYSTEM_ERR
 
     The pam_handle_t passed as first argument was invalid.
 
-3.1.5. Strings describing PAM error codes
+3.1.5. Strings describing PAM error codes
 
 #include <security/pam_appl.h>
 
-const char *pam_strerror( pamh,     
-                          errnum);  
+const char *pam_strerror( pamh,     
+                          errnum);  
 
 pam_handle_t *pamh;
 int errnum;
- 
+ 
 
-3.1.5.1. DESCRIPTION
+3.1.5.1. DESCRIPTION
 
 The pam_strerror function returns a pointer to a string describing the error
 code passed in the argument errnum, possibly using the LC_MESSAGES part of the
 current locale to select the appropriate language. This string must not be
 modified by the application. No library function will modify this string.
 
-3.1.5.2. RETURN VALUES
+3.1.5.2. RETURN VALUES
 
 This function returns always a pointer to a string.
 
-3.1.6. Request a delay on failure
+3.1.6. Request a delay on failure
 
 #include <security/pam_appl.h>
 
-int pam_fail_delay(  pamh,   
-                     usec);  
+int pam_fail_delay(  pamh,   
+                     usec);  
 
 pam_handle_t *pamh;
 unsigned int usec;
- 
+ 
 
-3.1.6.1. DESCRIPTION
+3.1.6.1. DESCRIPTION
 
 The pam_fail_delay function provides a mechanism by which an application or
 module can suggest a minimum delay of usec micro-seconds. The function keeps a
 record of the longest time requested with this function. Should 
 pam_authenticate(3) fail, the failing return to the application is delayed by
-an amount of time randomly distributed (by up to 25%) about this longest value.
+an amount of time randomly distributed (by up to 50%) about this longest value.
 
 Independent of success, the delay time is reset to its zero default value when
 the PAM service module returns control to the application. The delay occurs 
@@ -681,7 +681,7 @@ the application when it called pam_start(3) or explicitly with pam_set_item(3).
 Note, if PAM_FAIL_DELAY item is unset (or set to NULL), then no delay will be
 performed.
 
-3.1.6.2. RETURN VALUES
+3.1.6.2. RETURN VALUES
 
 PAM_SUCCESS
 
@@ -691,25 +691,25 @@ PAM_SYSTEM_ERR
 
     A NULL pointer was submitted as PAM handle.
 
-3.1.7. Authenticating the user
+3.1.7. Authenticating the user
 
 #include <security/pam_appl.h>
 
-int pam_authenticate(  pamh,    
-                       flags);  
+int pam_authenticate(  pamh,    
+                       flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.7.1. DESCRIPTION
+3.1.7.1. DESCRIPTION
 
 The pam_authenticate function is used to authenticate the user. The user is
 required to provide an authentication token depending upon the authentication
 service, usually this is a password, but could also be a finger print.
 
-The PAM service module may request that the user enter their username vio the
-the conversation mechanism (see pam_start(3) and pam_conv(3)). The name of the
+The PAM service module may request that the user enter their username via the
+conversation mechanism (see pam_start(3) and pam_conv(3)). The name of the
 authenticated user will be present in the PAM item PAM_USER. This item may be
 recovered with a call to pam_get_item(3).
 
@@ -726,7 +726,7 @@ PAM_DISALLOW_NULL_AUTHTOK
     The PAM module service should return PAM_AUTH_ERR if the user does not have
     a registered authentication token.
 
-3.1.7.2. RETURN VALUES
+3.1.7.2. RETURN VALUES
 
 PAM_ABORT
 
@@ -741,7 +741,7 @@ PAM_CRED_INSUFFICIENT
     For some reason the application does not have sufficient credentials to
     authenticate the user.
 
-PAM_AUTHINFO_UNVAIL
+PAM_AUTHINFO_UNAVAIL
 
     The modules were not able to access the authentication information. This
     might be due to a network or hardware failure etc.
@@ -759,18 +759,18 @@ PAM_USER_UNKNOWN
 
     User unknown to authentication service.
 
-3.1.8. Setting user credentials
+3.1.8. Setting user credentials
 
 #include <security/pam_appl.h>
 
-int pam_setcred(  pamh,    
-                  flags);  
+int pam_setcred(  pamh,    
+                  flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.8.1. DESCRIPTION
+3.1.8.1. DESCRIPTION
 
 The pam_setcred function is used to establish, maintain and delete the
 credentials of a user. It should be called to set the credentials after a user
@@ -805,7 +805,7 @@ PAM_REFRESH_CRED
 
     Extend the lifetime of the existing credentials.
 
-3.1.8.2. RETURN VALUES
+3.1.8.2. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -836,20 +836,20 @@ PAM_USER_UNKNOWN
 
     User is not known to an authentication module.
 
-3.1.9. Account validation management
+3.1.9. Account validation management
 
 #include <security/pam_appl.h>
 
-int pam_acct_mgmt(  pamh,    
-                    flags);  
+int pam_acct_mgmt(  pamh,    
+                    flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.9.1. DESCRIPTION
+3.1.9.1. DESCRIPTION
 
-The pam_acct_mgmt function is used to determine if the users account is valid.
+The pam_acct_mgmt function is used to determine if the user's account is valid.
 It checks for authentication token and account expiration and verifies access
 restrictions. It is typically called after the user has been authenticated.
 
@@ -866,7 +866,7 @@ PAM_DISALLOW_NULL_AUTHTOK
     The PAM module service should return PAM_NEW_AUTHTOK_REQD if the user has a
     null authentication token.
 
-3.1.9.2. RETURN VALUES
+3.1.9.2. RETURN VALUES
 
 PAM_ACCT_EXPIRED
 
@@ -896,18 +896,18 @@ PAM_USER_UNKNOWN
 
     User unknown to password service.
 
-3.1.10. Updating authentication tokens
+3.1.10. Updating authentication tokens
 
 #include <security/pam_appl.h>
 
-int pam_chauthtok(  pamh,    
-                    flags);  
+int pam_chauthtok(  pamh,    
+                    flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.10.1. DESCRIPTION
+3.1.10.1. DESCRIPTION
 
 The pam_chauthtok function is used to change the authentication token for a
 given user (as indicated by the state associated with the handle pamh).
@@ -922,12 +922,12 @@ PAM_SILENT
 
 PAM_CHANGE_EXPIRED_AUTHTOK
 
-    This argument indicates to the modules that the users authentication token
+    This argument indicates to the modules that the user's authentication token
     (password) should only be changed if it has expired. If this argument is
     not passed, the application requires that all authentication tokens are to
     be changed.
 
-3.1.10.2. RETURN VALUES
+3.1.10.2. RETURN VALUES
 
 PAM_AUTHTOK_ERR
 
@@ -965,18 +965,18 @@ PAM_USER_UNKNOWN
 
     User unknown to password service.
 
-3.1.11. Start PAM session management
+3.1.11. Start PAM session management
 
 #include <security/pam_appl.h>
 
-int pam_open_session(  pamh,    
-                       flags);  
+int pam_open_session(  pamh,    
+                       flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.11.1. DESCRIPTION
+3.1.11.1. DESCRIPTION
 
 The pam_open_session function sets up a user session for a previously
 successful authenticated user. The session should later be terminated with a
@@ -992,7 +992,7 @@ PAM_SILENT
 
     Do not emit any messages.
 
-3.1.11.2. RETURN VALUES
+3.1.11.2. RETURN VALUES
 
 PAM_ABORT
 
@@ -1010,18 +1010,18 @@ PAM_SUCCESS
 
     Session was successful created.
 
-3.1.12. terminating PAM session management
+3.1.12. terminating PAM session management
 
 #include <security/pam_appl.h>
 
-int pam_close_session( pamh,    
-                       flags);  
+int pam_close_session( pamh,    
+                       flags);  
 
 pam_handle_t *pamh;
 int flags;
- 
+ 
 
-3.1.12.1. DESCRIPTION
+3.1.12.1. DESCRIPTION
 
 The pam_close_session function is used to indicate that an authenticated
 session has ended. The session should have been created with a call to 
@@ -1037,7 +1037,7 @@ PAM_SILENT
 
     Do not emit any messages.
 
-3.1.12.2. RETURN VALUES
+3.1.12.2. RETURN VALUES
 
 PAM_ABORT
 
@@ -1055,18 +1055,18 @@ PAM_SUCCESS
 
     Session was successful terminated.
 
-3.1.13. Set or change PAM environment variable
+3.1.13. Set or change PAM environment variable
 
 #include <security/pam_appl.h>
 
-int pam_putenv(  pamh,         
-                 name_value);  
+int pam_putenv(  pamh,         
+                 name_value);  
 
 pam_handle_t *pamh;
 const char *name_value;
- 
+ 
 
-3.1.13.1. DESCRIPTION
+3.1.13.1. DESCRIPTION
 
 The pam_putenv function is used to add or change the value of PAM environment
 variables as associated with the pamh handle.
@@ -1094,7 +1094,7 @@ NAME
 pam_putenv() operates on a copy of name_value, which means in contrast to 
 putenv(3), the application is responsible to free the data.
 
-3.1.13.2. RETURN VALUES
+3.1.13.2. RETURN VALUES
 
 PAM_PERM_DENIED
 
@@ -1116,38 +1116,38 @@ PAM_SUCCESS
 
     The environment variable was successfully updated.
 
-3.1.14. Get a PAM environment variable
+3.1.14. Get a PAM environment variable
 
 #include <security/pam_appl.h>
 
-const char *pam_getenv( pamh,   
-                        name);  
+const char *pam_getenv( pamh,   
+                        name);  
 
 pam_handle_t *pamh;
 const char *name;
- 
+ 
 
-3.1.14.1. DESCRIPTION
+3.1.14.1. DESCRIPTION
 
 The pam_getenv function searches the PAM environment list as associated with
 the handle pamh for an item that matches the string pointed to by name and
 returns a pointer to the value of the environment variable. The application is
 not allowed to free the data.
 
-3.1.14.2. RETURN VALUES
+3.1.14.2. RETURN VALUES
 
 The pam_getenv function returns NULL on failure.
 
-3.1.15. Getting the PAM environment
+3.1.15. Getting the PAM environment
 
 #include <security/pam_appl.h>
 
-char **pam_getenvlist(  pamh);  
+char **pam_getenvlist(  pamh);  
 
 pam_handle_t *pamh;
- 
+ 
 
-3.1.15.1. DESCRIPTION
+3.1.15.1. DESCRIPTION
 
 The pam_getenvlist function returns a complete copy of the PAM environment as
 associated with the handle pamh. The PAM environment variables represent the
@@ -1166,13 +1166,13 @@ It is by design, and not a coincidence, that the format and contents of the
 returned array matches that required for the third argument of the execle(3)
 function call.
 
-3.1.15.2. RETURN VALUES
+3.1.15.2. RETURN VALUES
 
 The pam_getenvlist function returns NULL on failure.
 
-3.2. What is expected of an application
+3.2. What is expected of an application
 
-3.2.1. The conversation function
+3.2.1. The conversation function
 
 #include <security/pam_appl.h>
 
@@ -1193,7 +1193,7 @@ struct pam_conv {
 };
 
 
-3.2.1.1. DESCRIPTION
+3.2.1.1. DESCRIPTION
 
 The PAM library uses an application-defined callback to allow a direct
 communication between a loaded module and the application. This callback is
@@ -1263,15 +1263,15 @@ compatibility problems.
 For what its worth the two known module writer work-arounds for trying to
 maintain source level compatibility with both PAM implementations are:
 
-  * never call the conversation function with num_msg greater than one.
+  • never call the conversation function with num_msg greater than one.
 
-  * set up msg as doubly referenced so both types of conversation function can
+  • set up msg as doubly referenced so both types of conversation function can
     find the messages. That is, make
 
            msg[n] = & (( *msg )[n])
 
 
-3.2.1.2. RETURN VALUES
+3.2.1.2. RETURN VALUES
 
 PAM_BUF_ERR
 
@@ -1285,7 +1285,7 @@ PAM_SUCCESS
 
     Success.
 
-3.3. Programming notes
+3.3. Programming notes
 
 Note, all of the authentication service function calls accept the token 
 PAM_SILENT, which instructs the modules to not send messages to the
@@ -1294,7 +1294,7 @@ tokens specific to the individual function calls. PAM_SILENT does not override
 the prompting of the user for passwords etc., it only stops informative
 messages from being generated.
 
-Chapter 4.  Security issues of Linux-PAM
+Chapter 4.  Security issues of Linux-PAM
 
 PAM, from the perspective of an application, is a convenient API for
 authenticating users. PAM modules generally have no increased privilege over
@@ -1311,7 +1311,7 @@ Care should be taken to anticipate all of the documented behavior of the
 Linux-PAM library functions. A failure to do this will most certainly lead to a
 future security breach.
 
-4.1. Care about standard library calls
+4.1. Care about standard library calls
 
 In general, writers of authorization-granting applications should assume that
 each module is likely to call any or all 'libc' functions. For 'libc' functions
@@ -1326,7 +1326,7 @@ library.
 Two important function classes that fall into this category are getpwnam(3) and
 syslog(3).
 
-4.2. Choice of a service name
+4.2. Choice of a service name
 
 When picking the service-name that corresponds to the first entry in the 
 Linux-PAM configuration file, the application programmer should avoid the
@@ -1359,12 +1359,12 @@ The conclusion is that the application developer should carefully define the
 service-name of an application. The safest thing is to make it a single
 hard-wired name.
 
-4.3. The conversation function
+4.3. The conversation function
 
 Care should be taken to ensure that the conv() function is robust. Such a
 function is provided in the library libpam_misc (see below).
 
-4.4. The identity of the user
+4.4. The identity of the user
 
 The Linux-PAM modules will need to determine the identity of the user who
 requests a service, and the identity of the user who grants the service. These
@@ -1404,7 +1404,7 @@ originates from this remote/requesting host. At present, PAM has no established
 convention for indicating whether the application supports a trusted path to
 communication from this host.
 
-4.5. Sufficient resources
+4.5. Sufficient resources
 
 Care should be taken to ensure that the proper execution of an application is
 not compromised by a lack of system resources. If an application is unable to
@@ -1418,7 +1418,7 @@ and dealing with such extreme conditions gracefully and in a manner that
 preserves the PAM API. Such tolerance may be especially important when
 attempting to track a malicious adversary.
 
-Chapter 5. A library of miscellaneous helper functions
+Chapter 5. A library of miscellaneous helper functions
 
 To aid the work of the application developer a library of miscellaneous
 functions is provided. It is called libpam_misc, and contains a text based
@@ -1430,24 +1430,24 @@ defined by including <security/pam_misc.h>. It should be noted that this
 library is specific to Linux-PAM and is not referred to in the defining DCE-RFC
 (see See also) below.
 
-5.1. Functions supplied
+5.1. Functions supplied
 
-5.1.1. Text based conversation function
+5.1.1. Text based conversation function
 
 #include <security/pam_misc.h>
 
-int misc_conv(  num_msg,       
-                msgm,          
-                response,      
-                appdata_ptr);  
+int misc_conv(  num_msg,       
+                msgm,          
+                response,      
+                appdata_ptr);  
 
 int num_msg;
 const struct pam_message **msgm;
 struct pam_response **response;
 void *appdata_ptr;
- 
+ 
 
-5.1.1.1. DESCRIPTION
+5.1.1.1. DESCRIPTION
 
 The misc_conv function is part of libpam_misc and not of the standard libpam
 library. This function will prompt the user with the appropriate comments and
@@ -1472,7 +1472,7 @@ const char *pam_misc_conv_warn_line;
     Used in conjuction with pam_misc_conv_warn_time, this variable is a pointer
     to the string that will be displayed when it becomes time to warn the user
     that the timeout is approaching. Its default value is a translated version
-    of ?...Time is running out...?, but this can be changed by the application
+    of “...Time is running out...”, but this can be changed by the application
     prior to passing control to Linux-PAM.
 
 time_t pam_misc_conv_die_time;
@@ -1487,7 +1487,7 @@ const char *pam_misc_conv_die_line;
 
     Used in conjuction with pam_misc_conv_die_time, this variable is a pointer
     to the string that will be displayed when the conversation times out. Its
-    default value is a translated version of ?...Sorry, your time is up!?, but
+    default value is a translated version of “...Sorry, your time is up!”, but
     this can be changed by the application prior to passing control to 
     Linux-PAM.
 
@@ -1513,53 +1513,53 @@ int (*pam_binary_handler_free)(void *appdata, pamc_bp_t *delete_me);
     This function pointer is initialized to PAM_BP_RENEW(delete_me, 0, 0), but
     can be redefined as desired by the application.
 
-5.1.2. Transcribing an environment to that of PAM
+5.1.2. Transcribing an environment to that of PAM
 
 #include <security/pam_misc.h>
 
-int pam_misc_paste_env( pamh,   
-                        user);  
+int pam_misc_paste_env( pamh,   
+                        user);  
 
 pam_handle_t *pamh;
 const char * const *user;
- 
+ 
 
-5.1.2.1. DESCRIPTION
+5.1.2.1. DESCRIPTION
 
 This function takes the supplied list of environment pointers and uploads its
 contents to the PAM environment. Success is indicated by PAM_SUCCESS.
 
-5.1.3. Liberating a locally saved environment
+5.1.3. Liberating a locally saved environment
 
 #include <security/pam_misc.h>
 
-int pam_misc_drop_env(  env);  
+int pam_misc_drop_env(  env);  
 
 char **env;
- 
+ 
 
-5.1.3.1. DESCRIPTION
+5.1.3.1. DESCRIPTION
 
 This function is defined to complement the pam_getenvlist(3) function. It
 liberates the memory associated with env, overwriting with 0 all memory before
 free()ing it.
 
-5.1.4. BSD like PAM environment variable setting
+5.1.4. BSD like PAM environment variable setting
 
 #include <security/pam_misc.h>
 
-int pam_misc_setenv( pamh,       
-                     name,       
-                     value,      
-                     readonly);  
+int pam_misc_setenv( pamh,       
+                     name,       
+                     value,      
+                     readonly);  
 
 pam_handle_t *pamh;
 const char *name;
 const char *value;
 intreadonly;
- 
+ 
 
-5.1.4.1. DESCRIPTION
+5.1.4.1. DESCRIPTION
 
 This function performs a task equivalent to pam_putenv(3), its syntax is,
 however, more like the BSD style function; setenv(). The name and value are
@@ -1567,7 +1567,7 @@ concatenated with an '=' to form a name=value and passed to pam_putenv(). If,
 however, the PAM variable is already set, the replacement will only be applied
 if the last argument, readonly, is zero.
 
-Chapter 6. Porting legacy applications
+Chapter 6. Porting legacy applications
 
 The point of PAM is that the application is not supposed to have any idea how
 the attached authentication modules will choose to authenticate the user. So
@@ -1604,7 +1604,7 @@ total control in the authentication "procedure", the conversation function
 should only deal with reformatting user prompts and extracting responses from
 raw input.
 
-Chapter 7. Glossary of PAM related terms
+Chapter 7. Glossary of PAM related terms
 
 The following are a list of terms used within this document.
 
@@ -1627,7 +1627,7 @@ Credentials
     memberships) are not deemed to be PAM-credentials. It is the responsibility
     of the application to grant these directly.
 
-Chapter 8. An example application
+Chapter 8. An example application
 
 To get a flavor of the way a Linux-PAM application is written we include the
 following example. It prompts the user for their password and indicates whether
@@ -1696,7 +1696,7 @@ int main(int argc, char *argv[])
 
 
 
-Chapter 9. Files
+Chapter 9. Files
 
 /usr/include/security/pam_appl.h
 
@@ -1707,17 +1707,17 @@ Chapter 9. Files
     Header file for useful library functions for making applications easier to
     write.
 
-Chapter 10. See also
+Chapter 10. See also
 
-  * The Linux-PAM System Administrators' Guide.
+  • The Linux-PAM System Administrators' Guide.
 
-  * The Linux-PAM Module Writers' Guide.
+  • The Linux-PAM Module Writers' Guide.
 
-  * The V. Samar and R. Schemers (SunSoft), ``UNIFIED LOGIN WITH PLUGGABLE
+  • The V. Samar and R. Schemers (SunSoft), ``UNIFIED LOGIN WITH PLUGGABLE
     AUTHENTICATION MODULES'', Open Software Foundation Request For Comments
     86.0, October 1995.
 
-Chapter 11. Author/acknowledgments
+Chapter 11. Author/acknowledgments
 
 This document was written by Andrew G. Morgan (morgan@kernel.org) with many
 contributions from Chris Adams, Peter Allgeyer, Tim Baverstock, Tim Berger,
@@ -1736,7 +1736,7 @@ Lai for their advice. At an early stage in the development of Linux-PAM, Sun
 graciously made the documentation for their implementation of PAM available.
 This act greatly accelerated the development of Linux-PAM.
 
-Chapter 12. Copyright information for this document
+Chapter 12. Copyright information for this document
 
 Copyright (c) 2006 Thorsten Kukuk <kukuk@thkukuk.de>
 Copyright (c) 1996-2002 Andrew G. Morgan <morgan@kernel.org>

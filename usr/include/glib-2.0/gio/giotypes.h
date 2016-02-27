@@ -103,6 +103,7 @@ typedef struct _GIcon                         GIcon; /* Dummy typedef */
 typedef struct _GInetAddress                  GInetAddress;
 typedef struct _GInetAddressMask              GInetAddressMask;
 typedef struct _GInetSocketAddress            GInetSocketAddress;
+typedef struct _GNativeSocketAddress          GNativeSocketAddress;
 typedef struct _GInputStream                  GInputStream;
 typedef struct _GInitable                     GInitable;
 typedef struct _GIOModule                     GIOModule;
@@ -133,6 +134,7 @@ typedef struct _GNetworkMonitor               GNetworkMonitor;
 typedef struct _GNetworkService               GNetworkService;
 typedef struct _GOutputStream                 GOutputStream;
 typedef struct _GIOStream                     GIOStream;
+typedef struct _GSimpleIOStream               GSimpleIOStream;
 typedef struct _GPollableInputStream          GPollableInputStream; /* Dummy typedef */
 typedef struct _GPollableOutputStream         GPollableOutputStream; /* Dummy typedef */
 typedef struct _GResolver                     GResolver;
@@ -423,6 +425,41 @@ typedef struct _GOutputVector GOutputVector;
 struct _GOutputVector {
   gconstpointer buffer;
   gsize size;
+};
+
+/**
+ * GOutputMessage:
+ * @address: (allow-none): a #GSocketAddress, or %NULL
+ * @vectors: pointer to an array of output vectors
+ * @num_vectors: the number of output vectors pointed to by @vectors.
+ * @bytes_sent: initialize to 0. Will be set to the number of bytes
+ *     that have been sent
+ * @control_messages: (array length=num_control_messages) (allow-none): a pointer
+ *   to an array of #GSocketControlMessages, or %NULL.
+ * @num_control_messages: number of elements in @control_messages.
+ *
+ * Structure used for scatter/gather data output when sending multiple
+ * messages or packets in one go. You generally pass in an array of
+ * #GOutputVectors and the operation will use all the buffers as if they
+ * were one buffer.
+ *
+ * If @address is %NULL then the message is sent to the default receiver
+ * (as previously set by g_socket_connect()).
+ *
+ * Since: 2.44
+ */
+typedef struct _GOutputMessage GOutputMessage;
+
+struct _GOutputMessage {
+  GSocketAddress         *address;
+
+  GOutputVector          *vectors;
+  guint                   num_vectors;
+
+  guint                   bytes_sent;
+
+  GSocketControlMessage **control_messages;
+  guint                   num_control_messages;
 };
 
 typedef struct _GCredentials                  GCredentials;

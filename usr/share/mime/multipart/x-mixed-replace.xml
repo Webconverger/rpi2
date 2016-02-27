@@ -21,11 +21,12 @@
   <comment xml:lang="gl">fluxo de datos (por iniciativa do servidor)</comment>
   <comment xml:lang="he">מידע בזרימה (דחיפה ע״י השרת)</comment>
   <comment xml:lang="hu">sugárzott adatfolyam (kiszolgálóról)</comment>
+  <comment xml:lang="ia">Fluxo de datos (pulsate per servitor)</comment>
   <comment xml:lang="id">arus data (dorongan server)</comment>
   <comment xml:lang="it">Flusso di dati (server push)</comment>
   <comment xml:lang="ja">データストリーム (サーバープッシュ型)</comment>
   <comment xml:lang="kk">мәліметтер ағымы (server push)</comment>
-  <comment xml:lang="ko">데이터 스트림 (서버 푸시)</comment>
+  <comment xml:lang="ko">데이터 스트림(서버 푸시)</comment>
   <comment xml:lang="lt">duomenų srautas (iš serverio)</comment>
   <comment xml:lang="lv">datu straume (servera grūsta)</comment>
   <comment xml:lang="ms">Aliran dara (paksaan pelayan)</comment>
@@ -40,8 +41,9 @@
   <comment xml:lang="sk">Prúd dát (posielaný serverom)</comment>
   <comment xml:lang="sl">pretok podatkov (strežniški)</comment>
   <comment xml:lang="sq">Fluks me të dhëna (server push)</comment>
-  <comment xml:lang="sr">проток података (гурање са сервера)</comment>
+  <comment xml:lang="sr">ток података (гурање са сервера)</comment>
   <comment xml:lang="sv">dataflöde (serverutsändning)</comment>
+  <comment xml:lang="tr">veri akışı (sunucudan gönderilen)</comment>
   <comment xml:lang="uk">потік даних (від сервера)</comment>
   <comment xml:lang="vi">luồng dữ liệu (trình phục vụ đẩy)</comment>
   <comment xml:lang="zh_CN">数据流(服务器推送)</comment>

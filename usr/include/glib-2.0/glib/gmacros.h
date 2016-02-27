@@ -63,7 +63,13 @@
 #define G_GNUC_NULL_TERMINATED
 #endif
 
-#if     (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3)
+/* Clang feature detection: http://clang.llvm.org/docs/LanguageExtensions.html */
+#ifndef __has_feature
+#define __has_feature(x) 0
+#endif
+
+#if     (!defined(__clang__) && ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))) || \
+        (defined(__clang__) && __has_feature(__alloc_size__))
 #define G_GNUC_ALLOC_SIZE(x) __attribute__((__alloc_size__(x)))
 #define G_GNUC_ALLOC_SIZE2(x,y) __attribute__((__alloc_size__(x,y)))
 #else
@@ -158,12 +164,7 @@
 #endif  /* !__GNUC__ */
 #endif  /* !G_DISABLE_DEPRECATED */
 
-/* Clang feature detection: http://clang.llvm.org/docs/LanguageExtensions.html */
-#ifndef __has_feature
-#define __has_feature(x) 0
-#endif
-
-#if __has_feature(attribute_analyzer_noreturn)
+#if __has_feature(attribute_analyzer_noreturn) && defined(__clang_analyzer__)
 #define G_ANALYZER_ANALYZING 1
 #define G_ANALYZER_NORETURN __attribute__((analyzer_noreturn))
 #else
@@ -279,7 +280,7 @@
  *   if (x) G_STMT_START { ... } G_STMT_END; else ...
  * This intentionally does not use compiler extensions like GCC's '({...})' to
  * avoid portability issue or side effects when compiled with different compilers.
- * MSVC complains about "while(0)": C4127: “Conditional expression is constant”,
+ * MSVC complains about "while(0)": C4127: "Conditional expression is constant",
  * so we use __pragma to avoid the warning since the use here is intentional.
  */
 #if !(defined (G_STMT_START) && defined (G_STMT_END))
@@ -371,6 +372,49 @@
 #define GLIB_DEPRECATED G_DEPRECATED _GLIB_EXTERN
 #define GLIB_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) _GLIB_EXTERN
 #define GLIB_UNAVAILABLE(maj,min) G_UNAVAILABLE(maj,min) _GLIB_EXTERN
+#endif
+
+#ifdef __GNUC__
+
+/* these macros are private */
+#define _GLIB_AUTOPTR_FUNC_NAME(TypeName) glib_autoptr_cleanup_##TypeName
+#define _GLIB_AUTOPTR_TYPENAME(TypeName)  TypeName##_autoptr
+#define _GLIB_AUTO_FUNC_NAME(TypeName)    glib_auto_cleanup_##TypeName
+#define _GLIB_CLEANUP(func)               __attribute__((cleanup(func)))
+#define _GLIB_DEFINE_AUTOPTR_CHAINUP(ModuleObjName, ParentName) \
+  typedef ModuleObjName *_GLIB_AUTOPTR_TYPENAME(ModuleObjName);                                          \
+  static inline void _GLIB_AUTOPTR_FUNC_NAME(ModuleObjName) (ModuleObjName **_ptr) {                     \
+    _GLIB_AUTOPTR_FUNC_NAME(ParentName) ((ParentName **) _ptr); }                                        \
+
+
+/* these macros are API */
+#define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) \
+  typedef TypeName *_GLIB_AUTOPTR_TYPENAME(TypeName);                                                           \
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS                                                                              \
+  static inline void _GLIB_AUTOPTR_FUNC_NAME(TypeName) (TypeName **_ptr) { if (*_ptr) (func) (*_ptr); }         \
+  G_GNUC_END_IGNORE_DEPRECATIONS
+#define G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(TypeName, func) \
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS                                                                              \
+  static inline void _GLIB_AUTO_FUNC_NAME(TypeName) (TypeName *_ptr) { (func) (_ptr); }                         \
+  G_GNUC_END_IGNORE_DEPRECATIONS
+#define G_DEFINE_AUTO_CLEANUP_FREE_FUNC(TypeName, func, none) \
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS                                                                              \
+  static inline void _GLIB_AUTO_FUNC_NAME(TypeName) (TypeName *_ptr) { if (*_ptr != none) (func) (*_ptr); }     \
+  G_GNUC_END_IGNORE_DEPRECATIONS
+#define g_autoptr(TypeName) _GLIB_CLEANUP(_GLIB_AUTOPTR_FUNC_NAME(TypeName)) _GLIB_AUTOPTR_TYPENAME(TypeName)
+#define g_auto(TypeName) _GLIB_CLEANUP(_GLIB_AUTO_FUNC_NAME(TypeName)) TypeName
+#define g_autofree _GLIB_CLEANUP(g_autoptr_cleanup_generic_gfree)
+
+#else /* not GNU C */
+/* this (dummy) macro is private */
+#define _GLIB_DEFINE_AUTOPTR_CHAINUP(ModuleObjName, ParentName)
+
+/* these (dummy) macros are API */
+#define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func)
+#define G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(TypeName, func)
+#define G_DEFINE_AUTO_CLEANUP_FREE_FUNC(TypeName, func, none)
+
+/* no declaration of g_auto() or g_autoptr() here */
 #endif
 
 #endif /* __G_MACROS_H__ */

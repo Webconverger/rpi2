@@ -12,7 +12,7 @@
   <comment xml:lang="el">Δέσμη ενεργειών Lua</comment>
   <comment xml:lang="en_GB">Lua script</comment>
   <comment xml:lang="eo">Lua-skripto</comment>
-  <comment xml:lang="es">script en Lua</comment>
+  <comment xml:lang="es">secuencia de órdenes en Lua</comment>
   <comment xml:lang="eu">Lua script-a</comment>
   <comment xml:lang="fi">Lua-komentotiedosto</comment>
   <comment xml:lang="fo">Lua boðrøð</comment>
@@ -40,7 +40,9 @@
   <comment xml:lang="sk">Skript Lua</comment>
   <comment xml:lang="sl">Skriptna datoteka Lua</comment>
   <comment xml:lang="sq">Script Lua</comment>
+  <comment xml:lang="sr">Луа скрипта</comment>
   <comment xml:lang="sv">Lua-skript</comment>
+  <comment xml:lang="tr">Lua betiği</comment>
   <comment xml:lang="uk">скрипт Lua</comment>
   <comment xml:lang="vi">Văn lệnh Lua</comment>
   <comment xml:lang="zh_CN">Lua 脚本</comment>

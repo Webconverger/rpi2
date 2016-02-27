@@ -16,7 +16,7 @@
   <comment xml:lang="eo">OpenType-tiparo</comment>
   <comment xml:lang="es">tipo de letra OpenType</comment>
   <comment xml:lang="eu">OpenType letra-tipoa</comment>
-  <comment xml:lang="fi">OpenType-kirjasin</comment>
+  <comment xml:lang="fi">OpenType-fontti</comment>
   <comment xml:lang="fo">OpenType stavasnið</comment>
   <comment xml:lang="fr">police OpenType</comment>
   <comment xml:lang="ga">cló OpenType</comment>
@@ -25,7 +25,7 @@
   <comment xml:lang="hu">OpenType-betűkészlet</comment>
   <comment xml:lang="ia">Typo de litteras OpenType</comment>
   <comment xml:lang="id">Fonta OpenType</comment>
-  <comment xml:lang="it">Tipo carattere OpenType</comment>
+  <comment xml:lang="it">Carattere OpenType</comment>
   <comment xml:lang="ja">OpenType フォント</comment>
   <comment xml:lang="kk">OpenType қарібі</comment>
   <comment xml:lang="ko">오픈타입 글꼴</comment>
@@ -43,7 +43,7 @@
   <comment xml:lang="sk">Písmo OpenType</comment>
   <comment xml:lang="sl">Datoteka pisave OpenType</comment>
   <comment xml:lang="sq">Gërma OpenType</comment>
-  <comment xml:lang="sr">OpenType фонт</comment>
+  <comment xml:lang="sr">слова Отворене Врсте</comment>
   <comment xml:lang="sv">OpenType-typsnitt</comment>
   <comment xml:lang="tr">OpenType fontu</comment>
   <comment xml:lang="uk">шрифт OpenType</comment>

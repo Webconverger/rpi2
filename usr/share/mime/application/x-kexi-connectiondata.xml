@@ -34,7 +34,9 @@
   <comment xml:lang="ru">параметры Kexi для подключения к серверу БД</comment>
   <comment xml:lang="sk">Nastavenia Kexi pre pripojenie k databázovému serveru</comment>
   <comment xml:lang="sl">Strežniška povezava do nastavitvene datoteke Kexi.</comment>
+  <comment xml:lang="sr">подешавања Кексија за везу са сервером базе података</comment>
   <comment xml:lang="sv">Kexi-inställningar för anslutning till databasserver</comment>
+  <comment xml:lang="tr">Veritabanı sunucu bağlantısı için Kexi ayarları</comment>
   <comment xml:lang="uk">параметри Kexi для встановлення з’єднання з сервером бази даних</comment>
   <comment xml:lang="zh_CN">Kexi 数据库服务器连接设置</comment>
   <comment xml:lang="zh_TW">Kexi 設定值 (資料庫伺服器連線用)</comment>

@@ -31,8 +31,11 @@
   <comment xml:lang="pt_BR">Manifest de cache de aplicação web</comment>
   <comment xml:lang="ro">Manifest de cache pentru aplicații web</comment>
   <comment xml:lang="ru">манифест кэша веб-приложения</comment>
+  <comment xml:lang="sk">Manifest vyrovnávacej pamäte webovej aplikácie</comment>
   <comment xml:lang="sl">Predpomnilnik spletnega programa</comment>
+  <comment xml:lang="sr">проглас оставе Веб програма</comment>
   <comment xml:lang="sv">Cachemanifest för webbapplikation</comment>
+  <comment xml:lang="tr">Web uygulama önbelleği bildirimi</comment>
   <comment xml:lang="uk">маніфест кешу веб-програми</comment>
   <comment xml:lang="zh_CN">网络应用程序缓存清单</comment>
   <comment xml:lang="zh_TW">網頁應用程式快取聲明</comment>

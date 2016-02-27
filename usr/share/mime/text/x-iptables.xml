@@ -35,11 +35,13 @@
   <comment xml:lang="pl">Plik konfiguracji iptables</comment>
   <comment xml:lang="pt_BR">Arquivo de configuração do iptables</comment>
   <comment xml:lang="ro">fișier configurare iptables</comment>
-  <comment xml:lang="ru">конфигурационный файл iptables</comment>
+  <comment xml:lang="ru">файл настроек iptables</comment>
   <comment xml:lang="sk">Súbor nastavení iptables</comment>
   <comment xml:lang="sl">nastavitvena datoteka iptables</comment>
   <comment xml:lang="sq">File konfigurimi iptables</comment>
+  <comment xml:lang="sr">датотека подешавања иптабела</comment>
   <comment xml:lang="sv">iptables-konfigurationsfil</comment>
+  <comment xml:lang="tr">iptables yapılandırma dosyası</comment>
   <comment xml:lang="uk">файл налаштувань iptables</comment>
   <comment xml:lang="vi">tập tin cấu hình iptables</comment>
   <comment xml:lang="zh_CN">iptables 防火墙配置文件</comment>

@@ -38,14 +38,15 @@
   <comment xml:lang="nn">referanse til fil over nettverk</comment>
   <comment xml:lang="pl">Odwołanie do pliku zdalnego</comment>
   <comment xml:lang="pt">referência a um ficheiro remoto</comment>
-  <comment xml:lang="pt_BR">Referência a um arquivo remoto</comment>
+  <comment xml:lang="pt_BR">Referência para arquivo remoto</comment>
   <comment xml:lang="ro">referință fișier la distanță</comment>
   <comment xml:lang="ru">ссылка на удалённый файл</comment>
   <comment xml:lang="sk">Odkaz na vzdialený súbor</comment>
   <comment xml:lang="sl">sklic do oddaljene datoteke</comment>
   <comment xml:lang="sq">Referim për tek file në distancë</comment>
-  <comment xml:lang="sr">референца на удаљену датотеку</comment>
+  <comment xml:lang="sr">упута на удаљену датотеку</comment>
   <comment xml:lang="sv">referens till fjärrfil</comment>
+  <comment xml:lang="tr">uzaktaki dosyaya başvuru</comment>
   <comment xml:lang="uk">посилання на віддалений файл</comment>
   <comment xml:lang="vi">tham chiếu đến tập tin ở xa</comment>
   <comment xml:lang="zh_CN">到远程文件的引用</comment>

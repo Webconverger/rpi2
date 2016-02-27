@@ -315,10 +315,12 @@ struct IPerlStdIOInfo
 #define PerlSIO_fputs(s,f)		fputs(s,f)
 #define PerlSIO_fflush(f)		Fflush(f)
 #define PerlSIO_fgets(s, n, f)		fgets(s,n,f)
-#if defined(VMS) && defined(__DECC)
+#if defined(__VMS)
      /* Unusual definition of ungetc() here to accommodate fast_sv_gets()'
       * belief that it can mix getc/ungetc with reads from stdio buffer */
+START_EXTERN_C
      int decc$ungetc(int __c, FILE *__stream);
+END_EXTERN_C
 #    define PerlSIO_ungetc(c,f) ((c) == EOF ? EOF : \
             ((*(f) && !((*(f))->_flag & _IONBF) && \
             ((*(f))->_ptr > (*(f))->_base)) ? \
@@ -1413,11 +1415,5 @@ struct IPerlSockInfo
 #endif	/* __Inc__IPerl___ */
 
 /*
- * Local variables:
- * c-indentation-style: bsd
- * c-basic-offset: 4
- * indent-tabs-mode: nil
- * End:
- *
  * ex: set ts=8 sts=4 sw=4 et:
  */

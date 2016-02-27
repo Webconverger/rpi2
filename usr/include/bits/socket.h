@@ -1,5 +1,5 @@
 /* System-specific socket constants and types.  Linux version.
-   Copyright (C) 1991-2014 Free Software Foundation, Inc.
+   Copyright (C) 1991-2015 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -68,6 +68,8 @@ typedef __socklen_t socklen_t;
 #define PF_PPPOX	24	/* PPPoX sockets.  */
 #define PF_WANPIPE	25	/* Wanpipe API sockets.  */
 #define PF_LLC		26	/* Linux LLC.  */
+#define PF_IB		27	/* Native InfiniBand address.  */
+#define PF_MPLS		28	/* MPLS.  */
 #define PF_CAN		29	/* Controller Area Network.  */
 #define PF_TIPC		30	/* TIPC sockets.  */
 #define PF_BLUETOOTH	31	/* Bluetooth sockets.  */
@@ -113,6 +115,8 @@ typedef __socklen_t socklen_t;
 #define AF_PPPOX	PF_PPPOX
 #define AF_WANPIPE	PF_WANPIPE
 #define AF_LLC		PF_LLC
+#define AF_IB		PF_IB
+#define AF_MPLS		PF_MPLS
 #define AF_CAN		PF_CAN
 #define AF_TIPC		PF_TIPC
 #define AF_BLUETOOTH	PF_BLUETOOTH

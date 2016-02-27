@@ -8,7 +8,7 @@
   <comment xml:lang="ca">executable de DOS/Windows</comment>
   <comment xml:lang="cs">spustitelný soubor pro DOS/Windows</comment>
   <comment xml:lang="da">DOS-/Windowskørbar</comment>
-  <comment xml:lang="de">DOS/Windows-Programm</comment>
+  <comment xml:lang="de">DOS/Windows-Programmdatei</comment>
   <comment xml:lang="el">Εκτελέσιμο DOS/Windows</comment>
   <comment xml:lang="en_GB">DOS/Windows executable</comment>
   <comment xml:lang="eo">DOS/Windows-plenumebla</comment>
@@ -43,7 +43,7 @@
   <comment xml:lang="sk">Spustiteľný súbor pre DOS/Windows</comment>
   <comment xml:lang="sl">Izvedljiva datoteka DOS/Windows</comment>
   <comment xml:lang="sq">I ekzekutueshëm DOS/Windows</comment>
-  <comment xml:lang="sr">ДОС/Виндоуз извршна датотека</comment>
+  <comment xml:lang="sr">ДОС/Виндоуз извршна</comment>
   <comment xml:lang="sv">Körbar DOS/Windows-fil</comment>
   <comment xml:lang="tr">DOS/Windows çalıştırılabilir</comment>
   <comment xml:lang="uk">виконуваний файл DOS/Windows</comment>
