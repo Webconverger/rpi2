@@ -50,3 +50,4 @@ etc/machine-id
 etc/webc/cmdline
 root/.viminfo
 usr/share/fish
+var/lib/pacman/sync
