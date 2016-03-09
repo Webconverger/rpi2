@@ -1,0 +1,37 @@
+%NAME%
+st
+
+%VERSION%
+0.6-2
+
+%DESC%
+A simple virtual terminal emulator for X.
+
+%URL%
+http://st.suckless.org
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1448459217
+
+%INSTALLDATE%
+1457493939
+
+%PACKAGER%
+Arch Linux ARM Build System <builder+xu4@archlinuxarm.org>
+
+%SIZE%
+95232
+
+%LICENSE%
+MIT
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+libxft
+libxext
+

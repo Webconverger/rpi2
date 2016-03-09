@@ -1,0 +1,15 @@
+%FILES%
+usr/
+usr/bin/
+usr/bin/st
+usr/share/
+usr/share/doc/
+usr/share/doc/st/
+usr/share/doc/st/README
+usr/share/licenses/
+usr/share/licenses/st/
+usr/share/licenses/st/LICENSE
+usr/share/man/
+usr/share/man/man1/
+usr/share/man/man1/st.1.gz
+
