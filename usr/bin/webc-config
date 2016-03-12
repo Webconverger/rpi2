@@ -135,6 +135,57 @@ then
 fi
 
 
+if cmdline_has blank
+then
+  blank=$(cmdline_get blank)
+  sleep_time=0
+
+  for t in $(echo ${a#+*} | grep -o '[0-9]*[A-Za-z]')
+  do
+    case $t in
+      *[Ww]) sleep_time+=$(( $t * 7 * 24 * 60 * 60 ));;
+      *[Dd]) sleep_time+=$(( $t * 24 * 60 * 60 ));;
+      *[Hh]) sleep_time+=$(( $t * 60 * 60 ));;
+      *[Mm]) sleep_time+=$(( $t * 60 ));;
+      *[Ss]) sleep_time+=$(( $t ));;
+    esac
+  done
+  if test "$blank"
+  then
+    cat > /etc/systemd/system/blank.timer <<EOF
+[Unit]
+Description=Screen blanking timer
+
+[Timer]
+OnCalendar=${blank%+*}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    cat > /etc/systemd/system/blank.service <<EOF
+[Unit]
+Description=Blank and lock screen
+Before=sleep.target
+
+[Service]
+ExecStart=/bin/sh -c 'physlock -d && sleep $sleep_time && systemctl stop blank.service'
+ExecStop=/usr/bin/pkill physlock
+
+[Install]
+WantedBy=sleep.target
+EOF
+    systemctl daemon-reload
+    systemctl enable blank.timer
+    systemctl start blank.timer
+  fi
+else
+  if systemctl -q is-enabled blank.timer 2>/dev/null
+  then
+    systemctl disable blank.timer
+    systemctl stop blank.timer
+  fi
+fi
+
 
 wpassid=$( cmdline_get wpa-ssid )
 wpapsk=$( cmdline_get wpa-psk )

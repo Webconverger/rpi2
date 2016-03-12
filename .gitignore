@@ -19,6 +19,7 @@ root/.bash_history
 root/.cache/
 root/.lesshst
 root/.vim*
+root/.viminfo
 run
 sys
 tmp
@@ -48,6 +49,7 @@ var/lib/apt
 var/lib/aptitude
 var/lib/dpkg/*-old
 var/lib/logrotate.status
+var/lib/pacman/sync
 var/lib/systemd/coredump/
 var/lib/systemd/random-seed
 var/lock
