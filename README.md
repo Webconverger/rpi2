@@ -27,7 +27,6 @@ Now, lets fetch the Webconverger rootfs for rpi2 from Github:
 	Initialized empty Git repository in /mnt/sdb2/.git/
 	sdb2# git remote add origin https://github.com/Webconverger/rpi2.git # be patient!
 	sdb2# git pull origin master
-	sdb2# bash ./.gitfixups # create some missing empty directories, since git doesn't store empty dirs
 
 Ok, we should have all the files! Now we need to copy over the kernel stuff
 into the special first fat partition for the Rpi2 to boot.
