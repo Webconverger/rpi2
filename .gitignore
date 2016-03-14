@@ -20,6 +20,8 @@ root/.cache/
 root/.lesshst
 root/.vim*
 root/.viminfo
+root/.dbus/
+root/.ssh/
 run
 sys
 tmp
