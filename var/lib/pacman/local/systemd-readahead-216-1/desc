@@ -1,0 +1,36 @@
+%NAME%
+systemd-readahead
+
+%VERSION%
+216-1
+
+%DESC%
+Standalone version of the fast built-in readahead implementation dropped in systemd 217
+
+%URL%
+https://dev.gentoo.org/~pacho/systemd-readahead.html
+
+%ARCH%
+armv7h
+
+%BUILDDATE%
+1461319826
+
+%INSTALLDATE%
+1461893139
+
+%PACKAGER%
+Unknown Packager
+
+%SIZE%
+101376
+
+%LICENSE%
+LGPL-2.1 MIT
+
+%VALIDATION%
+none
+
+%DEPENDS%
+systemd>216
+
