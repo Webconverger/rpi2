@@ -135,55 +135,80 @@ then
 fi
 
 
-if cmdline_has blank
+if cmdline_has wake
 then
-  blank=$(cmdline_get blank)
-  sleep_time=0
+  wake=$(cmdline_get wake)
+  wake="${wake/_/ }"   # TODO: Use &20 instead of _
+  physlock -d &   # Start screen locker first
 
-  for t in $(echo ${a#+*} | grep -o '[0-9]*[A-Za-z]')
+  for t in $(echo ${wake#*+} | grep -o '[0-9]*[A-Za-z]')
   do
     case $t in
-      *[Ww]) sleep_time+=$(( $t * 7 * 24 * 60 * 60 ));;
-      *[Dd]) sleep_time+=$(( $t * 24 * 60 * 60 ));;
-      *[Hh]) sleep_time+=$(( $t * 60 * 60 ));;
-      *[Mm]) sleep_time+=$(( $t * 60 ));;
-      *[Ss]) sleep_time+=$(( $t ));;
+      *[Ww]) sleep_time=$(( $sleep_time + ${t%[Ww]} * 7 * 24 * 60 * 60));;
+      *[Dd]) sleep_time=$(( $sleep_time + ${t%[Dd]} * 24 * 60 *60));;
+      *[Hh]) sleep_time=$(( $sleep_time + ${t%[Hh]} * 60 * 60));;
+      *[Mm]) sleep_time=$(( $sleep_time + ${t%[Mm]} * 60));;
+      *[Ss]) sleep_time=$(( $sleep_time + ${t%[Ss]} ));;
     esac
   done
-  if test "$blank"
+
+  wday=$(echo $wake | grep -o '\s.*:.*\s') # Eg. 10:00
+  tstart=$(date +%s --date="$wday")         # Time to start (epoch)
+  tstop=$(( $tstart + $sleep_time ))         # Time to stop (epoch)
+  unwake=$(date +"${wake%$wday*} %H:%M:%S" --date="@$tstop") # Eg. Mon-Fri 20:00
+
+  logger "Waking up system at ${wake%+*} and unwake at $unwake"
+
+  if test "$wake"
   then
-    cat > /etc/systemd/system/blank.timer <<EOF
+    cat > /etc/systemd/system/wake.timer <<EOF
 [Unit]
-Description=Screen blanking timer
+Description=Starts screen waking timer
 
 [Timer]
-OnCalendar=${blank%+*}
+OnCalendar=${wake%+*}
 
 [Install]
 WantedBy=multi-user.target
 EOF
-    cat > /etc/systemd/system/blank.service <<EOF
+    cat > /etc/systemd/system/unwake.timer <<EOF
 [Unit]
-Description=Blank and lock screen
+Description=Stop screen waking timer
+
+[Timer]
+OnCalendar=${unwake}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    cat > /etc/systemd/system/wake.service <<EOF
+[Unit]
+Description=Wake up!
 Before=sleep.target
 
 [Service]
-ExecStart=/bin/sh -c 'physlock -d && sleep $sleep_time && systemctl stop blank.service'
-ExecStop=/usr/bin/pkill physlock
+ExecStart=pkill physlock
+
+[Install]
+WantedBy=sleep.target
+EOF
+    cat > /etc/systemd/system/unwake.service <<EOF
+[Unit]
+Description=Wake up! Or not!
+
+[Service]
+ExecStart=phylock -d &
 
 [Install]
 WantedBy=sleep.target
 EOF
     systemctl daemon-reload
-    systemctl enable blank.timer
-    systemctl start blank.timer
+    systemctl start wake.timer
+    systemctl start unwake.timer
   fi
 else
-  if systemctl -q is-enabled blank.timer 2>/dev/null
-  then
-    systemctl disable blank.timer
-    systemctl stop blank.timer
-  fi
+  systemctl stop wake.timer
+  systemctl stop unwake.timer
 fi
 
 
