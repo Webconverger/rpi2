@@ -19,7 +19,8 @@ fi
 
 i=0
 webck=$(cmdline_get webck)
-homepage=$(awk -niord '{printf RT?$0chr("0x"substr(RT,2)):$0}' RS=%.. <<< $homepage) # urldecode
+#homepage=$(awk -niord '{printf RT?$0chr("0x"substr(RT,2)):$0}' RS=%.. <<< $homepage) # urldecode
+homepage=$(sed 's|%20\([hftp:]*//\)| \1|g' <<< $homepage)
 
 max=$(( $(grep -co ' ' <<< $homepage) + 1))
 
