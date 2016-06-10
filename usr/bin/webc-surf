@@ -17,5 +17,14 @@ then
 	rm -rf ~/.{cache,config,dbus,local}
 fi
 
+i=0
 webck=$(cmdline_get webck)
-/usr/bin/webc-wsc ${webck:-/usr/bin/surf2} $homepage
+homepage=$(awk -niord '{printf RT?$0chr("0x"substr(RT,2)):$0}' RS=%.. <<< $homepage) # urldecode
+
+max=$(( $(grep -co ' ' <<< $homepage) + 1))
+
+while i=$(( $i % $max + 1 ))
+do
+	echo $i $(cut -f$i -d' ' <<< $homepage)
+	/usr/bin/webc-wsc ${webck:-/usr/bin/surf2} $(cut -f$i -d' ' <<< $homepage)
+done
