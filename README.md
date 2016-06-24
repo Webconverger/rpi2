@@ -1,48 +1,61 @@
-# Setup
+# Installing Webconverger
 
-Based on <http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2>
+###### **NOTE:** There are no support for Windows and OSX installation currently
 
-NOTE: On my system: `sd=/dev/sdb`. This is the device of my microSD card discovered via `dmesg` or `lsblk`.
+## Installing from Linux
 
-Start fdisk to partition the SD card: `# fdisk $sd` Warning: All data will be deleted from the  microSD card.
+1. Identify the partition of microSD card
 
-At the fdisk prompt, we will delete old partitions and create one **100M FAT32** boot partition and leave the rest for a **ext4** formatted root partition with the following commands:
+Run `sudo fdisk -l`, insert the microSD card and re-run `sudo fdisk -l` again. Identify the newly inserted device which **partition** is normally `/dev/sdc` or `/dev/mmcblk0`, then export it as variable and enter **Sudo mode**:
 
-1. Type `o`. This will clear out any partitions on the drive.
-* Type `p` to list partitions. There should be no partitions left.
-* Type `n`, then `p` for primary, 1 for the first partition on the drive, press ENTER to accept the default first sector, then type `+100M` for the last sector.
-* Type `t`, then `c` to set the first partition to type W95 FAT32 (LBA).
-* Type `n`, then `p` for primary, `2` for the second partition on the drive, and then press ENTER twice to accept the default first and last sector.
-* Write the partition table and exit by typing `w`.
+    sudo su
+    export sd=/dev/mmcblk0
 
-Lets setup the rootfs on the microSD card:
+2. Format the SD card
 
-	# mkfs.ext4 ${sd}2
-	# mkdir /mnt/$(basename ${sd})2
-	# mount ${sd}2 /mnt/$(basename ${sd})2
+**Warning:** This will destroy all the data from the microSD card.
 
-Now, lets fetch the Webconverger rootfs for rpi2 from Github:
+Run `fdisk $sd` and type in the following (_**`<E>`** means enter, ignore the spaces_):
 
-	sdb2# git init
-	Initialized empty Git repository in /mnt/sdb2/.git/
-	sdb2# git remote add origin https://github.com/Webconverger/rpi2.git # be patient!
-	sdb2# git pull origin master
+    o <E> n <E> <E> <E> +30M <E> t <E> c <E> n <E> <E> <E> w <E>
 
-Ok, we should have all the files! Now we need to copy over the kernel stuff
-into the special first fat partition for the Rpi2 to boot.
+For your information, this will create 2 partitions on the disk (`fat32` and `linux`).
 
-	/mnt# mkfs.vfat ${sd}1
-	/mnt# mount ${sd}1 /mnt/$(basename ${sd})1
-	/mnt# cd /mnt/$(basename ${sd})1
-	/mnt/sdb1# cp -r ../$(basename ${sd})2/boot/* .
+3. Installation
 
-## For the developer
+Build the Linux filesystem
 
-	git remote set-url --push origin git@github.com:Webconverger/rpi2.git
-	git push -u origin master
+    mkfs.vfat ${sd}1
+    mkfs.ext4 ${sd}2
 
-In your [configuration](https://config.webconverger.com/):
+Mount the partitions
 
-	boot_append=debug
+    mkdir -p /mnt/boot /mnt/root
+	mount ${sd}1 /mnt/boot
+	mount ${sd}2 /mnt/root
 
-Or append `debug` in the fat partition's `cmdline.txt`
+Download Webconverger (*be patient*)
+
+    rm -rf /mnt/root/*
+    git clone git://github.com/Webconverger/rpi2.git /mnt/root
+
+Setup the boot partition
+
+    cp -r /mnt/root/boot/* /mnt/boot/
+
+Unmount the partitions and ready to go
+
+    sync
+    umount /mnt/boot /mnt/root
+
+For more info, please refer to <https://Webconverger.org/rpi2/>.
+
+# For developer
+
+## Debug mode
+
+Add `boot_append=debug` to your [configuration](https://config.Webconverger.com/) or append `debug` to fat partition's `cmdline.txt`
+
+# References
+
+Arch Linux ARM installation - <http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2>
