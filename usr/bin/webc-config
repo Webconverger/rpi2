@@ -21,6 +21,7 @@ fi
 
 . "$config_runtime"
 
+
 for x in $(cmdline)
 do
 	case $x in
@@ -100,6 +101,91 @@ do
 	esac
 done
 
+
+if cmdline_has wake
+then
+	i=0
+	for w in "$(cmdline_get wake | tr ^ \\n)"
+	do
+		sleep_time=0
+		for t in $(echo ${w#*+} | grep -o '[0-9]*[A-Za-z]')
+		do
+			case $t in
+				*[Ww]) sleep_time=$(( $sleep_time + ${t%[Ww]} * 7 * 24 * 60 * 60 ));;
+				*[Dd]) sleep_time=$(( $sleep_time + ${t%[Dd]} * 24 * 60 * 60 ));;
+				*[Hh]) sleep_time=$(( $sleep_time + ${t%[Hh]} * 60 * 60 ));;
+				*[Mm]) sleep_time=$(( $sleep_time + ${t%[Mm]} * 60 ));;
+				*[Ss]) sleep_time=$(( $sleep_time + ${t%[Ss]} ));;
+			esac
+		done
+		wday=$(echo "$w" | grep -o '[0-9]\+:[0-9]\+\s')       # Eg. 10:00
+		dura=$(( $(date +%s --date="$wday") + $sleep_time ))  # epoch
+
+		wake[$i]=${w%+*}                                      # Eg. Sun 10:0
+		unwake[$i]=$(date +"${w%$wday*} %H:%M" -d "@$dura")   # Eg. Mon-Fri 20:00
+		logger "Waking up system at ${w% +*} and unwake at $unwake"
+		i=$(( $i + 1 ))
+	done
+	unset i
+
+	cat > /etc/systemd/system/wake.timer <<EOF
+[Unit]
+Description=Starts screen waking timer
+
+[Timer]
+$(echo "${wake[@]}" | sed 's/  /\n/g' | sed 's/^/OnCalendar=/')
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+	cat > /etc/systemd/system/unwake.timer <<EOF
+[Unit]
+Description=Stop screen waking timer
+
+[Timer]
+$(echo "${unwake[@]}" | sed 's/  /\n/g' | sed 's/^\s//' | sed 's/^/OnCalendar=/')
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+	cat > /etc/systemd/system/wake.service <<EOF
+[Unit]
+Description=Wake up!
+Before=sleep.target
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=$(which xset) dpms force on
+EOF
+	cat > /etc/systemd/system/unwake.service <<EOF
+[Unit]
+Description=Wake up! Or not!
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=$(which xset) dpms force off
+EOF
+
+# TODO: not sure if this is required
+#	if cmdline_has noblank
+#	then
+#		echo "ExecStart=$(which xset) s off"
+#		echo "ExecStartPost=$(which xset) -dpms"
+#	else
+#		echo "ExecStart=$(which xset) s ${secondstillblank:-10}"
+#	fi >> /etc/systemd/system/wake.service
+
+	systemctl daemon-reload
+	systemctl start unwake.timer
+	systemctl start wake.timer
+else
+	systemctl stop unwake.timer
+	systemctl stop wake.timer
+fi
+
+
 if cmdline_has debug
 then
 	sshkey=$(cmdline_get ssh)
@@ -132,83 +218,6 @@ then
 			logger "ALREADY ran script from $shell and logged it at $log"
 		fi
 	fi
-fi
-
-
-if cmdline_has wake
-then
-  wake=$(cmdline_get wake)
-  wake="${wake/_/ }"   # TODO: Use &20 instead of _
-  physlock -d &   # Start screen locker first
-
-  for t in $(echo ${wake#*+} | grep -o '[0-9]*[A-Za-z]')
-  do
-    case $t in
-      *[Ww]) sleep_time=$(( $sleep_time + ${t%[Ww]} * 7 * 24 * 60 * 60));;
-      *[Dd]) sleep_time=$(( $sleep_time + ${t%[Dd]} * 24 * 60 *60));;
-      *[Hh]) sleep_time=$(( $sleep_time + ${t%[Hh]} * 60 * 60));;
-      *[Mm]) sleep_time=$(( $sleep_time + ${t%[Mm]} * 60));;
-      *[Ss]) sleep_time=$(( $sleep_time + ${t%[Ss]} ));;
-    esac
-  done
-
-  wday=$(echo $wake | grep -o '\s.*:.*\s') # Eg. 10:00
-  tstart=$(date +%s --date="$wday")         # Time to start (epoch)
-  tstop=$(( $tstart + $sleep_time ))         # Time to stop (epoch)
-  unwake=$(date +"${wake%$wday*} %H:%M:%S" --date="@$tstop") # Eg. Mon-Fri 20:00
-
-  logger "Waking up system at ${wake%+*} and unwake at $unwake"
-
-  if test "$wake"
-  then
-    cat > /etc/systemd/system/wake.timer <<EOF
-[Unit]
-Description=Starts screen waking timer
-
-[Timer]
-OnCalendar=${wake%+*}
-
-[Install]
-WantedBy=multi-user.target
-EOF
-    cat > /etc/systemd/system/unwake.timer <<EOF
-[Unit]
-Description=Stop screen waking timer
-
-[Timer]
-OnCalendar=${unwake}
-
-[Install]
-WantedBy=multi-user.target
-EOF
-    cat > /etc/systemd/system/wake.service <<EOF
-[Unit]
-Description=Wake up!
-Before=sleep.target
-
-[Service]
-ExecStart=pkill physlock
-
-[Install]
-WantedBy=sleep.target
-EOF
-    cat > /etc/systemd/system/unwake.service <<EOF
-[Unit]
-Description=Wake up! Or not!
-
-[Service]
-ExecStart=phylock -d &
-
-[Install]
-WantedBy=sleep.target
-EOF
-    systemctl daemon-reload
-    systemctl start wake.timer
-    systemctl start unwake.timer
-  fi
-else
-  systemctl stop wake.timer
-  systemctl stop unwake.timer
 fi
 
 
