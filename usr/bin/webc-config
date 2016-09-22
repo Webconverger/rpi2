@@ -197,7 +197,7 @@ EOF
 Description=Wake up! Or not!
 
 [Service]
-ExecStart=phylock -d &
+ExecStart=physlock -d &
 
 [Install]
 WantedBy=sleep.target
