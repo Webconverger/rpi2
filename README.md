@@ -37,7 +37,7 @@ Mount the partitions
 Download Webconverger (*be patient*)
 
     rm -rf /mnt/root/*
-    git clone git://github.com/Webconverger/rpi2.git /mnt/root
+    git clone https://github.com/Webconverger/rpi2.git /mnt/root
 
 Setup the boot partition
 
