@@ -105,25 +105,25 @@ done
 if cmdline_has wake
 then
 	i=0
-	for w in "$(cmdline_get wake | tr ^ \\n)"
+	IFS=$'\n'; for w in $(cmdline_get wake | tr ^ \\n)
 	do
 		sleep_time=0
 		for t in $(echo ${w#*+} | grep -o '[0-9]*[A-Za-z]')
 		do
 			case $t in
-				*[Ww]) sleep_time=$(( $sleep_time + ${t%[Ww]} * 7 * 24 * 60 * 60 ));;
-				*[Dd]) sleep_time=$(( $sleep_time + ${t%[Dd]} * 24 * 60 * 60 ));;
-				*[Hh]) sleep_time=$(( $sleep_time + ${t%[Hh]} * 60 * 60 ));;
-				*[Mm]) sleep_time=$(( $sleep_time + ${t%[Mm]} * 60 ));;
+				*[Ww]) sleep_time=$(( $sleep_time + ${t%[Ww]}*60*60*24*7 ));;
+				*[Dd]) sleep_time=$(( $sleep_time + ${t%[Dd]}*60*60*24 ));;
+				*[Hh]) sleep_time=$(( $sleep_time + ${t%[Hh]}*60*60 ));;
+				*[Mm]) sleep_time=$(( $sleep_time + ${t%[Mm]}*60 ));;
 				*[Ss]) sleep_time=$(( $sleep_time + ${t%[Ss]} ));;
 			esac
 		done
 		wday=$(echo "$w" | grep -o '[0-9]\+:[0-9]\+\s')       # Eg. 10:00
 		dura=$(( $(date +%s --date="$wday") + $sleep_time ))  # epoch
 
-		wake[$i]=${w%+*}                                      # Eg. Sun 10:0
-		unwake[$i]=$(date +"${w%$wday*} %H:%M" -d "@$dura")   # Eg. Mon-Fri 20:00
-		logger "Waking up system at ${w% +*} and unwake at $unwake"
+		wake[$i]=${w% +*}                                     # Eg. Sun 10:0
+		unwake[$i]=$(date +"${w% $wday*} %H:%M" -d "@$dura")  # Eg. Mon-Fri 20:00
+		logger "Wake at ${wake[$i]} till ${unwake[$i]}"
 		i=$(( $i + 1 ))
 	done
 	unset i
@@ -133,7 +133,7 @@ then
 Description=Starts screen waking timer
 
 [Timer]
-$(echo "${wake[@]}" | sed 's/  /\n/g' | sed 's/^/OnCalendar=/')
+$(echo "${wake[*]}" | sed 's/^/OnCalendar=/')
 Persistent=true
 
 [Install]
@@ -144,7 +144,7 @@ EOF
 Description=Stop screen waking timer
 
 [Timer]
-$(echo "${unwake[@]}" | sed 's/  /\n/g' | sed 's/^\s//' | sed 's/^/OnCalendar=/')
+$(echo "${unwake[*]}" | sed 's/^/OnCalendar=/')
 Persistent=true
 
 [Install]
