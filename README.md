@@ -8,16 +8,26 @@
 
 Run `sudo fdisk -l`, insert the microSD card and re-run `sudo fdisk -l` again. Identify the newly inserted device which **partition** is normally `/dev/sdc` or `/dev/mmcblk0`, then export it as variable and enter **Sudo mode**:
 
-    sudo su
+    sudo -i
     export sd=/dev/mmcblk0
 
 2. Format the SD card
 
 **Warning:** This will destroy all the data from the microSD card.
 
-Run `fdisk $sd` and type in the following (_**`<E>`** means enter, ignore the spaces_):
+Run `fdisk $sd` and type in the following:
 
-    o <E> n <E> <E> <E> +30M <E> t <E> c <E> n <E> <E> <E> w <E>
+    o
+    n
+    
+    
+    +30M
+    t
+    c
+    n
+    
+    
+    w
 
 For your information, this will create 2 partitions on the disk (`fat32` and `linux`).
 
@@ -25,14 +35,14 @@ For your information, this will create 2 partitions on the disk (`fat32` and `li
 
 Build the Linux filesystem
 
-    mkfs.vfat ${sd}1
-    mkfs.ext4 ${sd}2
+    mkfs.vfat ${sd}*1
+    mkfs.ext4 ${sd}*2
 
 Mount the partitions
 
     mkdir -p /mnt/boot /mnt/root
-	mount ${sd}1 /mnt/boot
-	mount ${sd}2 /mnt/root
+	mount ${sd}*1 /mnt/boot
+	mount ${sd}*2 /mnt/root
 
 Download Webconverger (*be patient*)
 
