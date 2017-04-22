@@ -5,8 +5,8 @@ includedir=${prefix}/include
 
 Name: libnm-glib-vpn
 Description: Convenience library for NetworkManager VPN plugins
-Version: 1.0.0
-Requires: NetworkManager >= 1.0.0 glib-2.0 dbus-glib-1
+Version: 1.6.2
+Requires: NetworkManager >= 1.6.2 glib-2.0 dbus-glib-1
 Cflags: -I${includedir}/libnm-glib
 Libs: -L${libdir} -lnm-glib-vpn
 

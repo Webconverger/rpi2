@@ -12,7 +12,7 @@ and/or use gtk-doc annotations.  -->
   <c:include name="json-glib/json-glib.h"/>
   <namespace name="Json"
              version="1.0"
-             shared-library="libjson-glib-1.0.so.0"
+             shared-library="libgio-2.0.so.0,libgobject-2.0.so.0,libglib-2.0.so.0,libjson-glib-1.0.so.0"
              c:identifier-prefixes="Json"
              c:symbol-prefixes="json">
     <record name="Array"
@@ -57,7 +57,10 @@ See also: json_array_add_element(), json_node_take_array()</doc>
             <doc xml:space="preserve">a #JsonArray</doc>
             <type name="Array" c:type="JsonArray*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="full" allow-none="1">
+          <parameter name="value"
+                     transfer-ownership="full"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a #JsonArray</doc>
             <type name="Array" c:type="JsonArray*"/>
           </parameter>
@@ -204,7 +207,7 @@ See also: json_array_add_element(), json_node_set_string()</doc>
 element at @index_ inside a #JsonArray</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a copy of the #JsonNode at the requested
-  index. Use json_node_free() when done.</doc>
+  index. Use json_node_unref() when done.</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -215,6 +218,25 @@ element at @index_ inside a #JsonArray</doc>
           <parameter name="index_" transfer-ownership="none">
             <doc xml:space="preserve">the index of the element to retrieve</doc>
             <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="equal" c:identifier="json_array_equal" version="1.2">
+        <doc xml:space="preserve">Check whether @a and @b are equal #JsonArrays, meaning they have the same
+number of elements, and the values of elements in corresponding positions
+are equal.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @a and @b are equal; %FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="a" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON array</doc>
+            <type name="Array" c:type="gconstpointer"/>
+          </instance-parameter>
+          <parameter name="b" transfer-ownership="none">
+            <doc xml:space="preserve">another JSON array</doc>
+            <type name="Array" c:type="gconstpointer"/>
           </parameter>
         </parameters>
       </method>
@@ -242,7 +264,10 @@ remove elements from the @array.</doc>
             <doc xml:space="preserve">the function to be called on each element</doc>
             <type name="ArrayForeach" c:type="JsonArrayForeach"/>
           </parameter>
-          <parameter name="data" transfer-ownership="none">
+          <parameter name="data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">data to be passed to the function</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -451,6 +476,39 @@ See also: json_array_get_element(), json_node_get_string()</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="hash" c:identifier="json_array_hash" version="1.2">
+        <doc xml:space="preserve">Calculate a hash value for the given @key (a #JsonArray).
+
+The hash is calculated over the array and all its elements, recursively. If
+the array is immutable, this is a fast operation; otherwise, it scales
+proportionally with the length of the array.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">hash value for @key</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="key" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON array to hash</doc>
+            <type name="Array" c:type="gconstpointer"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_immutable"
+              c:identifier="json_array_is_immutable"
+              version="1.2">
+        <doc xml:space="preserve">Check whether the given @array has been marked as immutable by calling
+json_array_seal() on it.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the @array is immutable</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="array" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonArray</doc>
+            <type name="Array" c:type="JsonArray*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="ref" c:identifier="json_array_ref">
         <doc xml:space="preserve">Increase by one the reference count of a #JsonArray.</doc>
         <return-value transfer-ownership="none">
@@ -480,6 +538,21 @@ resources.</doc>
             <doc xml:space="preserve">the position of the element to be removed</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="seal" c:identifier="json_array_seal" version="1.2">
+        <doc xml:space="preserve">Seals the #JsonArray, making it immutable to further changes. This will
+recursively seal all elements in the array too.
+
+If the @array is already immutable, this is a no-op.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="array" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonArray</doc>
+            <type name="Array" c:type="JsonArray*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <method name="unref" c:identifier="json_array_unref">
@@ -517,7 +590,11 @@ this function. It is safe to change the value of @element_node.</doc>
           <doc xml:space="preserve">a #JsonNode containing the value at @index_</doc>
           <type name="Node" c:type="JsonNode*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="3">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="3">
           <doc xml:space="preserve">data passed to the function</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -525,10 +602,9 @@ this function. It is safe to change the value of @element_node.</doc>
     </callback>
     <callback name="BoxedDeserializeFunc"
               c:type="JsonBoxedDeserializeFunc"
-              version="0.10"
-              introspectable="0">
+              version="0.10">
       <doc xml:space="preserve">Deserializes the contents of the passed #JsonNode into a #GBoxed</doc>
-      <return-value>
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the newly created boxed type</doc>
         <type name="gpointer" c:type="gpointer"/>
       </return-value>
@@ -548,7 +624,10 @@ this function. It is safe to change the value of @element_node.</doc>
         <type name="Node" c:type="JsonNode*"/>
       </return-value>
       <parameters>
-        <parameter name="boxed" transfer-ownership="none">
+        <parameter name="boxed"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">a #GBoxed</doc>
           <type name="gpointer" c:type="gconstpointer"/>
         </parameter>
@@ -569,6 +648,16 @@ accessed using the provided API</doc>
 JSON tree and obtain the root #JsonNode.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the newly created #JsonBuilder instance</doc>
+          <type name="Builder" c:type="JsonBuilder*"/>
+        </return-value>
+      </constructor>
+      <constructor name="new_immutable"
+                   c:identifier="json_builder_new_immutable"
+                   version="1.2">
+        <doc xml:space="preserve">Creates a new #JsonBuilder instance with its #JsonBuilder:immutable property
+set to %TRUE to create immutable output trees.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #JsonBuilder</doc>
           <type name="Builder" c:type="JsonBuilder*"/>
         </return-value>
       </constructor>
@@ -679,7 +768,9 @@ See also: json_builder_add_value()</doc>
       <method name="add_value" c:identifier="json_builder_add_value">
         <doc xml:space="preserve">If called after json_builder_set_member_name(), sets @node as member of the
 most recent opened object, otherwise @node is added as element of the most
-recent opened array.</doc>
+recent opened array.
+
+The builder will take ownership of the #JsonNode.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the #JsonBuilder, or %NULL if the call was inconsistent</doc>
           <type name="Builder" c:type="JsonBuilder*"/>
@@ -689,7 +780,7 @@ recent opened array.</doc>
             <doc xml:space="preserve">a #JsonBuilder</doc>
             <type name="Builder" c:type="JsonBuilder*"/>
           </instance-parameter>
-          <parameter name="node" transfer-ownership="none">
+          <parameter name="node" transfer-ownership="full">
             <doc xml:space="preserve">the value of the member or element</doc>
             <type name="Node" c:type="JsonNode*"/>
           </parameter>
@@ -766,7 +857,7 @@ Cannot be called after json_builder_set_member_name().</doc>
 (ie: all opened objects, object members and arrays are being closed).</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the #JsonNode, or %NULL if the build is not complete.
-  Free the returned value with json_node_free().</doc>
+  Free the returned value with json_node_unref().</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -809,6 +900,16 @@ Can be called only if the call is associated to an object.</doc>
           </parameter>
         </parameters>
       </method>
+      <property name="immutable"
+                version="1.2"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether the #JsonNode tree built by the #JsonBuilder should be immutable
+when created. Making the output immutable on creation avoids the expense
+of traversing it to make it immutable later.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <field name="parent_instance" readable="0" private="1">
         <type name="GObject.Object" c:type="GObject"/>
       </field>
@@ -1061,6 +1162,7 @@ current file contents. This operation is atomic.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1143,11 +1245,11 @@ stream.</doc>
       <doc xml:space="preserve">Json major version component (e.g. 1 if %JSON_VERSION is 1.2.3)</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="2" c:type="JSON_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="7" c:type="JSON_MICRO_VERSION">
       <doc xml:space="preserve">Json micro version component (e.g. 3 if %JSON_VERSION is 1.2.3)</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" value="0" c:type="JSON_MINOR_VERSION">
+    <constant name="MINOR_VERSION" value="2" c:type="JSON_MINOR_VERSION">
       <doc xml:space="preserve">Json minor version component (e.g. 2 if %JSON_VERSION is 1.2.3)</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -1189,8 +1291,12 @@ and it's the equivalent of:
         </parameters>
       </constructor>
       <method name="copy" c:identifier="json_node_copy">
-        <doc xml:space="preserve">Copies @node. If the node contains complex data types then the reference
-count of the objects is increased.</doc>
+        <doc xml:space="preserve">Copies @node. If the node contains complex data types, their reference
+counts are increased, regardless of whether the node is mutable or
+immutable.
+
+The copy will be immutable if, and only if, @node is immutable. However,
+there should be no need to copy an immutable node.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the copied #JsonNode</doc>
           <type name="Node" c:type="JsonNode*"/>
@@ -1204,8 +1310,9 @@ count of the objects is increased.</doc>
       </method>
       <method name="dup_array" c:identifier="json_node_dup_array">
         <doc xml:space="preserve">Retrieves the #JsonArray stored inside a #JsonNode and returns it
-with its reference count increased by one.</doc>
-        <return-value transfer-ownership="full">
+with its reference count increased by one. If the node does not hold an
+array value, %NULL is returned.</doc>
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #JsonArray with its reference
   count increased.</doc>
           <type name="Array" c:type="JsonArray*"/>
@@ -1219,8 +1326,9 @@ with its reference count increased by one.</doc>
       </method>
       <method name="dup_object" c:identifier="json_node_dup_object">
         <doc xml:space="preserve">Retrieves the #JsonObject inside @node. The reference count of
-the returned object is increased.</doc>
-        <return-value transfer-ownership="full">
+the returned object is increased. If the node does not hold an object value,
+%NULL is returned.</doc>
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #JsonObject</doc>
           <type name="Object" c:type="JsonObject*"/>
         </return-value>
@@ -1232,10 +1340,12 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="dup_string" c:identifier="json_node_dup_string">
-        <doc xml:space="preserve">Gets a copy of the string value stored inside a #JsonNode</doc>
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">a newly allocated string containing a copy
-  of the #JsonNode contents. Use g_free() to free the allocated resources</doc>
+        <doc xml:space="preserve">Gets a copy of the string value stored inside a #JsonNode. If the node does
+not hold a string value, %NULL is returned.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a newly allocated string
+  containing a copy of the #JsonNode contents. Use g_free() to free the
+  allocated resources</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
@@ -1243,6 +1353,26 @@ the returned object is increased.</doc>
             <doc xml:space="preserve">a #JsonNode of type %JSON_NODE_VALUE</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="equal" c:identifier="json_node_equal" version="1.2">
+        <doc xml:space="preserve">Check whether @a and @b are equal #JsonNodes, meaning they have the same
+type and same values (checked recursively). Note that integer values are
+compared numerically, ignoring type, so a double value 4.0 is equal to the
+integer value 4.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @a and @b are equal; %FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="a" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON node</doc>
+            <type name="Node" c:type="gconstpointer"/>
+          </instance-parameter>
+          <parameter name="b" transfer-ownership="none">
+            <doc xml:space="preserve">another JSON node</doc>
+            <type name="Node" c:type="gconstpointer"/>
+          </parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="json_node_free">
@@ -1258,8 +1388,9 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_array" c:identifier="json_node_get_array">
-        <doc xml:space="preserve">Retrieves the #JsonArray stored inside a #JsonNode</doc>
-        <return-value transfer-ownership="none">
+        <doc xml:space="preserve">Retrieves the #JsonArray stored inside a #JsonNode. If the node does not
+hold an array value, %NULL is returned.</doc>
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #JsonArray</doc>
           <type name="Array" c:type="JsonArray*"/>
         </return-value>
@@ -1271,7 +1402,10 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_boolean" c:identifier="json_node_get_boolean">
-        <doc xml:space="preserve">Gets the boolean value stored inside a #JsonNode</doc>
+        <doc xml:space="preserve">Gets the boolean value stored inside a #JsonNode. If the node holds an
+integer or double value which is zero, %FALSE is returned; otherwise %TRUE
+is returned. If the node holds a %JSON_NODE_NULL value or a value of another
+non-boolean type, %FALSE is returned.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a boolean value.</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -1284,7 +1418,11 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_double" c:identifier="json_node_get_double">
-        <doc xml:space="preserve">Gets the double value stored inside a #JsonNode</doc>
+        <doc xml:space="preserve">Gets the double value stored inside a #JsonNode. If the node holds an integer
+value, it is returned as a double. If the node holds a %FALSE boolean value,
+`0.0` is returned; otherwise a non-zero double is returned. If the node holds
+a %JSON_NODE_NULL value or a value of another non-double type, `0.0` is
+returned.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a double value.</doc>
           <type name="gdouble" c:type="gdouble"/>
@@ -1297,7 +1435,11 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_int" c:identifier="json_node_get_int">
-        <doc xml:space="preserve">Gets the integer value stored inside a #JsonNode</doc>
+        <doc xml:space="preserve">Gets the integer value stored inside a #JsonNode. If the node holds a double
+value, its integer component is returned. If the node holds a %FALSE boolean
+value, `0` is returned; otherwise a non-zero integer is returned. If the
+node holds a %JSON_NODE_NULL value or a value of another non-integer type,
+`0` is returned.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">an integer value.</doc>
           <type name="gint64" c:type="gint64"/>
@@ -1325,8 +1467,9 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_object" c:identifier="json_node_get_object">
-        <doc xml:space="preserve">Retrieves the #JsonObject stored inside a #JsonNode</doc>
-        <return-value transfer-ownership="none">
+        <doc xml:space="preserve">Retrieves the #JsonObject stored inside a #JsonNode. If the node does not
+hold an object value, %NULL is returned.</doc>
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #JsonObject</doc>
           <type name="Object" c:type="JsonObject*"/>
         </return-value>
@@ -1339,9 +1482,9 @@ the returned object is increased.</doc>
       </method>
       <method name="get_parent" c:identifier="json_node_get_parent">
         <doc xml:space="preserve">Retrieves the parent #JsonNode of @node.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the parent node, or %NULL if @node is
-  the root node</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">the parent node, or %NULL if @node
+  is the root node</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -1352,8 +1495,9 @@ the returned object is increased.</doc>
         </parameters>
       </method>
       <method name="get_string" c:identifier="json_node_get_string">
-        <doc xml:space="preserve">Gets the string value stored inside a #JsonNode</doc>
-        <return-value transfer-ownership="none">
+        <doc xml:space="preserve">Gets the string value stored inside a #JsonNode. If the node does not hold a
+string value, %NULL is returned.</doc>
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a string value.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -1366,7 +1510,8 @@ the returned object is increased.</doc>
       </method>
       <method name="get_value" c:identifier="json_node_get_value">
         <doc xml:space="preserve">Retrieves a value from a #JsonNode and copies into @value. When done
-using it, call g_value_unset() on the #GValue.</doc>
+using it, call g_value_unset() on the #GValue. If the node does not hold a
+scalar value, @value is not modified.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1396,6 +1541,24 @@ using it, call g_value_unset() on the #GValue.</doc>
           <instance-parameter name="node" transfer-ownership="none">
             <doc xml:space="preserve">a #JsonNode</doc>
             <type name="Node" c:type="JsonNode*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="hash" c:identifier="json_node_hash" version="1.2">
+        <doc xml:space="preserve">Calculate a hash value for the given @key (a #JsonNode).
+
+The hash is calculated over the node and its value, recursively. If the node
+is immutable, this is a fast operation; otherwise, it scales proportionally
+with the size of the node’s value (for example, with the number of members
+in the #JsonObject if this node contains an object).</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">hash value for @key</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="key" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON node to hash</doc>
+            <type name="Node" c:type="gconstpointer"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -1437,7 +1600,10 @@ the given type, and any data contained will be cleared.</doc>
             <doc xml:space="preserve">the #JsonNode to initialize</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
-          <parameter name="array" transfer-ownership="none" allow-none="1">
+          <parameter name="array"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the #JsonArray to initialize @node with, or %NULL</doc>
             <type name="Array" c:type="JsonArray*"/>
           </parameter>
@@ -1543,7 +1709,10 @@ the given type, and any data contained will be cleared.</doc>
             <doc xml:space="preserve">the #JsonNode to initialize</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
-          <parameter name="object" transfer-ownership="none" allow-none="1">
+          <parameter name="object"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the #JsonObject to initialize @node with, or %NULL</doc>
             <type name="Object" c:type="JsonObject*"/>
           </parameter>
@@ -1565,10 +1734,29 @@ the given type, and any data contained will be cleared.</doc>
             <doc xml:space="preserve">the #JsonNode to initialize</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none" allow-none="1">
+          <parameter name="value"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a string value</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="is_immutable"
+              c:identifier="json_node_is_immutable"
+              version="1.2">
+        <doc xml:space="preserve">Check whether the given @node has been marked as immutable by calling
+json_node_seal() on it.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the @node is immutable</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonNode</doc>
+            <type name="Node" c:type="JsonNode*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <method name="is_null" c:identifier="json_node_is_null" version="0.8">
@@ -1587,8 +1775,40 @@ A %JSON_NODE_NULL node is not the same as a %NULL #JsonNode; a
           </instance-parameter>
         </parameters>
       </method>
+      <method name="ref" c:identifier="json_node_ref" version="1.2">
+        <doc xml:space="preserve">Increment the reference count of @node.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a pointer to @node</doc>
+          <type name="Node" c:type="JsonNode*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonNode</doc>
+            <type name="Node" c:type="JsonNode*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="seal" c:identifier="json_node_seal" version="1.2">
+        <doc xml:space="preserve">Seals the #JsonNode, making it immutable to further changes. In order to be
+sealed, the @node must have a type and value set. The value will be
+recursively sealed — if the node holds an object, that #JsonObject will be
+sealed, etc.
+
+If the @node is already immutable, this is a no-op.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonNode</doc>
+            <type name="Node" c:type="JsonNode*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="set_array" c:identifier="json_node_set_array">
-        <doc xml:space="preserve">Sets @array inside @node and increases the #JsonArray reference count</doc>
+        <doc xml:space="preserve">Sets @array inside @node and increases the #JsonArray reference count.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1605,7 +1825,9 @@ A %JSON_NODE_NULL node is not the same as a %NULL #JsonNode; a
       </method>
       <method name="set_boolean" c:identifier="json_node_set_boolean">
         <doc xml:space="preserve">Sets @value as the boolean content of the @node, replacing any existing
-content.</doc>
+content.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1622,7 +1844,9 @@ content.</doc>
       </method>
       <method name="set_double" c:identifier="json_node_set_double">
         <doc xml:space="preserve">Sets @value as the double content of the @node, replacing any existing
-content.</doc>
+content.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1639,7 +1863,9 @@ content.</doc>
       </method>
       <method name="set_int" c:identifier="json_node_set_int">
         <doc xml:space="preserve">Sets @value as the integer content of the @node, replacing any existing
-content.</doc>
+content.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1655,7 +1881,11 @@ content.</doc>
         </parameters>
       </method>
       <method name="set_object" c:identifier="json_node_set_object">
-        <doc xml:space="preserve">Sets @objects inside @node. The reference count of @object is increased.</doc>
+        <doc xml:space="preserve">Sets @objects inside @node. The reference count of @object is increased.
+
+If @object is %NULL, the node’s existing object is cleared.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1664,7 +1894,10 @@ content.</doc>
             <doc xml:space="preserve">a #JsonNode initialized to %JSON_NODE_OBJECT</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
-          <parameter name="object" transfer-ownership="none">
+          <parameter name="object"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a #JsonObject</doc>
             <type name="Object" c:type="JsonObject*"/>
           </parameter>
@@ -1673,7 +1906,10 @@ content.</doc>
       <method name="set_parent"
               c:identifier="json_node_set_parent"
               version="0.8">
-        <doc xml:space="preserve">Sets the parent #JsonNode of @node</doc>
+        <doc xml:space="preserve">Sets the parent #JsonNode of @node.
+
+It is an error to call this with an immutable @parent. @node may be
+immutable.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1690,7 +1926,9 @@ content.</doc>
       </method>
       <method name="set_string" c:identifier="json_node_set_string">
         <doc xml:space="preserve">Sets @value as the string content of the @node, replacing any existing
-content.</doc>
+content.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1706,7 +1944,9 @@ content.</doc>
         </parameters>
       </method>
       <method name="set_value" c:identifier="json_node_set_value">
-        <doc xml:space="preserve">Sets @value inside @node. The passed #GValue is copied into the #JsonNode</doc>
+        <doc xml:space="preserve">Sets @value inside @node. The passed #GValue is copied into the #JsonNode.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1722,7 +1962,9 @@ content.</doc>
         </parameters>
       </method>
       <method name="take_array" c:identifier="json_node_take_array">
-        <doc xml:space="preserve">Sets @array into @node without increasing the #JsonArray reference count.</doc>
+        <doc xml:space="preserve">Sets @array into @node without increasing the #JsonArray reference count.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1738,7 +1980,9 @@ content.</doc>
         </parameters>
       </method>
       <method name="take_object" c:identifier="json_node_take_object">
-        <doc xml:space="preserve">Sets @object inside @node. The reference count of @object is not increased.</doc>
+        <doc xml:space="preserve">Sets @object inside @node. The reference count of @object is not increased.
+
+It is an error to call this on an immutable node.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1762,6 +2006,19 @@ content.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonNode</doc>
+            <type name="Node" c:type="JsonNode*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="unref" c:identifier="json_node_unref" version="1.2">
+        <doc xml:space="preserve">Decrement the reference count of @node. If it reaches zero, the node is
+freed.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="node" transfer-ownership="full">
             <doc xml:space="preserve">a #JsonNode</doc>
             <type name="Node" c:type="JsonNode*"/>
           </instance-parameter>
@@ -1847,7 +2104,7 @@ This function will return if the @object already contains a member
 inside a #JsonObject</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a copy of the node for the requested
-  object member or %NULL. Use json_node_free() when done.</doc>
+  object member or %NULL. Use json_node_unref() when done.</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -1858,6 +2115,24 @@ inside a #JsonObject</doc>
           <parameter name="member_name" transfer-ownership="none">
             <doc xml:space="preserve">the name of the JSON object member to access</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="equal" c:identifier="json_object_equal" version="1.2">
+        <doc xml:space="preserve">Check whether @a and @b are equal #JsonObjects, meaning they have the same
+set of members, and the values of corresponding members are equal.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @a and @b are equal; %FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="a" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON object</doc>
+            <type name="Object" c:type="gconstpointer"/>
+          </instance-parameter>
+          <parameter name="b" transfer-ownership="none">
+            <doc xml:space="preserve">another JSON object</doc>
+            <type name="Object" c:type="gconstpointer"/>
           </parameter>
         </parameters>
       </method>
@@ -1885,7 +2160,10 @@ remove members from the @object.</doc>
             <doc xml:space="preserve">the function to be called on each member</doc>
             <type name="ObjectForeach" c:type="JsonObjectForeach"/>
           </parameter>
-          <parameter name="data" transfer-ownership="none">
+          <parameter name="data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">data to be passed to the function</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2044,11 +2322,13 @@ See also: json_object_get_member()</doc>
               c:identifier="json_object_get_object_member"
               version="0.8">
         <doc xml:space="preserve">Convenience function that retrieves the object
-stored in @member_name of @object
+stored in @member_name of @object. It is an error to specify a @member_name
+which does not exist.
 
 See also: json_object_get_member()</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the object inside the object's member</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">the object inside the object’s
+   member, or %NULL if the value for the member is `null`</doc>
           <type name="Object" c:type="JsonObject*"/>
         </return-value>
         <parameters>
@@ -2132,6 +2412,39 @@ See also: json_object_get_member()</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="hash" c:identifier="json_object_hash" version="1.2">
+        <doc xml:space="preserve">Calculate a hash value for the given @key (a #JsonObject).
+
+The hash is calculated over the object and all its members, recursively. If
+the object is immutable, this is a fast operation; otherwise, it scales
+proportionally with the number of members in the object.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">hash value for @key</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="key" transfer-ownership="none">
+            <doc xml:space="preserve">a JSON object to hash</doc>
+            <type name="Object" c:type="gconstpointer"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_immutable"
+              c:identifier="json_object_is_immutable"
+              version="1.2">
+        <doc xml:space="preserve">Check whether the given @object has been marked as immutable by calling
+json_object_seal() on it.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the @object is immutable</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonObject</doc>
+            <type name="Object" c:type="JsonObject*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="ref" c:identifier="json_object_ref">
         <doc xml:space="preserve">Increase by one the reference count of a #JsonObject.</doc>
         <return-value transfer-ownership="none">
@@ -2160,6 +2473,21 @@ See also: json_object_get_member()</doc>
             <doc xml:space="preserve">the name of the member to remove</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="seal" c:identifier="json_object_seal" version="1.2">
+        <doc xml:space="preserve">Seals the #JsonObject, making it immutable to further changes. This will
+recursively seal all members of the object too.
+
+If the @object is already immutable, this is a no-op.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonObject</doc>
+            <type name="Object" c:type="JsonObject*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <method name="set_array_member"
@@ -2398,12 +2726,107 @@ this function. It is safe to change the value of @member_node.</doc>
           <doc xml:space="preserve">a #JsonNode containing the @member_name value</doc>
           <type name="Node" c:type="JsonNode*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="3">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="3">
           <doc xml:space="preserve">data passed to the function</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
     </callback>
+    <record name="ObjectIter" c:type="JsonObjectIter" version="1.2">
+      <doc xml:space="preserve">An iterator used to iterate over the members of a #JsonObject. This must
+be allocated on the stack and initialised using json_object_iter_init().
+The order in which members are returned by the iterator is undefined. The
+iterator is invalidated if its #JsonObject is modified during iteration.
+
+All the fields in the #JsonObjectIter structure are private and should
+never be accessed directly.</doc>
+      <field name="priv_pointer" readable="0" private="1">
+        <array zero-terminated="0" c:type="gpointer" fixed-size="6">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
+      <field name="priv_int" readable="0" private="1">
+        <array zero-terminated="0" c:type="int" fixed-size="2">
+          <type name="gint" c:type="int"/>
+        </array>
+      </field>
+      <field name="priv_boolean" readable="0" private="1">
+        <array zero-terminated="0" c:type="gboolean" fixed-size="1">
+          <type name="gboolean" c:type="gboolean"/>
+        </array>
+      </field>
+      <method name="init" c:identifier="json_object_iter_init" version="1.2">
+        <doc xml:space="preserve">Initialise the @iter and associate it with @object.
+
+|[&lt;!-- language="C" --&gt;
+JsonObjectIter iter;
+const gchar *member_name;
+JsonNode *member_node;
+
+json_object_iter_init (&amp;iter, some_object);
+while (json_object_iter_next (&amp;iter, &amp;member_name, &amp;member_node))
+  {
+    // Do something with @member_name and @member_node.
+  }
+]|</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="iter" transfer-ownership="none">
+            <doc xml:space="preserve">an uninitialised #JsonObjectIter</doc>
+            <type name="ObjectIter" c:type="JsonObjectIter*"/>
+          </instance-parameter>
+          <parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">the #JsonObject to iterate over</doc>
+            <type name="Object" c:type="JsonObject*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="next" c:identifier="json_object_iter_next" version="1.2">
+        <doc xml:space="preserve">Advance @iter and retrieve the next member in the object. If the end of the
+object is reached, %FALSE is returned and @member_name and @member_node are
+set to invalid values. After that point, the @iter is invalid.
+
+The order in which members are returned by the iterator is undefined. The
+iterator is invalidated if its #JsonObject is modified during iteration.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @member_name and @member_node are valid; %FALSE if the end
+   of the object has been reached</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="iter" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonObjectIter</doc>
+            <type name="ObjectIter" c:type="JsonObjectIter*"/>
+          </instance-parameter>
+          <parameter name="member_name"
+                     direction="out"
+                     caller-allocates="0"
+                     transfer-ownership="none"
+                     optional="1"
+                     allow-none="1">
+            <doc xml:space="preserve">return
+   location for the member name, or %NULL to ignore</doc>
+            <type name="utf8" c:type="const gchar**"/>
+          </parameter>
+          <parameter name="member_node"
+                     direction="out"
+                     caller-allocates="0"
+                     transfer-ownership="none"
+                     optional="1"
+                     allow-none="1">
+            <doc xml:space="preserve">return
+   location for the member value, or %NULL to ignore</doc>
+            <type name="Node" c:type="JsonNode**"/>
+          </parameter>
+        </parameters>
+      </method>
+    </record>
     <class name="Parser"
            c:symbol-prefix="parser"
            c:type="JsonParser"
@@ -2420,6 +2843,16 @@ hierarchy using the data types API.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the newly created #JsonParser. Use g_object_unref()
   to release all the memory it allocates.</doc>
+          <type name="Parser" c:type="JsonParser*"/>
+        </return-value>
+      </constructor>
+      <constructor name="new_immutable"
+                   c:identifier="json_parser_new_immutable"
+                   version="1.2">
+        <doc xml:space="preserve">Creates a new #JsonParser instance with its #JsonParser:immutable property
+set to %TRUE to create immutable output trees.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #JsonParser</doc>
           <type name="Parser" c:type="JsonParser*"/>
         </return-value>
       </constructor>
@@ -2617,6 +3050,7 @@ used.</doc>
                      direction="out"
                      caller-allocates="0"
                      transfer-ownership="none"
+                     optional="1"
                      allow-none="1">
             <doc xml:space="preserve">Return location for the variable
   name, or %NULL</doc>
@@ -2697,6 +3131,7 @@ on the passed @error.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -2728,19 +3163,24 @@ of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="3">
             <doc xml:space="preserve">a #GAsyncReadyCallback to call when the request is satisfied</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2769,6 +3209,16 @@ json_parser_load_from_stream_async().</doc>
           </parameter>
         </parameters>
       </method>
+      <property name="immutable"
+                version="1.2"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">Whether the #JsonNode tree built by the #JsonParser should be immutable
+when created. Making the output immutable on creation avoids the expense
+of traversing it to make it immutable later.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <field name="parent_instance" readable="0" private="1">
         <type name="GObject.Object" c:type="GObject"/>
       </field>
@@ -2820,7 +3270,10 @@ an error in a JSON stream.</doc>
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
-          <parameter name="error" transfer-ownership="none">
+          <parameter name="error"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a pointer to the #GError</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -3170,7 +3623,7 @@ matches it against the JSON tree pointed by @root.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a newly-created #JsonNode of type
   %JSON_NODE_ARRAY containing an array of matching #JsonNodes.
-  Use json_node_free() when done</doc>
+  Use json_node_unref() when done</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -3217,7 +3670,7 @@ returned wrapped in a #JsonNode.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a newly-created #JsonNode of type
   %JSON_NODE_ARRAY containing an array of matching #JsonNodes.
-  Use json_node_free() when done</doc>
+  Use json_node_unref() when done</doc>
           <type name="Node" c:type="JsonNode*"/>
         </return-value>
         <parameters>
@@ -3278,7 +3731,10 @@ the JSON tree starting from @node</doc>
           <type name="Reader" c:type="JsonReader*"/>
         </return-value>
         <parameters>
-          <parameter name="node" transfer-ownership="none" allow-none="1">
+          <parameter name="node"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a #JsonNode, or %NULL</doc>
             <type name="Node" c:type="JsonNode*"/>
           </parameter>
@@ -3572,7 +4028,21 @@ json_reader_end_element (reader);
 
 If @reader is not currently on an array or an object, or if the @index_ is
 bigger than the size of the array or the object, the #JsonReader will be
-put in an error state until json_reader_end_element() is called.</doc>
+put in an error state until json_reader_end_element() is called. This means
+that if used conditionally, json_reader_end_element() must be called on both
+code paths:
+
+|[
+if (!json_reader_read_element (reader, 1))
+  {
+    json_reader_end_element (reader);
+    g_set_error (error, …);
+    return FALSE;
+  }
+
+str_value = json_reader_get_string_value (reader);
+json_reader_end_element (reader);
+]|</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE on success, and %FALSE otherwise</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -3617,7 +4087,20 @@ json_reader_end_member (reader);
 
 If @reader is not currently on an object, or if the @member_name is not
 defined in the object, the #JsonReader will be put in an error state until
-json_reader_end_member() is called.</doc>
+json_reader_end_member() is called. This means that if used conditionally,
+json_reader_end_member() must be called on both code paths:
+
+|[
+if (!json_reader_read_member (reader, "title"))
+  {
+    json_reader_end_member (reader);
+    g_set_error (error, …);
+    return FALSE;
+  }
+
+str_value = json_reader_get_string_value (reader);
+json_reader_end_member (reader);
+]|</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE on success, and %FALSE otherwise</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -3648,7 +4131,10 @@ If another #JsonNode is currently set as root, it will be replaced.</doc>
             <doc xml:space="preserve">a #JsonReader</doc>
             <type name="Reader" c:type="JsonReader*"/>
           </instance-parameter>
-          <parameter name="root" transfer-ownership="none" allow-none="1">
+          <parameter name="root"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a #JsonNode</doc>
             <type name="Node" c:type="JsonNode*"/>
           </parameter>
@@ -3815,7 +4301,8 @@ property contained inside @property_node into @value.</doc>
       <virtual-method name="find_property"
                       invoker="find_property"
                       version="0.14">
-        <doc xml:space="preserve">FIXME</doc>
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.find_property() implementation on
+the @serializable instance. *</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the #GParamSpec for the property
   or %NULL if no property was found</doc>
@@ -3832,18 +4319,28 @@ property contained inside @property_node into @value.</doc>
           </parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="get_property" invoker="get_property">
+      <virtual-method name="get_property"
+                      invoker="get_property"
+                      version="0.14">
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.get_property() implementation
+on the @serializable instance.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="serializable" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonSerializable</doc>
             <type name="Serializable" c:type="JsonSerializable*"/>
           </instance-parameter>
           <parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GParamSpec</doc>
             <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
           </parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value"
+                     direction="out"
+                     caller-allocates="1"
+                     transfer-ownership="none">
+            <doc xml:space="preserve">return location for the property value</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -3887,18 +4384,25 @@ property into a #JsonNode object.</doc>
           </parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="set_property" invoker="set_property">
+      <virtual-method name="set_property"
+                      invoker="set_property"
+                      version="0.14">
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.set_property() implementation
+on the @serializable instance.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="serializable" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonSerializable</doc>
             <type name="Serializable" c:type="JsonSerializable*"/>
           </instance-parameter>
           <parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GParamSpec</doc>
             <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
           </parameter>
           <parameter name="value" transfer-ownership="none">
+            <doc xml:space="preserve">the property value to set</doc>
             <type name="GObject.Value" c:type="const GValue*"/>
           </parameter>
         </parameters>
@@ -4030,7 +4534,8 @@ property contained inside @property_node into @value.</doc>
       <method name="find_property"
               c:identifier="json_serializable_find_property"
               version="0.14">
-        <doc xml:space="preserve">FIXME</doc>
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.find_property() implementation on
+the @serializable instance. *</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the #GParamSpec for the property
   or %NULL if no property was found</doc>
@@ -4048,18 +4553,27 @@ property contained inside @property_node into @value.</doc>
         </parameters>
       </method>
       <method name="get_property"
-              c:identifier="json_serializable_get_property">
+              c:identifier="json_serializable_get_property"
+              version="0.14">
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.get_property() implementation
+on the @serializable instance.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="serializable" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonSerializable</doc>
             <type name="Serializable" c:type="JsonSerializable*"/>
           </instance-parameter>
           <parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GParamSpec</doc>
             <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
           </parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value"
+                     direction="out"
+                     caller-allocates="1"
+                     transfer-ownership="none">
+            <doc xml:space="preserve">return location for the property value</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -4067,7 +4581,8 @@ property contained inside @property_node into @value.</doc>
       <method name="list_properties"
               c:identifier="json_serializable_list_properties"
               version="0.14">
-        <doc xml:space="preserve">FIXME</doc>
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.list_properties() implementation on
+the @serializable instance.</doc>
         <return-value transfer-ownership="container">
           <doc xml:space="preserve">an array
   of #GParamSpec. Use g_free() to free the array when done.</doc>
@@ -4118,18 +4633,24 @@ property into a #JsonNode object.</doc>
         </parameters>
       </method>
       <method name="set_property"
-              c:identifier="json_serializable_set_property">
+              c:identifier="json_serializable_set_property"
+              version="0.14">
+        <doc xml:space="preserve">Calls the #JsonSerializableIface.set_property() implementation
+on the @serializable instance.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="serializable" transfer-ownership="none">
+            <doc xml:space="preserve">a #JsonSerializable</doc>
             <type name="Serializable" c:type="JsonSerializable*"/>
           </instance-parameter>
           <parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GParamSpec</doc>
             <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
           </parameter>
           <parameter name="value" transfer-ownership="none">
+            <doc xml:space="preserve">the property value to set</doc>
             <type name="GObject.Value" c:type="const GValue*"/>
           </parameter>
         </parameters>
@@ -4246,12 +4767,15 @@ sequence.</doc>
           </return-value>
           <parameters>
             <parameter name="serializable" transfer-ownership="none">
+              <doc xml:space="preserve">a #JsonSerializable</doc>
               <type name="Serializable" c:type="JsonSerializable*"/>
             </parameter>
             <parameter name="pspec" transfer-ownership="none">
+              <doc xml:space="preserve">a #GParamSpec</doc>
               <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
             </parameter>
             <parameter name="value" transfer-ownership="none">
+              <doc xml:space="preserve">the property value to set</doc>
               <type name="GObject.Value" c:type="const GValue*"/>
             </parameter>
           </parameters>
@@ -4264,19 +4788,25 @@ sequence.</doc>
           </return-value>
           <parameters>
             <parameter name="serializable" transfer-ownership="none">
+              <doc xml:space="preserve">a #JsonSerializable</doc>
               <type name="Serializable" c:type="JsonSerializable*"/>
             </parameter>
             <parameter name="pspec" transfer-ownership="none">
+              <doc xml:space="preserve">a #GParamSpec</doc>
               <type name="GObject.ParamSpec" c:type="GParamSpec*"/>
             </parameter>
-            <parameter name="value" transfer-ownership="none">
+            <parameter name="value"
+                       direction="out"
+                       caller-allocates="1"
+                       transfer-ownership="none">
+              <doc xml:space="preserve">return location for the property value</doc>
               <type name="GObject.Value" c:type="GValue*"/>
             </parameter>
           </parameters>
         </callback>
       </field>
     </record>
-    <constant name="VERSION_S" value="1.0.2" c:type="JSON_VERSION_S">
+    <constant name="VERSION_S" value="1.2.7" c:type="JSON_VERSION_S">
       <doc xml:space="preserve">JSON-GLib version, encoded as a string, useful for printing and
 concatenation.</doc>
       <type name="utf8" c:type="gchar*"/>
@@ -4332,7 +4862,7 @@ returns %TRUE and it's undefined otherwise.</doc>
               c:identifier="json_boxed_deserialize"
               version="0.10">
       <doc xml:space="preserve">Deserializes @node into a #GBoxed of @gboxed_type</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">the newly allocated #GBoxed. Use
   g_boxed_free() to release the resources allocated by this
   function</doc>
@@ -4414,7 +4944,10 @@ into a #JsonNode</doc>
           <doc xml:space="preserve">a boxed type</doc>
           <type name="GType" c:type="GType"/>
         </parameter>
-        <parameter name="boxed" transfer-ownership="none">
+        <parameter name="boxed"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">a pointer to a #GBoxed of type @gboxed_type</doc>
           <type name="gpointer" c:type="gconstpointer"/>
         </parameter>
@@ -4450,6 +4983,26 @@ Note: the JSON data stream must be an object declaration.</doc>
         <parameter name="length" transfer-ownership="none">
           <doc xml:space="preserve">length of the data stream</doc>
           <type name="gsize" c:type="gsize"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="from_string"
+              c:identifier="json_from_string"
+              version="1.2"
+              throws="1">
+      <doc xml:space="preserve">Parses the string in @str and returns a #JsonNode representing
+the JSON tree.
+
+In case of parsing error, this function returns %NULL and sets
+@error appropriately.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a #JsonNode, or %NULL</doc>
+        <type name="Node" c:type="JsonNode*"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve">a valid UTF-8 string containing JSON data</doc>
+          <type name="utf8" c:type="const char*"/>
         </parameter>
       </parameters>
     </function>
@@ -4514,7 +5067,7 @@ instance. Each member of the returned JSON object will
 map to a property of the #GObject</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve">the newly created #JsonNode
-  of type %JSON_NODE_OBJECT. Use json_node_free() to free
+  of type %JSON_NODE_OBJECT. Use json_node_unref() to free
   the resources allocated by this function</doc>
         <type name="Node" c:type="JsonNode*"/>
       </return-value>
@@ -4580,7 +5133,10 @@ by the caller code.</doc>
           <doc xml:space="preserve">A #JsonNode to convert</doc>
           <type name="Node" c:type="JsonNode*"/>
         </parameter>
-        <parameter name="signature" transfer-ownership="none" allow-none="1">
+        <parameter name="signature"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">A valid #GVariant type string, or %NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
@@ -4611,7 +5167,10 @@ by the caller code.</doc>
           <doc xml:space="preserve">The length of @json, or -1 if %NULL-terminated</doc>
           <type name="gssize" c:type="gssize"/>
         </parameter>
-        <parameter name="signature" transfer-ownership="none" allow-none="1">
+        <parameter name="signature"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">A valid #GVariant type string, or %NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
@@ -4653,6 +5212,7 @@ JSON tree, and then #JsonGenerator to stringify it.</doc>
                    direction="out"
                    caller-allocates="0"
                    transfer-ownership="full"
+                   optional="1"
                    allow-none="1">
           <doc xml:space="preserve">Return location for the length of the returned
   string, or %NULL</doc>
@@ -4705,6 +5265,81 @@ translate the compatible types into JSON native types.</doc>
                    transfer-ownership="full">
           <doc xml:space="preserve">return value for the length of the buffer, or %NULL</doc>
           <type name="gsize" c:type="gsize*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="string_compare"
+              c:identifier="json_string_compare"
+              version="1.2">
+      <doc xml:space="preserve">Check whether @a and @b are equal UTF-8 JSON strings and return an ordering
+over them in strcmp() style.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">an integer less than zero if @a &lt; @b, equal to zero if @a == @b, and
+   greater than zero if @a &gt; @b</doc>
+        <type name="gint" c:type="gint"/>
+      </return-value>
+      <parameters>
+        <parameter name="a" transfer-ownership="none">
+          <doc xml:space="preserve">a JSON string</doc>
+          <type name="utf8" c:type="gconstpointer"/>
+        </parameter>
+        <parameter name="b" transfer-ownership="none">
+          <doc xml:space="preserve">another JSON string</doc>
+          <type name="utf8" c:type="gconstpointer"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="string_equal"
+              c:identifier="json_string_equal"
+              version="1.2">
+      <doc xml:space="preserve">Check whether @a and @b are equal UTF-8 JSON strings.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if @a and @b are equal; %FALSE otherwise</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="a" transfer-ownership="none">
+          <doc xml:space="preserve">a JSON string</doc>
+          <type name="utf8" c:type="gconstpointer"/>
+        </parameter>
+        <parameter name="b" transfer-ownership="none">
+          <doc xml:space="preserve">another JSON string</doc>
+          <type name="utf8" c:type="gconstpointer"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="string_hash" c:identifier="json_string_hash" version="1.2">
+      <doc xml:space="preserve">Calculate a hash value for the given @key (a UTF-8 JSON string).
+
+Note: Member names are compared byte-wise, without applying any Unicode
+decomposition or normalisation. This is not explicitly mentioned in the JSON
+standard (ECMA-404), but is assumed.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">hash value for @key</doc>
+        <type name="guint" c:type="guint"/>
+      </return-value>
+      <parameters>
+        <parameter name="key" transfer-ownership="none">
+          <doc xml:space="preserve">a JSON string to hash</doc>
+          <type name="utf8" c:type="gconstpointer"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="to_string" c:identifier="json_to_string" version="1.2">
+      <doc xml:space="preserve">Generates a stringified JSON representation of the contents of
+the passed @node.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">the string representation of the #JsonNode</doc>
+        <type name="utf8" c:type="char*"/>
+      </return-value>
+      <parameters>
+        <parameter name="node" transfer-ownership="none">
+          <doc xml:space="preserve">a #JsonNode</doc>
+          <type name="Node" c:type="JsonNode*"/>
+        </parameter>
+        <parameter name="pretty" transfer-ownership="none">
+          <doc xml:space="preserve">whether the output should be prettyfied for printing</doc>
+          <type name="gboolean" c:type="gboolean"/>
         </parameter>
       </parameters>
     </function>

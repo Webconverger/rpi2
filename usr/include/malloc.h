@@ -1,5 +1,5 @@
 /* Prototypes and definition for malloc implementation.
-   Copyright (C) 1996-2014 Free Software Foundation, Inc.
+   Copyright (C) 1996-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -83,7 +83,7 @@ struct mallinfo
   int smblks;   /* number of fastbin blocks */
   int hblks;    /* number of mmapped regions */
   int hblkhd;   /* space in mmapped regions */
-  int usmblks;  /* maximum total allocated space */
+  int usmblks;  /* always 0, preserved for backwards compatibility */
   int fsmblks;  /* space available in freed fastbin blocks */
   int uordblks; /* total allocated space */
   int fordblks; /* total free space */
@@ -134,18 +134,6 @@ extern void malloc_stats (void) __THROW;
 /* Output information about state of allocator to stream FP.  */
 extern int malloc_info (int __options, FILE *__fp) __THROW;
 
-/* Record the state of all malloc variables in an opaque data structure. */
-extern void *malloc_get_state (void) __THROW;
-
-/* Restore the state of all malloc variables from data obtained with
-   malloc_get_state(). */
-extern int malloc_set_state (void *__ptr) __THROW;
-
-/* Called once when malloc is initialized; redefining this variable in
-   the application provides the preferred way to set up the hook
-   pointers. */
-extern void (*__MALLOC_HOOK_VOLATILE __malloc_initialize_hook) (void)
-__MALLOC_DEPRECATED;
 /* Hooks for debugging and user-defined versions. */
 extern void (*__MALLOC_HOOK_VOLATILE __free_hook) (void *__ptr,
                                                    const void *)

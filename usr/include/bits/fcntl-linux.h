@@ -1,5 +1,5 @@
 /* O_*, F_*, FD_* bit values for Linux.
-   Copyright (C) 2001-2014 Free Software Foundation, Inc.
+   Copyright (C) 2001-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -97,7 +97,7 @@
 # define __O_DSYNC	 010000
 #endif
 #ifndef __O_TMPFILE
-# define __O_TMPFILE   020200000
+# define __O_TMPFILE   (020000000 | __O_DIRECTORY)
 #endif
 
 #ifndef F_GETLK
@@ -318,15 +318,7 @@ struct f_owner_ex
 
 
 /* Flags for fallocate.  */
-# define FALLOC_FL_KEEP_SIZE		1 /* Don't extend size of file
-					     even if offset + len is
-					     greater than file size.  */
-# define FALLOC_FL_PUNCH_HOLE		2 /* Create a hole in the file.  */
-# define FALLOC_FL_COLLAPSE_RANGE	8 /* Remove a range of a file
-					     without leaving a
-					     hole.  */
-# define FALLOC_FL_ZERO_RANGE		16 /* Convert a range of a
-					      file to zeros.  */
+# include <linux/falloc.h>
 
 
 /* File handle structure.  */

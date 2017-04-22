@@ -10,9 +10,9 @@
 #include <linux/if_addr.h>
 #include <linux/neighbour.h>
 #include <linux/netconf.h>
+#include <arpa/inet.h>
 
-struct rtnl_handle
-{
+struct rtnl_handle {
 	int			fd;
 	struct sockaddr_nl	local;
 	struct sockaddr_nl	peer;
@@ -20,70 +20,111 @@ struct rtnl_handle
 	__u32			dump;
 	int			proto;
 	FILE		       *dump_fp;
+#define RTNL_HANDLE_F_LISTEN_ALL_NSID		0x01
+	int			flags;
 };
 
 extern int rcvbuf;
 
-extern int rtnl_open(struct rtnl_handle *rth, unsigned subscriptions)
+int rtnl_open(struct rtnl_handle *rth, unsigned int subscriptions)
 	__attribute__((warn_unused_result));
 
-extern int rtnl_open_byproto(struct rtnl_handle *rth, unsigned subscriptions,
+int rtnl_open_byproto(struct rtnl_handle *rth, unsigned int subscriptions,
 			     int protocol)
 	__attribute__((warn_unused_result));
 
-extern void rtnl_close(struct rtnl_handle *rth);
-extern int rtnl_wilddump_request(struct rtnl_handle *rth, int fam, int type)
+void rtnl_close(struct rtnl_handle *rth);
+int rtnl_wilddump_request(struct rtnl_handle *rth, int fam, int type)
 	__attribute__((warn_unused_result));
-extern int rtnl_wilddump_req_filter(struct rtnl_handle *rth, int fam, int type,
+int rtnl_wilddump_req_filter(struct rtnl_handle *rth, int fam, int type,
 				    __u32 filt_mask)
 	__attribute__((warn_unused_result));
-extern int rtnl_dump_request(struct rtnl_handle *rth, int type, void *req,
+
+typedef int (*req_filter_fn_t)(struct nlmsghdr *nlh, int reqlen);
+
+int rtnl_wilddump_req_filter_fn(struct rtnl_handle *rth, int fam, int type,
+				req_filter_fn_t fn)
+	__attribute__((warn_unused_result));
+int rtnl_wilddump_stats_req_filter(struct rtnl_handle *rth, int fam, int type,
+				   __u32 filt_mask)
+	__attribute__((warn_unused_result));
+int rtnl_dump_request(struct rtnl_handle *rth, int type, void *req,
 			     int len)
 	__attribute__((warn_unused_result));
+int rtnl_dump_request_n(struct rtnl_handle *rth, struct nlmsghdr *n)
+	__attribute__((warn_unused_result));
+
+struct rtnl_ctrl_data {
+	int	nsid;
+};
 
 typedef int (*rtnl_filter_t)(const struct sockaddr_nl *,
 			     struct nlmsghdr *n, void *);
 
-struct rtnl_dump_filter_arg
-{
+typedef int (*rtnl_listen_filter_t)(const struct sockaddr_nl *,
+				    struct rtnl_ctrl_data *,
+				    struct nlmsghdr *n, void *);
+
+struct rtnl_dump_filter_arg {
 	rtnl_filter_t filter;
 	void *arg1;
+	__u16 nc_flags;
 };
 
-extern int rtnl_dump_filter_l(struct rtnl_handle *rth,
+int rtnl_dump_filter_l(struct rtnl_handle *rth,
 			      const struct rtnl_dump_filter_arg *arg);
-extern int rtnl_dump_filter(struct rtnl_handle *rth, rtnl_filter_t filter,
-			    void *arg);
-extern int rtnl_talk(struct rtnl_handle *rtnl, struct nlmsghdr *n, pid_t peer,
-		     unsigned groups, struct nlmsghdr *answer)
+int rtnl_dump_filter_nc(struct rtnl_handle *rth,
+			rtnl_filter_t filter,
+			void *arg, __u16 nc_flags);
+#define rtnl_dump_filter(rth, filter, arg) \
+	rtnl_dump_filter_nc(rth, filter, arg, 0)
+int rtnl_talk(struct rtnl_handle *rtnl, struct nlmsghdr *n,
+	      struct nlmsghdr *answer, size_t len)
 	__attribute__((warn_unused_result));
-extern int rtnl_send(struct rtnl_handle *rth, const void *buf, int)
+int rtnl_talk_suppress_rtnl_errmsg(struct rtnl_handle *rtnl, struct nlmsghdr *n,
+				   struct nlmsghdr *answer, size_t len)
 	__attribute__((warn_unused_result));
-extern int rtnl_send_check(struct rtnl_handle *rth, const void *buf, int)
+int rtnl_send(struct rtnl_handle *rth, const void *buf, int)
+	__attribute__((warn_unused_result));
+int rtnl_send_check(struct rtnl_handle *rth, const void *buf, int)
 	__attribute__((warn_unused_result));
 
-extern int addattr(struct nlmsghdr *n, int maxlen, int type);
-extern int addattr8(struct nlmsghdr *n, int maxlen, int type, __u8 data);
-extern int addattr16(struct nlmsghdr *n, int maxlen, int type, __u16 data);
-extern int addattr32(struct nlmsghdr *n, int maxlen, int type, __u32 data);
-extern int addattr64(struct nlmsghdr *n, int maxlen, int type, __u64 data);
-extern int addattrstrz(struct nlmsghdr *n, int maxlen, int type, const char *data);
+int addattr(struct nlmsghdr *n, int maxlen, int type);
+int addattr8(struct nlmsghdr *n, int maxlen, int type, __u8 data);
+int addattr16(struct nlmsghdr *n, int maxlen, int type, __u16 data);
+int addattr32(struct nlmsghdr *n, int maxlen, int type, __u32 data);
+int addattr64(struct nlmsghdr *n, int maxlen, int type, __u64 data);
+int addattrstrz(struct nlmsghdr *n, int maxlen, int type, const char *data);
 
-extern int addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data, int alen);
-extern int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len);
-extern struct rtattr *addattr_nest(struct nlmsghdr *n, int maxlen, int type);
-extern int addattr_nest_end(struct nlmsghdr *n, struct rtattr *nest);
-extern struct rtattr *addattr_nest_compat(struct nlmsghdr *n, int maxlen, int type, const void *data, int len);
-extern int addattr_nest_compat_end(struct nlmsghdr *n, struct rtattr *nest);
-extern int rta_addattr32(struct rtattr *rta, int maxlen, int type, __u32 data);
-extern int rta_addattr_l(struct rtattr *rta, int maxlen, int type, const void *data, int alen);
+int addattr_l(struct nlmsghdr *n, int maxlen, int type,
+	      const void *data, int alen);
+int addraw_l(struct nlmsghdr *n, int maxlen, const void *data, int len);
+struct rtattr *addattr_nest(struct nlmsghdr *n, int maxlen, int type);
+int addattr_nest_end(struct nlmsghdr *n, struct rtattr *nest);
+struct rtattr *addattr_nest_compat(struct nlmsghdr *n, int maxlen, int type,
+				   const void *data, int len);
+int addattr_nest_compat_end(struct nlmsghdr *n, struct rtattr *nest);
+int rta_addattr8(struct rtattr *rta, int maxlen, int type, __u8 data);
+int rta_addattr16(struct rtattr *rta, int maxlen, int type, __u16 data);
+int rta_addattr32(struct rtattr *rta, int maxlen, int type, __u32 data);
+int rta_addattr64(struct rtattr *rta, int maxlen, int type, __u64 data);
+int rta_addattr_l(struct rtattr *rta, int maxlen, int type,
+		  const void *data, int alen);
 
-extern int parse_rtattr(struct rtattr *tb[], int max, struct rtattr *rta, int len);
-extern int parse_rtattr_flags(struct rtattr *tb[], int max, struct rtattr *rta,
+int parse_rtattr(struct rtattr *tb[], int max, struct rtattr *rta, int len);
+int parse_rtattr_flags(struct rtattr *tb[], int max, struct rtattr *rta,
 			      int len, unsigned short flags);
-extern int parse_rtattr_byindex(struct rtattr *tb[], int max, struct rtattr *rta, int len);
-extern struct rtattr *parse_rtattr_one(int type, struct rtattr *rta, int len);
-extern int __parse_rtattr_nested_compat(struct rtattr *tb[], int max, struct rtattr *rta, int len);
+int parse_rtattr_byindex(struct rtattr *tb[], int max,
+			 struct rtattr *rta, int len);
+struct rtattr *parse_rtattr_one(int type, struct rtattr *rta, int len);
+int __parse_rtattr_nested_compat(struct rtattr *tb[], int max, struct rtattr *rta, int len);
+
+struct rtattr *rta_nest(struct rtattr *rta, int maxlen, int type);
+int rta_nest_end(struct rtattr *rta, struct rtattr *nest);
+
+#define RTA_TAIL(rta) \
+		((struct rtattr *) (((void *) (rta)) + \
+				    RTA_ALIGN((rta)->rta_len)))
 
 #define parse_rtattr_nested(tb, max, rta) \
 	(parse_rtattr((tb), (max), RTA_DATA(rta), RTA_PAYLOAD(rta)))
@@ -103,13 +144,22 @@ static inline __u16 rta_getattr_u16(const struct rtattr *rta)
 {
 	return *(__u16 *)RTA_DATA(rta);
 }
+static inline __be16 rta_getattr_be16(const struct rtattr *rta)
+{
+	return ntohs(rta_getattr_u16(rta));
+}
 static inline __u32 rta_getattr_u32(const struct rtattr *rta)
 {
 	return *(__u32 *)RTA_DATA(rta);
 }
+static inline __be32 rta_getattr_be32(const struct rtattr *rta)
+{
+	return ntohl(rta_getattr_u32(rta));
+}
 static inline __u64 rta_getattr_u64(const struct rtattr *rta)
 {
 	__u64 tmp;
+
 	memcpy(&tmp, RTA_DATA(rta), sizeof(__u64));
 	return tmp;
 }
@@ -118,44 +168,58 @@ static inline const char *rta_getattr_str(const struct rtattr *rta)
 	return (const char *)RTA_DATA(rta);
 }
 
-extern int rtnl_listen(struct rtnl_handle *, rtnl_filter_t handler,
-		       void *jarg);
-extern int rtnl_from_file(FILE *, rtnl_filter_t handler,
-		       void *jarg);
+int rtnl_listen_all_nsid(struct rtnl_handle *);
+int rtnl_listen(struct rtnl_handle *, rtnl_listen_filter_t handler,
+		void *jarg);
+int rtnl_from_file(FILE *, rtnl_listen_filter_t handler,
+		   void *jarg);
 
 #define NLMSG_TAIL(nmsg) \
 	((struct rtattr *) (((void *) (nmsg)) + NLMSG_ALIGN((nmsg)->nlmsg_len)))
 
 #ifndef IFA_RTA
 #define IFA_RTA(r) \
-	((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ifaddrmsg))))
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct ifaddrmsg))))
 #endif
 #ifndef IFA_PAYLOAD
-#define IFA_PAYLOAD(n)	NLMSG_PAYLOAD(n,sizeof(struct ifaddrmsg))
+#define IFA_PAYLOAD(n)	NLMSG_PAYLOAD(n, sizeof(struct ifaddrmsg))
 #endif
 
 #ifndef IFLA_RTA
 #define IFLA_RTA(r) \
-	((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ifinfomsg))))
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct ifinfomsg))))
 #endif
 #ifndef IFLA_PAYLOAD
-#define IFLA_PAYLOAD(n)	NLMSG_PAYLOAD(n,sizeof(struct ifinfomsg))
+#define IFLA_PAYLOAD(n)	NLMSG_PAYLOAD(n, sizeof(struct ifinfomsg))
 #endif
 
 #ifndef NDA_RTA
 #define NDA_RTA(r) \
-	((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ndmsg))))
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct ndmsg))))
 #endif
 #ifndef NDA_PAYLOAD
-#define NDA_PAYLOAD(n)	NLMSG_PAYLOAD(n,sizeof(struct ndmsg))
+#define NDA_PAYLOAD(n)	NLMSG_PAYLOAD(n, sizeof(struct ndmsg))
 #endif
 
 #ifndef NDTA_RTA
 #define NDTA_RTA(r) \
-	((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ndtmsg))))
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct ndtmsg))))
 #endif
 #ifndef NDTA_PAYLOAD
-#define NDTA_PAYLOAD(n) NLMSG_PAYLOAD(n,sizeof(struct ndtmsg))
+#define NDTA_PAYLOAD(n) NLMSG_PAYLOAD(n, sizeof(struct ndtmsg))
+#endif
+
+#ifndef NETNS_RTA
+#define NETNS_RTA(r) \
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct rtgenmsg))))
+#endif
+#ifndef NETNS_PAYLOAD
+#define NETNS_PAYLOAD(n)	NLMSG_PAYLOAD(n, sizeof(struct rtgenmsg))
+#endif
+
+#ifndef IFLA_STATS_RTA
+#define IFLA_STATS_RTA(r) \
+	((struct rtattr *)(((char *)(r)) + NLMSG_ALIGN(sizeof(struct if_stats_msg))))
 #endif
 
 /* User defined nlmsg_type which is used mostly for logging netlink
@@ -163,4 +227,3 @@ extern int rtnl_from_file(FILE *, rtnl_filter_t handler,
 #define NLMSG_TSTAMP	15
 
 #endif /* __LIBNETLINK_H__ */
-

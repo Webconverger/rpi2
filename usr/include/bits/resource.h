@@ -1,5 +1,5 @@
 /* Bit values & structures for resource limits.  Linux version.
-   Copyright (C) 1994-2014 Free Software Foundation, Inc.
+   Copyright (C) 1994-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -175,8 +175,7 @@ enum __rusage_who
 #endif
 };
 
-#define __need_timeval
-#include <bits/time.h>		/* For `struct timeval'.  */
+#include <bits/types/struct_timeval.h>
 
 /* Structure which says how much of each resource has been used.  */
 

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: XCB Present
 Description: XCB Present Extension
-Version: 1.11
-Requires: xcb xcb-randr xcb-xfixes xcb-sync
+Version: 1.12
+Requires.private: xcb xcb-randr xcb-xfixes xcb-sync
 Libs: -L${libdir} -lxcb-present
 Cflags: -I${includedir}

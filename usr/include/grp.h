@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -60,9 +60,7 @@ struct group
    This function is a possible cancellation point and therefore not
    marked with __THROW.  */
 extern void setgrent (void);
-#endif
 
-#if defined __USE_XOPEN_EXTENDED || defined __USE_XOPEN2K8
 /* Close the group-file stream.
 
    This function is a possible cancellation point and therefore not

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: XCB Xv
 Description: XCB Xv Extension
-Version: 1.11
-Requires: xcb xcb-shm
+Version: 1.12
+Requires.private: xcb xcb-shm
 Libs: -L${libdir} -lxcb-xv
 Cflags: -I${includedir}

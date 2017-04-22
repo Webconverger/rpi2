@@ -29,10 +29,10 @@ extern "C" {
 #include <mntent.h>
 #include <sys/types.h>
 
-#define LIBMOUNT_VERSION   "2.26.0"
+#define LIBMOUNT_VERSION   "2.29.2"
 #define LIBMOUNT_MAJOR_VERSION   2
-#define LIBMOUNT_MINOR_VERSION   26
-#define LIBMOUNT_PATCH_VERSION   0
+#define LIBMOUNT_MINOR_VERSION   29
+#define LIBMOUNT_PATCH_VERSION   2
 
 /**
  * libmnt_cache:
@@ -159,7 +159,7 @@ enum {
  *
  * loopdev setup failed, errno set by libc
  */
-#define MNT_ERR_LOOPDEV	     5003
+#define MNT_ERR_LOOPDEV      5003
 /**
  * MNT_ERR_MOUNTOPT:
  *
@@ -178,6 +178,12 @@ enum {
  * libblkid detected more filesystems on the device
  */
 #define MNT_ERR_AMBIFS       5006
+/**
+ * MNT_ERR_LOOPOVERLAP:
+ *
+ * detected overlapping loop device that cannot be re-used
+ */
+#define MNT_ERR_LOOPOVERLAP 5007
 
 #ifndef __GNUC_PREREQ
 # if defined __GNUC__ && defined __GNUC_MINOR__
@@ -339,7 +345,7 @@ extern const char *mnt_fs_get_srcpath(struct libmnt_fs *fs);
 extern int mnt_fs_get_tag(struct libmnt_fs *fs, const char **name,
 			  const char **value);
 extern const char *mnt_fs_get_target(struct libmnt_fs *fs);
-extern int mnt_fs_set_target(struct libmnt_fs *fs, const char *target);
+extern int mnt_fs_set_target(struct libmnt_fs *fs, const char *tgt);
 extern const char *mnt_fs_get_fstype(struct libmnt_fs *fs);
 extern int mnt_fs_set_fstype(struct libmnt_fs *fs, const char *fstype);
 
@@ -379,7 +385,7 @@ extern int mnt_fs_set_freq(struct libmnt_fs *fs, int freq);
 extern int mnt_fs_get_passno(struct libmnt_fs *fs);
 extern int mnt_fs_set_passno(struct libmnt_fs *fs, int passno);
 extern const char *mnt_fs_get_root(struct libmnt_fs *fs);
-extern int mnt_fs_set_root(struct libmnt_fs *fs, const char *root);
+extern int mnt_fs_set_root(struct libmnt_fs *fs, const char *path);
 extern const char *mnt_fs_get_bindsrc(struct libmnt_fs *fs);
 extern int mnt_fs_set_bindsrc(struct libmnt_fs *fs, const char *src);
 extern int mnt_fs_get_id(struct libmnt_fs *fs);
@@ -391,6 +397,7 @@ extern const char *mnt_fs_get_swaptype(struct libmnt_fs *fs);
 extern off_t mnt_fs_get_size(struct libmnt_fs *fs);
 extern off_t mnt_fs_get_usedsize(struct libmnt_fs *fs);
 extern int mnt_fs_get_priority(struct libmnt_fs *fs);
+extern int mnt_fs_set_priority(struct libmnt_fs *fs, int prio);
 
 extern const char *mnt_fs_get_comment(struct libmnt_fs *fs);
 extern int mnt_fs_set_comment(struct libmnt_fs *fs, const char *comm);
@@ -483,6 +490,8 @@ extern struct libmnt_fs *mnt_table_find_srcpath(struct libmnt_table *tb,
 				const char *path, int direction);
 extern struct libmnt_fs *mnt_table_find_tag(struct libmnt_table *tb, const char *tag,
 				const char *val, int direction);
+extern struct libmnt_fs *mnt_table_find_target_with_option(struct libmnt_table *tb, const char *path,
+			const char *option, const char *val, int direction);
 extern struct libmnt_fs *mnt_table_find_source(struct libmnt_table *tb,
 				const char *source, int direction);
 extern struct libmnt_fs *mnt_table_find_pair(struct libmnt_table *tb,
@@ -832,6 +841,10 @@ extern int mnt_context_set_syscall_status(struct libmnt_context *cxt, int status
 #ifndef MS_STRICTATIME
 #define MS_STRICTATIME	(1<<24) /* Always perform atime updates */
 #endif
+#ifndef MS_LAZYTIME
+#define MS_LAZYTIME     (1<<25) /* Update the on-disk [acm]times lazily */
+#endif
+
 
 /*
  * Magic mount flag number. Had to be or-ed to the flag values.

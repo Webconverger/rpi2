@@ -7,6 +7,7 @@
 
 [Unit]
 Description=Journal Gateway Service
+Documentation=man:systemd-journal-gatewayd(8)
 Requires=systemd-journal-gatewayd.socket
 
 [Service]
@@ -19,6 +20,11 @@ PrivateDevices=yes
 PrivateNetwork=yes
 ProtectSystem=full
 ProtectHome=yes
+ProtectControlGroups=yes
+ProtectKernelTunables=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
 
 # If there are many split upjournal files we need a lot of fds to
 # access them all and combine

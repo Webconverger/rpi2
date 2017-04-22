@@ -3,8 +3,7 @@
 #
 
 datarootdir=/usr/share
-DIR="${DIR-/usr/share/ss}"
-SS_DIR="/usr/share/ss"
+DIR=/usr/share/ss
 AWK=gawk
 SED=/usr/bin/sed
 
@@ -30,12 +29,8 @@ if test -n "$_SS_DIR_OVERRIDE" ; then
 fi
 
 if test ! -f $DIR/ct_c.sed || test ! -f $DIR/ct_c.awk ; then
-    DIR="$SS_DIR"
-#    echo "Falling back to $DIR..."
-    if test ! -f "$DIR/ct_c.sed" || test ! -f "$DIR/ct_c.awk" ; then
-	echo "mk_cmds: Couldn't find mk_cmds's template files."
-	exit 1
-    fi
+    echo "mk_cmds: Couldn't find mk_cmds's template files."
+    exit 1
 fi
 
 FILE="$1"
@@ -57,6 +52,6 @@ if grep "^#__ERROR_IN_FILE" "${TMP}" > /dev/null; then
 else
 	rm -f "${BASE}.c"
 	mv -f "${TMP}" "${BASE}.c"
-	chmod -w "${BASE}.c"
+	chmod a-w "${BASE}.c"
 	exit 0
 fi

@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -27,12 +27,8 @@
 # define __need_size_t
 # include <stddef.h>
 
-/* Provide correct C++ prototypes, and indicate this to the caller.  This
-   requires a compatible C++ standard library.  As a heuristic, we provide
-   these when the compiler indicates full conformance with C++98 or later,
-   and for older GCC versions that are known to provide a compatible
-   libstdc++.  */
-# if defined __cplusplus && (__cplusplus >= 199711L || __GNUC_PREREQ (4, 4))
+/* Tell the caller that we provide correct C++ prototypes.  */
+# if defined __cplusplus && __GNUC_PREREQ (4, 4)
 #  define __CORRECT_ISO_CPP_STRINGS_H_PROTO
 # endif
 
@@ -139,5 +135,13 @@ extern int strncasecmp_l (const char *__s1, const char *__s2,
 __END_DECLS
 
 #endif	/* string.h  */
+
+#if __GNUC_PREREQ (3,4) && __USE_FORTIFY_LEVEL > 0 \
+    && defined __fortify_function
+/* Functions with security checks.  */
+# if defined __USE_MISC || !defined __USE_XOPEN2K8
+#  include <bits/strings_fortified.h>
+# endif
+#endif
 
 #endif	/* strings.h  */

@@ -10,7 +10,7 @@
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
-# are also available at http://curl.haxx.se/docs/copyright.html.
+# are also available at https://curl.haxx.se/docs/copyright.html.
 #
 # You may opt to use, copy, modify, merge, publish, distribute and/or sell
 # copies of the Software, and permit persons to whom the Software is
@@ -71,7 +71,7 @@ while test $# -gt 0; do
         ;;
 
     --ca)
-        echo ""/etc/ssl/certs/ca-certificates.crt""
+        echo "/etc/ssl/certs/ca-certificates.crt"
         ;;
 
     --cc)
@@ -83,7 +83,7 @@ while test $# -gt 0; do
         ;;
 
     --feature|--features)
-        for feature in SSL IPv6 UnixSockets libz AsynchDNS IDN GSS-API SPNEGO Kerberos NTLM NTLM_WB TLS-SRP ""; do
+        for feature in SSL IPv6 UnixSockets libz AsynchDNS GSS-API PSL SPNEGO Kerberos NTLM NTLM_WB TLS-SRP HTTPS-proxy ""; do
             test -n "$feature" && echo "$feature"
         done
         ;;
@@ -95,7 +95,7 @@ while test $# -gt 0; do
         ;;
 
     --version)
-        echo libcurl 7.41.0
+        echo libcurl 7.53.1
         exit 0
         ;;
 
@@ -107,20 +107,20 @@ while test $# -gt 0; do
         # dash as that's used for things like version 1.2.3-CVS
         cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
         checknum=`echo "$cmajor*256*256 + $cminor*256 + ${cpatch:-0}" | bc`
-        numuppercase=`echo 072900 | tr 'a-f' 'A-F'`
+        numuppercase=`echo 073501 | tr 'a-f' 'A-F'`
         nownum=`echo "obase=10; ibase=16; $numuppercase" | bc`
 
         if test "$nownum" -ge "$checknum"; then
           # silent success
           exit 0
         else
-          echo "requested version $checkfor is newer than existing 7.41.0"
+          echo "requested version $checkfor is newer than existing 7.53.1"
           exit 1
         fi
         ;;
 
     --vernum)
-        echo 072900
+        echo 073501
         exit 0
         ;;
 
@@ -148,7 +148,7 @@ while test $# -gt 0; do
            CURLLIBDIR=""
         fi
         if test "Xno" = "Xyes"; then
-          echo ${CURLLIBDIR}-lcurl -lidn -lssh2 -lssl -lcrypto -lssl -lcrypto -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lz
+          echo ${CURLLIBDIR}-lcurl -lssh2 -lpsl -lssl -lcrypto -lssl -lcrypto -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lz
         else
           echo ${CURLLIBDIR}-lcurl
         fi
@@ -156,7 +156,7 @@ while test $# -gt 0; do
 
     --static-libs)
         if test "Xyes" != "Xno" ; then
-          echo ${exec_prefix}/lib/libcurl.a -Wl,-O1,--sort-common,--as-needed,-z,relro -lidn -lssh2 -lssl -lcrypto -lssl -lcrypto -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lz
+          echo ${exec_prefix}/lib/libcurl.a -Wl,-O1,--sort-common,--as-needed,-z,relro -lssh2 -lpsl -lssl -lcrypto -lssl -lcrypto -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lz
         else
           echo "curl was built with static libraries disabled" >&2
           exit 1
@@ -164,7 +164,7 @@ while test $# -gt 0; do
         ;;
 
     --configure)
-        echo " '--prefix=/usr' '--mandir=/usr/share/man' '--disable-ldap' '--disable-ldaps' '--enable-ipv6' '--enable-manual' '--enable-versioned-symbols' '--enable-threaded-resolver' '--with-gssapi' '--with-libidn' '--with-random=/dev/urandom' '--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'CFLAGS=-march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -g -fvar-tracking-assignments' 'LDFLAGS=-Wl,-O1,--sort-common,--as-needed,-z,relro' 'CPPFLAGS=-D_FORTIFY_SOURCE=2'"
+        echo " '--prefix=/usr' '--mandir=/usr/share/man' '--disable-ldap' '--disable-ldaps' '--enable-ipv6' '--enable-manual' '--enable-versioned-symbols' '--enable-threaded-resolver' '--with-gssapi' '--with-random=/dev/urandom' '--with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'CFLAGS=-march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector-strong --param=ssp-buffer-size=4 -g -fvar-tracking-assignments' 'LDFLAGS=-Wl,-O1,--sort-common,--as-needed,-z,relro' 'CPPFLAGS=-D_FORTIFY_SOURCE=2'"
         ;;
 
     *)

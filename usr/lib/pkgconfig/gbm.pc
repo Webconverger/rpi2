@@ -5,8 +5,8 @@ includedir=${prefix}/include
 
 Name: gbm
 Description: Mesa gbm library
-Requires.private: libudev >= 151
-Version: 10.5.2
+Requires.private: 
+Version: 17.0.4
 Libs: -L${libdir} -lgbm
 Libs.private: -ldl
 Cflags: -I${includedir}

@@ -1,10 +1,11 @@
 prefix=/usr
-libdir=/usr/lib
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Name: wavpack
 Description: wavpack library
-Version: 4.70.0
+Version: 5.1.0
 Requires:
 Conflicts:
 Libs: -L${libdir} -lwavpack

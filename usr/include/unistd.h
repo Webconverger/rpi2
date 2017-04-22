@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -65,6 +65,9 @@ __BEGIN_DECLS
 
 /* The utilities on GNU systems also correspond to this version.  */
 #define _POSIX2_VERSION	__POSIX2_THIS_VERSION
+
+/* This symbol was required until the 2001 edition of POSIX.  */
+#define	_POSIX2_C_VERSION	__POSIX2_THIS_VERSION
 
 /* If defined, the implementation supports the
    C Language Bindings Option.  */
@@ -778,8 +781,7 @@ extern int ttyname_r (int __fd, char *__buf, size_t __buflen)
    with a terminal, zero if not.  */
 extern int isatty (int __fd) __THROW;
 
-#if defined __USE_MISC \
-    || (defined __USE_XOPEN_EXTENDED && !defined __USE_UNIX98)
+#ifdef __USE_MISC
 /* Return the index into the active-logins file (utmp) for
    the controlling terminal.  */
 extern int ttyslot (void) __THROW;
@@ -847,7 +849,7 @@ extern int tcsetpgrp (int __fd, __pid_t __pgrp_id) __THROW;
    This function is a possible cancellation point and therefore not
    marked with __THROW.  */
 extern char *getlogin (void);
-#if defined __USE_REENTRANT || defined __USE_POSIX199506
+#ifdef __USE_POSIX199506
 /* Return at most NAME_LEN characters of the login name of the user in NAME.
    If it cannot be determined or some other error occurred, return the error
    code.  Otherwise return 0.
@@ -872,7 +874,7 @@ extern int setlogin (const char *__name) __THROW __nonnull ((1));
 #endif
 
 
-#if defined __USE_UNIX98 || defined __USE_XOPEN2K
+#if defined __USE_XOPEN_EXTENDED || defined __USE_XOPEN2K
 /* Put the name of the current host in no more than LEN bytes of NAME.
    The result is null-terminated if LEN is large enough for the full
    name and the terminator.  */
@@ -880,7 +882,7 @@ extern int gethostname (char *__name, size_t __len) __THROW __nonnull ((1));
 #endif
 
 
-#if defined __USE_MISC || (defined __USE_XOPEN && !defined __USE_UNIX98)
+#if defined __USE_MISC
 /* Set the name of the current host to NAME, which is LEN bytes long.
    This call is restricted to the super-user.  */
 extern int sethostname (const char *__name, size_t __len)
@@ -935,7 +937,7 @@ extern void setusershell (void) __THROW; /* Rewind and re-read the file.  */
    terminal.  If NOCHDIR is zero, do `chdir ("/")'.  If NOCLOSE is zero,
    redirects stdin, stdout, and stderr to /dev/null.  */
 extern int daemon (int __nochdir, int __noclose) __THROW __wur;
-#endif /* Use misc || X/Open.  */
+#endif /* Use misc.  */
 
 
 #if defined __USE_MISC || (defined __USE_XOPEN && !defined __USE_XOPEN2K)
@@ -1135,13 +1137,31 @@ extern void swab (const void *__restrict __from, void *__restrict __to,
 #endif
 
 
-/* The Single Unix specification demands this prototype to be here.
-   It is also found in <stdio.h>.  */
+/* Prior to Issue 6, the Single Unix Specification required these
+   prototypes to appear in this header.  They are also found in
+   <stdio.h>.  */
 #if defined __USE_XOPEN && !defined __USE_XOPEN2K
 /* Return the name of the controlling terminal.  */
 extern char *ctermid (char *__s) __THROW;
+
+/* Return the name of the current user.  */
+extern char *cuserid (char *__s);
 #endif
 
+
+/* Unix98 requires this function to be declared here.  In other
+   standards it is in <pthread.h>.  */
+#if defined __USE_UNIX98 && !defined __USE_XOPEN2K
+extern int pthread_atfork (void (*__prepare) (void),
+			   void (*__parent) (void),
+			   void (*__child) (void)) __THROW;
+#endif
+
+#ifdef __USE_MISC
+/* Write LENGTH bytes of randomness starting at BUFFER.  Return 0 on
+   success or -1 on error.  */
+int getentropy (void *__buffer, size_t __length) __wur;
+#endif
 
 /* Define some macros helping to catch buffer overflows.  */
 #if __USE_FORTIFY_LEVEL > 0 && defined __fortify_function

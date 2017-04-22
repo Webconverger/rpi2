@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -71,8 +71,7 @@ typedef __uid_t uid_t;
 
 #ifdef __USE_POSIX199309
 /* We need `struct timespec' later on.  */
-# define __need_timespec
-# include <time.h>
+# include <bits/types/struct_timespec.h>
 #endif
 
 #if defined __USE_POSIX199309 || defined __USE_XOPEN_EXTENDED
@@ -146,12 +145,10 @@ extern __sighandler_t ssignal (int __sig, __sighandler_t __handler)
 extern int gsignal (int __sig) __THROW;
 #endif /* Use misc.  */
 
-#ifdef __USE_XOPEN2K
+#ifdef __USE_XOPEN2K8
 /* Print a message describing the meaning of the given signal number.  */
 extern void psignal (int __sig, const char *__s);
-#endif /* Use POSIX 2008.  */
 
-#ifdef __USE_XOPEN2K
 /* Print a message describing the meaning of the given signal information.  */
 extern void psiginfo (const siginfo_t *__pinfo, const char *__s);
 #endif /* POSIX 2008.  */
@@ -164,12 +161,12 @@ extern void psiginfo (const siginfo_t *__pinfo, const char *__s);
 
    This function is a cancellation point and therefore not marked with
    __THROW.  */
-extern int __sigpause (int __sig_or_mask, int __is_sig);
 
 #ifdef __USE_XOPEN
 # ifdef __GNUC__
 extern int sigpause (int __sig) __asm__ ("__xpg_sigpause");
 # else
+extern int __sigpause (int __sig_or_mask, int __is_sig);
 /* Remove a signal from the signal mask and suspend the process.  */
 #  define sigpause(sig) __sigpause ((sig), 1)
 # endif
@@ -302,30 +299,6 @@ extern int sigqueue (__pid_t __pid, int __sig, const union sigval __val)
    Use `strsignal' instead (see <string.h>).  */
 extern const char *const _sys_siglist[_NSIG];
 extern const char *const sys_siglist[_NSIG];
-
-/* Structure passed to `sigvec'.  */
-struct sigvec
-  {
-    __sighandler_t sv_handler;	/* Signal handler.  */
-    int sv_mask;		/* Mask of signals to be blocked.  */
-
-    int sv_flags;		/* Flags (see below).  */
-# define sv_onstack	sv_flags /* 4.2 BSD compatibility.  */
-  };
-
-/* Bits in `sv_flags'.  */
-# define SV_ONSTACK	(1 << 0)/* Take the signal on the signal stack.  */
-# define SV_INTERRUPT	(1 << 1)/* Do not restart system calls.  */
-# define SV_RESETHAND	(1 << 2)/* Reset handler to SIG_DFL on receipt.  */
-
-
-/* If VEC is non-NULL, set the handler for SIG to the `sv_handler' member
-   of VEC.  The signals in `sv_mask' will be blocked while the handler runs.
-   If the SV_RESETHAND bit is set in `sv_flags', the handler for SIG will be
-   reset to SIG_DFL before `sv_handler' is entered.  If OVEC is non-NULL,
-   it is filled in with the old information for SIG.  */
-extern int sigvec (int __sig, const struct sigvec *__vec,
-		   struct sigvec *__ovec) __THROW;
 
 
 /* Get machine-dependent `struct sigcontext' and signal subcodes.  */

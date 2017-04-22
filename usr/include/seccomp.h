@@ -2,7 +2,7 @@
  * Seccomp Library
  *
  * Copyright (c) 2012,2013 Red Hat <pmoore@redhat.com>
- * Author: Paul Moore <pmoore@redhat.com>
+ * Author: Paul Moore <paul@paul-moore.com>
  */
 
 /*
@@ -36,8 +36,14 @@ extern "C" {
  */
 
 #define SCMP_VER_MAJOR		2
-#define SCMP_VER_MINOR		2
-#define SCMP_VER_MICRO		0
+#define SCMP_VER_MINOR		3
+#define SCMP_VER_MICRO		2
+
+struct scmp_version {
+	unsigned int major;
+	unsigned int minor;
+	unsigned int micro;
+};
 
 /*
  * types
@@ -57,6 +63,7 @@ enum scmp_filter_attr {
 	SCMP_FLTATR_ACT_BADARCH = 2,	/**< bad architecture action */
 	SCMP_FLTATR_CTL_NNP = 3,	/**< set NO_NEW_PRIVS on filter load */
 	SCMP_FLTATR_CTL_TSYNC = 4,	/**< sync threads on filter load */
+	SCMP_FLTATR_API_TSKIP = 5,	/**< allow rules with a -1 syscall */
 	_SCMP_FLTATR_MAX,
 };
 
@@ -121,10 +128,13 @@ struct scmp_arg_cmp {
  * The ARM architecture tokens
  */
 #define SCMP_ARCH_ARM		AUDIT_ARCH_ARM
-#ifndef AUDIT_ARCH_AARCH64
 /* AArch64 support for audit was merged in 3.17-rc1 */
+#ifndef AUDIT_ARCH_AARCH64
+#ifndef EM_AARCH64
+#define EM_AARCH64		183
+#endif /* EM_AARCH64 */
 #define AUDIT_ARCH_AARCH64	(EM_AARCH64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
-#endif
+#endif /* AUDIT_ARCH_AARCH64 */
 #define SCMP_ARCH_AARCH64	AUDIT_ARCH_AARCH64
 
 /**
@@ -133,22 +143,47 @@ struct scmp_arg_cmp {
 #ifndef __AUDIT_ARCH_CONVENTION_MIPS64_N32
 #define __AUDIT_ARCH_CONVENTION_MIPS64_N32	0x20000000
 #endif
-#define SCMP_ARCH_MIPS		AUDIT_ARCH_MIPS
-#define SCMP_ARCH_MIPS64	AUDIT_ARCH_MIPS64
-#ifndef AUDIT_ARCH_MIPS64N32
+#ifndef EM_MIPS
+#define EM_MIPS			8
+#endif
+#ifndef AUDIT_ARCH_MIPS
+#define AUDIT_ARCH_MIPS		(EM_MIPS)
+#endif
+#ifndef AUDIT_ARCH_MIPS64
+#define AUDIT_ARCH_MIPS64	(EM_MIPS|__AUDIT_ARCH_64BIT)
+#endif
 /* MIPS64N32 support was merged in 3.15 */
+#ifndef AUDIT_ARCH_MIPS64N32
 #define AUDIT_ARCH_MIPS64N32	(EM_MIPS|__AUDIT_ARCH_64BIT|\
 				 __AUDIT_ARCH_CONVENTION_MIPS64_N32)
 #endif
-#define SCMP_ARCH_MIPS64N32	AUDIT_ARCH_MIPS64N32
-#define SCMP_ARCH_MIPSEL	AUDIT_ARCH_MIPSEL
-#define SCMP_ARCH_MIPSEL64	AUDIT_ARCH_MIPSEL64
-#ifndef AUDIT_ARCH_MIPSEL64N32
 /* MIPSEL64N32 support was merged in 3.15 */
+#ifndef AUDIT_ARCH_MIPSEL64N32
 #define AUDIT_ARCH_MIPSEL64N32	(EM_MIPS|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE|\
 				 __AUDIT_ARCH_CONVENTION_MIPS64_N32)
 #endif
+#define SCMP_ARCH_MIPS		AUDIT_ARCH_MIPS
+#define SCMP_ARCH_MIPS64	AUDIT_ARCH_MIPS64
+#define SCMP_ARCH_MIPS64N32	AUDIT_ARCH_MIPS64N32
+#define SCMP_ARCH_MIPSEL	AUDIT_ARCH_MIPSEL
+#define SCMP_ARCH_MIPSEL64	AUDIT_ARCH_MIPSEL64
 #define SCMP_ARCH_MIPSEL64N32	AUDIT_ARCH_MIPSEL64N32
+
+/**
+ * The PowerPC architecture tokens
+ */
+#define SCMP_ARCH_PPC		AUDIT_ARCH_PPC
+#define SCMP_ARCH_PPC64		AUDIT_ARCH_PPC64
+#ifndef AUDIT_ARCH_PPC64LE
+#define AUDIT_ARCH_PPC64LE	(EM_PPC64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
+#endif
+#define SCMP_ARCH_PPC64LE	AUDIT_ARCH_PPC64LE
+
+/**
+ * The S390 architecture tokens
+ */
+#define SCMP_ARCH_S390		AUDIT_ARCH_S390
+#define SCMP_ARCH_S390X		AUDIT_ARCH_S390X
 
 /**
  * Convert a syscall name into the associated syscall number
@@ -223,6 +258,15 @@ struct scmp_arg_cmp {
 /*
  * functions
  */
+
+/**
+ * Query the library version information
+ *
+ * This function returns a pointer to a populated scmp_version struct, the
+ * caller does not need to free the structure when finished.
+ *
+ */
+const struct scmp_version *seccomp_version(void);
 
 /**
  * Initialize the filter state
@@ -542,6 +586,7 @@ int seccomp_export_bpf(const scmp_filter_ctx ctx, int fd);
 
 /* NOTE - pseudo syscall values {-1..-99} are reserved */
 #define __NR_SCMP_ERROR		-1
+#define __NR_SCMP_UNDEF		-2
 
 /* socket syscalls */
 
@@ -1216,7 +1261,11 @@ int seccomp_export_bpf(const scmp_filter_ctx ctx, int fd);
 
 #define __PNR_cacheflush	-10104
 #ifndef __NR_cacheflush
+#ifdef __ARM_NR_cacheflush
+#define __NR_cacheflush		__ARM_NR_cacheflush
+#else
 #define __NR_cacheflush		__PNR_cacheflush
+#endif
 #endif /* __NR_cacheflush */
 
 #define __PNR_sysmips		-10106
@@ -1423,6 +1472,152 @@ int seccomp_export_bpf(const scmp_filter_ctx ctx, int fd);
 #ifndef __NR_utimes
 #define __NR_utimes		__PNR_utimes
 #endif /* __NR_utimes */
+
+#define __PNR_getrlimit		-10180
+#ifndef __NR_getrlimit
+#define __NR_getrlimit		__PNR_getrlimit
+#endif /* __NR_utimes */
+
+#define __PNR_mmap		-10181
+#ifndef __NR_mmap
+#define __NR_mmap		__PNR_mmap
+#endif /* __NR_utimes */
+
+#define __PNR_breakpoint	-10182
+#ifndef __NR_breakpoint
+#ifdef __ARM_NR_breakpoint
+#define __NR_breakpoint		__ARM_NR_breakpoint
+#else
+#define __NR_breakpoint		__PNR_breakpoint
+#endif
+#endif /* __NR_breakpoint */
+
+#define __PNR_set_tls		-10183
+#ifndef __NR_set_tls
+#ifdef __ARM_NR_set_tls
+#define __NR_set_tls		__ARM_NR_set_tls
+#else
+#define __NR_set_tls		__PNR_set_tls
+#endif
+#endif /* __NR_set_tls */
+
+#define __PNR_usr26		-10184
+#ifndef __NR_usr26
+#ifdef __ARM_NR_usr26
+#define __NR_usr26		__ARM_NR_usr26
+#else
+#define __NR_usr26		__PNR_usr26
+#endif
+#endif /* __NR_usr26 */
+
+#define __PNR_usr32		-10185
+#ifndef __NR_usr32
+#ifdef __ARM_NR_usr32
+#define __NR_usr32		__ARM_NR_usr32
+#else
+#define __NR_usr32		__PNR_usr32
+#endif
+#endif /* __NR_usr32 */
+
+#define __PNR_multiplexer	-10186
+#ifndef __NR_multiplexer
+#define __NR_multiplexer	__PNR_multiplexer
+#endif /* __NR_multiplexer */
+
+#define __PNR_rtas		-10187
+#ifndef __NR_rtas
+#define __NR_rtas		__PNR_rtas
+#endif /* __NR_rtas */
+
+#define __PNR_spu_create	-10188
+#ifndef __NR_spu_create
+#define __NR_spu_create		__PNR_spu_create
+#endif /* __NR_spu_create */
+
+#define __PNR_spu_run		-10189
+#ifndef __NR_spu_run
+#define __NR_spu_run		__PNR_spu_run
+#endif /* __NR_spu_run */
+
+#define __PNR_subpage_prot	-10189
+#ifndef __NR_subpage_prot
+#define __NR_subpage_prot	__PNR_subpage_prot
+#endif /* __NR_subpage_prot */
+
+#define __PNR_swapcontext	-10190
+#ifndef __NR_swapcontext
+#define __NR_swapcontext	__PNR_swapcontext
+#endif /* __NR_swapcontext */
+
+#define __PNR_sys_debug_setcontext	-10191
+#ifndef __NR_sys_debug_setcontext
+#define __NR_sys_debug_setcontext	__PNR_sys_debug_setcontext
+#endif /* __NR_sys_debug_setcontext */
+
+#define __PNR_switch_endian	-10191
+#ifndef __NR_switch_endian
+#define __NR_switch_endian	__PNR_switch_endian
+#endif /* __NR_switch_endian */
+
+#define __PNR_get_mempolicy	-10192
+#ifndef __NR_get_mempolicy
+#define __NR_get_mempolicy	__PNR_get_mempolicy
+#endif /* __NR_get_mempolicy */
+
+#define __PNR_move_pages	-10193
+#ifndef __NR_move_pages
+#define __NR_move_pages		__PNR_move_pages
+#endif /* __NR_move_pages */
+
+#define __PNR_mbind		-10194
+#ifndef __NR_mbind
+#define __NR_mbind		__PNR_mbind
+#endif /* __NR_mbind */
+
+#define __PNR_set_mempolicy	-10195
+#ifndef __NR_set_mempolicy
+#define __NR_set_mempolicy	__PNR_set_mempolicy
+#endif /* __NR_set_mempolicy */
+
+#define __PNR_s390_runtime_instr	-10196
+#ifndef __NR_s390_runtime_instr
+#define __NR_s390_runtime_instr		__PNR_s390_runtime_instr
+#endif /* __NR_s390_runtime_instr */
+
+#define __PNR_s390_pci_mmio_read	-10197
+#ifndef __NR_s390_pci_mmio_read
+#define __NR_s390_pci_mmio_read		__PNR_s390_pci_mmio_read
+#endif /* __NR_s390_pci_mmio_read */
+
+#define __PNR_s390_pci_mmio_write	-10198
+#ifndef __NR_s390_pci_mmio_write
+#define __NR_s390_pci_mmio_write	__PNR_s390_pci_mmio_write
+#endif /* __NR_s390_pci_mmio_write */
+
+#define __PNR_membarrier	-10199
+#ifndef __NR_membarrier
+#define __NR_membarrier		__PNR_membarrier
+#endif /* __NR_membarrier */
+
+#define __PNR_userfaultfd	-10200
+#ifndef __NR_userfaultfd
+#define __NR_userfaultfd	__PNR_userfaultfd
+#endif /* __NR_userfaultfd */
+
+#define __PNR_pkey_mprotect	-10201
+#ifndef __NR_pkey_mprotect
+#define __NR_pkey_mprotect	__PNR_pkey_mprotect
+#endif /* __NR_pkey_mprotect */
+
+#define __PNR_pkey_alloc	-10202
+#ifndef __NR_pkey_alloc
+#define __NR_pkey_alloc	__PNR_pkey_alloc
+#endif /* __NR_pkey_alloc */
+
+#define __PNR_pkey_free		-10203
+#ifndef __NR_pkey_free
+#define __NR_pkey_free		__PNR_pkey_free
+#endif /* __NR_pkey_free */
 
 #ifdef __cplusplus
 }

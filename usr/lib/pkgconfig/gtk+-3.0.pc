@@ -9,8 +9,8 @@ gtk_host=armv7l-unknown-linux-gnueabihf
 
 Name: GTK+
 Description: GTK+ Graphical UI Library
-Version: 3.14.9
-Requires: gdk-3.0 atk >= 2.12.0 cairo >= 1.12.0 cairo-gobject >= 1.12.0 gdk-pixbuf-2.0 >= 2.30.0 gio-2.0 >= 2.41.2
-Requires.private: atk atk-bridge-2.0 pangoft2 gio-unix-2.0 >= 2.41.2
+Version: 3.22.10
+Requires: gdk-3.0 atk >= 2.15.1 cairo >= 1.14.0 cairo-gobject >= 1.14.0 gdk-pixbuf-2.0 >= 2.30.0 gio-2.0 >= 2.49.4
+Requires.private: atk atk-bridge-2.0 wayland-client >= 1.9.91 wayland-protocols >= 1.7 xkbcommon >= 0.2.0 wayland-cursor >= 1.9.91 wayland-egl  epoxy >= 1.0 pangoft2 gio-unix-2.0 >= 2.49.4
 Libs: -L${libdir} -lgtk-3 
 Cflags: -I${includedir}/gtk-3.0 

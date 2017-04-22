@@ -8,7 +8,7 @@ errordbdir=${datarootdir}/X11
 
 Name: Xt
 Description: X Toolkit Library
-Version: 1.1.4
+Version: 1.1.5
 Requires: xproto x11
 Requires.private: ice sm
 Cflags: -I${includedir}

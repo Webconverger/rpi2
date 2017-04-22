@@ -8,13 +8,16 @@
 [Unit]
 Description=Virtual Machine and Container Download Service
 Documentation=man:systemd-importd.service(8)
+Documentation=http://www.freedesktop.org/wiki/Software/systemd/importd
 
 [Service]
 ExecStart=/usr/lib/systemd/systemd-importd
 BusName=org.freedesktop.import1
-CapabilityBoundingSet=CAP_CHOWN CAP_FOWNER CAP_FSETID CAP_MKNOD CAP_SETFCAP CAP_SYS_ADMIN CAP_SETPCAP
+WatchdogSec=3min
+KillMode=mixed
+CapabilityBoundingSet=CAP_CHOWN CAP_FOWNER CAP_FSETID CAP_MKNOD CAP_SETFCAP CAP_SYS_ADMIN CAP_SETPCAP CAP_DAC_OVERRIDE
 NoNewPrivileges=yes
-WatchdogSec=1min
-PrivateTmp=yes
-ProtectSystem=full
-ProtectHome=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module @obsolete @raw-io

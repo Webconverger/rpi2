@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: JavaScriptCoreGTK+
 Description: GTK+ version of the JavaScriptCore engine
-Version: 2.6.5
+Version: 2.14.5
 Requires: glib-2.0
 Libs: -L${libdir} -ljavascriptcoregtk-4.0
 Cflags: -I${includedir}/webkitgtk-4.0

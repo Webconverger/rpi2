@@ -7,11 +7,13 @@ pluginsdir=${exec_prefix}/lib/gstreamer-1.0
 datarootdir=${prefix}/share
 datadir=${datarootdir}
 girdir=${datadir}/gir-1.0
+completionsdir=${datarootdir}/bash-completion/completions
+helpersdir=${datarootdir}/bash-completion/helpers
 typelibdir=${libdir}/girepository-1.0
 
 Name: GStreamer
 Description: Streaming media framework
-Version: 1.4.5
+Version: 1.10.4
 Requires: glib-2.0, gobject-2.0
 Requires.private: gmodule-no-export-2.0
 Libs: -L${libdir} -lgstreamer-1.0

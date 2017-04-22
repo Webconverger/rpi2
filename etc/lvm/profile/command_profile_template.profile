@@ -11,6 +11,17 @@
 # Refer to 'man lvm.conf' for further information about profiles and
 # general configuration file layout.
 #
+allocation {
+	cache_mode="writethrough"
+	cache_settings {
+	}
+}
+log {
+	report_command_log=0
+	command_log_sort="log_seq_num"
+	command_log_cols="log_seq_num,log_type,log_context,log_object_type,log_object_name,log_object_id,log_object_group,log_object_group_id,log_message,log_errno,log_ret_code"
+	command_log_selection="!(log_type=status && message=success)"
+}
 global {
 	units="h"
 	si_unit_consistency=1
@@ -18,6 +29,9 @@ global {
 	lvdisplay_shows_full_device_path=0
 }
 report {
+	output_format="basic"
+	compact_output=0
+	compact_output_cols=""
 	aligned=1
 	buffered=1
 	headings=1
@@ -25,8 +39,9 @@ report {
 	list_item_separator=","
 	prefixes=0
 	quoted=1
-	colums_as_rows=0
+	columns_as_rows=0
 	binary_values_as_numeric=0
+	time_format="%Y-%m-%d %T %z"
 	devtypes_sort="devtype_name"
 	devtypes_cols="devtype_name,devtype_max_partitions,devtype_description"
 	devtypes_cols_verbose="devtype_name,devtype_max_partitions,devtype_description"
@@ -45,4 +60,15 @@ report {
 	pvsegs_sort="pv_name,pvseg_start"
 	pvsegs_cols="pv_name,vg_name,pv_fmt,pv_attr,pv_size,pv_free,pvseg_start,pvseg_size"
 	pvsegs_cols_verbose="pv_name,vg_name,pv_fmt,pv_attr,pv_size,pv_free,pvseg_start,pvseg_size,lv_name,seg_start_pe,segtype,seg_pe_ranges"
+	vgs_cols_full="vg_all"
+	pvs_cols_full="pv_all"
+	lvs_cols_full="lv_all"
+	pvsegs_cols_full="pvseg_all,pv_uuid,lv_uuid"
+	segs_cols_full="seg_all,lv_uuid"
+	vgs_sort_full="vg_name"
+	pvs_sort_full="pv_name"
+	lvs_sort_full="vg_name,lv_name"
+	pvsegs_sort_full="pv_uuid,pvseg_start"
+	segs_sort_full="lv_uuid,seg_start"
+	mark_hidden_devices=1
 }

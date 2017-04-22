@@ -1,4 +1,4 @@
-/* Copyright (C) 1997-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1997-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Thorsten Kukuk <kukuk@suse.de>, 1997.
 
@@ -19,7 +19,7 @@
 #ifndef	__RPCSVC_NISLIB_H__
 #define	__RPCSVC_NISLIB_H__
 
-#include <features.h>
+#include <rpcsvc/nis.h>
 
 __BEGIN_DECLS
 

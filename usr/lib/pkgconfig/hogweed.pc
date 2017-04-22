@@ -1,6 +1,6 @@
 prefix=/usr
 exec_prefix=${prefix}
-libdir=/usr/lib
+libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 # Uses Requires.private and Libs.private, under the assumption that
@@ -10,9 +10,10 @@ includedir=${prefix}/include
 Name: Hogweed
 Description: Nettle low-level cryptographic library (public-key algorithms)
 URL: http://www.lysator.liu.se/~nisse/nettle
-Version: 2.7.1
-Requires.private: nettle
-Libs: -L${libdir} -lhogweed
-Libs.private: -lgmp
+Version: 3.3
+Requires: # nettle
+Requires.private:  nettle
+Libs: -L${libdir} -lhogweed # -lgmp 
+Libs.private:  -lgmp 
 Cflags: -I${includedir}
 

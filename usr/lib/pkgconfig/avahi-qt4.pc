@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: avahi-qt4
 Description: Avahi Multicast DNS Responder (QT4 Support)
-Version: 0.6.31
+Version: 0.6.32
 Requires.private: QtCore >= 4.0.0
 Libs: -L${libdir} -lavahi-qt4
 Cflags: -D_REENTRANT -I${includedir}

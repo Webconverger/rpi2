@@ -10,6 +10,6 @@ typelibdir=${libdir}/girepository-1.0
 Name: GStreamer base classes
 Description: Base classes for GStreamer elements
 Requires: gstreamer-1.0
-Version: 1.4.5
+Version: 1.10.4
 Libs: -L${libdir} -lgstbase-1.0
 Cflags: -I${includedir}

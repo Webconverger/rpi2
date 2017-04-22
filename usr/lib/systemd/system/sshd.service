@@ -3,7 +3,6 @@ Description=OpenSSH Daemon
 Wants=sshdgenkeys.service
 After=sshdgenkeys.service
 After=network.target
-ConditionKernelCommandLine=debug
 
 [Service]
 ExecStart=/usr/bin/sshd -D

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: caca
 Description: Colour ASCII-Art library
-Version: 0.99.beta18
+Version: 0.99.beta19
 Requires: 
 Conflicts: 
 Libs: -L${libdir} -lcaca

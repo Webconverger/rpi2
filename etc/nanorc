@@ -46,7 +46,8 @@
 
 ## Constantly display the cursor position in the statusbar.  Note that
 ## this overrides "quickblank".
-# set const
+# set constantshow
+## (The old form, 'const', is deprecated.)
 
 ## Use cut-to-end-of-line by default.
 # set cut
@@ -56,8 +57,14 @@
 ## width less this number.
 # set fill -8
 
-## Enable ~/.nano_history for saving and reading search/replace strings.
+## Remember the used search/replace strings for the next session.
 # set historylog
+
+## Make the justify command kill whitespace at the end of lines.
+# set justifytrim
+
+## Display line numbers to the left of the text.
+# set linenumbers
 
 ## Enable vim-style lock-files.  This is just to let a vim user know you
 ## are editing a file [s]he is trying to edit and vice versa. There are
@@ -85,11 +92,12 @@
 ## Don't convert files from DOS/Mac format.
 # set noconvert
 
-## Don't follow symlinks when writing files.
-# set nofollow
-
 ## Don't display the helpful shortcut lists at the bottom of the screen.
 # set nohelp
+
+## Don't pause between warnings at startup.  Which means that only the
+## last one will be readable (when there are multiple ones).
+# set nopauses
 
 ## Don't add newlines to the ends of files.
 # set nonewlines
@@ -104,7 +112,8 @@
 # set operatingdir ""
 
 ## Remember the cursor position in each file for the next editing session.
-# set poslog
+# set positionlog
+## (The old form, 'poslog', is deprecated.)
 
 ## Preserve the XON and XOFF keys (^Q and ^S).
 # set preserve
@@ -135,6 +144,10 @@
 
 ## Do extended regular expression searches by default.
 # set regexp
+
+## Put the cursor on the highlighted item in the file browser;
+## useful for people who use a braille display.
+# set showcursor
 
 ## Make the Home key smarter.  When Home is pressed anywhere but at the
 ## very beginning of non-whitespace characters on a line, the cursor
@@ -176,17 +189,29 @@
 ## The default otherwise:
 # set whitespace ">."
 
-## Detect word boundaries more accurately by treating punctuation
+## Detect word boundaries differently by treating punctuation
 ## characters as parts of words.
 # set wordbounds
 
+## The characters (besides alphanumeric ones) that should be considered
+## as parts of words.  This option does not have a default value.  When
+## set, it overrides option 'set wordbounds'.
+# set wordchars "<_>."
+
 
 ## Paint the interface elements of nano.
-## This is an example; by default there are no colors.
+## These are examples; by default there are no colors.
 # set titlecolor brightwhite,blue
 # set statuscolor brightwhite,green
-# set keycolor green
-# set functioncolor yellow
+# set numbercolor cyan
+# set keycolor cyan
+# set functioncolor green
+## In root's .nanorc you might want to use:
+# set titlecolor brightwhite,red
+# set statuscolor brightwhite,red
+# set numbercolor magenta
+# set keycolor brightmagenta
+# set functioncolor magenta
 
 
 ## Setup of syntax coloring.
@@ -235,13 +260,15 @@
 
 
 ## Key bindings.
-## See nanorc(5) for more details on this.
+## See nanorc(5) (section REBINDING KEYS) for more details on this.
 ##
-## Here are a few samples to get you going.
-##
-# bind M-W nowrap main
-# bind M-A casesens search
-# bind ^S research main
+## The following five functions are not bound to any key by default.
+## You may wish to choose different keys than the ones suggested here.
+# bind ^S savefile main
+# bind M-Q findprevious main
+# bind M-W findnext main
+# bind M-B cutwordleft main
+# bind M-N cutwordright main
 
-## Set this if your backspace key sends Del most of the time.
+## Set this if your Backspace key sends Del most of the time.
 # bind Del backspace all

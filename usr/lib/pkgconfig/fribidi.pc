@@ -8,6 +8,6 @@ includedir=${prefix}/include
 Name: GNU FriBidi
 Description: Unicode Bidirectional Algorithm Library
 Requires: glib-2.0
-Version: 0.19.6
+Version: 0.19.7
 Libs: -L${libdir} -lfribidi
 Cflags: -I${includedir}/fribidi

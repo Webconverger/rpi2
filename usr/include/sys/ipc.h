@@ -1,4 +1,4 @@
-/* Copyright (C) 1995-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1995-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -19,10 +19,6 @@
 #define _SYS_IPC_H	1
 
 #include <features.h>
-
-#if !defined __USE_MISC && !defined __USE_XOPEN && __GNUC__ >= 2
-# warning "Files using this header must be compiled with _GNU_SOURCE or _XOPEN_SOURCE"
-#endif
 
 /* Get system dependent definition of `struct ipc_perm' and more.  */
 #include <bits/ipctypes.h>

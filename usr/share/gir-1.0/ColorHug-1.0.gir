@@ -17,6 +17,9 @@ and/or use gtk-doc annotations.  -->
              shared-library="libcolorhug.so.2"
              c:identifier-prefixes="Ch"
              c:symbol-prefixes="ch">
+    <alias name="Cmd" c:type="ChCmd">
+      <type name="guint8" c:type="guint8"/>
+    </alias>
     <constant name="BUFFER_INPUT_CMD" value="0" c:type="CH_BUFFER_INPUT_CMD">
       <type name="gint" c:type="gint"/>
     </constant>
@@ -105,7 +108,7 @@ and/or use gtk-doc annotations.  -->
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CCD_SPECTRAL_RESOLUTION"
-              value="3648"
+              value="1024"
               c:type="CH_CCD_SPECTRAL_RESOLUTION">
       <type name="gint" c:type="gint"/>
     </constant>
@@ -126,6 +129,30 @@ ColorHug       |      ✓       |      ×
 ColorHug2      |      ✓       |      ×
 ColorHug+      |      ✓       |      ×
 ColorHugALS    |      ✓       |      ×</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="CMD_CLEAR_ERROR"
+              value="97"
+              c:type="CH_CMD_CLEAR_ERROR"
+              version="1.3.1">
+      <doc xml:space="preserve">Clears any recorded error on the device.
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     0x00
+wIndex:     interface
+wLength:    0x00
+Direction:  DEVICE-&gt;HOST
+Data:       []
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_ERASE_FLASH"
@@ -327,6 +354,30 @@ ColorHug+      |      ×       |      ✓
 ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="CMD_GET_ERROR"
+              value="96"
+              c:type="CH_CMD_GET_ERROR"
+              version="1.3.1">
+      <doc xml:space="preserve">Gets any recorded error from the device.
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     0x00
+wIndex:     interface
+wLength:    0x00
+Direction:  DEVICE-&gt;HOST
+Data:       [1:error][1:cmd]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
     <constant name="CMD_GET_FIRMWARE_VERSION"
               value="7"
               c:type="CH_CMD_GET_FIRMWARE_VERSION"
@@ -357,7 +408,8 @@ The hardware versions are as follows:
 0x01		= ColorHug
 0x02		= ColorHug2
 0x03		= ColorHug+
-0x04-0x0f	= Reserved for future use
+0x04		= ColorHugALS
+0x05-0x0f	= Reserved for future use
 
 IN:  [1:cmd]
 OUT: [1:retval][1:cmd][1:hw_version]
@@ -370,6 +422,25 @@ ColorHug       |      ✓       |      ✓
 ColorHug2      |      ✓       |      ✓
 ColorHug+      |      ✓       |      ✓
 ColorHugALS    |      ✓       |      ✓</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="CMD_GET_ILLUMINANTS"
+              value="21"
+              c:type="CH_CMD_GET_ILLUMINANTS"
+              version="1.3.4">
+      <doc xml:space="preserve">Get the illuminant state.
+
+IN:  [1:cmd]
+OUT: [1:retval][1:cmd][1:illuminants]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_GET_INTEGRAL_TIME"
@@ -540,7 +611,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ×
 ColorHug+      |      ×       |      ×
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_GET_REMOTE_HASH"
@@ -601,6 +672,30 @@ ColorHug+      |      ×       |      ✓
 ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="CMD_LOAD_SRAM"
+              value="65"
+              c:type="CH_CMD_LOAD_SRAM"
+              version="0.1.29">
+      <doc xml:space="preserve">Load the SRAM from the EEPROM.
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     0x00
+wIndex:     interface
+wLength:    0x00
+Direction:  DEVICE-&gt;HOST
+Data:       [1:error][1:cmd]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
     <constant name="CMD_READ_FLASH"
               value="37"
               c:type="CH_CMD_READ_FLASH"
@@ -626,8 +721,17 @@ ColorHugALS    |      ✓       |      ×</doc>
               version="0.1.29">
       <doc xml:space="preserve">Read in raw data from the SRAM memory.
 
+PROTOCOLv1:
 IN:  [1:cmd][2:address][1:length]
 OUT: [1:retval][1:cmd][1-60:data]
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     [address-index/64]
+wIndex:     interface
+wLength:    0x64
+Direction:  DEVICE-&gt;HOST
+Data:       [64:DATA]
 
 This command is available under these conditions:
 
@@ -656,6 +760,30 @@ ColorHug       |      ✓       |      ✓
 ColorHug2      |      ✓       |      ✓
 ColorHug+      |      ✓       |      ✓
 ColorHugALS    |      ✓       |      ✓</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="CMD_SAVE_SRAM"
+              value="66"
+              c:type="CH_CMD_SAVE_SRAM"
+              version="0.1.29">
+      <doc xml:space="preserve">Save the SRAM to the EEPROM.
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     0x00
+wIndex:     interface
+wLength:    0x00
+Direction:  DEVICE-&gt;HOST
+Data:       [1:error][1:cmd]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_SELF_TEST"
@@ -754,6 +882,30 @@ ColorHug+      |      ×       |      ×
 ColorHugALS    |      ×       |      ✓</doc>
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="CMD_SET_CRYPTO_KEY"
+              value="112"
+              c:type="CH_CMD_SET_CRYPTO_KEY"
+              version="1.3.1">
+      <doc xml:space="preserve">Sets the 128 bit encyption key for the device.
+
+PROTOCOLv2:
+bRequest:   [cmd]
+wValue:     0x00
+wIndex:     interface
+wLength:    0x00
+Direction:  DEVICE-&gt;HOST
+Data:       [4:key0][4:key1][4:key2][4:key3]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
     <constant name="CMD_SET_DAC_VALUE"
               value="61"
               c:type="CH_CMD_SET_DAC_VALUE"
@@ -826,6 +978,25 @@ ColorHug+      |      ✓       |      ✓
 ColorHugALS    |      ✓       |      ✓
 
 Different values of @success are permitted in each mode.</doc>
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="CMD_SET_ILLUMINANTS"
+              value="22"
+              c:type="CH_CMD_SET_ILLUMINANTS"
+              version="1.3.4">
+      <doc xml:space="preserve">Set the illuminants.
+
+IN:  [1:cmd][1:illuminant]
+OUT: [1:retval][1:cmd]
+
+This command is available under these conditions:
+
+               |  Bootloader  |  Firmware
+---------------+--------------+-----------
+ColorHug       |      ×       |      ×
+ColorHug2      |      ×       |      ×
+ColorHug+      |      ×       |      ✓
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_SET_INTEGRAL_TIME"
@@ -1009,7 +1180,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ×
 ColorHug+      |      ×       |      ×
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_SET_REMOTE_HASH"
@@ -1049,7 +1220,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ✓
 ColorHug+      |      ×       |      ✓
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_TAKE_READINGS"
@@ -1121,7 +1292,7 @@ ColorHugALS    |      ×       |      ✓</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_TAKE_READING_SPECTRAL"
-              value="80"
+              value="85"
               c:type="CH_CMD_TAKE_READING_SPECTRAL"
               version="0.1.31">
       <doc xml:space="preserve">Takes a spectral reading putting %CH_CCD_SPECTRAL_RESOLUTION uint16_t values
@@ -1186,7 +1357,7 @@ This command is available under these conditions:
 ColorHug       |      ×       |      ✓
 ColorHug2      |      ×       |      ✓
 ColorHug+      |      ×       |      ✓
-ColorHugALS    |      ×       |      ✓</doc>
+ColorHugALS    |      ×       |      ×</doc>
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="CMD_WRITE_FLASH"
@@ -1238,6 +1409,26 @@ ColorHugALS    |      ×       |      ×</doc>
       <member name="green" value="3" c:identifier="CH_COLOR_SELECT_GREEN">
       </member>
     </enumeration>
+    <constant name="DEVICE_GUID_COLORHUG"
+              value="40338ceb-b966-4eae-adae-9c32edfcc484"
+              c:type="CH_DEVICE_GUID_COLORHUG">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG2"
+              value="2082b5e0-7a64-478a-b1b2-e3404fab6dad"
+              c:type="CH_DEVICE_GUID_COLORHUG2">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG_ALS"
+              value="84f40464-9272-4ef7-9399-cd95f12da696"
+              c:type="CH_DEVICE_GUID_COLORHUG_ALS">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="DEVICE_GUID_COLORHUG_PLUS"
+              value="6d6f05a9-3ecb-43a2-bcbb-3844f1825366"
+              c:type="CH_DEVICE_GUID_COLORHUG_PLUS">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="DEVICE_USB_TIMEOUT"
               value="10000"
               c:type="CH_DEVICE_USB_TIMEOUT">
@@ -2040,7 +2231,10 @@ WARNING: this function is syncronous and will block.</doc>
             <doc xml:space="preserve">A #GAsyncReadyCallback that will be called when finished.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">User data passed to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2063,6 +2257,34 @@ WARNING: this function is syncronous and will block.</doc>
           <parameter name="res" transfer-ownership="none">
             <doc xml:space="preserve">the #GAsyncResult</doc>
             <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="read_firmware"
+              c:identifier="ch_device_queue_read_firmware"
+              version="1.2.11">
+        <doc xml:space="preserve">Reads firmware on the device.
+
+NOTE: This command is available on hardware version: 1 &amp; 2</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="device_queue" transfer-ownership="none">
+            <doc xml:space="preserve">A #ChDeviceQueue</doc>
+            <type name="DeviceQueue" c:type="ChDeviceQueue*"/>
+          </instance-parameter>
+          <parameter name="device" transfer-ownership="none">
+            <doc xml:space="preserve">A #GUsbDevice</doc>
+            <type name="GUsb.Device" c:type="GUsbDevice*"/>
+          </parameter>
+          <parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">Firmware binary data</doc>
+            <type name="guint8" c:type="guint8**"/>
+          </parameter>
+          <parameter name="len" transfer-ownership="none">
+            <doc xml:space="preserve">Size of @data</doc>
+            <type name="gsize" c:type="gsize*"/>
           </parameter>
         </parameters>
       </method>
@@ -2951,11 +3173,8 @@ NOTE: This command is available on hardware version: 2</doc>
           </parameter>
         </parameters>
       </method>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="DeviceQueuePrivate" c:type="ChDeviceQueuePrivate*"/>
       </field>
       <glib:signal name="device-failed" when="last">
         <return-value transfer-ownership="none">
@@ -3056,11 +3275,6 @@ NOTE: This command is available on hardware version: 2</doc>
         </callback>
       </field>
     </record>
-    <record name="DeviceQueuePrivate"
-            c:type="ChDeviceQueuePrivate"
-            disguised="1">
-      <doc xml:space="preserve">Private #ChDeviceQueue data</doc>
-    </record>
     <bitfield name="DeviceQueueProcessFlags"
               c:type="ChDeviceQueueProcessFlags">
       <doc xml:space="preserve">CH_DEVICE_QUEUE_PROCESS_FLAGS_NONE:
@@ -3101,6 +3315,16 @@ Flags for controlling processing options</doc>
     <constant name="EEPROM_ADDR_RUNCODE_ALS"
               value="8192"
               c:type="CH_EEPROM_ADDR_RUNCODE_ALS">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="EP0_TRANSFER_SIZE"
+              value="64"
+              c:type="CH_EP0_TRANSFER_SIZE">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="EP0_TRANSFER_SIZE_V2"
+              value="1024"
+              c:type="CH_EP0_TRANSFER_SIZE_V2">
       <type name="gint" c:type="gint"/>
     </constant>
     <enumeration name="Error" c:type="ChError">
@@ -3316,6 +3540,14 @@ Flags for controlling processing options</doc>
               c:type="CH_INTEGRAL_TIME_VALUE_MAX">
       <type name="gint" c:type="gint"/>
     </constant>
+    <bitfield name="Illuminant" c:type="ChIlluminant">
+      <member name="none" value="0" c:identifier="CH_ILLUMINANT_NONE">
+      </member>
+      <member name="a" value="1" c:identifier="CH_ILLUMINANT_A">
+      </member>
+      <member name="uv" value="2" c:identifier="CH_ILLUMINANT_UV">
+      </member>
+    </bitfield>
     <enumeration name="MeasureMode" c:type="ChMeasureMode">
       <member name="frequency"
               value="0"
@@ -3383,6 +3615,24 @@ Flags for controlling processing options</doc>
         </parameters>
       </function>
     </record>
+    <enumeration name="SpectrumKind" c:type="ChSpectrumKind">
+      <member name="raw" value="0" c:identifier="CH_SPECTRUM_KIND_RAW">
+      </member>
+      <member name="dark_cal"
+              value="1"
+              c:identifier="CH_SPECTRUM_KIND_DARK_CAL">
+      </member>
+      <member name="temp_cal"
+              value="2"
+              c:identifier="CH_SPECTRUM_KIND_TEMP_CAL">
+      </member>
+      <member name="irradiance_cal"
+              value="3"
+              c:identifier="CH_SPECTRUM_KIND_IRRADIANCE_CAL">
+      </member>
+      <member name="last" value="4" c:identifier="CH_SPECTRUM_KIND_LAST">
+      </member>
+    </enumeration>
     <bitfield name="StatusLed" c:type="ChStatusLed">
       <member name="green" value="1" c:identifier="CH_STATUS_LED_GREEN">
       </member>
@@ -3444,6 +3694,11 @@ Flags for controlling processing options</doc>
               c:type="CH_USB_PID_FIRMWARE_ALS">
       <type name="gint" c:type="gint"/>
     </constant>
+    <constant name="USB_PID_FIRMWARE_ALS_SENSOR_HID"
+              value="4104"
+              c:type="CH_USB_PID_FIRMWARE_ALS_SENSOR_HID">
+      <type name="gint" c:type="gint"/>
+    </constant>
     <constant name="USB_PID_FIRMWARE_PLUS"
               value="4098"
               c:type="CH_USB_PID_FIRMWARE_PLUS">
@@ -3483,7 +3738,7 @@ Flags for controlling processing options</doc>
       </return-value>
       <parameters>
         <parameter name="cmd" transfer-ownership="none">
-          <type name="guint8" c:type="guint8"/>
+          <type name="Cmd" c:type="ChCmd"/>
         </parameter>
       </parameters>
     </function>
@@ -3510,6 +3765,19 @@ Flags for controlling processing options</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="device_close"
+              c:identifier="ch_device_close"
+              version="1.2.11"
+              throws="1">
+      <return-value transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="device_error_quark"
               c:identifier="ch_device_error_quark"
               version="0.1.1">
@@ -3517,6 +3785,243 @@ Flags for controlling processing options</doc>
         <doc xml:space="preserve">ChDevice error quark.</doc>
         <type name="GLib.Quark" c:type="GQuark"/>
       </return-value>
+    </function>
+    <function name="device_get_adc_calibration_neg"
+              c:identifier="ch_device_get_adc_calibration_neg"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Gets the ADC positive calibration value.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">offset value</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_adc_calibration_pos"
+              c:identifier="ch_device_get_adc_calibration_pos"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Gets the ADC positive calibration value.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">offset value</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_ccd_calibration"
+              c:identifier="ch_device_get_ccd_calibration"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets any PCB wavelength_cal from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="nm_start" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="c0" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="c1" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="c2" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_error"
+              c:identifier="ch_device_get_error"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the status for the last operation.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="status"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">a #ChError, e.g. %CH_ERROR_INVALID_ADDRESS</doc>
+          <type name="Error" c:type="ChError*"/>
+        </parameter>
+        <parameter name="cmd"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">a #ChCmd, e.g. %CH_CMD_TAKE_READING_SPECTRAL</doc>
+          <type name="Cmd" c:type="ChCmd*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_guid"
+              c:identifier="ch_device_get_guid"
+              version="1.2.9">
+      <doc xml:space="preserve">Returns the GUID for the connected ColorHug device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the GUID address, or %NULL for error</doc>
+        <type name="utf8" c:type="const gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_illuminants"
+              c:identifier="ch_device_get_illuminants"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Gets the illuminants from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="Illuminant" c:type="ChIlluminant*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_integral_time"
+              c:identifier="ch_device_get_integral_time"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the integration time used for taking the next samples.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">integration time in ms</doc>
+          <type name="guint16" c:type="guint16*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_leds"
+              c:identifier="ch_device_get_leds"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the LEDs from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="StatusLed" c:type="ChStatusLed*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="device_get_mode"
               c:identifier="ch_device_get_mode"
@@ -3527,6 +4032,36 @@ Flags for controlling processing options</doc>
       <parameters>
         <parameter name="device" transfer-ownership="none">
           <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_pcb_errata"
+              c:identifier="ch_device_get_pcb_errata"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets any PCB errata from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">#ChPcbErrata, e.g. %CH_PCB_ERRATA_SWAPPED_LEDS</doc>
+          <type name="PcbErrata" c:type="ChPcbErrata*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
         </parameter>
       </parameters>
     </function>
@@ -3545,6 +4080,118 @@ Flags for controlling processing options</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="device_get_serial_number"
+              c:identifier="ch_device_get_serial_number"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the serial number from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="guint32" c:type="guint32*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_spectrum"
+              c:identifier="ch_device_get_spectrum"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the spectrum from the device. This queries the device multiple times
+until the spectrum has been populated.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a #CdSpectrum, or %NULL for error</doc>
+        <type name="Colord.Spectrum" c:type="CdSpectrum*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_spectrum_full"
+              c:identifier="ch_device_get_spectrum_full"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Gets the spectrum from the device. This queries the device multiple times
+until the spectrum has been populated.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a #CdSpectrum, or %NULL for error</doc>
+        <type name="Colord.Spectrum" c:type="CdSpectrum*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="kind" transfer-ownership="none">
+          <doc xml:space="preserve">A #ChSpectrumKind</doc>
+          <type name="SpectrumKind" c:type="ChSpectrumKind"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_get_temperature"
+              c:identifier="ch_device_get_temperature"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Gets the PCB board temperature from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value"
+                   direction="out"
+                   caller-allocates="0"
+                   transfer-ownership="full">
+          <doc xml:space="preserve">temperature in Celcius</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="device_is_colorhug"
               c:identifier="ch_device_is_colorhug"
               version="0.1.29">
@@ -3554,6 +4201,29 @@ Flags for controlling processing options</doc>
       <parameters>
         <parameter name="device" transfer-ownership="none">
           <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_load_sram"
+              c:identifier="ch_device_load_sram"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Loads the entire SRAM from the device EEPROM.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
         </parameter>
       </parameters>
     </function>
@@ -3600,6 +4270,389 @@ ColorHug and all firmware versions for ColorHug2 and ColorHug+.</doc>
       <parameters>
         <parameter name="device" transfer-ownership="none">
           <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_open_full"
+              c:identifier="ch_device_open_full"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Opens the device ready for use.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_read_sram"
+              c:identifier="ch_device_read_sram"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Reads a value from the SRAM.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="GLib.Bytes" c:type="GBytes*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="addr" transfer-ownership="none">
+          <type name="guint16" c:type="guint16"/>
+        </parameter>
+        <parameter name="len" transfer-ownership="none">
+          <type name="guint16" c:type="guint16"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_save_sram"
+              c:identifier="ch_device_save_sram"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Saves the entire SRAM space into the device EEPROM.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_self_test"
+              c:identifier="ch_device_self_test"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Performs a self test on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_ccd_calibration"
+              c:identifier="ch_device_set_ccd_calibration"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets any PCB wavelength_cal on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="nm_start" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="c0" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="c1" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="c2" transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_crypto_key"
+              c:identifier="ch_device_set_crypto_key"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets the firmware signing keys on the device.
+
+IMPORTANT: This can only be called once until the device is unlocked.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="keys" transfer-ownership="none">
+          <doc xml:space="preserve">a set of XTEA keys</doc>
+          <type name="guint32" c:type="guint32"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_illuminants"
+              c:identifier="ch_device_set_illuminants"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Sets the illuminants on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="Illuminant" c:type="ChIlluminant"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_integral_time"
+              c:identifier="ch_device_set_integral_time"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets the integration value for the next sample.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">integration time in ms</doc>
+          <type name="guint16" c:type="guint16"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_leds"
+              c:identifier="ch_device_set_leds"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets the LEDs on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="StatusLed" c:type="ChStatusLed"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_pcb_errata"
+              c:identifier="ch_device_set_pcb_errata"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets any PCB errata on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">#ChPcbErrata, e.g. %CH_PCB_ERRATA_SWAPPED_LEDS</doc>
+          <type name="PcbErrata" c:type="ChPcbErrata"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_serial_number"
+              c:identifier="ch_device_set_serial_number"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Sets the serial number on the device</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">serial number</doc>
+          <type name="guint32" c:type="guint32"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_set_spectrum_full"
+              c:identifier="ch_device_set_spectrum_full"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Sets the spectrum from the device. This sends data multiple multiple times
+until the spectrum has been populated.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="kind" transfer-ownership="none">
+          <doc xml:space="preserve">A #ChSpectrumKind</doc>
+          <type name="SpectrumKind" c:type="ChSpectrumKind"/>
+        </parameter>
+        <parameter name="sp" transfer-ownership="none">
+          <doc xml:space="preserve">A #CdSpectrum</doc>
+          <type name="Colord.Spectrum" c:type="CdSpectrum*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_take_reading_spectral"
+              c:identifier="ch_device_take_reading_spectral"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Takes a reading from the device.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve">a #ChSpectrumKind, e.g. %CH_SPECTRUM_KIND_RAW</doc>
+          <type name="SpectrumKind" c:type="ChSpectrumKind"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_take_reading_xyz"
+              c:identifier="ch_device_take_reading_xyz"
+              version="1.3.1"
+              throws="1">
+      <doc xml:space="preserve">Takes a reading from the device and returns the XYZ value.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a #CdColorXYZ, or %NULL for error</doc>
+        <type name="Colord.ColorXYZ" c:type="CdColorXYZ*"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="calibration_idx" transfer-ownership="none">
+          <doc xml:space="preserve">A calibration index or 0 for none</doc>
+          <type name="guint16" c:type="guint16"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
         </parameter>
       </parameters>
     </function>
@@ -3694,7 +4747,10 @@ ColorHug and all firmware versions for ColorHug2 and ColorHug+.</doc>
           <doc xml:space="preserve">A #GAsyncReadyCallback that will be called when finished.</doc>
           <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">User data passed to @callback</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -3717,6 +4773,36 @@ ColorHug and all firmware versions for ColorHug2 and ColorHug+.</doc>
         <parameter name="res" transfer-ownership="none">
           <doc xml:space="preserve">the #GAsyncResult</doc>
           <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="device_write_sram"
+              c:identifier="ch_device_write_sram"
+              version="1.3.4"
+              throws="1">
+      <doc xml:space="preserve">Loads the entire SRAM from the device EEPROM.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE for success</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="device" transfer-ownership="none">
+          <doc xml:space="preserve">A #GUsbDevice</doc>
+          <type name="GUsb.Device" c:type="GUsbDevice*"/>
+        </parameter>
+        <parameter name="addr" transfer-ownership="none">
+          <type name="guint16" c:type="guint16"/>
+        </parameter>
+        <parameter name="data" transfer-ownership="none">
+          <doc xml:space="preserve">A #GBytes</doc>
+          <type name="GLib.Bytes" c:type="GBytes*"/>
+        </parameter>
+        <parameter name="cancellable"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+          <type name="Gio.Cancellable" c:type="GCancellable*"/>
         </parameter>
       </parameters>
     </function>

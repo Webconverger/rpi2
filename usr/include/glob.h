@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ __BEGIN_DECLS
 /* We need `size_t' for the following definitions.  */
 #ifndef __size_t
 typedef __SIZE_TYPE__ __size_t;
-# if defined __USE_XOPEN || __USE_XOPEN2K8
+# if defined __USE_XOPEN || defined __USE_XOPEN2K8
 typedef __SIZE_TYPE__ size_t;
 # endif
 #else

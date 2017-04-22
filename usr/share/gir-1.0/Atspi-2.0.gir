@@ -56,7 +56,7 @@ descendants.</doc>
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
-          <instance-parameter name="accessible" transfer-ownership="none">
+          <instance-parameter name="obj" transfer-ownership="none">
             <doc xml:space="preserve">The #AtspiAccessible whose cache to clear.</doc>
             <type name="Accessible" c:type="AtspiAccessible*"/>
           </instance-parameter>
@@ -592,7 +592,7 @@ relationships with other #AtspiAccessible objects.</doc>
           <doc xml:space="preserve">a #GArray of
          #AtspiRelation pointers or NULL on exception.</doc>
           <array name="GLib.Array" c:type="GArray*">
-            <type name="Accessible"/>
+            <type name="Relation"/>
           </array>
         </return-value>
         <parameters>
@@ -869,9 +869,9 @@ events are not raised / to aid in testing for such bugs.</doc>
         <type name="Accessible" c:type="AtspiAccessible*"/>
       </field>
       <field name="children">
-        <type name="GLib.List" c:type="GList*">
+        <array name="GLib.PtrArray" c:type="GPtrArray*">
           <type name="gpointer" c:type="gpointer"/>
-        </type>
+        </array>
       </field>
       <field name="role">
         <type name="Role" c:type="AtspiRole"/>
@@ -1746,10 +1746,9 @@ restrictions on #AtspiAccesible objects to be traversed.</doc>
       <method name="set_position"
               c:identifier="atspi_component_set_position"
               throws="1">
+        <doc xml:space="preserve">Moves the component to the specified position.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">#TRUE if successful; #FALSE otherwise.
-
-Moves the component to the specified position.</doc>
+          <doc xml:space="preserve">#TRUE if successful; #FALSE otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -1775,10 +1774,9 @@ Moves the component to the specified position.</doc>
       <method name="set_size"
               c:identifier="atspi_component_set_size"
               throws="1">
+        <doc xml:space="preserve">Resizes the specified component to the given coordinates.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">#TRUE if successful; #FALSE otherwise.
-
-Resizes the specified component to the given coordinates.</doc>
+          <doc xml:space="preserve">#TRUE if successful; #FALSE otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -2092,7 +2090,10 @@ top-level window.</doc>
            or NULL.</doc>
             <type name="DeviceListenerCB" c:type="AtspiDeviceListenerCB"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a pointer to data which will be passed to the
 callback when invoked.</doc>
             <type name="gpointer" c:type="void*"/>
@@ -2152,7 +2153,6 @@ and data associated with the callback should be freed.  It an be NULL.</doc>
               c:identifier="atspi_device_listener_add_callback">
         <doc xml:space="preserve">Adds an in-process callback function to an existing #AtspiDeviceListener.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">#TRUE if successful, otherwise #FALSE.</doc>
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
@@ -2175,7 +2175,10 @@ and data associated with the callback should be freed.  It an be NULL.</doc>
 and data associated with the callback should be freed. It can be NULL.</doc>
             <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a pointer to data which will be passed to the
             callback when invoked.</doc>
             <type name="gpointer" c:type="void*"/>
@@ -2187,7 +2190,6 @@ and data associated with the callback should be freed. It can be NULL.</doc>
         <doc xml:space="preserve">Removes an in-process callback function from an existing
 #AtspiDeviceListener.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">#TRUE if successful, otherwise #FALSE.</doc>
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
@@ -2226,7 +2228,11 @@ relayed to the currently focussed application, #FALSE if the event delivery shou
          being received.</doc>
           <type name="DeviceEvent" c:type="const AtspiDeviceEvent*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="1">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="1">
           <doc xml:space="preserve">Data which is passed to the client each time this callback is notified.</doc>
           <type name="gpointer" c:type="void*"/>
         </parameter>
@@ -2655,7 +2661,10 @@ See: #atspi_event_main</doc>
 when an event is fired.</doc>
             <type name="EventListenerCB" c:type="AtspiEventListenerCB"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">data to pass to the callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2713,7 +2722,10 @@ and data associated with the callback should be freed.  Can be NULL.</doc>
            event type.</doc>
             <type name="EventListenerCB" c:type="AtspiEventListenerCB"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">User data that was passed in for this callback.</doc>
             <type name="gpointer" c:type="void*"/>
           </parameter>
@@ -2766,7 +2778,10 @@ and data associated with the callback should be freed.  Can be NULL.</doc>
 against an event type.</doc>
             <type name="EventListenerCB" c:type="AtspiEventListenerCB"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">User data to be passed to the callback.</doc>
             <type name="gpointer" c:type="void*"/>
           </parameter>
@@ -2799,7 +2814,10 @@ for a description of the format.</doc>
                      destroy="2">
             <type name="EventListenerCB" c:type="AtspiEventListenerCB"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <type name="gpointer" c:type="void*"/>
           </parameter>
           <parameter name="callback_destroyed"
@@ -3031,7 +3049,11 @@ for a description of the format and legal event types.</doc>
           <doc xml:space="preserve">The event for which notification is sent.</doc>
           <type name="Event" c:type="AtspiEvent*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="1">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="1">
           <doc xml:space="preserve">User data which is passed to the callback each time a notification takes place.</doc>
           <type name="gpointer" c:type="void*"/>
         </parameter>
@@ -3860,7 +3882,7 @@ to the appropriate META value, for the convenience of the client.</doc>
       <doc xml:space="preserve">One higher than the highest valid value of #AtspiRelationType.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="ROLE_COUNT" value="91" c:type="ATSPI_ROLE_COUNT">
+    <constant name="ROLE_COUNT" value="122" c:type="ATSPI_ROLE_COUNT">
       <doc xml:space="preserve">One higher than the highest valid value of #AtspiRole.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -4178,7 +4200,6 @@ determine the size of the enumeration.</doc>
       </member>
     </enumeration>
     <enumeration name="Role"
-                 version="2.8"
                  glib:type-name="AtspiRole"
                  glib:get-type="atspi_role_get_type"
                  c:type="AtspiRole">
@@ -4613,8 +4634,13 @@ and shown in its own window.</doc>
               value="61"
               c:identifier="ATSPI_ROLE_TEXT"
               glib:nick="text">
-        <doc xml:space="preserve">An object that presents text to the user, of nonspecific
-type.</doc>
+        <doc xml:space="preserve">An interactive widget that supports multiple lines of text
+and optionally accepts user input, but whose purpose is not to solicit user
+input. Thus @ATSPI_ROLE_TEXT is appropriate for the text view in a plain text
+editor but inappropriate for an input field in a dialog box or web form. For
+widgets whose purpose is to solicit input from the user, see @ATSPI_ROLE_ENTRY
+and @ATSPI_ROLE_PASSWORD_TEXT. For generic objects which display a brief amount
+of textual information, see @ATSPI_ROLE_STATIC.</doc>
       </member>
       <member name="toggle_button"
               value="62"
@@ -4947,7 +4973,8 @@ within an existing window.</doc>
               c:identifier="ATSPI_ROLE_LEVEL_BAR"
               glib:nick="level-bar">
         <doc xml:space="preserve">A bar that serves as a level indicator to, for
-instance, show the strength of a password or the state of a battery.</doc>
+instance, show the strength of a password or the state of a battery.
+  Since: 2.8</doc>
       </member>
       <member name="title_bar"
               value="104"
@@ -5046,8 +5073,53 @@ AtspiValue. @Since: 2.12</doc>
 indicates an amount of elapsed time from a start point, or the time
 remaining until an end point. @Since: 2.12</doc>
       </member>
-      <member name="last_defined"
+      <member name="static"
               value="116"
+              c:identifier="ATSPI_ROLE_STATIC"
+              glib:nick="static">
+        <doc xml:space="preserve">A generic non-container object whose purpose is to display
+a brief amount of information to the user and whose role is known by the
+implementor but lacks semantic value for the user. Examples in which
+@ATSPI_ROLE_STATIC is appropriate include the message displayed in a message
+box and an image used as an alternative means to display text.
+@ATSPI_ROLE_STATIC should not be applied to widgets which are traditionally
+interactive, objects which display a significant amount of content, or any
+object which has an accessible relation pointing to another object. The
+displayed information, as a general rule, should be exposed through the
+accessible name of the object. For labels which describe another widget, see
+@ATSPI_ROLE_LABEL. For text views, see @ATSPI_ROLE_TEXT. For generic
+containers, see @ATSPI_ROLE_PANEL. For objects whose role is not known by the
+implementor, see @ATSPI_ROLE_UNKNOWN. @Since: 2.16.</doc>
+      </member>
+      <member name="math_fraction"
+              value="117"
+              c:identifier="ATSPI_ROLE_MATH_FRACTION"
+              glib:nick="math-fraction">
+        <doc xml:space="preserve">An object that represents a mathematical fraction.</doc>
+      </member>
+      <member name="math_root"
+              value="118"
+              c:identifier="ATSPI_ROLE_MATH_ROOT"
+              glib:nick="math-root">
+        <doc xml:space="preserve">An object that represents a mathematical expression
+displayed with a radical. @Since: 2.16.</doc>
+      </member>
+      <member name="subscript"
+              value="119"
+              c:identifier="ATSPI_ROLE_SUBSCRIPT"
+              glib:nick="subscript">
+        <doc xml:space="preserve">An object that contains text that is displayed as a
+subscript. @Since: 2.16.</doc>
+      </member>
+      <member name="superscript"
+              value="120"
+              c:identifier="ATSPI_ROLE_SUPERSCRIPT"
+              glib:nick="superscript">
+        <doc xml:space="preserve">An object that contains text that is displayed as a
+superscript. @Since: 2.16.</doc>
+      </member>
+      <member name="last_defined"
+              value="121"
               c:identifier="ATSPI_ROLE_LAST_DEFINED"
               glib:nick="last-defined">
         <doc xml:space="preserve">Not a valid role, used for finding end of
@@ -5455,7 +5527,13 @@ condition.</doc>
               c:identifier="ATSPI_STATE_ACTIVE"
               glib:nick="active">
         <doc xml:space="preserve">Indicates a window is currently the active window, or
-is an active subelement within a container or table.</doc>
+an object is the active subelement within a container or table.
+@ATSPI_STATE_ACTIVE should not be used for objects which have
+@ATSPI_STATE_FOCUSABLE or @ATSPI_STATE_SELECTABLE: Those objects should use
+@ATSPI_STATE_FOCUSED and @ATSPI_STATE_SELECTED respectively.
+@ATSPI_STATE_ACTIVE is a means to indicate that an object which is not
+focusable and not selectable is the currently-active item within its
+parent container.</doc>
       </member>
       <member name="armed"
               value="2"
@@ -5810,8 +5888,16 @@ showing. This means that activation renders conditional content.
 Note that ordinary tooltips are not considered popups in this
 context. @Since: 2.12</doc>
       </member>
-      <member name="last_defined"
+      <member name="read_only"
               value="43"
+              c:identifier="ATSPI_STATE_READ_ONLY"
+              glib:nick="read-only">
+        <doc xml:space="preserve">Indicates that an object which is ENABLED and
+SENSITIVE has a value which can be read, but not modified, by the
+user. @Since: 2.16</doc>
+      </member>
+      <member name="last_defined"
+              value="44"
               c:identifier="ATSPI_STATE_LAST_DEFINED"
               glib:nick="last-defined">
         <doc xml:space="preserve">This value of the enumeration should not be used
@@ -6472,7 +6558,8 @@ AtspiAccessibles representing the column header cells.</doc>
         </parameters>
       </method>
       <method name="get_column_span"
-              c:identifier="atspi_table_cell_get_column_span">
+              c:identifier="atspi_table_cell_get_column_span"
+              throws="1">
         <doc xml:space="preserve">Returns the number of columns occupied by this cell accessible.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a gint representing the number of columns occupied by this cell,
@@ -6484,9 +6571,6 @@ or 0 if the cell does not implement this method.</doc>
             <doc xml:space="preserve">a GObject instance that implements AtspiTableCellIface</doc>
             <type name="TableCell" c:type="AtspiTableCell*"/>
           </instance-parameter>
-          <parameter name="error" transfer-ownership="none">
-            <type name="GLib.Error" c:type="GError*"/>
-          </parameter>
         </parameters>
       </method>
       <method name="get_row_column_span"
@@ -7945,15 +8029,15 @@ at-spi2-atk) when it is desirable to re-enter the main loop.</doc>
     </function>
     <function name="set_timeout" c:identifier="atspi_set_timeout">
       <doc xml:space="preserve">Set the timeout used for method calls. If this is not set explicitly,
- a default of 0.8 ms is used.
- Note that at-spi2-registryd currently uses a timeout of 3 seconds when
- sending a keyboard event notification. This means that, if an AT makes
- a call in response to the keyboard notification and the application
- being called does not respond before the timeout is reached,
- at-spi2-registryd will time out on the keyboard event notification and
- pass the key onto the application (ie, reply to indicate that the key
- was not consumed), so this may make it undesirable to set a timeout
- larger than 3 seconds.
+a default of 0.8 ms is used.
+Note that at-spi2-registryd currently uses a timeout of 3 seconds when
+sending a keyboard event notification. This means that, if an AT makes
+a call in response to the keyboard notification and the application
+being called does not respond before the timeout is reached,
+at-spi2-registryd will time out on the keyboard event notification and
+pass the key onto the application (ie, reply to indicate that the key
+was not consumed), so this may make it undesirable to set a timeout
+larger than 3 seconds.
 
 By default, the normal timeout is set to 800 ms, and the application startup
 timeout is set to 15 seconds.</doc>
@@ -7967,10 +8051,10 @@ timeout is set to 15 seconds.</doc>
         </parameter>
         <parameter name="startup_time" transfer-ownership="none">
           <doc xml:space="preserve">The amount of time, in milliseconds, to allow to pass
- before enforcing timeouts on an application. Can be used to prevent
- timeout exceptions if an application is likely to block for an extended
- period of time on initialization. -1 can be passed to disable this
- behavior.</doc>
+before enforcing timeouts on an application. Can be used to prevent
+timeout exceptions if an application is likely to block for an extended
+period of time on initialization. -1 can be passed to disable this
+behavior.</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
       </parameters>

@@ -1,5 +1,3 @@
-/*-*- Mode: C; c-basic-offset: 8; indent-tabs-mode: nil -*-*/
-
 #ifndef foosdmessageshfoo
 #define foosdmessageshfoo
 
@@ -23,6 +21,7 @@
 ***/
 
 #include "sd-id128.h"
+
 #include "_sd-common.h"
 
 _SD_BEGIN_DECLARATIONS;
@@ -41,6 +40,7 @@ _SD_BEGIN_DECLARATIONS;
 #define SD_MESSAGE_JOURNAL_USAGE    SD_ID128_MAKE(ec,38,7f,57,7b,84,4b,8f,a9,48,f3,3c,ad,9a,75,e6)
 
 #define SD_MESSAGE_COREDUMP         SD_ID128_MAKE(fc,2e,22,bc,6e,e6,47,b6,b9,07,29,ab,34,a2,50,b1)
+#define SD_MESSAGE_TRUNCATED_CORE   SD_ID128_MAKE(5a,ad,d8,e9,54,dc,4b,1a,8c,95,4d,63,fd,9e,11,37)
 
 #define SD_MESSAGE_SESSION_START    SD_ID128_MAKE(8d,45,62,0c,1a,43,48,db,b1,74,10,da,57,c6,0c,66)
 #define SD_MESSAGE_SESSION_STOP     SD_ID128_MAKE(33,54,93,94,24,b4,45,6d,98,02,ca,83,33,ed,42,4a)
@@ -81,9 +81,11 @@ _SD_BEGIN_DECLARATIONS;
 #define SD_MESSAGE_SUSPEND_KEY      SD_ID128_MAKE(b7,2e,a4,a2,88,15,45,a0,b5,0e,20,0e,55,b9,b0,72)
 #define SD_MESSAGE_HIBERNATE_KEY    SD_ID128_MAKE(b7,2e,a4,a2,88,15,45,a0,b5,0e,20,0e,55,b9,b0,73)
 
-#define SD_MESSAGE_CONFIG_ERROR     SD_ID128_MAKE(c7,72,d2,4e,9a,88,4c,be,b9,ea,12,62,5c,30,6c,01)
+#define SD_MESSAGE_INVALID_CONFIGURATION SD_ID128_MAKE(c7,72,d2,4e,9a,88,4c,be,b9,ea,12,62,5c,30,6c,01)
 
-#define SD_MESSAGE_BOOTCHART        SD_ID128_MAKE(9f,26,aa,56,2c,f4,40,c2,b1,6c,77,3d,04,79,b5,18)
+#define SD_MESSAGE_DNSSEC_FAILURE   SD_ID128_MAKE(16,75,d7,f1,72,17,40,98,b1,10,8b,f8,c7,dc,8f,5d)
+#define SD_MESSAGE_DNSSEC_TRUST_ANCHOR_REVOKED SD_ID128_MAKE(4d,44,08,cf,d0,d1,44,85,91,84,d1,e6,5d,7c,8a,65)
+#define SD_MESSAGE_DNSSEC_DOWNGRADE SD_ID128_MAKE(36,db,2d,fa,5a,90,45,e1,bd,4a,f5,f9,3e,1c,f0,57)
 
 _SD_END_DECLARATIONS;
 

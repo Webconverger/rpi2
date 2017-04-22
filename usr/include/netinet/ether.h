@@ -1,5 +1,5 @@
 /* Functions for storing Ethernet addresses in ASCII and mapping to hostnames.
-   Copyright (C) 1996-2014 Free Software Foundation, Inc.
+   Copyright (C) 1996-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -24,6 +24,7 @@
 /* Get definition of `struct ether_addr'.  */
 #include <netinet/if_ether.h>
 
+#ifdef __USE_MISC
 __BEGIN_DECLS
 
 /* Convert 48 bit Ethernet ADDRess to ASCII.  */
@@ -49,5 +50,6 @@ extern int ether_line (const char *__line, struct ether_addr *__addr,
 		       char *__hostname) __THROW;
 
 __END_DECLS
+#endif /* Use misc.  */
 
 #endif /* netinet/ether.h */

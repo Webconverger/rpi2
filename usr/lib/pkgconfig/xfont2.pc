@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Xfont2
+Description: X font Library version 2
+Version: 2.0.1
+Requires: xproto fontsproto
+Requires.private: fontenc freetype2
+Cflags: -I${includedir}
+Libs: -L${libdir} -lXfont2
+Libs.private: -lz -lm

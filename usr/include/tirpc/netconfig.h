@@ -1,7 +1,9 @@
 #ifndef _NETCONFIG_H_
 #define _NETCONFIG_H_
 
+#ifdef HAVE_FEATURES_H
 #include <features.h>
+#endif
 
 #define NETCONFIG "/etc/netconfig"
 #define NETPATH	  "NETPATH"
@@ -74,7 +76,9 @@ typedef struct {
 #define NC_UDP		"udp"
 #define NC_ICMP		"icmp"
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern void *setnetconfig (void);
 extern struct netconfig *getnetconfig (void *);
@@ -89,6 +93,8 @@ extern int endnetpath (void *);
 extern void nc_perror (const char *);
 extern char *nc_sperror (void);
 
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _NETCONFIG_H_ */

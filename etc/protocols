@@ -1,4 +1,4 @@
-# See the full IANA XML file at: /usr/share/iana-etc/protocol-numbers.iana
+# Full data: /usr/share/iana-etc/protocol-numbers.iana
 
 hopopt         0 HOPOPT
 icmp           1 ICMP
@@ -13,7 +13,6 @@ igp            9 IGP
 bbn-rcc-mon   10 BBN-RCC-MON
 nvp-ii        11 NVP-II
 pup           12 PUP
-argus         13 ARGUS
 emcon         14 EMCON
 xnet          15 XNET
 chaos         16 CHAOS
@@ -53,7 +52,6 @@ bna           49 BNA
 esp           50 ESP
 ah            51 AH
 i-nlsp        52 I-NLSP
-swipe         53 SWIPE
 narp          54 NARP
 mobile        55 MOBILE
 tlsp          56 TLSP
@@ -93,7 +91,6 @@ larp          91 LARP
 mtp           92 MTP
 ax.25         93 AX.25
 ipip          94 IPIP
-micp          95 MICP
 scc-sp        96 SCC-SP
 etherip       97 ETHERIP
 encap         98 ENCAP
@@ -118,7 +115,6 @@ stp          118 STP
 srp          119 SRP
 uti          120 UTI
 smp          121 SMP
-sm           122 SM
 ptp          123 PTP
 fire         125 FIRE
 crtp         126 CRTP

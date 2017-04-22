@@ -14,7 +14,7 @@
 # GNU General Public License for more details.
 # 
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, see <http://www.gnu.org/licenses/>.
+# along with this program; if not, see <https://www.gnu.org/licenses/>.
 
 
 .#gpg.edit_ownertrust.value
@@ -228,7 +228,7 @@ self-signatures will be advanced by one second.
 
 .#gpg.passphrase.enter
 # fixme: Please translate and remove the hash mark from the key line.
-Please enter the passhrase; this is a secret sentence 
+Please enter the passphrase; this is a secret sentence
 
 .
 

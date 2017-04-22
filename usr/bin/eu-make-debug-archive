@@ -45,7 +45,7 @@ fatal_usage()
 
 script_version()
 {
-  echo "`basename $0` (elfutils) 0.161"
+  echo "`basename $0` (elfutils) 0.168"
   echo "Copyright (C) 2007 Red Hat, Inc."
   echo "This is free software; see the source for copying conditions."
   echo "There is NO warranty; not even for MERCHANTABILITY or"

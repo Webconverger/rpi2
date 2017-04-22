@@ -6,6 +6,6 @@ includedir=${prefix}/include
 Name: libva-tpi
 Description: Userspace Video Acceleration (VA) 3rd party interface
 Requires: libva
-Version: 0.37.0
+Version: 0.40.0
 Libs: -L${libdir} -lva-tpi
 Cflags: -I${includedir}

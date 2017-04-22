@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -124,12 +124,11 @@ typedef __key_t key_t;
 #endif
 
 #if defined __USE_XOPEN || defined __USE_XOPEN2K8
-# define __need_clock_t
+# include <bits/types/clock_t.h>
 #endif
-#define	__need_time_t
-#define __need_timer_t
-#define __need_clockid_t
-#include <time.h>
+#include <bits/types/clockid_t.h>
+#include <bits/types/time_t.h>
+#include <bits/types/timer_t.h>
 
 #ifdef __USE_XOPEN
 # ifndef __useconds_t_defined
@@ -218,8 +217,14 @@ typedef int register_t __attribute__ ((__mode__ (__word__)));
 /* It also defines `fd_set' and the FD_* macros for `select'.  */
 # include <sys/select.h>
 
-/* BSD defines these symbols, so we follow.  */
+/* BSD defines `major', `minor', and `makedev' in this header.
+   However, these symbols are likely to collide with user code, so we are
+   going to stop defining them here in an upcoming release.  Code that needs
+   these macros should include <sys/sysmacros.h> directly.  Code that does
+   not need these macros should #undef them after including this header.  */
+# define __SYSMACROS_DEPRECATED_INCLUSION
 # include <sys/sysmacros.h>
+# undef __SYSMACROS_DEPRECATED_INCLUSION
 #endif /* Use misc.  */
 
 

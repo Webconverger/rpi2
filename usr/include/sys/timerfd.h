@@ -1,4 +1,4 @@
-/* Copyright (C) 2008-2014 Free Software Foundation, Inc.
+/* Copyright (C) 2008-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -19,6 +19,7 @@
 #define	_SYS_TIMERFD_H	1
 
 #include <time.h>
+#include <bits/types/struct_itimerspec.h>
 
 /* Get the platform-dependent flags.  */
 #include <bits/timerfd.h>
@@ -35,7 +36,7 @@ enum
 __BEGIN_DECLS
 
 /* Return file descriptor for new interval timer source.  */
-extern int timerfd_create (clockid_t __clock_id, int __flags) __THROW;
+extern int timerfd_create (__clockid_t __clock_id, int __flags) __THROW;
 
 /* Set next expiration time of interval timer source UFD to UTMR.  If
    FLAGS has the TFD_TIMER_ABSTIME flag set the timeout value is

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: libsoup
 Description: a glib-based HTTP library
-Version: 2.48.1
+Version: 2.56.0
 Requires: libsoup-2.4
 Libs: -L${libdir} -lsoup-gnome-2.4
 Cflags: -I${includedir}/libsoup-gnome-2.4

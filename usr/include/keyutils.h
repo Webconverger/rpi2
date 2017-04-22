@@ -12,6 +12,7 @@
 #ifndef KEYUTILS_H
 #define KEYUTILS_H
 
+#include <sys/types.h>
 #include <stdint.h>
 
 extern const char keyutils_version_string[];
@@ -98,6 +99,14 @@ typedef uint32_t key_perm_t;
 #define KEYCTL_INSTANTIATE_IOV		20	/* instantiate a partially constructed key */
 #define KEYCTL_INVALIDATE		21	/* invalidate a key */
 #define KEYCTL_GET_PERSISTENT		22	/* get a user's persistent keyring */
+#define KEYCTL_DH_COMPUTE		23	/* Compute Diffie-Hellman values */
+
+/* keyctl structures */
+struct keyctl_dh_params {
+	key_serial_t priv;
+	key_serial_t prime;
+	key_serial_t base;
+};
 
 /*
  * syscall wrappers
@@ -152,6 +161,8 @@ extern long keyctl_instantiate_iov(key_serial_t id,
 				   key_serial_t ringid);
 extern long keyctl_invalidate(key_serial_t id);
 extern long keyctl_get_persistent(uid_t uid, key_serial_t id);
+extern long keyctl_dh_compute(key_serial_t priv, key_serial_t prime,
+			      key_serial_t base, char *buffer, size_t buflen);
 
 /*
  * utilities
@@ -159,6 +170,8 @@ extern long keyctl_get_persistent(uid_t uid, key_serial_t id);
 extern int keyctl_describe_alloc(key_serial_t id, char **_buffer);
 extern int keyctl_read_alloc(key_serial_t id, void **_buffer);
 extern int keyctl_get_security_alloc(key_serial_t id, char **_buffer);
+extern int keyctl_dh_compute_alloc(key_serial_t priv, key_serial_t prime,
+				   key_serial_t base, void **_buffer);
 
 typedef int (*recursive_key_scanner_t)(key_serial_t parent, key_serial_t key,
 				       char *desc, int desc_len, void *data);

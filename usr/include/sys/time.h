@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -21,18 +21,15 @@
 #include <features.h>
 
 #include <bits/types.h>
-#define __need_time_t
-#include <time.h>
-#define __need_timeval
-#include <bits/time.h>
-
-#include <sys/select.h>
+#include <bits/types/time_t.h>
+#include <bits/types/struct_timeval.h>
 
 #ifndef __suseconds_t_defined
 typedef __suseconds_t suseconds_t;
 # define __suseconds_t_defined
 #endif
 
+#include <sys/select.h>
 
 __BEGIN_DECLS
 

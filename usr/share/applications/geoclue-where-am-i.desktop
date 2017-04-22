@@ -8,3 +8,4 @@ Icon=mark-location-symbolic
 NoDisplay=true
 Terminal=true
 Type=Application
+X-Geoclue-Reason=Allows your current location to be shown on terminal.

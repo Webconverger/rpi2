@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: libbsd
 Description: Utility functions from BSD systems
-Version: 0.7.0
-URL: http://libbsd.freedesktop.org/
+Version: 0.8.3
+URL: https://libbsd.freedesktop.org/
 Libs: -L${libdir} -lbsd
 Cflags: -I${includedir}

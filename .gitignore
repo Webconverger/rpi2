@@ -57,3 +57,8 @@ var/lib/systemd/random-seed
 var/lock
 var/log
 var/tmp
+var/lib/pacman/local
+usr/share/zsh
+usr/share/icons
+root/.surf/
+var/cache/ldconfig/aux-cache

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: Xtst
 Description: The Xtst Library
-Version: 1.2.2
+Version: 1.2.3
 Requires: recordproto
 Requires.private: x11 xext xextproto xi
 Cflags: -I${includedir}

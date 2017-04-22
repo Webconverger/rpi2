@@ -10,7 +10,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software Foundation,
-# Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Author: Zdenek Kabelac <zkabelac at redhat.com>
 #
@@ -76,6 +76,7 @@ MOUNTPOINT=
 MOUNTED=
 REMOUNT=
 PROCMOUNTS="/proc/mounts"
+PROCSELFMOUNTINFO="/proc/self/mountinfo"
 NULL="$DM_DEV_DIR/null"
 
 IFS_OLD=$IFS
@@ -86,10 +87,10 @@ NL='
 tool_usage() {
 	echo "${TOOL}: Utility to resize or check the filesystem on a device"
 	echo
-	echo "  ${TOOL} [options] check device"
+	echo "  ${TOOL} [options] check <device>"
 	echo "    - Check the filesystem on device using fsck"
 	echo
-	echo "  ${TOOL} [options] resize device [new_size[BKMGTPE]]"
+	echo "  ${TOOL} [options] resize <device> [<new_size>[BKMGTPE]]"
 	echo "    - Change the size of the filesystem on device to new_size"
 	echo
 	echo "  Options:"
@@ -188,6 +189,14 @@ detect_fs() {
           # hardcoded /dev  since udev does not create these entries elsewhere
 	  /dev/dm-[0-9]*)
 		read </sys/block/${RVOLUME#/dev/}/dm/name SYSVOLUME 2>&1 && VOLUME="$DM_DEV_DIR/mapper/$SYSVOLUME"
+		read </sys/block/${RVOLUME#/dev/}/dev MAJORMINOR 2>&1 || error "Cannot get major:minor for \"$VOLUME\""
+		;;
+	  *)
+		STAT=$(stat --format "MAJOR=%t MINOR=%T" ${RVOLUME}) || error "Cannot get major:minor for \"$VOLUME\""
+		eval $STAT
+		MAJOR=$((0x${MAJOR}))
+		MINOR=$((0x${MINOR}))
+		MAJORMINOR=${MAJOR}:${MINOR}
 		;;
 	esac
 	# use null device as cache file to be sure about the result
@@ -198,11 +207,18 @@ detect_fs() {
 	verbose "\"$FSTYPE\" filesystem found on \"$VOLUME\""
 }
 
-# check if the given device is already mounted and where
-# FIXME: resolve swap usage and device stacking
-detect_mounted()  {
-	test -e "$PROCMOUNTS" || error "Cannot detect mounted device \"$VOLUME\""
+detect_mounted_with_proc_self_mountinfo()  {
+	MOUNTED=$("$GREP" "^[0-9]* [0-9]* $MAJORMINOR " "$PROCSELFMOUNTINFO")
 
+	# extract 5th field which is mount point
+	# echo -e translates \040 to spaces
+	MOUNTED=$(echo ${MOUNTED} | cut -d " " -f 5)
+	MOUNTED=$(echo -n -e ${MOUNTED})
+
+	test -n "$MOUNTED"
+}
+
+detect_mounted_with_proc_mounts()  {
 	MOUNTED=$("$GREP" "^$VOLUME[ \t]" "$PROCMOUNTS")
 
 	# for empty string try again with real volume name
@@ -222,6 +238,18 @@ detect_mounted()  {
 	fi
 
 	test -n "$MOUNTED"
+}
+
+# check if the given device is already mounted and where
+# FIXME: resolve swap usage and device stacking
+detect_mounted()  {
+	if test -e "$PROCSELFMOUNTINFO"; then
+		detect_mounted_with_proc_self_mountinfo
+	elif test -e "$PROCMOUNTS"; then
+		detect_mounted_with_proc_mounts
+	else
+		error "Cannot detect mounted device \"$VOLUME\""
+	fi
 }
 
 # get the full size of device in bytes

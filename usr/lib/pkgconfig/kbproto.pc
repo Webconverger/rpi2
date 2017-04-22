@@ -5,5 +5,5 @@ includedir=${prefix}/include
  
 Name: KBProto
 Description: KB extension headers
-Version: 1.0.6
+Version: 1.0.7
 Cflags: -I${includedir}

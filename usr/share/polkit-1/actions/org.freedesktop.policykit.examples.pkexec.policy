@@ -9,8 +9,26 @@
   <action id="org.freedesktop.policykit.example.pkexec.run-frobnicate">
     <description>Run the polkit example program Frobnicate</description>
     <description xml:lang="cs">Spustit ukázkový program polkit Frobnicate</description>
+    <description xml:lang="de">Das polkit-Beispielprogramm Frobnicate ausführen</description>
+    <description xml:lang="hu">Frobnicate polkit példaprogram futtatása</description>
+    <description xml:lang="pl">Uruchomienie przykładowego programu polkit „Frobnicate”</description>
+    <description xml:lang="pt_BR">Executa Frobnicate, o programa exemplo do polkit</description>
+    <description xml:lang="sk">Spustenie vzorového programu Frobnicate nástroja polkit</description>
+    <description xml:lang="sv">Kör polkit-exempelprogrammet Frobnicate</description>
+    <description xml:lang="tr">polkit örnek programı Frobnicate'i çalıştırın</description>
+    <description xml:lang="uk">Виконання прикладу програми polkit Frobnicate</description>
+    <description xml:lang="zh_CN">运行 polkit 示例程序“Frobnicate”</description>
     <message>Authentication is required to run the polkit example program Frobnicate (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
     <message xml:lang="cs">Pro spuštění ukázkového programu polkit Frobnicate je vyžadováno ověření (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="de">Legitimierung ist erforderlich, um das polkit-Beispielprogramm Frobnicate auszuführen (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="hu">Hitelesítés szükséges a Frobnicate polkit példaprogram futtatásához (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić przykładowy program polkit „Frobnicate” (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="pt_BR">A autenticação é necessária para executar o exemplo de programa do polkit Frobnicate (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="sk">Na spustenie vzorového programu Frobnicate nástroja polkit sa vyžaduje overenie totožnosti (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="sv">Autentisering krävs för att köra polkit-exempelprogrammet Frobnicate (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="tr">polkit örnek programı Frobnicate'i çalıştırmak için kimlik doğrulama gerekir (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
+    <message xml:lang="uk">Для запуску прикладу програми polkit Frobnicate (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line)) слід пройти розпізнавання</message>
+    <message xml:lang="zh_CN">需要验证：运行 polkit 示例程序 Frobnicate (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display), program=$(program), command_line=$(command_line))</message>
     <icon_name>audio-x-generic</icon_name> 
     <defaults>
       <allow_any>no</allow_any>

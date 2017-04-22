@@ -1,0 +1,10 @@
+prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: SpiderMonkey 24.2.0
+Description: The Mozilla library for JavaScript
+Version: 24.2.0
+Requires.private: nspr >= 4.9.2
+Libs: -L${libdir} -lmozjs-24
+Cflags: -include ${includedir}/mozjs-24/js/RequiredDefines.h -I${includedir}/mozjs-24

@@ -1,0 +1,3 @@
+[Test]
+Type=session
+Exec=/usr/lib/installed-tests/json-glib-1.0/path.test

@@ -1,5 +1,5 @@
 /* Declarations of socket constants, types, and functions.
-   Copyright (C) 1991-2014 Free Software Foundation, Inc.
+   Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -38,13 +38,7 @@ __BEGIN_DECLS
 #include <bits/socket.h>
 
 #ifdef __USE_MISC
-/* This is the 4.3 BSD `struct sockaddr' format, which is used as wire
-   format in the grotty old 4.3 `talk' protocol.  */
-struct osockaddr
-  {
-    unsigned short int sa_family;
-    unsigned char sa_data[14];
-  };
+# include <bits/types/struct_osockaddr.h>
 #endif
 
 /* The following constants should be used for the second parameter of
@@ -209,7 +203,7 @@ extern ssize_t recvmsg (int __fd, struct msghdr *__message, int __flags);
    __THROW.  */
 extern int recvmmsg (int __fd, struct mmsghdr *__vmessages,
 		     unsigned int __vlen, int __flags,
-		     const struct timespec *__tmo);
+		     struct timespec *__tmo);
 #endif
 
 

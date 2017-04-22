@@ -6,6 +6,6 @@ driverdir=${exec_prefix}/lib/dri
 
 Name: libva
 Description: Userspace Video Acceleration (VA) core interface
-Version: 0.37.0
+Version: 0.40.0
 Libs: -L${libdir} -lva
 Cflags: -I${includedir}

@@ -13,9 +13,11 @@ RequiresMountsFor=/var/lib/systemd/random-seed
 Conflicts=shutdown.target
 After=systemd-remount-fs.service
 Before=sysinit.target shutdown.target
+ConditionVirtualization=!container
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/lib/systemd/systemd-random-seed load
 ExecStop=/usr/lib/systemd/systemd-random-seed save
+TimeoutSec=30s

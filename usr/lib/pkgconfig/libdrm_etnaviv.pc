@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libdrm_etnaviv
+Description: Userspace interface to etnaviv kernel DRM services
+Version: 2.4.80
+Libs: -L${libdir} -ldrm_etnaviv
+Cflags: -I${includedir} -I${includedir}/libdrm
+Requires.private: libdrm

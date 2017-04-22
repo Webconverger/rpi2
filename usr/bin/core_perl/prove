@@ -3,6 +3,7 @@
 	if $running_under_some_shell;
 #!/usr/bin/perl -w
 
+BEGIN { pop @INC if $INC[-1] eq '.' }
 use strict;
 use warnings;
 use App::Prove;
@@ -55,6 +56,7 @@ Boolean options:
  -w                     Enable warnings.
  -h,  --help            Display this help
  -?,                    Display this help
+ -V,  --version         Display the version
  -H,  --man             Longer manpage for prove
       --norc            Don't process default .proverc
 

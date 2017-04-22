@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -18,9 +18,8 @@
 #ifndef __NETIPX_IPX_H
 #define __NETIPX_IPX_H 1
 
-#include <features.h>
-
 #include <sys/types.h>
+#include <stdint.h>
 #include <bits/sockaddr.h>
 
 __BEGIN_DECLS
@@ -34,10 +33,10 @@ __BEGIN_DECLS
 struct sockaddr_ipx
   {
     sa_family_t sipx_family;
-    u_int16_t sipx_port;
-    u_int32_t sipx_network;
+    uint16_t sipx_port;
+    uint32_t sipx_network;
     unsigned char sipx_node[IPX_NODE_LEN];
-    u_int8_t sipx_type;
+    uint8_t sipx_type;
     unsigned char sipx_zero;	/* 16 byte fill */
   };
 

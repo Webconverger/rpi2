@@ -2,7 +2,7 @@
 # Enhanced Seccomp Library pkg-config Configuration
 #
 # Copyright (c) 2012 Red Hat <pmoore@redhat.com>
-# Author: Paul Moore <pmoore@redhat.com>
+# Author: Paul Moore <paul@paul-moore.com>
 #
 
 #
@@ -27,6 +27,6 @@ includedir=${prefix}/include
 Name: libseccomp
 Description: The enhanced seccomp library
 URL: https://github.com/seccomp/libseccomp
-Version: 2.2.0
+Version: 2.3.2
 Cflags: -I${includedir}
 Libs: -L${libdir} -lseccomp

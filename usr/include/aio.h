@@ -1,4 +1,4 @@
-/* Copyright (C) 1996-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1996-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -26,8 +26,7 @@
 #include <sys/types.h>
 #define __need_sigevent_t
 #include <bits/siginfo.h>
-#define __need_timespec
-#include <time.h>
+#include <bits/types/struct_timespec.h>
 
 __BEGIN_DECLS
 

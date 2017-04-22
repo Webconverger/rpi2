@@ -5,9 +5,9 @@ includedir=${prefix}/include
 
 Name: libavresample
 Description: Libav audio resampling library
-Version: 2.1.0
+Version: 3.5.0
 Requires: 
-Requires.private: libavutil >= 54.20.100
+Requires.private: libavutil >= 55.58.100
 Conflicts:
 Libs: -L${libdir}  -lavresample 
 Libs.private: -lm

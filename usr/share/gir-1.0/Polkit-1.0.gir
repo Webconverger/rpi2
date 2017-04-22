@@ -39,7 +39,7 @@ and/or use gtk-doc annotations.  -->
       <method name="get_annotation"
               c:identifier="polkit_action_description_get_annotation">
         <doc xml:space="preserve">Get the value of the annotation with @key.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">%NULL if there is no annoation with @key,
 otherwise the annotation value owned by @action_description. Do not
 free.</doc>
@@ -246,19 +246,24 @@ polkit_authority_get_sync() for the synchronous version.</doc>
         <parameters>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="2">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -296,6 +301,7 @@ g_object_unref() when done with it.</doc>
         <parameters>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -334,19 +340,24 @@ result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="4">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -400,6 +411,7 @@ asynchronous version.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -448,7 +460,10 @@ sufficiently authorized (e.g. running as uid 0).</doc>
             <doc xml:space="preserve">The action to check for.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="details" transfer-ownership="none" allow-none="1">
+          <parameter name="details"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">Details about the action or %NULL.</doc>
             <type name="Details" c:type="PolkitDetails*"/>
           </parameter>
@@ -459,19 +474,24 @@ sufficiently authorized (e.g. running as uid 0).</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="6">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -540,7 +560,10 @@ the &lt;link linkend="eggdbus-method-org.freedesktop.PolicyKit1.Authority.CheckA
             <doc xml:space="preserve">The action to check for.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="details" transfer-ownership="none" allow-none="1">
+          <parameter name="details"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">Details about the action or %NULL.</doc>
             <type name="Details" c:type="PolkitDetails*"/>
           </parameter>
@@ -551,6 +574,7 @@ the &lt;link linkend="eggdbus-method-org.freedesktop.PolicyKit1.Authority.CheckA
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -576,19 +600,24 @@ to get the result of the operation.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="2">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -640,6 +669,7 @@ g_object_unref().</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -670,19 +700,24 @@ the result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="3">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -740,6 +775,7 @@ been freed with g_object_unref().</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -793,7 +829,7 @@ been freed with g_object_unref().</doc>
 &lt;literal&gt;org.freedesktop.PolicyKit1&lt;/literal&gt; or %NULL if no-one
 currently owns the name. You may connect to the #GObject::notify
 signal to track changes to the #PolkitAuthority:owner property.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">%NULL or a string that should be freed with g_free().</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -807,6 +843,10 @@ signal to track changes to the #PolkitAuthority:owner property.</doc>
       <method name="register_authentication_agent"
               c:identifier="polkit_authority_register_authentication_agent">
         <doc xml:space="preserve">Asynchronously registers an authentication agent.
+
+Note that this should be called by the same effective UID which will be
+the real UID using the #PolkitAgentSession API or otherwise calling
+polkit_authority_authentication_agent_response().
 
 When the operation is finished, @callback will be invoked in the
 &lt;link linkend="g-main-context-push-thread-default"&gt;thread-default
@@ -836,19 +876,24 @@ result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="5">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -876,7 +921,13 @@ result of the operation.</doc>
       <method name="register_authentication_agent_sync"
               c:identifier="polkit_authority_register_authentication_agent_sync"
               throws="1">
-        <doc xml:space="preserve">Registers an authentication agent. The calling thread is blocked
+        <doc xml:space="preserve">Registers an authentication agent.
+
+Note that this should be called by the same effective UID which will be
+the real UID using the #PolkitAgentSession API or otherwise calling
+polkit_authority_authentication_agent_response().
+
+The calling thread is blocked
 until a reply is received. See
 polkit_authority_register_authentication_agent() for the
 asynchronous version.</doc>
@@ -903,6 +954,7 @@ asynchronous version.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -912,6 +964,10 @@ asynchronous version.</doc>
       <method name="register_authentication_agent_with_options"
               c:identifier="polkit_authority_register_authentication_agent_with_options">
         <doc xml:space="preserve">Asynchronously registers an authentication agent.
+
+Note that this should be called by the same effective UID which will be
+the real UID using the #PolkitAgentSession API or otherwise calling
+polkit_authority_authentication_agent_response().
 
 When the operation is finished, @callback will be invoked in the
 &lt;link linkend="g-main-context-push-thread-default"&gt;thread-default
@@ -939,25 +995,33 @@ result of the operation.</doc>
             <doc xml:space="preserve">The object path for the authentication agent.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="options" transfer-ownership="none" allow-none="1">
+          <parameter name="options"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A #GVariant with options or %NULL.</doc>
             <type name="GLib.Variant" c:type="GVariant*"/>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="6">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -985,7 +1049,13 @@ result of the operation.</doc>
       <method name="register_authentication_agent_with_options_sync"
               c:identifier="polkit_authority_register_authentication_agent_with_options_sync"
               throws="1">
-        <doc xml:space="preserve">Registers an authentication agent. The calling thread is blocked
+        <doc xml:space="preserve">Registers an authentication agent.
+
+Note that this should be called by the same effective UID which will be
+the real UID using the #PolkitAgentSession API or otherwise calling
+polkit_authority_authentication_agent_response().
+
+The calling thread is blocked
 until a reply is received. See
 polkit_authority_register_authentication_agent_with_options() for the
 asynchronous version.</doc>
@@ -1010,12 +1080,16 @@ asynchronous version.</doc>
             <doc xml:space="preserve">The object path for the authentication agent.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="options" transfer-ownership="none" allow-none="1">
+          <parameter name="options"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A #GVariant with options or %NULL.</doc>
             <type name="GLib.Variant" c:type="GVariant*"/>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1046,19 +1120,24 @@ get the result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="3">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1106,6 +1185,7 @@ asynchronous version.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1136,19 +1216,24 @@ the result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="3">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1196,6 +1281,7 @@ asynchronous version.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1230,19 +1316,24 @@ the result of the operation.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="4">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1293,6 +1384,7 @@ asynchronous version.</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1372,7 +1464,10 @@ information is provided. Must be %FALSE unless @is_authorized is
 %TRUE.</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
-          <parameter name="details" transfer-ownership="none" allow-none="1">
+          <parameter name="details"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">Must be %NULL unless @is_authorized is %TRUE</doc>
             <type name="Details" c:type="PolkitDetails*"/>
           </parameter>
@@ -1381,7 +1476,7 @@ information is provided. Must be %FALSE unless @is_authorized is
       <method name="get_details"
               c:identifier="polkit_authorization_result_get_details">
         <doc xml:space="preserve">Gets the details about the result.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">A #PolkitDetails object or
 %NULL if there are no details. This object is owned by @result and
 should not be freed by the caller.</doc>
@@ -1487,7 +1582,7 @@ to check if the authorization will be retained if obtained via authentication.
 
 This method simply reads the value of the key/value pair in @details with the
 key &lt;literal&gt;polkit.temporary_authorization_id&lt;/literal&gt;.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The opaque temporary authorization id for
    @result or %NULL if not available. Do not free this string, it
    is owned by @result.</doc>
@@ -1543,7 +1638,7 @@ means that the method used for checking authorization is likely to block for a l
       </constructor>
       <method name="get_keys" c:identifier="polkit_details_get_keys">
         <doc xml:space="preserve">Gets a list of all keys on @details.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">%NULL if there are no keys
 otherwise an array of strings that should be freed with
 g_strfreev().</doc>
@@ -1574,7 +1669,10 @@ If @value is %NULL, the key will be removed.</doc>
             <doc xml:space="preserve">A key.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="value" transfer-ownership="none" allow-none="1">
+          <parameter name="value"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A value.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1582,7 +1680,7 @@ If @value is %NULL, the key will be removed.</doc>
       </method>
       <method name="lookup" c:identifier="polkit_details_lookup">
         <doc xml:space="preserve">Gets the value for @key on @details.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">%NULL if there is no value for @key, otherwise a string owned by @details.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -1651,7 +1749,7 @@ identities.</doc>
                 throws="1">
         <doc xml:space="preserve">Creates an object from @str that implements the #PolkitIdentity
 interface.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #PolkitIdentity or %NULL
 if @error is set. Free with g_object_unref().</doc>
           <type name="Identity" c:type="PolkitIdentity*"/>
@@ -1929,12 +2027,16 @@ polkit_permission_new() for the asynchronous version.</doc>
             <doc xml:space="preserve">The PolicyKit action identifier.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="subject" transfer-ownership="none" allow-none="1">
+          <parameter name="subject"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A #PolkitSubject or %NULL for the current process.</doc>
             <type name="Subject" c:type="PolkitSubject*"/>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -1959,25 +2061,33 @@ polkit_permission_new_sync() for the synchronous version.</doc>
             <doc xml:space="preserve">The PolicyKit action identifier.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="subject" transfer-ownership="none" allow-none="1">
+          <parameter name="subject"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">A #PolkitSubject or %NULL for the current process.</doc>
             <type name="Subject" c:type="PolkitSubject*"/>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="4">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied.</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2087,19 +2197,25 @@ result of the operation.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="2">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none" closure="2">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     closure="2">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2139,6 +2255,7 @@ asynchronous version.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -2209,19 +2326,24 @@ result of the operation.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="2">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2265,6 +2387,7 @@ asynchronous version.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -2365,12 +2488,14 @@ polkit_subject_from_string().</doc>
             </parameter>
             <parameter name="cancellable"
                        transfer-ownership="none"
+                       nullable="1"
                        allow-none="1">
               <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
               <type name="Gio.Cancellable" c:type="GCancellable*"/>
             </parameter>
             <parameter name="callback"
                        transfer-ownership="none"
+                       nullable="1"
                        allow-none="1"
                        scope="async"
                        closure="3">
@@ -2378,7 +2503,11 @@ polkit_subject_from_string().</doc>
               <type name="Gio.AsyncReadyCallback"
                     c:type="GAsyncReadyCallback"/>
             </parameter>
-            <parameter name="user_data" transfer-ownership="none" closure="3">
+            <parameter name="user_data"
+                       transfer-ownership="none"
+                       nullable="1"
+                       allow-none="1"
+                       closure="3">
               <doc xml:space="preserve">The data to pass to @callback.</doc>
               <type name="gpointer" c:type="gpointer"/>
             </parameter>
@@ -2416,6 +2545,7 @@ polkit_subject_from_string().</doc>
             </parameter>
             <parameter name="cancellable"
                        transfer-ownership="none"
+                       nullable="1"
                        allow-none="1">
               <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
               <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -2464,7 +2594,7 @@ free, this string is owned by @system_bus_name.</doc>
               throws="1">
         <doc xml:space="preserve">Synchronously gets a #PolkitUnixProcess object for @system_bus_name
 - the calling thread is blocked until a reply is received.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #PolkitUnixProcess object or %NULL if @error is set.</doc>
           <type name="Subject" c:type="PolkitSubject*"/>
         </return-value>
@@ -2475,6 +2605,30 @@ free, this string is owned by @system_bus_name.</doc>
           </instance-parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
+            <type name="Gio.Cancellable" c:type="GCancellable*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_user_sync"
+              c:identifier="polkit_system_bus_name_get_user_sync"
+              throws="1">
+        <doc xml:space="preserve">Synchronously gets a #PolkitUnixUser object for @system_bus_name;
+the calling thread is blocked until a reply is received.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">A #PolkitUnixUser object or %NULL if @error is set.</doc>
+          <type name="UnixUser" c:type="PolkitUnixUser*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="system_bus_name" transfer-ownership="none">
+            <doc xml:space="preserve">A #PolkitSystemBusName.</doc>
+            <type name="SystemBusName" c:type="PolkitSystemBusName*"/>
+          </instance-parameter>
+          <parameter name="cancellable"
+                     transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -3001,19 +3155,24 @@ use polkit_unix_session_new_for_process_sync().</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
           </parameter>
           <parameter name="callback"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1"
                      scope="async"
                      closure="3">
             <doc xml:space="preserve">A #GAsyncReadyCallback to call when the request is satisfied</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">The data to pass to @callback.</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -3023,7 +3182,7 @@ use polkit_unix_session_new_for_process_sync().</doc>
                 c:identifier="polkit_unix_session_new_for_process_finish"
                 throws="1">
         <doc xml:space="preserve">Finishes constructing a #PolkitSubject for a process id.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #PolkitUnixSession for the @pid passed to
     polkit_unix_session_new_for_process() or %NULL if @error is
     set. Free with g_object_unref().</doc>
@@ -3044,7 +3203,7 @@ use polkit_unix_session_new_for_process_sync().</doc>
 This is a synchronous call - the calling thread is blocked until a
 reply is received. For the asynchronous version, see
 polkit_unix_session_new_for_process().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #PolkitUnixSession for
 @pid or %NULL if @error is set. Free with g_object_unref().</doc>
           <type name="Subject" c:type="PolkitSubject*"/>
@@ -3056,6 +3215,7 @@ polkit_unix_session_new_for_process().</doc>
           </parameter>
           <parameter name="cancellable"
                      transfer-ownership="none"
+                     nullable="1"
                      allow-none="1">
             <doc xml:space="preserve">A #GCancellable or %NULL.</doc>
             <type name="Gio.Cancellable" c:type="GCancellable*"/>
@@ -3141,7 +3301,7 @@ is owned by @session.</doc>
                 throws="1">
         <doc xml:space="preserve">Creates a new #PolkitUnixUser object for a user with the user name
 @name.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #PolkitUnixUser object or %NULL if @error is set.</doc>
           <type name="Identity" c:type="PolkitIdentity*"/>
         </return-value>
@@ -3154,7 +3314,7 @@ is owned by @session.</doc>
       </function>
       <method name="get_name" c:identifier="polkit_unix_user_get_name">
         <doc xml:space="preserve">Get the user's name.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">User name string or %NULL if user uid not found.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -3220,7 +3380,7 @@ is owned by @session.</doc>
               throws="1">
       <doc xml:space="preserve">Creates an object from @str that implements the #PolkitIdentity
 interface.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A #PolkitIdentity or %NULL
 if @error is set. Free with g_object_unref().</doc>
         <type name="Identity" c:type="PolkitIdentity*"/>

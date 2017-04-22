@@ -8,5 +8,5 @@ Name: libexslt
 Version: 0.8.17
 Description: EXSLT Extension library
 Requires: libxml-2.0
-Libs: -L${libdir} -lexslt -lxslt  -lxml2 -lz -lm -ldl -lm -lgcrypt -lgpg-error
+Libs: -L${libdir} -lexslt -lxslt  -lxml2 -lz -llzma -lm -ldl -lm -lgcrypt -lgpg-error
 Cflags: -I${includedir}

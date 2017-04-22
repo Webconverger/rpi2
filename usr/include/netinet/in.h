@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -85,15 +85,17 @@ enum
 #define IPPROTO_SCTP		IPPROTO_SCTP
     IPPROTO_UDPLITE = 136, /* UDP-Lite protocol.  */
 #define IPPROTO_UDPLITE		IPPROTO_UDPLITE
+    IPPROTO_MPLS = 137,    /* MPLS in IP.  */
+#define IPPROTO_MPLS		IPPROTO_MPLS
     IPPROTO_RAW = 255,	   /* Raw IP packets.  */
 #define IPPROTO_RAW		IPPROTO_RAW
     IPPROTO_MAX
   };
 
-/* If __USE_KERNEL_IPV6_DEFS is defined then the user has included the kernel
+/* If __USE_KERNEL_IPV6_DEFS is 1 then the user has included the kernel
    network headers first and we should use those ABI-identical definitions
-   instead of our own.  */
-#ifndef __USE_KERNEL_IPV6_DEFS
+   instead of our own, otherwise 0.  */
+#if !__USE_KERNEL_IPV6_DEFS
 enum
   {
     IPPROTO_HOPOPTS = 0,   /* IPv6 Hop-by-Hop options.  */
@@ -204,17 +206,15 @@ enum
 #define INADDR_ALLRTRS_GROUP    ((in_addr_t) 0xe0000002) /* 224.0.0.2 */
 #define INADDR_MAX_LOCAL_GROUP  ((in_addr_t) 0xe00000ff) /* 224.0.0.255 */
 
-#ifndef __USE_KERNEL_IPV6_DEFS
+#if !__USE_KERNEL_IPV6_DEFS
 /* IPv6 address */
 struct in6_addr
   {
     union
       {
 	uint8_t	__u6_addr8[16];
-#ifdef __USE_MISC
 	uint16_t __u6_addr16[8];
 	uint32_t __u6_addr32[4];
-#endif
       } __in6_u;
 #define s6_addr			__in6_u.__u6_addr8
 #ifdef __USE_MISC
@@ -247,7 +247,7 @@ struct sockaddr_in
 			   sizeof (struct in_addr)];
   };
 
-#ifndef __USE_KERNEL_IPV6_DEFS
+#if !__USE_KERNEL_IPV6_DEFS
 /* Ditto, for IPv6.  */
 struct sockaddr_in6
   {
@@ -283,7 +283,7 @@ struct ip_mreq_source
   };
 #endif
 
-#ifndef __USE_KERNEL_IPV6_DEFS
+#if !__USE_KERNEL_IPV6_DEFS
 /* Likewise, for IPv6.  */
 struct ipv6_mreq
   {
@@ -383,6 +383,7 @@ extern uint16_t htons (uint16_t __hostshort)
 
 /* Get machine dependent optimized versions of byte swapping functions.  */
 #include <bits/byteswap.h>
+#include <bits/uintn-identity.h>
 
 #ifdef __OPTIMIZE__
 /* We can optimize calls to the conversion functions.  Either nothing has
@@ -391,10 +392,10 @@ extern uint16_t htons (uint16_t __hostshort)
 # if __BYTE_ORDER == __BIG_ENDIAN
 /* The host byte order is the same as network byte order,
    so these functions are all just identity.  */
-# define ntohl(x)	(x)
-# define ntohs(x)	(x)
-# define htonl(x)	(x)
-# define htons(x)	(x)
+# define ntohl(x)	__uint32_identity (x)
+# define ntohs(x)	__uint16_identity (x)
+# define htonl(x)	__uint32_identity (x)
+# define htons(x)	__uint16_identity (x)
 # else
 #  if __BYTE_ORDER == __LITTLE_ENDIAN
 #   define ntohl(x)	__bswap_32 (x)
@@ -409,52 +410,52 @@ extern uint16_t htons (uint16_t __hostshort)
 # define IN6_IS_ADDR_UNSPECIFIED(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      __a->s6_addr32[0] == 0						      \
-      && __a->s6_addr32[1] == 0						      \
-      && __a->s6_addr32[2] == 0						      \
-      && __a->s6_addr32[3] == 0; }))
+      __a->__in6_u.__u6_addr32[0] == 0					      \
+      && __a->__in6_u.__u6_addr32[1] == 0				      \
+      && __a->__in6_u.__u6_addr32[2] == 0				      \
+      && __a->__in6_u.__u6_addr32[3] == 0; }))
 
 # define IN6_IS_ADDR_LOOPBACK(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      __a->s6_addr32[0] == 0						      \
-      && __a->s6_addr32[1] == 0						      \
-      && __a->s6_addr32[2] == 0						      \
-      && __a->s6_addr32[3] == htonl (1); }))
+      __a->__in6_u.__u6_addr32[0] == 0					      \
+      && __a->__in6_u.__u6_addr32[1] == 0				      \
+      && __a->__in6_u.__u6_addr32[2] == 0				      \
+      && __a->__in6_u.__u6_addr32[3] == htonl (1); }))
 
 # define IN6_IS_ADDR_LINKLOCAL(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      (__a->s6_addr32[0] & htonl (0xffc00000)) == htonl (0xfe800000); }))
+      (__a->__in6_u.__u6_addr32[0] & htonl (0xffc00000)) == htonl (0xfe800000); }))
 
 # define IN6_IS_ADDR_SITELOCAL(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      (__a->s6_addr32[0] & htonl (0xffc00000)) == htonl (0xfec00000); }))
+      (__a->__in6_u.__u6_addr32[0] & htonl (0xffc00000)) == htonl (0xfec00000); }))
 
 # define IN6_IS_ADDR_V4MAPPED(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      __a->s6_addr32[0] == 0						      \
-      && __a->s6_addr32[1] == 0						      \
-      && __a->s6_addr32[2] == htonl (0xffff); }))
+      __a->__in6_u.__u6_addr32[0] == 0					      \
+      && __a->__in6_u.__u6_addr32[1] == 0				      \
+      && __a->__in6_u.__u6_addr32[2] == htonl (0xffff); }))
 
 # define IN6_IS_ADDR_V4COMPAT(a) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
-      __a->s6_addr32[0] == 0						      \
-      && __a->s6_addr32[1] == 0						      \
-      && __a->s6_addr32[2] == 0						      \
-      && ntohl (__a->s6_addr32[3]) > 1; }))
+      __a->__in6_u.__u6_addr32[0] == 0					      \
+      && __a->__in6_u.__u6_addr32[1] == 0				      \
+      && __a->__in6_u.__u6_addr32[2] == 0				      \
+      && ntohl (__a->__in6_u.__u6_addr32[3]) > 1; }))
 
 # define IN6_ARE_ADDR_EQUAL(a,b) \
   (__extension__							      \
    ({ const struct in6_addr *__a = (const struct in6_addr *) (a);	      \
       const struct in6_addr *__b = (const struct in6_addr *) (b);	      \
-      __a->s6_addr32[0] == __b->s6_addr32[0]				      \
-      && __a->s6_addr32[1] == __b->s6_addr32[1]				      \
-      && __a->s6_addr32[2] == __b->s6_addr32[2]				      \
-      && __a->s6_addr32[3] == __b->s6_addr32[3]; }))
+      __a->__in6_u.__u6_addr32[0] == __b->__in6_u.__u6_addr32[0]	      \
+      && __a->__in6_u.__u6_addr32[1] == __b->__in6_u.__u6_addr32[1]	      \
+      && __a->__in6_u.__u6_addr32[2] == __b->__in6_u.__u6_addr32[2]	      \
+      && __a->__in6_u.__u6_addr32[3] == __b->__in6_u.__u6_addr32[3]; }))
 #else
 # define IN6_IS_ADDR_UNSPECIFIED(a) \
 	(((const uint32_t *) (a))[0] == 0				      \
@@ -530,6 +531,7 @@ extern int bindresvport6 (int __sockfd, struct sockaddr_in6 *__sock_in)
 #ifdef __USE_GNU
 struct cmsghdr;			/* Forward declaration.  */
 
+#if !__USE_KERNEL_IPV6_DEFS
 /* IPv6 packet information.  */
 struct in6_pktinfo
   {
@@ -543,7 +545,7 @@ struct ip6_mtuinfo
     struct sockaddr_in6 ip6m_addr; /* dst address including zone ID */
     uint32_t ip6m_mtu;		   /* path MTU in host byte order */
   };
-
+#endif /* !__USE_KERNEL_IPV6_DEFS */
 
 /* Obsolete hop-by-hop and Destination Options Processing (RFC 2292).  */
 extern int inet6_option_space (int __nbytes)

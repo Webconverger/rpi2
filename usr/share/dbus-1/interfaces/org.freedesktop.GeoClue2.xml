@@ -1,12 +1,3 @@
-<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
-"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-
-<!--
-    GeoClue 2.0 Interface Specification
-
-    Copyright (C) 2013 Red Hat, Inc.
--->
-
 <node>
 
   <!--
@@ -72,6 +63,11 @@
         Location:
 
         Current location as path to a #org.freedesktop.GeoClue2.Location object.
+        Please note that this property will be set to "/" (D-Bus equivalent of
+        null) initially, until Geoclue finds user's location. You want to delay
+        reading this property until your callback to
+        #org.freedesktop.GeoClue2.Client::LocationUpdated signal is called for
+        the first time after starting the client.
     -->
     <property name="Location" type="o" access="read"/>
 
@@ -81,14 +77,32 @@
         Contains the current distance threshold in meters. This value is used
         by the service when it gets new location info. If the distance moved is
         below the threshold, it won't emit the LocationUpdated signal.
+        The default value is 0. When TimeThreshold is zero, it always emits
+        the signal.
     -->
-    <property name="DistanceThreshold" type="u" access="readwrite"/>
+    <property name="DistanceThreshold" type="u" access="readwrite">
+        <annotation name="org.freedesktop.Accounts.DefaultValue" value="0"/>
+    </property>
+
+    <!--
+        TimeThreshold:
+
+        Contains the current time threshold in seconds. This value is used
+        by the service when it gets new location info. If the time since the
+        last update is below the threshold, it won't emit the LocationUpdated
+        signal. The default value is 0. When TimeThreshold is zero, it always
+        emits the signal.
+    -->
+    <property name="TimeThreshold" type="u" access="readwrite">
+        <annotation name="org.freedesktop.Accounts.DefaultValue" value="0"/>
+    </property>
 
     <!--
         DesktopId:
 
         The desktop file id (the basename of the desktop file). This property
-        must be set by applications for authorization to work.
+        must be set by applications for authorization to work, unless your app
+        is an xdg-app bundle.
     -->
     <property name="DesktopId" type="s" access="readwrite"/>
 
@@ -185,6 +199,23 @@
     <property name="Altitude" type="d" access="read"/>
 
     <!--
+        Speed:
+
+        The speed in meters per second. When unknown, it's set to -1.0.
+    -->
+    <property name="Speed" type="d" access="read"/>
+
+    <!--
+        Heading:
+
+        The heading direction in degrees with respect to North direction, in
+        clockwise order. That means North becomes 0 degree, East: 90 degrees,
+        South: 180 degrees, West: 270 degrees and so on. When unknown,
+        it's set to -1.0.
+    -->
+    <property name="Heading" type="d" access="read"/>
+
+    <!--
         Description:
 
         A human-readable description of the location, if available.
@@ -195,5 +226,21 @@
         geocode-glib.
     -->
     <property name="Description" type="s" access="read"/>
+
+
+    <!--
+        Timestamp:
+
+        The timestamp when the location was determined, in seconds and
+        microseconds since the Epoch. This is the time of measurement if the
+        backend provided that information, otherwise the time when GeoClue
+        received the new location.
+
+        Note that GeoClue can't guarantee that the timestamp will always
+        monotonically increase, as a backend may not respect that.
+        Also note that a timestamp can be very old, e.g. because of a cached
+        location.
+    -->
+    <property name="Timestamp" type="(tt)" access="read"/>
   </interface>
 </node>

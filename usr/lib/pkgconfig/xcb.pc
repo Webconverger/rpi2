@@ -2,11 +2,11 @@ prefix=/usr
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
-xcbproto_version=1.11
+xcbproto_version=1.12
 
 Name: XCB
 Description: X-protocol C Binding
-Version: 1.11
+Version: 1.12
 Requires.private: xau >= 0.99.2 xdmcp
 Libs: -L${libdir} -lxcb
 Libs.private: 

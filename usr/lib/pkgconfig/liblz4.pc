@@ -7,8 +7,8 @@ libdir=/usr/lib
 includedir=/usr/include
 
 Name: lz4
-Description: fast lossless compression algorithm library
-URL: http://code.google.com/p/lz4/
-Version: 128
+Description: extremely fast lossless compression algorithm library
+URL: http://www.lz4.org/
+Version: 1.7.5
 Libs: -L/usr/lib -llz4
 Cflags: -I/usr/include

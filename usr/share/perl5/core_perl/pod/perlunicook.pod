@@ -33,7 +33,8 @@ This I<does> make even Unix programmers C<binmode> your binary streams,
 or open them with C<:raw>, but that's the only way to get at them
 portably anyway.
 
-B<WARNING>: C<use autoload> and C<use open> do not get along with each other.
+B<WARNING>: C<use autodie> (pre 2.26) and C<use open> do not get along with each
+other.
 
 =head2 ℞ 1: Generic Unicode-savvy filter
 
@@ -185,7 +186,7 @@ know how to understand its output.
  # cpan -i Unicode::Unihan
  use Unicode::Unihan;
  my $str = "東京";
- my $unhan = new Unicode::Unihan;
+ my $unhan = Unicode::Unihan->new;
  for my $lang (qw(Mandarin Cantonese Korean JapaneseOn JapaneseKun)) {
      printf "CJK $str in %-12s is ", $lang;
      say $unhan->$lang($str);
@@ -204,7 +205,7 @@ use the specific module:
 
  # cpan -i Lingua::JA::Romanize::Japanese
  use Lingua::JA::Romanize::Japanese;
- my $k2r = new Lingua::JA::Romanize::Japanese;
+ my $k2r = Lingua::JA::Romanize::Japanese->new;
  my $str = "東京";
  say "Japanese for $str is ", $k2r->chars($str);
 
@@ -439,7 +440,7 @@ convert such strings manually.
  use Unicode::UCD qw(num);
  my $str = "got Ⅻ and ४५६७ and ⅞ and here";
  my @nums = ();
- while (/$str =~ (\d+|\N)/g) {  # not just ASCII!
+ while ($str =~ /(\d+|\N)/g) {  # not just ASCII!
     push @nums, num($1);
  }
  say "@nums";   #     12      4567      0.875
@@ -612,7 +613,7 @@ Break up text into lines according to Unicode rules.
  use charnames qw(:full);
 
  my $para = "This is a super\N{HYPHEN}long string. " x 20;
- my $fmt = new Unicode::LineBreak;
+ my $fmt = Unicode::LineBreak->new;
  print $fmt->break($para), "\n";
 
 =head2 ℞ 42: Unicode text in DBM hashes, the tedious way
@@ -637,7 +638,7 @@ won’t fit into a byte.  Here’s how to manually manage the translation:
     # assume $uni_key holds a normal Perl string (abstract Unicode)
     my $enc_key   = encode("UTF-8", $uni_key, 1);
     my $enc_value = $dbhash{$enc_key};
-    my $uni_value = decode("UTF-8", $enc_key, 1);
+    my $uni_value = decode("UTF-8", $enc_value, 1);
 
 =head2 ℞ 43: Unicode text in DBM hashes, the easy way
 
@@ -744,7 +745,7 @@ Here's that program; tested on v5.14.
  # So the Asian stuff comes out in an order that someone
  # who reads those scripts won't freak out over; the
  # CJK stuff will be in JIS X 0208 order that way.
- my $coll  = new Unicode::Collate::Locale locale => "ja";
+ my $coll  = Unicode::Collate::Locale->new(locale => "ja");
 
  for my $item ($coll->sort(keys %price)) {
      print pad(entitle($item), $width, ".");
@@ -854,4 +855,3 @@ Acknowledgement via code comment is polite but not required.
 =head1 REVISION HISTORY
 
 v1.0.0 – first public release, 2012-02-27
-

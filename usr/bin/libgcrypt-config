@@ -14,7 +14,7 @@
 # General.
 prefix="/usr"
 exec_prefix="${prefix}"
-version="1.6.3"
+version="1.7.6"
 includedir="${prefix}/include"
 libdir="${exec_prefix}/lib"
 gpg_error_libs="-lgpg-error"
@@ -31,9 +31,9 @@ api_version="1"
 my_host="armv7l-unknown-linux-gnueabihf"
 
 # Misc information.
-symmetric_ciphers="arcfour blowfish cast5 des aes twofish serpent rfc2268 seed camellia idea salsa20 gost28147"
+symmetric_ciphers="arcfour blowfish cast5 des aes twofish serpent rfc2268 seed camellia idea salsa20 gost28147 chacha20"
 asymmetric_ciphers="dsa elgamal rsa ecc"
-digests="crc gostr3411-94 md4 md5 rmd160 sha1 sha256 sha512 tiger whirlpool stribog"
+digests="crc gostr3411-94  md4 md5 rmd160 sha1 sha256 sha512 sha3 tiger whirlpool stribog"
 
 # State variables.
 echo_libs=no

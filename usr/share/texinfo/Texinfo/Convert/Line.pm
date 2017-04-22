@@ -1,6 +1,6 @@
 # Line.pm: handle line of text.
 #
-# Copyright 2010, 2011, 2012 Free Software Foundation, Inc.
+# Copyright 2010, 2011, 2012, 2013 Free Software Foundation, Inc.
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -55,16 +55,12 @@ sub dump($)
 {
   my $self = shift;
   my $word = 'UNDEF';
-  my $underlying = '';
   if (defined($self->{'word'})) {
     $word = $self->{'word'};
-    if ($self->{'word'} ne $self->{'underlying_word'}) {
-      $underlying = ", underlying_word: $self->{'underlying_word'},";
-    }
   }
   my $end_sentence = 'UNDEF';
   $end_sentence = $self->{'end_sentence'} if (defined($self->{'end_sentence'}));
-  print STDERR "line ($self->{'line_beginning'},$self->{'counter'}) word: $word, space `$self->{'space'}'${underlying} end_sentence: $end_sentence\n"; 
+  print STDERR "line ($self->{'line_beginning'},$self->{'counter'}) word: $word, space `$self->{'space'}' end_sentence: $end_sentence\n"; 
 }
 
 sub end_line($)
@@ -138,7 +134,7 @@ sub _add_pending_word($)
       $result .= $line->{'word'};
       print STDERR "ADD_WORD.L[$line->{'word'}]\n" if ($line->{'DEBUG'});
       $line->{'word'} = undef;
-      $line->{'underlying_word'} = undef;
+      $line->{'last_char'} = undef;
     }
   }
   return $result;
@@ -155,34 +151,34 @@ sub end($)
   return $result;
 }
 
-sub add_next($;$$$$)
+sub add_next($;$$)
 {
   my $line = shift;
   my $word = shift;
-  my $space = shift;
-  my $end_sentence = shift;
   my $transparent = shift;
   $line->{'end_line_count'} = 0;
-  return $line->_add_next($word, undef, $space, $end_sentence, $transparent);
+  return $line->_add_next($word, $transparent);
 }
 
-# add a word and/or spaces and end of sentence.
-sub _add_next($;$$$$$)
+my $end_sentence_character = quotemeta('.?!');
+my $after_punctuation_characters = quotemeta('"\')]');
+
+# add a word
+sub _add_next($;$$)
 {
   my $line = shift;
   my $word = shift;
-  my $underlying_word = shift;
-  my $space = shift;
-  my $end_sentence = shift;
   my $transparent = shift;
   my $result = '';
 
-  $underlying_word = $word if (!defined($underlying_word));
-
   if (defined($word)) {
+    my $disinhibit; # full stop after capital letter ends sentence
+    if ($word =~ s/\x08$//) {
+      $disinhibit = 1;
+    }
     if (!defined($line->{'word'})) {
       $line->{'word'} = '';
-      $line->{'underlying_word'} = '';
+      $line->{'last_char'} = '';
       if ($line->{'end_sentence'}
           and $line->{'end_sentence'} > 0
           and !$line->{'frenchspacing'}
@@ -194,41 +190,43 @@ sub _add_next($;$$$$$)
       }
     }
     $line->{'word'} .= $word;
-    $line->{'underlying_word'} .= $underlying_word unless ($transparent);
+
+    if (!$transparent) {
+      if ($disinhibit) {
+        $line->{'last_char'} = 'a';
+      } elsif ($word =~
+           /([^$end_sentence_character$after_punctuation_characters])
+            [$end_sentence_character$after_punctuation_characters]*$/x) {
+        # Save the last character in $word before punctuation
+        $line->{'last_char'} = $1;
+      }
+    }
+
     if ($line->{'DEBUG'}) {
       print STDERR "WORD+.L $word -> $line->{'word'}\n";
-      print STDERR "WORD+.L $underlying_word -> $line->{'underlying_word'}\n";
     }
   }
-  if (defined($space)) {
-    if ($line->{'protect_spaces'}) {
-      $result .= $line->_add_text($space);
-    } else {
-      $result .= $line->_add_pending_word();
-      $line->{'space'} = $space;
-    }
-  }
-  if (defined($end_sentence)) {
-    $line->{'end_sentence'} = $end_sentence;
-  }
+
   return $result;
 }
 
-sub add_underlying_text($$)
-{
-  my $line = shift;
-  my $underlying_text = shift;
-  if (defined($underlying_text)) {
-    $line->{'underlying_word'} = ''
-       if (!defined($line->{'underlying_word'}));
-    $line->{'underlying_word'} .= $underlying_text;
-  }
-}
-
-sub inhibit_end_sentence($)
+sub remove_end_sentence($)
 {
   my $line = shift;
   $line->{'end_sentence'} = 0;
+}
+
+sub add_end_sentence($;$)
+{
+  my $line = shift;
+  my $value = shift;
+  $line->{'end_sentence'} = $value;
+}
+
+sub allow_end_sentence($)
+{
+  my $line = shift;
+  $line->{'last_char'} = 'a'; # lower-case
 }
 
 sub set_space_protection($$;$$$)
@@ -261,16 +259,11 @@ sub set_space_protection($$;$$$)
   return '';
 }
 
-my $end_sentence_character = quotemeta('.?!');
-my $after_punctuation_characters = quotemeta('"\')]');
-
 # wrap a text.
-sub add_text($$;$)
+sub add_text($$)
 {
   my $line = shift;
   my $text = shift;
-  my $underlying_text = shift;
-  $underlying_text = $text if (!defined($underlying_text));
   $line->{'end_line_count'} = 0;
   my $result = '';
 
@@ -282,12 +275,11 @@ sub add_text($$;$)
     }
     # \x{202f}\x{00a0} are non breaking spaces
     if ($text =~ s/^([^\S\x{202f}\x{00a0}\n]+)//) {
-      $underlying_text =~ s/^([^\S\x{202f}\x{00a0}\n]+)//;
       my $spaces = $1;
       print STDERR "SPACES.L\n" if ($line->{'DEBUG'});
       if ($line->{'protect_spaces'}) {
         $line->{'word'} .= $spaces;
-        $line->{'underlying_word'} .= $spaces;
+        $line->{'last_char'} = substr($spaces, -1);
       } else {
         my $added_word = $line->{'word'};
         $result .= $line->_add_pending_word();
@@ -316,16 +308,30 @@ sub add_text($$;$)
       }
     } elsif ($text =~ s/^(([^\s\p{InFullwidth}]|[\x{202f}\x{00a0}])+)//) {
       my $added_word = $1;
-      $underlying_text =~ s/^(([^\s\p{InFullwidth}]|[\x{202f}\x{00a0}])+)//;
-      my $underlying_added_word = $1;
 
-      $result .= $line->_add_next($added_word, $underlying_added_word);
-      # now check if it is considered as an end of sentence
-      if (defined($line->{'end_sentence'}) and 
-        $added_word =~ /^[$after_punctuation_characters]*$/) {
-        # do nothing in the case of a continuation of after_punctuation_characters
-      } elsif ($line->{'underlying_word'} =~ /[$end_sentence_character][$after_punctuation_characters]*$/
-           and $line->{'underlying_word'} !~ /[[:upper:]][$end_sentence_character$after_punctuation_characters]*$/) {
+      # Whether a sentence end is permitted in spite of a preceding
+      # upper case letter.
+      my $disinhibit = 0;
+
+      # Reverse the insertion of the control character in Plaintext.pm.
+      if ($added_word =~ s/\x08(?=[$end_sentence_character]
+                                  [$after_punctuation_characters]*$)//x) {
+        $disinhibit = 0;
+      }
+      $result .= _add_next($line, $added_word);
+
+      # Check if it is considered as an end of sentence.  There are two things
+      # to check: one, that we have a ., ! or ?; and second, that it is not
+      # preceded by an upper-case letter (ignoring some punctuation)
+      if (defined($line->{'end_sentence'})
+          and $added_word =~ /^[$after_punctuation_characters]*$/) {
+        # do nothing in the case of a continuation of 
+        # after_punctuation_characters
+      } elsif (($disinhibit
+                or !$line->{'last_char'}
+                or $line->{'last_char'} !~ /[[:upper:]]/)
+              and $added_word =~ /[$end_sentence_character]
+                                  [$after_punctuation_characters]*$/x) {
         if ($line->{'frenchspacing'}) {
           $line->{'end_sentence'} = -1;
         } else {
@@ -338,19 +344,15 @@ sub add_text($$;$)
         delete $line->{'end_sentence'};
       }
     } elsif ($text =~ s/^\n//) {
-      $underlying_text =~ s/^\n//;
       $result .= $line->_end_line();
     } elsif ($text =~ s/^(\p{InFullwidth})//) {
       my $added = $1;
-      $underlying_text =~ s/^(\p{InFullwidth})//;
-      my $underlying_added = $1;
       print STDERR "EAST_ASIAN.L\n" if ($line->{'DEBUG'});
       if (!defined($line->{'word'})) {
         $line->{'word'} = '';
-        $line->{'underlying_word'} = '';
       }
       $line->{'word'} .= $added;
-      $line->{'underlying_word'} .= $underlying_added; 
+      $line->{'last_char'} = $added;
       $result .= $line->_add_pending_word();
       delete $line->{'end_sentence'};
       $line->{'space'} = '';

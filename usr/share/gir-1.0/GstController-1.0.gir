@@ -123,14 +123,20 @@ color component off and a value of 1.0 will be the color level.</doc>
         </array>
       </field>
     </record>
-    <record name="ControlPoint" c:type="GstControlPoint">
-      <doc xml:space="preserve">a internal structure for value+time and various temporary
+    <record name="ControlPoint"
+            c:type="GstControlPoint"
+            glib:type-name="GstControlPoint"
+            glib:get-type="gst_control_point_get_type"
+            c:symbol-prefix="control_point">
+      <doc xml:space="preserve">An internal structure for value+time and various temporary
 values used for interpolation. This "inherits" from
 GstTimedValue.</doc>
       <field name="timestamp" writable="1">
+        <doc xml:space="preserve">timestamp of the value change</doc>
         <type name="Gst.ClockTime" c:type="GstClockTime"/>
       </field>
       <field name="value" writable="1">
+        <doc xml:space="preserve">the new value</doc>
         <type name="gdouble" c:type="gdouble"/>
       </field>
       <union name="cache" c:type="cache">
@@ -142,6 +148,22 @@ GstTimedValue.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </field>
         </record>
+        <record name="cubic_monotonic" c:type="cubic_monotonic">
+          <field name="c1s" writable="1">
+            <type name="gdouble" c:type="gdouble"/>
+          </field>
+          <field name="c2s" writable="1">
+            <type name="gdouble" c:type="gdouble"/>
+          </field>
+          <field name="c3s" writable="1">
+            <type name="gdouble" c:type="gdouble"/>
+          </field>
+        </record>
+        <field name="_gst_reserved" writable="1">
+          <array zero-terminated="0" c:type="guint8" fixed-size="64">
+            <type name="guint8" c:type="guint8"/>
+          </array>
+        </field>
       </union>
     </record>
     <class name="DirectControlBinding"
@@ -152,11 +174,15 @@ GstTimedValue.</doc>
            glib:get-type="gst_direct_control_binding_get_type"
            glib:type-struct="DirectControlBindingClass">
       <doc xml:space="preserve">A value mapping object that attaches control sources to gobject properties. It
-will map the control values [0.0 ... 1.0] to the target property range. If a
-control value is outside of the range, it will be clipped.</doc>
+will map the control values directly to the target property range. If a
+non-absolute direct control binding is used, the value range [0.0 ... 1.0]
+is mapped to full target property range, and all values outside the range
+will be clipped. An absolute control binding will not do any value
+transformations.</doc>
       <constructor name="new" c:identifier="gst_direct_control_binding_new">
         <doc xml:space="preserve">Create a new control-binding that attaches the #GstControlSource to the
-#GObject property.</doc>
+#GObject property. It will map the control source range [0.0 ... 1.0] to
+the full target property range, and clip all values outside this range.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the new #GstDirectControlBinding</doc>
           <type name="Gst.ControlBinding" c:type="GstControlBinding*"/>
@@ -176,6 +202,37 @@ control value is outside of the range, it will be clipped.</doc>
           </parameter>
         </parameters>
       </constructor>
+      <constructor name="new_absolute"
+                   c:identifier="gst_direct_control_binding_new_absolute"
+                   version="1.6">
+        <doc xml:space="preserve">Create a new control-binding that attaches the #GstControlSource to the
+#GObject property. It will directly map the control source values to the
+target property range without any transformations.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the new #GstDirectControlBinding</doc>
+          <type name="Gst.ControlBinding" c:type="GstControlBinding*"/>
+        </return-value>
+        <parameters>
+          <parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">the object of the property</doc>
+            <type name="Gst.Object" c:type="GstObject*"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <doc xml:space="preserve">the property-name to attach the control source</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="cs" transfer-ownership="none">
+            <doc xml:space="preserve">the control source</doc>
+            <type name="Gst.ControlSource" c:type="GstControlSource*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <property name="absolute"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <property name="control-source"
                 writable="1"
                 construct="1"
@@ -205,11 +262,18 @@ control value is outside of the range, it will be clipped.</doc>
         <type name="DirectControlBindingConvertGValue"
               c:type="GstDirectControlBindingConvertGValue"/>
       </field>
-      <field name="_gst_reserved" readable="0" private="1">
-        <array zero-terminated="0" c:type="gpointer" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
+      <union name="ABI" c:type="ABI">
+        <field name="_gst_reserved" writable="1">
+          <array zero-terminated="0" c:type="gpointer" fixed-size="4">
+            <type name="gpointer" c:type="gpointer"/>
+          </array>
+        </field>
+        <record name="abi" c:type="abi">
+          <field name="want_absolute" writable="1">
+            <type name="gboolean" c:type="gboolean"/>
+          </field>
+        </record>
+      </union>
     </class>
     <record name="DirectControlBindingClass"
             c:type="GstDirectControlBindingClass"
@@ -261,7 +325,10 @@ control value is outside of the range, it will be clipped.</doc>
           <doc xml:space="preserve">the value returned by the cotnrol source</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
-        <parameter name="dest_value" transfer-ownership="none">
+        <parameter name="dest_value"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">the target location</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -345,7 +412,16 @@ All functions are MT-safe.</doc>
               value="2"
               c:identifier="GST_INTERPOLATION_MODE_CUBIC"
               glib:nick="cubic">
-        <doc xml:space="preserve">cubic interpolation</doc>
+        <doc xml:space="preserve">cubic interpolation (natural), may overshoot
+  the min or max values set by the control point, but is more 'curvy'</doc>
+      </member>
+      <member name="cubic_monotonic"
+              value="3"
+              c:identifier="GST_INTERPOLATION_MODE_CUBIC_MONOTONIC"
+              glib:nick="cubic-monotonic">
+        <doc xml:space="preserve">monotonic cubic interpolation, will not
+  produce any values outside of the min-max range set by the control points
+  (Since 1.8)</doc>
       </member>
     </enumeration>
     <class name="LFOControlSource"
@@ -479,14 +555,13 @@ chance to setup things.
 
 All functions are MT-safe.</doc>
       <method name="find_control_point_iter"
-              c:identifier="gst_timed_value_control_source_find_control_point_iter"
-              introspectable="0">
+              c:identifier="gst_timed_value_control_source_find_control_point_iter">
         <doc xml:space="preserve">Find last value before given timestamp in control point list.
 If all values in the control point list come after the given
 timestamp or no values exist, %NULL is returned.
 
 For use in control source implementations.</doc>
-        <return-value>
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">the found #GSequenceIter or %NULL</doc>
           <type name="GLib.SequenceIter" c:type="GSequenceIter*"/>
         </return-value>
@@ -637,6 +712,42 @@ time.</doc>
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
+      <glib:signal name="value-added" when="first" version="1.6">
+        <doc xml:space="preserve">Emited right after the new value has been added to @self</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="timed_value" transfer-ownership="none">
+            <doc xml:space="preserve">The newly added #GstTimedValue</doc>
+            <type name="ControlPoint"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="value-changed" when="first" version="1.6">
+        <doc xml:space="preserve">Emited right after the new value has been set on @timed_signals</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="timed_value" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstTimedValue where the value changed</doc>
+            <type name="ControlPoint"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="value-removed" when="first" version="1.6">
+        <doc xml:space="preserve">Emited when @timed_value is removed from @self</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="timed_value" transfer-ownership="none">
+            <doc xml:space="preserve">The removed #GstTimedValue</doc>
+            <type name="ControlPoint"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
     </class>
     <record name="TimedValueControlSourceClass"
             c:type="GstTimedValueControlSourceClass"

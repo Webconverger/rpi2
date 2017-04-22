@@ -1,4 +1,4 @@
-/* Copyright (C) 2007-2014 Free Software Foundation, Inc.
+/* Copyright (C) 2007-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -34,5 +34,15 @@ struct sockaddr_iucv
   };
 
 __END_DECLS
+
+#define SOL_IUCV        277			/* IUCV level */
+
+/* IUCV socket options (SOL_IUCV) */
+#define SO_IPRMDATA_MSG	0x0080			/* Send/recv IPRM_DATA msgs */
+#define SO_MSGLIMIT	0x1000			/* Get/set IUCV MSGLIMIT */
+#define SO_MSGSIZE	0x0800			/* Get maximum msgsize */
+
+/* IUCV related control messages (scm) */
+#define SCM_IUCV_TRGCLS	0x0001			/* Target class control message */
 
 #endif

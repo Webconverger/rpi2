@@ -1,5 +1,5 @@
 /* stringprep.h --- Header file for stringprep functions.
-   Copyright (C) 2002-2015 Simon Josefsson
+   Copyright (C) 2002-2016 Simon Josefsson
 
    This file is part of GNU Libidn.
 
@@ -51,7 +51,7 @@ extern "C"
 {
 # endif
 
-# define STRINGPREP_VERSION "1.30"
+# define STRINGPREP_VERSION "1.33"
 
 /* Error codes. */
   typedef enum
@@ -68,6 +68,7 @@ extern "C"
     STRINGPREP_PROFILE_ERROR = 101,
     STRINGPREP_FLAG_ERROR = 102,
     STRINGPREP_UNKNOWN_PROFILE = 103,
+    STRINGPREP_ICONV_ERROR = 104,
     /* Internal errors. */
     STRINGPREP_NFKC_FAILED = 200,
     STRINGPREP_MALLOC_ERROR = 201

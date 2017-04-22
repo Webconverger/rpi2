@@ -26,8 +26,19 @@
 #include <inttypes.h>
 #include <malloc.h>
 #include <getopt.h>
+#include <errno.h>
 #include <endian.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <asm/types.h>
+#include <mntent.h>
+#ifdef OVERRIDE_SYSTEM_FSXATTR
+# define fsxattr sys_fsxattr
+#endif
+#include <linux/fs.h> /* fsxattr defintion for new kernels */
+#ifdef OVERRIDE_SYSTEM_FSXATTR
+# undef fsxattr
+#endif
 
 static __inline__ int xfsctl(const char *path, int fd, int cmd, void *p)
 {
@@ -128,30 +139,87 @@ platform_discard_blocks(int fd, uint64_t start, uint64_t len)
 	return 0;
 }
 
-#if (__GLIBC__ < 2) || ((__GLIBC__ == 2) && (__GLIBC_MINOR__ <= 1))
-# define constpp	const char * const *
-#else
-# define constpp	char * const *
-#endif
-
 #define ENOATTR		ENODATA	/* Attribute not found */
 #define EFSCORRUPTED	EUCLEAN	/* Filesystem is corrupted */
 #define EFSBADCRC	EBADMSG	/* Bad CRC detected */
 
-typedef loff_t		xfs_off_t;
+typedef off_t		xfs_off_t;
 typedef __uint64_t	xfs_ino_t;
 typedef __uint32_t	xfs_dev_t;
 typedef __int64_t	xfs_daddr_t;
-typedef char*		xfs_caddr_t;
+typedef __u32		xfs_nlink_t;
 
-#ifndef	_UCHAR_T_DEFINED
-typedef unsigned char	uchar_t;
-#define	_UCHAR_T_DEFINED	1
+/**
+ * Abstraction of mountpoints.
+ */
+struct mntent_cursor {
+	FILE *mtabp;
+};
+
+static inline int platform_mntent_open(struct mntent_cursor * cursor, char *mtab)
+{
+	cursor->mtabp = setmntent(mtab, "r");
+	if (!cursor->mtabp) {
+		fprintf(stderr, "Error: cannot read %s\n", mtab);
+		return 1;
+	}
+	return 0;
+}
+
+static inline struct mntent * platform_mntent_next(struct mntent_cursor * cursor)
+{
+	return getmntent(cursor->mtabp);
+}
+
+static inline void platform_mntent_close(struct mntent_cursor * cursor)
+{
+	endmntent(cursor->mtabp);
+}
+
+/*
+ * Check whether we have to define FS_IOC_FS[GS]ETXATTR ourselves. These
+ * are a copy of the definitions moved to linux/uapi/fs.h in the 4.5 kernel,
+ * so this is purely for supporting builds against old kernel headers.
+ */
+#if !defined FS_IOC_FSGETXATTR || defined OVERRIDE_SYSTEM_FSXATTR
+struct fsxattr {
+	__u32		fsx_xflags;	/* xflags field value (get/set) */
+	__u32		fsx_extsize;	/* extsize field value (get/set)*/
+	__u32		fsx_nextents;	/* nextents field value (get)	*/
+	__u32		fsx_projid;	/* project identifier (get/set) */
+	__u32		fsx_cowextsize;	/* cow extsize field value (get/set) */
+	unsigned char	fsx_pad[8];
+};
 #endif
 
-#ifndef _BOOLEAN_T_DEFINED
-typedef enum {B_FALSE, B_TRUE}	boolean_t;
-#define _BOOLEAN_T_DEFINED	1
+#ifndef FS_IOC_FSGETXATTR
+/*
+ * Flags for the fsx_xflags field
+ */
+#define FS_XFLAG_REALTIME	0x00000001	/* data in realtime volume */
+#define FS_XFLAG_PREALLOC	0x00000002	/* preallocated file extents */
+#define FS_XFLAG_IMMUTABLE	0x00000008	/* file cannot be modified */
+#define FS_XFLAG_APPEND		0x00000010	/* all writes append */
+#define FS_XFLAG_SYNC		0x00000020	/* all writes synchronous */
+#define FS_XFLAG_NOATIME	0x00000040	/* do not update access time */
+#define FS_XFLAG_NODUMP		0x00000080	/* do not include in backups */
+#define FS_XFLAG_RTINHERIT	0x00000100	/* create with rt bit set */
+#define FS_XFLAG_PROJINHERIT	0x00000200	/* create with parents projid */
+#define FS_XFLAG_NOSYMLINKS	0x00000400	/* disallow symlink creation */
+#define FS_XFLAG_EXTSIZE	0x00000800	/* extent size allocator hint */
+#define FS_XFLAG_EXTSZINHERIT	0x00001000	/* inherit inode extent size */
+#define FS_XFLAG_NODEFRAG	0x00002000	/* do not defragment */
+#define FS_XFLAG_FILESTREAM	0x00004000	/* use filestream allocator */
+#define FS_XFLAG_DAX		0x00008000	/* use DAX for IO */
+#define FS_XFLAG_HASATTR	0x80000000	/* no DIFLAG for this	*/
+
+#define FS_IOC_FSGETXATTR     _IOR ('X', 31, struct fsxattr)
+#define FS_IOC_FSSETXATTR     _IOW ('X', 32, struct fsxattr)
+
+#endif
+
+#ifndef FS_XFLAG_COWEXTSIZE
+#define FS_XFLAG_COWEXTSIZE	0x00010000	/* CoW extent size allocator hint */
 #endif
 
 #endif	/* __XFS_LINUX_H__ */

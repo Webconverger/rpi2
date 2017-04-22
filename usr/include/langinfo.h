@@ -1,5 +1,5 @@
 /* Access to locale-dependent parameters.
-   Copyright (C) 1995-2014 Free Software Foundation, Inc.
+   Copyright (C) 1995-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -583,7 +583,7 @@ enum
 extern char *nl_langinfo (nl_item __item) __THROW;
 
 
-#ifdef	__USE_XOPEN2K
+#ifdef __USE_XOPEN2K8
 /* This interface is for the extended locale model.  See <locale.h> for
    more information.  */
 

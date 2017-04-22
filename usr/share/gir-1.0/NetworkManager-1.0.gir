@@ -14,10 +14,8 @@ and/or use gtk-doc annotations.  -->
              shared-library="libnm-util.so.2"
              c:identifier-prefixes="NM"
              c:symbol-prefixes="nm">
-    <enumeration name="80211ApFlags" c:type="NM80211ApFlags">
-      <doc xml:space="preserve">802.11 access point flags.
-
-(Corresponds to the NM_802_11_AP_FLAGS type in nm-access-point.xml.)</doc>
+    <bitfield name="80211ApFlags" c:type="NM80211ApFlags">
+      <doc xml:space="preserve">802.11 access point flags.</doc>
       <member name="none" value="0" c:identifier="NM_802_11_AP_FLAGS_NONE">
         <doc xml:space="preserve">access point has no special capabilities</doc>
       </member>
@@ -27,13 +25,11 @@ and/or use gtk-doc annotations.  -->
         <doc xml:space="preserve">access point requires authentication and
 encryption (usually means WEP)</doc>
       </member>
-    </enumeration>
-    <enumeration name="80211ApSecurityFlags" c:type="NM80211ApSecurityFlags">
+    </bitfield>
+    <bitfield name="80211ApSecurityFlags" c:type="NM80211ApSecurityFlags">
       <doc xml:space="preserve">802.11 access point security and authentication flags.  These flags describe
 the current security requirements of an access point as determined from the
-access point's beacon.
-
-(Corresponds to the NM_802_11_AP_SEC type in nm-access-point.xml.)</doc>
+access point's beacon.</doc>
       <member name="none" value="0" c:identifier="NM_802_11_AP_SEC_NONE">
         <doc xml:space="preserve">the access point has no special security requirements</doc>
       </member>
@@ -94,11 +90,9 @@ supported</doc>
         <doc xml:space="preserve">802.1x authentication and key management
 is supported</doc>
       </member>
-    </enumeration>
+    </bitfield>
     <enumeration name="80211Mode" c:type="NM80211Mode">
-      <doc xml:space="preserve">Indicates the 802.11 mode an access point or device is currently in.
-
-(Corresponds to the NM_802_11_MODE type in generic-types.xml.)</doc>
+      <doc xml:space="preserve">Indicates the 802.11 mode an access point or device is currently in.</doc>
       <member name="unknown" value="0" c:identifier="NM_802_11_MODE_UNKNOWN">
         <doc xml:space="preserve">the device or access point mode is unknown</doc>
       </member>
@@ -121,9 +115,7 @@ is supported</doc>
     <enumeration name="ActiveConnectionState" c:type="NMActiveConnectionState">
       <doc xml:space="preserve">#NMActiveConnectionState values indicate the state of a connection to a
 specific network while it is starting, connected, or disconnecting from that
-network.
-
-(Corresponds to the NM_ACTIVE_CONNECTION_STATE type in nm-active-connection.xml.)</doc>
+network.</doc>
       <member name="unknown"
               value="0"
               c:identifier="NM_ACTIVE_CONNECTION_STATE_UNKNOWN">
@@ -152,11 +144,9 @@ network.
   and will be removed</doc>
       </member>
     </enumeration>
-    <enumeration name="BluetoothCapabilities" c:type="NMBluetoothCapabilities">
+    <bitfield name="BluetoothCapabilities" c:type="NMBluetoothCapabilities">
       <doc xml:space="preserve">#NMBluetoothCapabilities values indicate the usable capabilities of a
-Bluetooth device.
-
-(Corresponds to the NM_BT_CAPABILITY type in nm-device-bt.xml.)</doc>
+Bluetooth device.</doc>
       <member name="none" value="0" c:identifier="NM_BT_CAPABILITY_NONE">
         <doc xml:space="preserve">device has no usable capabilities</doc>
       </member>
@@ -166,7 +156,7 @@ Bluetooth device.
       <member name="nap" value="2" c:identifier="NM_BT_CAPABILITY_NAP">
         <doc xml:space="preserve">device provides Network Access Point capability</doc>
       </member>
-    </enumeration>
+    </bitfield>
     <constant name="CONNECTION_CHANGED"
               value="changed"
               c:type="NM_CONNECTION_CHANGED">
@@ -339,7 +329,10 @@ keeping secret data in memory when not needed.</doc>
             <type name="SettingClearSecretsWithFlagsFn"
                   c:type="NMSettingClearSecretsWithFlagsFn"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">caller-supplied data passed to @func</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -454,7 +447,10 @@ calling the supplied user function for each property.</doc>
             <doc xml:space="preserve">user-supplied function called for each setting's property</doc>
             <type name="SettingValueIterFn" c:type="NMSettingValueIterFn"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">user data passed to @func at each invocation</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1128,8 +1124,10 @@ if they were not</doc>
         <doc xml:space="preserve">Deep-copies the settings of @new_conenction and replaces the settings of @connection
 with the copied settings.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">%TRUE if the settings were valid and added to the connection, %FALSE
-if they were not</doc>
+          <doc xml:space="preserve">%TRUE if the settings were valid after replacing the connection, %FALSE
+if they were not. Regardless of whether %TRUE or %FALSE is returned, the connection
+is successfully replaced. %FALSE only means, that the connection does not verify
+at the end of the operation.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -1364,7 +1362,6 @@ updated</doc>
     <enumeration name="ConnectivityState"
                  version="0.9.8.6"
                  c:type="NMConnectivityState">
-      <doc xml:space="preserve">(Corresponds to the NM_CONNECTIVITY type in nm-manager.xml.)</doc>
       <member name="unknown" value="0" c:identifier="NM_CONNECTIVITY_UNKNOWN">
         <doc xml:space="preserve">Network connectivity is unknown.</doc>
       </member>
@@ -1549,10 +1546,8 @@ updated</doc>
               c:type="NM_DBUS_VPN_WRONG_STATE">
       <type name="utf8" c:type="gchar*"/>
     </constant>
-    <enumeration name="DeviceCapabilities" c:type="NMDeviceCapabilities">
-      <doc xml:space="preserve">General device capability flags.
-
-(Corresponds to the NM_DEVICE_CAP type in nm-device-wifi.xml.)</doc>
+    <bitfield name="DeviceCapabilities" c:type="NMDeviceCapabilities">
+      <doc xml:space="preserve">General device capability flags.</doc>
       <member name="none" value="0" c:identifier="NM_DEVICE_CAP_NONE">
         <doc xml:space="preserve">device has no special capabilities</doc>
       </member>
@@ -1571,15 +1566,13 @@ updated</doc>
               c:identifier="NM_DEVICE_CAP_IS_SOFTWARE">
         <doc xml:space="preserve">this device is a software device</doc>
       </member>
-    </enumeration>
-    <enumeration name="DeviceModemCapabilities"
-                 c:type="NMDeviceModemCapabilities">
+    </bitfield>
+    <bitfield name="DeviceModemCapabilities"
+              c:type="NMDeviceModemCapabilities">
       <doc xml:space="preserve">#NMDeviceModemCapabilities values indicate the generic radio access
 technology families a modem device supports.  For more information on the
 specific access technologies the device supports use the ModemManager D-Bus
-API.
-
-(Corresponds to the NM_DEVICE_MODEM_CAPABILITY type in nm-device-modem.xml.)</doc>
+API.</doc>
       <member name="none"
               value="0"
               c:identifier="NM_DEVICE_MODEM_CAPABILITY_NONE">
@@ -1608,9 +1601,8 @@ GPRS, EDGE, UMTS, HSDPA, HSUPA, or HSPA+ packet switched data capability</doc>
               c:identifier="NM_DEVICE_MODEM_CAPABILITY_LTE">
         <doc xml:space="preserve">modem has LTE data capability</doc>
       </member>
-    </enumeration>
+    </bitfield>
     <enumeration name="DeviceState" c:type="NMDeviceState">
-      <doc xml:space="preserve">(Corresponds to the NM_DEVICE_STATE type in nm-device.xml.)</doc>
       <member name="unknown" value="0" c:identifier="NM_DEVICE_STATE_UNKNOWN">
         <doc xml:space="preserve">the device's state is unknown</doc>
       </member>
@@ -1692,9 +1684,7 @@ GPRS, EDGE, UMTS, HSDPA, HSUPA, or HSPA+ packet switched data capability</doc>
       </member>
     </enumeration>
     <enumeration name="DeviceStateReason" c:type="NMDeviceStateReason">
-      <doc xml:space="preserve">Device state change reason codes
-
-(Corresponds to the NM_DEVICE_STATE_REASON type in nm-device.xml.)</doc>
+      <doc xml:space="preserve">Device state change reason codes</doc>
       <member name="none" value="0" c:identifier="NM_DEVICE_STATE_REASON_NONE">
         <doc xml:space="preserve">No reason given</doc>
       </member>
@@ -1993,6 +1983,21 @@ GPRS, EDGE, UMTS, HSDPA, HSUPA, or HSPA+ packet switched data capability</doc>
               c:identifier="NM_DEVICE_STATE_REASON_SIM_PIN_INCORRECT">
         <doc xml:space="preserve">SIM PIN was incorrect</doc>
       </member>
+      <member name="new_activation"
+              value="60"
+              c:identifier="NM_DEVICE_STATE_REASON_NEW_ACTIVATION">
+        <doc xml:space="preserve">New connection activation was enqueued</doc>
+      </member>
+      <member name="parent_changed"
+              value="61"
+              c:identifier="NM_DEVICE_STATE_REASON_PARENT_CHANGED">
+        <doc xml:space="preserve">the device's parent changed</doc>
+      </member>
+      <member name="parent_managed_changed"
+              value="62"
+              c:identifier="NM_DEVICE_STATE_REASON_PARENT_MANAGED_CHANGED">
+        <doc xml:space="preserve">the device parent's management changed</doc>
+      </member>
       <member name="last"
               value="65535"
               c:identifier="NM_DEVICE_STATE_REASON_LAST">
@@ -2000,9 +2005,7 @@ GPRS, EDGE, UMTS, HSDPA, HSUPA, or HSPA+ packet switched data capability</doc>
     </enumeration>
     <enumeration name="DeviceType" c:type="NMDeviceType">
       <doc xml:space="preserve">#NMDeviceType values indicate the type of hardware represented by
-an #NMDevice.
-
-(Corresponds to the NM_DEVICE_TYPE type in nm-device.xml.)</doc>
+an #NMDevice.</doc>
       <member name="unknown" value="0" c:identifier="NM_DEVICE_TYPE_UNKNOWN">
         <doc xml:space="preserve">unknown device</doc>
       </member>
@@ -2056,12 +2059,26 @@ GSM/UMTS, or LTE network access protocols</doc>
       <member name="team" value="15" c:identifier="NM_DEVICE_TYPE_TEAM">
         <doc xml:space="preserve">a team master interface</doc>
       </member>
+      <member name="tun" value="16" c:identifier="NM_DEVICE_TYPE_TUN">
+        <doc xml:space="preserve">a TUN/TAP interface</doc>
+      </member>
+      <member name="ip_tunnel"
+              value="17"
+              c:identifier="NM_DEVICE_TYPE_IP_TUNNEL">
+        <doc xml:space="preserve">an IP tunnel interface</doc>
+      </member>
+      <member name="macvlan" value="18" c:identifier="NM_DEVICE_TYPE_MACVLAN">
+        <doc xml:space="preserve">a MACVLAN interface</doc>
+      </member>
+      <member name="vxlan" value="19" c:identifier="NM_DEVICE_TYPE_VXLAN">
+        <doc xml:space="preserve">a VXLAN interface</doc>
+      </member>
+      <member name="veth" value="20" c:identifier="NM_DEVICE_TYPE_VETH">
+        <doc xml:space="preserve">a VETH interface</doc>
+      </member>
     </enumeration>
-    <enumeration name="DeviceWifiCapabilities"
-                 c:type="NMDeviceWifiCapabilities">
-      <doc xml:space="preserve">802.11 specific device encryption and authentication capabilities.
-
-(Corresponds to the NM_802_11_DEVICE_CAP type in nm-device-wifi.xml.)</doc>
+    <bitfield name="DeviceWifiCapabilities" c:type="NMDeviceWifiCapabilities">
+      <doc xml:space="preserve">802.11 specific device encryption and authentication capabilities.</doc>
       <member name="none" value="0" c:identifier="NM_WIFI_DEVICE_CAP_NONE">
         <doc xml:space="preserve">device has no encryption/authentication capabilities</doc>
       </member>
@@ -2097,7 +2114,22 @@ GSM/UMTS, or LTE network access protocols</doc>
       <member name="adhoc" value="128" c:identifier="NM_WIFI_DEVICE_CAP_ADHOC">
         <doc xml:space="preserve">device supports Ad-Hoc mode</doc>
       </member>
-    </enumeration>
+      <member name="freq_valid"
+              value="256"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_VALID">
+        <doc xml:space="preserve">device reports frequency capabilities</doc>
+      </member>
+      <member name="freq_2ghz"
+              value="512"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_2GHZ">
+        <doc xml:space="preserve">device supports 2.4GHz frequencies</doc>
+      </member>
+      <member name="freq_5ghz"
+              value="1024"
+              c:identifier="NM_WIFI_DEVICE_CAP_FREQ_5GHZ">
+        <doc xml:space="preserve">device supports 5GHz frequencies</doc>
+      </member>
+    </bitfield>
     <record name="IP4Address"
             c:type="NMIP4Address"
             glib:type-name="NMIP4Address"
@@ -2549,7 +2581,10 @@ reaches zero, the object will be destroyed.</doc>
             <doc xml:space="preserve">the #NMIP6Address</doc>
             <type name="IP6Address" c:type="NMIP6Address*"/>
           </instance-parameter>
-          <parameter name="addr" transfer-ownership="none">
+          <parameter name="addr"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the IPv6 address</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -2565,7 +2600,10 @@ reaches zero, the object will be destroyed.</doc>
             <doc xml:space="preserve">the #NMIP6Address</doc>
             <type name="IP6Address" c:type="NMIP6Address*"/>
           </instance-parameter>
-          <parameter name="gateway" transfer-ownership="none">
+          <parameter name="gateway"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the IPv6 default gateway</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -2724,7 +2762,10 @@ reaches zero, the object will be destroyed.</doc>
             <doc xml:space="preserve">the #NMIP6Route</doc>
             <type name="IP6Route" c:type="NMIP6Route*"/>
           </instance-parameter>
-          <parameter name="dest" transfer-ownership="none">
+          <parameter name="dest"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the destination address</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -2757,7 +2798,10 @@ reaches zero, the object will be destroyed.</doc>
             <doc xml:space="preserve">the #NMIP6Route</doc>
             <type name="IP6Route" c:type="NMIP6Route*"/>
           </instance-parameter>
-          <parameter name="next_hop" transfer-ownership="none">
+          <parameter name="next_hop"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the IPv6 address of the next hop</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -2798,12 +2842,12 @@ reaches zero, the object will be destroyed.</doc>
 is compiled against.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="0" c:type="NM_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="2" c:type="NM_MICRO_VERSION">
       <doc xml:space="preserve">Evaluates to the micro version number of NetworkManager which this source
 compiled against.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" value="0" c:type="NM_MINOR_VERSION">
+    <constant name="MINOR_VERSION" value="6" c:type="NM_MINOR_VERSION">
       <doc xml:space="preserve">Evaluates to the minor version number of NetworkManager which this source
 is compiled against.</doc>
       <type name="gint" c:type="gint"/>
@@ -3528,6 +3572,11 @@ as the allowed frequency bands (#NMSettingGsm:allowed-bands property).</doc>
               c:type="NM_SETTING_IP4_CONFIG_DHCP_SEND_HOSTNAME">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="SETTING_IP4_CONFIG_DHCP_TIMEOUT"
+              value="dhcp-timeout"
+              c:type="NM_SETTING_IP4_CONFIG_DHCP_TIMEOUT">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="SETTING_IP4_CONFIG_DNS"
               value="dns"
               c:type="NM_SETTING_IP4_CONFIG_DNS">
@@ -4148,6 +4197,11 @@ for this connection.</doc>
               c:type="NM_SETTING_WIRELESS_MTU">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="SETTING_WIRELESS_POWERSAVE"
+              value="powersave"
+              c:type="NM_SETTING_WIRELESS_POWERSAVE">
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="SETTING_WIRELESS_RATE"
               value="rate"
               c:type="NM_SETTING_WIRELESS_RATE">
@@ -4321,7 +4375,11 @@ string to GValue mapping of properties that apply to the setting</doc>
             <type name="SettingClearSecretsWithFlagsFn"
                   c:type="NMSettingClearSecretsWithFlagsFn"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none" closure="2">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     closure="2">
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
         </parameters>
@@ -4485,7 +4543,10 @@ leakage of information.</doc>
             <type name="SettingClearSecretsWithFlagsFn"
                   c:type="NMSettingClearSecretsWithFlagsFn"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">caller-supplied data passed to @func</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4591,7 +4652,10 @@ user function for each property.</doc>
             <doc xml:space="preserve">user-supplied function called for each property of the setting</doc>
             <type name="SettingValueIterFn" c:type="NMSettingValueIterFn"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">user data passed to @func at each invocation</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -7182,18 +7246,20 @@ must be strings. Option names must contain only alphanumeric characters
               value="2"
               c:identifier="NM_SETTING_BOND_ERROR_MISSING_PROPERTY"
               glib:nick="MissingProperty">
-        <doc xml:space="preserve">the property was missing and is
-required</doc>
+        <doc xml:space="preserve">the property was missing and is</doc>
       </member>
       <member name="InvalidOption"
               value="3"
               c:identifier="NM_SETTING_BOND_ERROR_INVALID_OPTION"
               glib:nick="InvalidOption">
+        <doc xml:space="preserve">the option was invalid</doc>
       </member>
       <member name="MissingOption"
               value="4"
               c:identifier="NM_SETTING_BOND_ERROR_MISSING_OPTION"
               glib:nick="MissingOption">
+        <doc xml:space="preserve">the option was missing
+required</doc>
       </member>
       <function name="quark" c:identifier="nm_setting_bond_error_quark">
         <doc xml:space="preserve">Registers an error quark for #NMSettingBond if necessary.</doc>
@@ -7933,7 +7999,11 @@ free the elements.</doc>
               <type name="SettingClearSecretsWithFlagsFn"
                     c:type="NMSettingClearSecretsWithFlagsFn"/>
             </parameter>
-            <parameter name="user_data" transfer-ownership="none" closure="3">
+            <parameter name="user_data"
+                       transfer-ownership="none"
+                       nullable="1"
+                       allow-none="1"
+                       closure="3">
               <type name="gpointer" c:type="gpointer"/>
             </parameter>
           </parameters>
@@ -7981,7 +8051,11 @@ support this feature</doc>
           <doc xml:space="preserve">The secret's flags, eg %NM_SETTING_SECRET_FLAG_AGENT_OWNED</doc>
           <type name="SettingSecretFlags" c:type="NMSettingSecretFlags"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="3">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="3">
           <doc xml:space="preserve">User data passed to nm_connection_clear_secrets_with_flags()</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -10238,6 +10312,22 @@ update DNS information for this machine.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_dhcp_timeout"
+              c:identifier="nm_setting_ip4_config_get_dhcp_timeout">
+        <doc xml:space="preserve">Returns the value contained in the #NMSettingIP4Config:dhcp-timeout
+property.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The number of seconds after which unfinished DHCP transaction
+fails or zero for "default".</doc>
+          <type name="gint" c:type="int"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingIP4Config</doc>
+            <type name="SettingIP4Config" c:type="NMSettingIP4Config*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_dns" c:identifier="nm_setting_ip4_config_get_dns">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the IPv4 address (network byte order) of the DNS server at index
@@ -10615,6 +10705,11 @@ providing a static hostname for the computer.  If the
 %TRUE, the current persistent hostname of the computer is sent.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
+      <property name="dhcp-timeout" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">Number of seconds after which the unfinished DHCP transaction fails
+or zero for default.</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
       <property name="dns"
                 introspectable="0"
                 writable="1"
@@ -10846,7 +10941,10 @@ known</doc>
             <doc xml:space="preserve">the #NMSettingIP6Config</doc>
             <type name="SettingIP6Config" c:type="NMSettingIP6Config*"/>
           </instance-parameter>
-          <parameter name="dns" transfer-ownership="none">
+          <parameter name="dns"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the IPv6 address of the DNS server to add</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -10974,7 +11072,7 @@ property.</doc>
         </parameters>
       </method>
       <method name="get_dns" c:identifier="nm_setting_ip6_config_get_dns">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the IPv6 address of the DNS server at index @i</doc>
           <type name="gpointer" c:type="const in6_addr*"/>
         </return-value>
@@ -11250,7 +11348,10 @@ specify a metric. See #NMSettingIP6Config:route-metric for more details.</doc>
             <doc xml:space="preserve">the #NMSettingIP6Config</doc>
             <type name="SettingIP6Config" c:type="NMSettingIP6Config*"/>
           </instance-parameter>
-          <parameter name="dns" transfer-ownership="none">
+          <parameter name="dns"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the IPv6 address of the DNS server to remove</doc>
             <type name="gpointer" c:type="const in6_addr*"/>
           </parameter>
@@ -13100,7 +13201,10 @@ during iteration will not be part of the iteration.</doc>
             <doc xml:space="preserve">an user provided function</doc>
             <type name="VPNIterFunc" c:type="NMVPNIterFunc"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">data to be passed to @func</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -13126,7 +13230,10 @@ iteration will not be part of the iteration.</doc>
             <doc xml:space="preserve">an user provided function</doc>
             <type name="VPNIterFunc" c:type="NMVPNIterFunc"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">data to be passed to @func</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -13373,7 +13480,11 @@ nm_setting_enumerate_values()</doc>
           <doc xml:space="preserve">The property's flags, like %NM_SETTING_PARAM_SECRET</doc>
           <type name="GObject.ParamFlags" c:type="GParamFlags"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="4">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="4">
           <doc xml:space="preserve">User data passed to nm_setting_enumerate_values()</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -13670,7 +13781,8 @@ both "from" and "to" are unsigned integers, ie "7:3".</doc>
 interface.  Flags include %NM_VLAN_FLAG_REORDER_HEADERS (reordering of
 output packet headers), %NM_VLAN_FLAG_GVRP (use of the GVRP protocol),
 and %NM_VLAN_FLAG_LOOSE_BINDING (loose binding of the interface to its
-master device's operating state).</doc>
+master device's operating state), %NM_VLAN_FLAG_MVRP (use of the MVRP
+protocol).</doc>
         <type name="guint" c:type="guint"/>
       </property>
       <property name="id" writable="1" construct="1" transfer-ownership="none">
@@ -13825,17 +13937,24 @@ required</doc>
            glib:type-name="NMSettingWimax"
            glib:get-type="nm_setting_wimax_get_type"
            glib:type-struct="SettingWimaxClass">
-      <constructor name="new" c:identifier="nm_setting_wimax_new">
+      <constructor name="new"
+                   c:identifier="nm_setting_wimax_new"
+                   deprecated="1"
+                   deprecated-version="1.2">
         <doc xml:space="preserve">Creates a new #NMSettingWimax object with default values.</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the new empty #NMSettingWimax object</doc>
           <type name="Setting" c:type="NMSetting*"/>
         </return-value>
       </constructor>
       <method name="get_mac_address"
-              c:identifier="nm_setting_wimax_get_mac_address">
+              c:identifier="nm_setting_wimax_get_mac_address"
+              deprecated="1"
+              deprecated-version="1.2">
         <doc xml:space="preserve">Returns the MAC address of a WiMAX device which this connection is locked
 to.</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the MAC address</doc>
           <array name="GLib.ByteArray" c:type="const GByteArray*">
@@ -13850,9 +13969,12 @@ to.</doc>
         </parameters>
       </method>
       <method name="get_network_name"
-              c:identifier="nm_setting_wimax_get_network_name">
+              c:identifier="nm_setting_wimax_get_network_name"
+              deprecated="1"
+              deprecated-version="1.2">
         <doc xml:space="preserve">Returns the WiMAX NSP name (ex "Sprint" or "CLEAR") which identifies the
 specific WiMAX network this setting describes a connection to.</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the WiMAX NSP name</doc>
           <type name="utf8" c:type="const char*"/>
@@ -13866,16 +13988,24 @@ specific WiMAX network this setting describes a connection to.</doc>
       </method>
       <property name="mac-address"
                 introspectable="0"
+                deprecated="1"
+                deprecated-version="1.2"
                 writable="1"
                 transfer-ownership="none">
         <doc xml:space="preserve">If specified, this connection will only apply to the WiMAX device whose
 MAC address matches. This property does not change the MAC address of the
 device (known as MAC spoofing).</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <type/>
       </property>
-      <property name="network-name" writable="1" transfer-ownership="none">
+      <property name="network-name"
+                deprecated="1"
+                deprecated-version="1.2"
+                writable="1"
+                transfer-ownership="none">
         <doc xml:space="preserve">Network Service Provider (NSP) name of the WiMAX network this connection
 should use.</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="parent">
@@ -13913,8 +14043,12 @@ should use.</doc>
         <doc xml:space="preserve">the property was missing and is
 required</doc>
       </member>
-      <function name="quark" c:identifier="nm_setting_wimax_error_quark">
+      <function name="quark"
+                c:identifier="nm_setting_wimax_error_quark"
+                deprecated="1"
+                deprecated-version="1.2">
         <doc xml:space="preserve">Registers an error quark for #NMSettingWimax if necessary.</doc>
+        <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the error quark used for #NMSettingWimax errors.</doc>
           <type name="GLib.Quark" c:type="GQuark"/>
@@ -14767,6 +14901,20 @@ at index @idx</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_powersave"
+              c:identifier="nm_setting_wireless_get_powersave"
+              version="1.2">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the #NMSettingWireless:powersave property of the setting</doc>
+          <type name="guint32" c:type="guint32"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="setting" transfer-ownership="none">
+            <doc xml:space="preserve">the #NMSettingWireless</doc>
+            <type name="SettingWireless" c:type="NMSettingWireless*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_rate" c:identifier="nm_setting_wireless_get_rate">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the #NMSettingWireless:rate property of the setting</doc>
@@ -14952,6 +15100,16 @@ infrastructure is assumed.</doc>
                 transfer-ownership="none">
         <doc xml:space="preserve">If non-zero, only transmit packets of the specified size or smaller,
 breaking larger packets up into multiple Ethernet frames.</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="powersave"
+                version="1.2"
+                writable="1"
+                transfer-ownership="none">
+        <doc xml:space="preserve">If set to %FALSE, Wi-Fi power saving behavior is disabled.  If set to
+%TRUE, Wi-Fi power saving behavior is enabled.  All other values are
+reserved.  Note that even though only boolean values are allowed, the
+property type is an unsigned integer to allow for future expansion.</doc>
         <type name="guint" c:type="guint"/>
       </property>
       <property name="rate"
@@ -15851,9 +16009,7 @@ encryption protocol</doc>
       </function>
     </enumeration>
     <enumeration name="State" c:type="NMState">
-      <doc xml:space="preserve">#NMState values indicate the current overall networking state.
-
-(Corresponds to the NM_STATE type in nm-manager.xml.)</doc>
+      <doc xml:space="preserve">#NMState values indicate the current overall networking state.</doc>
       <member name="unknown" value="0" c:identifier="NM_STATE_UNKNOWN">
         <doc xml:space="preserve">networking state is unknown</doc>
       </member>
@@ -15905,7 +16061,11 @@ nm_utils_hwaddr_len(), and nm_utils_hwaddr_aton().</doc>
         <parameter name="filename" transfer-ownership="none">
           <type name="utf8" c:type="const char*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="1">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="1">
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
@@ -15974,10 +16134,11 @@ generating the dynamic WEP keys automatically</doc>
         <doc xml:space="preserve">WPA2 is used with 802.1x authentication</doc>
       </member>
     </enumeration>
+    <constant name="VLAN_FLAGS_ALL" value="0" c:type="NM_VLAN_FLAGS_ALL">
+      <type name="gint" c:type="gint"/>
+    </constant>
     <enumeration name="VPNConnectionState" c:type="NMVPNConnectionState">
-      <doc xml:space="preserve">VPN connection states
-
-(Corresponds to the NM_VPN_CONNECTION_STATE type in nm-vpn-connection.xml.)</doc>
+      <doc xml:space="preserve">VPN connection states</doc>
       <member name="unknown"
               value="0"
               c:identifier="NM_VPN_CONNECTION_STATE_UNKNOWN">
@@ -16025,9 +16186,7 @@ generating the dynamic WEP keys automatically</doc>
     </enumeration>
     <enumeration name="VPNConnectionStateReason"
                  c:type="NMVPNConnectionStateReason">
-      <doc xml:space="preserve">VPN connection state reasons
-
-(Corresponds to the NM_VPN_CONNECTION_STATE_REASON type in nm-vpn-connection.xml.)</doc>
+      <doc xml:space="preserve">VPN connection state reasons</doc>
       <member name="unknown"
               value="0"
               c:identifier="NM_VPN_CONNECTION_STATE_REASON_UNKNOWN">
@@ -16114,7 +16273,11 @@ generating the dynamic WEP keys automatically</doc>
           <doc xml:space="preserve">the value of the data or secret item</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none" closure="2">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="2">
           <doc xml:space="preserve">User data passed to nm_setting_vpn_foreach_data_item() or
 nm_setting_vpn_foreach_secret()</doc>
           <type name="gpointer" c:type="gpointer"/>
@@ -16122,9 +16285,7 @@ nm_setting_vpn_foreach_secret()</doc>
       </parameters>
     </callback>
     <enumeration name="VPNPluginFailure" c:type="NMVPNPluginFailure">
-      <doc xml:space="preserve">VPN plugin failure reasons
-
-(Corresponds to the NM_VPN_PLUGIN_FAILURE type in nm-vpn-plugin.xml.)</doc>
+      <doc xml:space="preserve">VPN plugin failure reasons</doc>
       <member name="login_failed"
               value="0"
               c:identifier="NM_VPN_PLUGIN_FAILURE_LOGIN_FAILED">
@@ -16143,9 +16304,7 @@ nm_setting_vpn_foreach_secret()</doc>
       </member>
     </enumeration>
     <enumeration name="VPNServiceState" c:type="NMVPNServiceState">
-      <doc xml:space="preserve">VPN daemon states
-
-(Corresponds to the NM_VPN_SERVICE_STATE type in nm-vpn-connection.xml.)</doc>
+      <doc xml:space="preserve">VPN daemon states</doc>
       <member name="unknown"
               value="0"
               c:identifier="NM_VPN_SERVICE_STATE_UNKNOWN">
@@ -16356,6 +16515,13 @@ nm_setting_vpn_foreach_secret()</doc>
         <doc xml:space="preserve">indicates that this interface's operating
  state is tied to the underlying network interface but other details
  (like routing) are not.</doc>
+      </member>
+      <member name="mvrp"
+              value="8"
+              c:identifier="NM_VLAN_FLAG_MVRP"
+              glib:nick="mvrp">
+        <doc xml:space="preserve">indicates that this interface should use MVRP to register
+ itself with it's switch</doc>
       </member>
     </enumeration>
     <enumeration name="VlanPriorityMap"
@@ -16643,8 +16809,11 @@ the actual WEP key using the MD5 hash algorithm.</doc>
     </function>
     <function name="setting_wimax_error_quark"
               c:identifier="nm_setting_wimax_error_quark"
-              moved-to="SettingWimaxError.quark">
+              moved-to="SettingWimaxError.quark"
+              deprecated="1"
+              deprecated-version="1.2">
       <doc xml:space="preserve">Registers an error quark for #NMSettingWimax if necessary.</doc>
+      <doc-deprecated xml:space="preserve">WiMAX is no longer supported.</doc-deprecated>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve">the error quark used for #NMSettingWimax errors.</doc>
         <type name="GLib.Quark" c:type="GQuark"/>
@@ -16849,7 +17018,10 @@ and will be overwritten by subsequent calls to this function</doc>
           <type name="UtilsFileSearchInPathsPredicate"
                 c:type="NMUtilsFileSearchInPathsPredicate"/>
         </parameter>
-        <parameter name="user_data" transfer-ownership="none">
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">(allow-none): user data for @predicate function.</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -16907,7 +17079,7 @@ length is @len/2.</doc>
         </parameter>
         <parameter name="len" transfer-ownership="none">
           <doc xml:space="preserve">the length of the @hex string (it has to be even)</doc>
-          <type name="gulong" c:type="size_t"/>
+          <type name="gsize" c:type="size_t"/>
         </parameter>
       </parameters>
     </function>
@@ -16954,7 +17126,10 @@ instead of a type.</doc>
   &lt;literal&gt;ARPHRD_INFINIBAND&lt;/literal&gt;</doc>
           <type name="gint" c:type="int"/>
         </parameter>
-        <parameter name="buffer" transfer-ownership="none">
+        <parameter name="buffer"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">buffer to store the result into</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -16975,7 +17150,10 @@ Bytes in @asc can be sepatared by colons (:), or hyphens (-), but not mixed.</do
           <doc xml:space="preserve">the ASCII representation of a hardware address</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
-        <parameter name="buffer" transfer-ownership="none">
+        <parameter name="buffer"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">buffer to store the result into</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -17010,7 +17188,10 @@ a type.</doc>
         <type name="utf8" c:type="char*"/>
       </return-value>
       <parameters>
-        <parameter name="addr" transfer-ownership="none">
+        <parameter name="addr"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">a binary hardware address</doc>
           <type name="gpointer" c:type="gconstpointer"/>
         </parameter>
@@ -17030,7 +17211,10 @@ a type.</doc>
         <type name="utf8" c:type="char*"/>
       </return-value>
       <parameters>
-        <parameter name="addr" transfer-ownership="none">
+        <parameter name="addr"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">a binary hardware address</doc>
           <type name="gpointer" c:type="gconstpointer"/>
         </parameter>
@@ -17136,7 +17320,10 @@ function in net/core/dev.c.</doc>
         <type name="utf8" c:type="const char*"/>
       </return-value>
       <parameters>
-        <parameter name="in6addr" transfer-ownership="none">
+        <parameter name="in6addr"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <doc xml:space="preserve">the address that should be converted to string.</doc>
           <type name="gpointer" c:type="const in6_addr*"/>
         </parameter>

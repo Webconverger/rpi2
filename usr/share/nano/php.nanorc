@@ -2,6 +2,7 @@
 
 syntax "php" "\.php[2345s~]?$"
 magic "PHP script text"
+comment "//"
 
 # PHP markings.
 color brightgreen "(<\?(php)?|\?>)"
@@ -25,7 +26,7 @@ color brightyellow "<[^=       ]*>" ""(\.|[^"])*""
 color brightblue "//.*"
 color brightblue start="/\*" end="\*/"
 ##color blue start="<" end=">"
-##color red "&[^;[[:space:]]]*;"
+##color red "&[^;[:space:]]*;"
 
 # Trailing whitespace.
 color ,green "[[:space:]]+$"

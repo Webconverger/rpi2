@@ -8,9 +8,27 @@
   <action id="org.freedesktop.policykit.exec">
     <description>Run a program as another user</description>
     <description xml:lang="cs">Spustit program jako jiný uživatel</description>
+    <description xml:lang="de">Ein Programm als ein anderer Benutzer ausführen</description>
+    <description xml:lang="hu">Program futtatása másik felhasználóként</description>
+    <description xml:lang="pl">Uruchomienie programu jako inny użytkownik</description>
+    <description xml:lang="pt_BR">Executa um programa como outro usuário</description>
+    <description xml:lang="sk">Spustenie programu ako iný používateľ</description>
+    <description xml:lang="sv">Kör ett program som en annan användare</description>
+    <description xml:lang="tr">Bir programı başka bir kullanıcı olarak çalıştırın</description>
+    <description xml:lang="uk">Виконання програми від імені іншого користувача</description>
+    <description xml:lang="zh_CN">作为另一个用户运行程序</description>
     <message>Authentication is required to run a program as another user</message>
     <message xml:lang="cs">Pro spuštění programu pod jiným uživatelem je vyžadováno ověření</message>
     <message xml:lang="da">Autorisering er påkrævet for at afvikle et program som en anden bruger</message>
+    <message xml:lang="de">Legitimierung ist erforderlich, um ein Programme als ein anderer Benutzer auszuführen.</message>
+    <message xml:lang="hu">Hitelesítés szükséges a program futtatásához másik felhasználóként</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić program jako inny użytkownik</message>
+    <message xml:lang="pt_BR">A autenticação é necessária para executar um programa como outro usuário</message>
+    <message xml:lang="sk">Na spustenie programu ako iný používateľ sa vyžaduje overenie totožnosti</message>
+    <message xml:lang="sv">Autentisering krävs för att köra ett program som en annan användare</message>
+    <message xml:lang="tr">Bir programı başka bir kullanıcı olarak çalıştırmak için kimlik doğrulama gerekir</message>
+    <message xml:lang="uk">Для виконання програми від імені іншого користувача слід пройти розпізнавання</message>
+    <message xml:lang="zh_CN">需要验证：作为另一个用户运行程序</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
       <allow_inactive>auth_admin</allow_inactive>

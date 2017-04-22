@@ -6,6 +6,6 @@ includedir=/usr/include
 Name: TagLib
 Description: Audio meta-data library
 Requires: 
-Version: 1.9.1
-Libs: -L/usr/lib -ltag
-Cflags: -I/usr/include/taglib 
+Version: 1.11.1
+Libs: -L${libdir} -ltag
+Cflags: -I${includedir}/taglib

@@ -88,10 +88,11 @@ sub _add_text($$)
 {
   my $line = shift;
   my $text = shift;
+  $text =~ s/\x08//g;
   if ($line->{'line_beginning'}) {
     if ($line->{'indent_length'}) {
-      $line->{'leading_spaces'} .= 
-        ' ' x ($line->{'indent_length'} - $line->{'counter'});
+      my $nspaces = $line->{'indent_length'} - $line->{'counter'};
+      ($line->{'leading_spaces'} .= ' ' x $nspaces) if $nspaces > 0;
       print STDERR "INDENT.U($line->{'counter'})\n" if ($line->{'DEBUG'});
     }
     $line->{'line_beginning'} = 0;
@@ -145,13 +146,11 @@ sub end($)
   return '';
 }
 
-# add a word and/or spaces and end of sentence.
-sub add_next($;$$$$)
+# add a word and/or end of sentence.
+sub add_next($;$$)
 {
   my $line = shift;
   my $word = shift;
-  my $space = shift;
-  my $end_sentence = shift;
   my $transparent = shift;
   $line->{'end_line_count'} = 0;
   my $result = '';
@@ -159,19 +158,20 @@ sub add_next($;$$$$)
   if (defined($word)) {
     $result .= $line->_add_text($word);
   }
-  if (defined($space)) {
-    $result .= $line->_add_text($space);
-  }
   return $result;
 }
 
-sub add_underlying_text($$)
+sub remove_end_sentence($)
 {
   my $line = shift;
-  my $underlying_text = shift;
 }
 
-sub inhibit_end_sentence($)
+sub add_end_sentence($;$)
+{
+  my $line = shift;
+}
+
+sub allow_end_sentence($)
 {
   my $line = shift;
 }
@@ -186,7 +186,6 @@ sub add_text($$)
 {
   my $line = shift;
   my $text = shift;
-  my $underlying_text = shift;
 
   $line->{'end_line_count'} = 0;
   return $line->_add_text($text);

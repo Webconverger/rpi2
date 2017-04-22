@@ -1,42 +1,53 @@
-/* gpg-error.h - Public interface to libgpg-error.               -*- c -*-
-   Copyright (C) 2003, 2004, 2010, 2013, 2014, 2015 g10 Code GmbH
-
-   This file is part of libgpg-error.
-
-   libgpg-error is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public License
-   as published by the Free Software Foundation; either version 2.1 of
-   the License, or (at your option) any later version.
-
-   libgpg-error is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with this program; if not, see <http://www.gnu.org/licenses/>.
-
-   Do not edit.  Generated from gpg-error.h.in for armv7l-unknown-linux-gnueabihf.
+/* gpg-error.h or gpgrt.h - Public interface to libgpg-error.   -*- c -*-
+ * Copyright (C) 2003-2004, 2010, 2013-2017 g10 Code GmbH
+ *
+ * This file is part of libgpg-error.
+ *
+ * libgpg-error is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * libgpg-error is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ * Do not edit.  Generated from gpg-error.h.in for:
+                 armv7l-unknown-linux-gnueabihf
  */
 
-
 #ifndef GPG_ERROR_H
-#define GPG_ERROR_H	1
+#define GPG_ERROR_H 1
+#ifndef GPGRT_H
+#define GPGRT_H 1
 
 #include <stddef.h>
 #include <stdio.h>
 #include <stdarg.h>
 
+/* The version string of this header. */
+#define GPG_ERROR_VERSION "1.27"
+#define GPGRT_VERSION     "1.27"
+
+/* The version number of this header. */
+#define GPG_ERROR_VERSION_NUMBER 0x011b00
+#define GPGRT_VERSION_NUMBER     0x011b00
+
+
 #ifdef __GNUC__
-#define GPG_ERR_INLINE __inline__
-#elif _MSC_VER >= 1300
-#define GPG_ERR_INLINE __inline
-#elif __STDC_VERSION__ >= 199901L
-#define GPG_ERR_INLINE inline
+# define GPG_ERR_INLINE __inline__
+#elif defined(_MSC_VER) && _MSC_VER >= 1300
+# define GPG_ERR_INLINE __inline
+#elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+# define GPG_ERR_INLINE inline
 #else
-#ifndef GPG_ERR_INLINE
-#define GPG_ERR_INLINE
-#endif
+# ifndef GPG_ERR_INLINE
+#  define GPG_ERR_INLINE
+# endif
 #endif
 
 #ifdef __cplusplus
@@ -334,6 +345,11 @@ typedef enum
     GPG_ERR_SEXP_BAD_HEX_CHAR = 211,
     GPG_ERR_SEXP_ODD_HEX_NUMBERS = 212,
     GPG_ERR_SEXP_BAD_OCT_CHAR = 213,
+    GPG_ERR_SUBKEYS_EXP_OR_REV = 217,
+    GPG_ERR_DB_CORRUPTED = 218,
+    GPG_ERR_SERVER_FAILED = 219,
+    GPG_ERR_NO_NAME = 220,
+    GPG_ERR_NO_KEY = 221,
     GPG_ERR_LEGACY_KEY = 222,
     GPG_ERR_REQUEST_TOO_SHORT = 223,
     GPG_ERR_REQUEST_TOO_LONG = 224,
@@ -367,6 +383,8 @@ typedef enum
     GPG_ERR_KEY_DISABLED = 252,
     GPG_ERR_KEY_ON_CARD = 253,
     GPG_ERR_INV_LOCK_OBJ = 254,
+    GPG_ERR_TRUE = 255,
+    GPG_ERR_FALSE = 256,
     GPG_ERR_ASS_GENERAL = 257,
     GPG_ERR_ASS_ACCEPT_FAILED = 258,
     GPG_ERR_ASS_CONNECT_FAILED = 259,
@@ -391,6 +409,110 @@ typedef enum
     GPG_ERR_ASS_NO_OUTPUT = 279,
     GPG_ERR_ASS_PARAMETER = 280,
     GPG_ERR_ASS_UNKNOWN_INQUIRE = 281,
+    GPG_ERR_ENGINE_TOO_OLD = 300,
+    GPG_ERR_WINDOW_TOO_SMALL = 301,
+    GPG_ERR_WINDOW_TOO_LARGE = 302,
+    GPG_ERR_MISSING_ENVVAR = 303,
+    GPG_ERR_USER_ID_EXISTS = 304,
+    GPG_ERR_NAME_EXISTS = 305,
+    GPG_ERR_DUP_NAME = 306,
+    GPG_ERR_TOO_YOUNG = 307,
+    GPG_ERR_TOO_OLD = 308,
+    GPG_ERR_UNKNOWN_FLAG = 309,
+    GPG_ERR_INV_ORDER = 310,
+    GPG_ERR_ALREADY_FETCHED = 311,
+    GPG_ERR_TRY_LATER = 312,
+    GPG_ERR_WRONG_NAME = 313,
+    GPG_ERR_SYSTEM_BUG = 666,
+    GPG_ERR_DNS_UNKNOWN = 711,
+    GPG_ERR_DNS_SECTION = 712,
+    GPG_ERR_DNS_ADDRESS = 713,
+    GPG_ERR_DNS_NO_QUERY = 714,
+    GPG_ERR_DNS_NO_ANSWER = 715,
+    GPG_ERR_DNS_CLOSED = 716,
+    GPG_ERR_DNS_VERIFY = 717,
+    GPG_ERR_DNS_TIMEOUT = 718,
+    GPG_ERR_LDAP_GENERAL = 721,
+    GPG_ERR_LDAP_ATTR_GENERAL = 722,
+    GPG_ERR_LDAP_NAME_GENERAL = 723,
+    GPG_ERR_LDAP_SECURITY_GENERAL = 724,
+    GPG_ERR_LDAP_SERVICE_GENERAL = 725,
+    GPG_ERR_LDAP_UPDATE_GENERAL = 726,
+    GPG_ERR_LDAP_E_GENERAL = 727,
+    GPG_ERR_LDAP_X_GENERAL = 728,
+    GPG_ERR_LDAP_OTHER_GENERAL = 729,
+    GPG_ERR_LDAP_X_CONNECTING = 750,
+    GPG_ERR_LDAP_REFERRAL_LIMIT = 751,
+    GPG_ERR_LDAP_CLIENT_LOOP = 752,
+    GPG_ERR_LDAP_NO_RESULTS = 754,
+    GPG_ERR_LDAP_CONTROL_NOT_FOUND = 755,
+    GPG_ERR_LDAP_NOT_SUPPORTED = 756,
+    GPG_ERR_LDAP_CONNECT = 757,
+    GPG_ERR_LDAP_NO_MEMORY = 758,
+    GPG_ERR_LDAP_PARAM = 759,
+    GPG_ERR_LDAP_USER_CANCELLED = 760,
+    GPG_ERR_LDAP_FILTER = 761,
+    GPG_ERR_LDAP_AUTH_UNKNOWN = 762,
+    GPG_ERR_LDAP_TIMEOUT = 763,
+    GPG_ERR_LDAP_DECODING = 764,
+    GPG_ERR_LDAP_ENCODING = 765,
+    GPG_ERR_LDAP_LOCAL = 766,
+    GPG_ERR_LDAP_SERVER_DOWN = 767,
+    GPG_ERR_LDAP_SUCCESS = 768,
+    GPG_ERR_LDAP_OPERATIONS = 769,
+    GPG_ERR_LDAP_PROTOCOL = 770,
+    GPG_ERR_LDAP_TIMELIMIT = 771,
+    GPG_ERR_LDAP_SIZELIMIT = 772,
+    GPG_ERR_LDAP_COMPARE_FALSE = 773,
+    GPG_ERR_LDAP_COMPARE_TRUE = 774,
+    GPG_ERR_LDAP_UNSUPPORTED_AUTH = 775,
+    GPG_ERR_LDAP_STRONG_AUTH_RQRD = 776,
+    GPG_ERR_LDAP_PARTIAL_RESULTS = 777,
+    GPG_ERR_LDAP_REFERRAL = 778,
+    GPG_ERR_LDAP_ADMINLIMIT = 779,
+    GPG_ERR_LDAP_UNAVAIL_CRIT_EXTN = 780,
+    GPG_ERR_LDAP_CONFIDENT_RQRD = 781,
+    GPG_ERR_LDAP_SASL_BIND_INPROG = 782,
+    GPG_ERR_LDAP_NO_SUCH_ATTRIBUTE = 784,
+    GPG_ERR_LDAP_UNDEFINED_TYPE = 785,
+    GPG_ERR_LDAP_BAD_MATCHING = 786,
+    GPG_ERR_LDAP_CONST_VIOLATION = 787,
+    GPG_ERR_LDAP_TYPE_VALUE_EXISTS = 788,
+    GPG_ERR_LDAP_INV_SYNTAX = 789,
+    GPG_ERR_LDAP_NO_SUCH_OBJ = 800,
+    GPG_ERR_LDAP_ALIAS_PROBLEM = 801,
+    GPG_ERR_LDAP_INV_DN_SYNTAX = 802,
+    GPG_ERR_LDAP_IS_LEAF = 803,
+    GPG_ERR_LDAP_ALIAS_DEREF = 804,
+    GPG_ERR_LDAP_X_PROXY_AUTH_FAIL = 815,
+    GPG_ERR_LDAP_BAD_AUTH = 816,
+    GPG_ERR_LDAP_INV_CREDENTIALS = 817,
+    GPG_ERR_LDAP_INSUFFICIENT_ACC = 818,
+    GPG_ERR_LDAP_BUSY = 819,
+    GPG_ERR_LDAP_UNAVAILABLE = 820,
+    GPG_ERR_LDAP_UNWILL_TO_PERFORM = 821,
+    GPG_ERR_LDAP_LOOP_DETECT = 822,
+    GPG_ERR_LDAP_NAMING_VIOLATION = 832,
+    GPG_ERR_LDAP_OBJ_CLS_VIOLATION = 833,
+    GPG_ERR_LDAP_NOT_ALLOW_NONLEAF = 834,
+    GPG_ERR_LDAP_NOT_ALLOW_ON_RDN = 835,
+    GPG_ERR_LDAP_ALREADY_EXISTS = 836,
+    GPG_ERR_LDAP_NO_OBJ_CLASS_MODS = 837,
+    GPG_ERR_LDAP_RESULTS_TOO_LARGE = 838,
+    GPG_ERR_LDAP_AFFECTS_MULT_DSAS = 839,
+    GPG_ERR_LDAP_VLV = 844,
+    GPG_ERR_LDAP_OTHER = 848,
+    GPG_ERR_LDAP_CUP_RESOURCE_LIMIT = 881,
+    GPG_ERR_LDAP_CUP_SEC_VIOLATION = 882,
+    GPG_ERR_LDAP_CUP_INV_DATA = 883,
+    GPG_ERR_LDAP_CUP_UNSUP_SCHEME = 884,
+    GPG_ERR_LDAP_CUP_RELOAD = 885,
+    GPG_ERR_LDAP_CANCELLED = 886,
+    GPG_ERR_LDAP_NO_SUCH_OPERATION = 887,
+    GPG_ERR_LDAP_TOO_LATE = 888,
+    GPG_ERR_LDAP_CANNOT_CANCEL = 889,
+    GPG_ERR_LDAP_ASSERTION_FAILED = 890,
+    GPG_ERR_LDAP_PROX_AUTH_DENIED = 891,
     GPG_ERR_USER_1 = 1024,
     GPG_ERR_USER_2 = 1025,
     GPG_ERR_USER_3 = 1026,
@@ -564,7 +686,7 @@ typedef enum
 
 /* We would really like to use bit-fields in a struct, but using
    structs as return values can cause binary compatibility issues, in
-   particular if you want to do it effeciently (also see
+   particular if you want to do it efficiently (also see
    -freg-struct-return option to GCC).  */
 typedef unsigned int gpg_error_t;
 
@@ -600,13 +722,7 @@ typedef unsigned int gpg_error_t;
 # define _GPG_ERR_CONSTRUCTOR
 #endif
 
-#if _GPG_ERR_GCC_VERSION >= 40400
-# define _GPGRT_GCC_A_PRINTF(f, a) __attribute__ ((format(__gnu_printf__,f,a)))
-#elif _GPG_ERR_GCC_VERSION >= 20500
-# define _GPGRT_GCC_A_PRINTF(f, a) __attribute__ ((format(printf,f,a)))
-#else
-# define _GPGRT_GCC_A_PRINTF(f, a)
-#endif
+#define GPGRT_GCC_VERSION  _GPG_ERR_GCC_VERSION
 
 #if _GPG_ERR_GCC_VERSION >= 29200
 # define _GPGRT__RESTRICT __restrict__
@@ -614,6 +730,122 @@ typedef unsigned int gpg_error_t;
 # define _GPGRT__RESTRICT
 #endif
 
+/* The noreturn attribute.  */
+#if _GPG_ERR_GCC_VERSION >= 20500
+# define GPGRT_ATTR_NORETURN   __attribute__ ((noreturn))
+#else
+# define GPGRT_ATTR_NORETURN
+#endif
+
+/* The printf attributes.  */
+#if _GPG_ERR_GCC_VERSION >= 40400
+# define GPGRT_ATTR_PRINTF(f, a) \
+                    __attribute__ ((format(__gnu_printf__,f,a)))
+# define GPGRT_ATTR_NR_PRINTF(f, a) \
+                    __attribute__ ((noreturn, format(__gnu_printf__,f,a)))
+#elif _GPG_ERR_GCC_VERSION >= 20500
+# define GPGRT_ATTR_PRINTF(f, a) \
+                    __attribute__ ((format(printf,f,a)))
+# define GPGRT_ATTR_NR_PRINTF(f, a) \
+                    __attribute__ ((noreturn, format(printf,f,a)))
+#else
+# define GPGRT_ATTR_PRINTF(f, a)
+# define GPGRT_ATTR_NR_PRINTF(f, a)
+#endif
+#if _GPG_ERR_GCC_VERSION >= 20800
+# define GPGRT_ATTR_FORMAT_ARG(a)  __attribute__ ((__format_arg__ (a)))
+#else
+# define GPGRT_ATTR_FORMAT_ARG(a)
+#endif
+
+/* The sentinel attribute.  */
+#if _GPG_ERR_GCC_VERSION >= 40000
+# define GPGRT_ATTR_SENTINEL(a)  __attribute__ ((sentinel(a)))
+#else
+# define GPGRT_ATTR_SENTINEL(a)
+#endif
+
+/* The used and unused attributes.
+   I am not sure since when the unused attribute is really supported.
+   In any case it it only needed for gcc versions which print a
+   warning.  Thus let us require gcc >= 3.5.  */
+#if _GPG_ERR_GCC_VERSION >= 40000
+# define GPGRT_ATTR_USED  __attribute__ ((used))
+#else
+# define GPGRT_ATTR_USED
+#endif
+#if _GPG_ERR_GCC_VERSION >= 30500
+# define GPGRT_ATTR_UNUSED  __attribute__ ((unused))
+#else
+# define GPGRT_ATTR_UNUSED
+#endif
+
+/* The deprecated attribute.  */
+#if _GPG_ERR_GCC_VERSION >= 30100
+# define GPGRT_ATTR_DEPRECATED  __attribute__ ((__deprecated__))
+#else
+# define GPGRT_ATTR_DEPRECATED
+#endif
+
+/* The pure attribute.  */
+#if _GPG_ERR_GCC_VERSION >= 29600
+# define GPGRT_ATTR_PURE  __attribute__ ((__pure__))
+#else
+# define GPGRT_ATTR_PURE
+#endif
+
+/* The malloc attribute.  */
+#if _GPG_ERR_GCC_VERSION >= 30200
+# define GPGRT_ATTR_MALLOC  __attribute__ ((__malloc__))
+#else
+# define GPGRT_ATTR_MALLOC
+#endif
+
+/* A macro defined if a GCC style __FUNCTION__ macro is available.  */
+#undef GPGRT_HAVE_MACRO_FUNCTION
+#if _GPG_ERR_GCC_VERSION >= 20500
+# define GPGRT_HAVE_MACRO_FUNCTION 1
+#endif
+
+/* A macro defined if the pragma GCC push_options is available.  */
+#undef GPGRT_HAVE_PRAGMA_GCC_PUSH
+#if _GPG_ERR_GCC_VERSION >= 40400
+# define GPGRT_HAVE_PRAGMA_GCC_PUSH 1
+#endif
+
+/* Detect LeakSanitizer (LSan) support for GCC and Clang based on
+ * whether AddressSanitizer (ASAN) is enabled via -fsanitize=address).
+ * Note that -fsanitize=leak just affect the linker options which
+ * cannot be detected here.  In that case you have to define the
+ * GPGRT_HAVE_LEAK_SANITIZER macro manually.  */
+#ifdef __GNUC__
+# ifdef __SANITIZE_ADDRESS__
+#  define GPGRT_HAVE_LEAK_SANITIZER
+# elif defined(__has_feature)
+#  if __has_feature(address_sanitizer)
+#   define GPGRT_HAVE_LEAK_SANITIZER
+#  endif
+# endif
+#endif
+
+
+/* The new name for the inline macro.  */
+#define GPGRT_INLINE GPG_ERR_INLINE
+
+#ifdef GPGRT_HAVE_LEAK_SANITIZER
+# include <sanitizer/lsan_interface.h>
+#endif
+
+/* Mark heap objects as non-leaked memory. */
+static GPGRT_INLINE void
+gpgrt_annotate_leaked_object (const void *p)
+{
+#ifdef GPGRT_HAVE_LEAK_SANITIZER
+  __lsan_ignore_object(p);
+#else
+  (void)p;
+#endif
+}
 
 
 /* Initialization function.  */
@@ -637,6 +869,9 @@ void gpg_err_deinit (int mode);
 
 /* Register blocking system I/O clamping functions.  */
 void gpgrt_set_syscall_clamp (void (*pre)(void), void (*post)(void));
+
+/* Get current I/O clamping functions.  */
+void gpgrt_get_syscall_clamp (void (**r_pre)(void), void (**r_post)(void));
 
 /* Register a custom malloc/realloc/free function.  */
 void gpgrt_set_alloc_func  (void *(*f)(void *a, size_t n));
@@ -732,12 +967,6 @@ void gpg_err_set_errno (int err);
 /* Return or check the version.  Both functions are identical.  */
 const char *gpgrt_check_version (const char *req_version);
 const char *gpg_error_check_version (const char *req_version);
-
-/* The version string of this header. */
-#define GPG_ERROR_VERSION "1.18"
-
-/* The version number of this header. */
-#define GPG_ERROR_VERSION_NUMBER 0x011200
 
 /* System specific type definitions.  */
 #include <sys/types.h>
@@ -891,7 +1120,7 @@ enum gpgrt_syshd_types
     GPGRT_SYSHD_NONE = 0,  /* No system handle available.                   */
     GPGRT_SYSHD_FD = 1,    /* A file descriptor as returned by open().      */
     GPGRT_SYSHD_SOCK = 2,  /* A socket as returned by socket().             */
-    GPGRT_SYSHD_RVID = 3,  /* A rendevous id (see libassuan's gpgcedev.c).  */
+    GPGRT_SYSHD_RVID = 3,  /* A rendezvous id (see libassuan's gpgcedev.c).  */
     GPGRT_SYSHD_HANDLE = 4 /* A HANDLE object (Windows).                    */
   };
 
@@ -913,6 +1142,32 @@ typedef struct _gpgrt_syshd es_syshd_t;
 #define ES_SYSHD_SOCK   GPGRT_SYSHD_SOCK
 #define ES_SYSHD_RVID   GPGRT_SYSHD_RVID
 #define ES_SYSHD_HANDLE GPGRT_SYSHD_HANDLE
+#endif
+
+/* The object used with gpgrt_poll.  */
+struct _gpgrt_poll_s
+{
+  gpgrt_stream_t stream;
+  unsigned int want_read:1;
+  unsigned int want_write:1;
+  unsigned int want_oob:1;
+  unsigned int want_rdhup:1;
+  unsigned int _reserv1:4;
+  unsigned int got_read:1;
+  unsigned int got_write:1;
+  unsigned int got_oob:1;
+  unsigned int got_rdhup:1;
+  unsigned int _reserv2:4;
+  unsigned int got_err:1;
+  unsigned int got_hup:1;
+  unsigned int got_nval:1;
+  unsigned int _reserv3:4;
+  unsigned int ignore:1;
+  unsigned int user:8;       /* For application use.  */
+};
+typedef struct _gpgrt_poll_s gpgrt_poll_t;
+#ifdef GPGRT_ENABLE_ES_MACROS
+typedef struct _gpgrt_poll_s es_poll_t;
 #endif
 
 gpgrt_stream_t gpgrt_fopen (const char *_GPGRT__RESTRICT path,
@@ -1049,22 +1304,22 @@ void gpgrt_free (void *a);
 
 int gpgrt_fprintf (gpgrt_stream_t _GPGRT__RESTRICT stream,
                    const char *_GPGRT__RESTRICT format, ...)
-                   _GPGRT_GCC_A_PRINTF(2,3);
+                   GPGRT_ATTR_PRINTF(2,3);
 int gpgrt_fprintf_unlocked (gpgrt_stream_t _GPGRT__RESTRICT stream,
                             const char *_GPGRT__RESTRICT format, ...)
-                            _GPGRT_GCC_A_PRINTF(2,3);
+                            GPGRT_ATTR_PRINTF(2,3);
 
 int gpgrt_printf (const char *_GPGRT__RESTRICT format, ...)
-                  _GPGRT_GCC_A_PRINTF(1,2);
+                  GPGRT_ATTR_PRINTF(1,2);
 int gpgrt_printf_unlocked (const char *_GPGRT__RESTRICT format, ...)
-                           _GPGRT_GCC_A_PRINTF(1,2);
+                           GPGRT_ATTR_PRINTF(1,2);
 
 int gpgrt_vfprintf (gpgrt_stream_t _GPGRT__RESTRICT stream,
                     const char *_GPGRT__RESTRICT format, va_list ap)
-                    _GPGRT_GCC_A_PRINTF(2,0);
+                    GPGRT_ATTR_PRINTF(2,0);
 int gpgrt_vfprintf_unlocked (gpgrt_stream_t _GPGRT__RESTRICT stream,
                              const char *_GPGRT__RESTRICT format, va_list ap)
-                             _GPGRT_GCC_A_PRINTF(2,0);
+                             GPGRT_ATTR_PRINTF(2,0);
 
 int gpgrt_setvbuf (gpgrt_stream_t _GPGRT__RESTRICT stream,
                    char *_GPGRT__RESTRICT buf, int mode, size_t size);
@@ -1072,6 +1327,10 @@ void gpgrt_setbuf (gpgrt_stream_t _GPGRT__RESTRICT stream,
                    char *_GPGRT__RESTRICT buf);
 
 void gpgrt_set_binary (gpgrt_stream_t stream);
+int  gpgrt_set_nonblock (gpgrt_stream_t stream, int onoff);
+int  gpgrt_get_nonblock (gpgrt_stream_t stream);
+
+int gpgrt_poll (gpgrt_poll_t *fdlist, unsigned int nfds, int timeout);
 
 gpgrt_stream_t gpgrt_tmpfile (void);
 
@@ -1083,20 +1342,20 @@ void gpgrt_fname_set (gpgrt_stream_t stream, const char *fname);
 const char *gpgrt_fname_get (gpgrt_stream_t stream);
 
 int gpgrt_asprintf (char **r_buf, const char * _GPGRT__RESTRICT format, ...)
-                    _GPGRT_GCC_A_PRINTF(2,3);
+                    GPGRT_ATTR_PRINTF(2,3);
 int gpgrt_vasprintf (char **r_buf, const char * _GPGRT__RESTRICT format,
                      va_list ap)
-                     _GPGRT_GCC_A_PRINTF(2,0);
+                     GPGRT_ATTR_PRINTF(2,0);
 char *gpgrt_bsprintf (const char * _GPGRT__RESTRICT format, ...)
-                      _GPGRT_GCC_A_PRINTF(1,2);
+                      GPGRT_ATTR_PRINTF(1,2);
 char *gpgrt_vbsprintf (const char * _GPGRT__RESTRICT format, va_list ap)
-                       _GPGRT_GCC_A_PRINTF(1,0);
+                       GPGRT_ATTR_PRINTF(1,0);
 int gpgrt_snprintf (char *buf, size_t bufsize,
                     const char * _GPGRT__RESTRICT format, ...)
-                    _GPGRT_GCC_A_PRINTF(3,4);
+                    GPGRT_ATTR_PRINTF(3,4);
 int gpgrt_vsnprintf (char *buf,size_t bufsize,
                      const char * _GPGRT__RESTRICT format, va_list arg_ptr)
-                     _GPGRT_GCC_A_PRINTF(3,0);
+                     GPGRT_ATTR_PRINTF(3,0);
 
 
 #ifdef GPGRT_ENABLE_ES_MACROS
@@ -1167,6 +1426,9 @@ int gpgrt_vsnprintf (char *buf,size_t bufsize,
 # define es_setvbuf           gpgrt_setvbuf
 # define es_setbuf            gpgrt_setbuf
 # define es_set_binary        gpgrt_set_binary
+# define es_set_nonblock      gpgrt_set_nonblock
+# define es_get_nonblock      gpgrt_get_nonblock
+# define es_poll              gpgrt_poll
 # define es_tmpfile           gpgrt_tmpfile
 # define es_opaque_set        gpgrt_opaque_set
 # define es_opaque_get        gpgrt_opaque_get
@@ -1177,10 +1439,21 @@ int gpgrt_vsnprintf (char *buf,size_t bufsize,
 # define es_bsprintf          gpgrt_bsprintf
 # define es_vbsprintf         gpgrt_vbsprintf
 #endif /*GPGRT_ENABLE_ES_MACROS*/
+
+/* Base64 decode functions.  */
+
+struct _gpgrt_b64state;
+typedef struct _gpgrt_b64state *gpgrt_b64state_t;
+
+gpgrt_b64state_t gpgrt_b64dec_start (const char *title);
+gpg_error_t gpgrt_b64dec_proc (gpgrt_b64state_t state,
+                               void *buffer, size_t length, size_t *r_nbytes);
+gpg_error_t gpgrt_b64dec_finish (gpgrt_b64state_t state);
 
 #ifdef __cplusplus
 }
 #endif
+#endif	/* GPGRT_H */
 #endif	/* GPG_ERROR_H */
 /*
 Local Variables:

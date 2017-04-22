@@ -7,7 +7,7 @@ includedir=${prefix}/include
 
 Name: Libinput
 Description: Input device library
-Version: 0.13.0
+Version: 1.7.0
 Cflags: -I${includedir}
 Libs: -L${libdir} -linput
 Libs.private: -lm -lrt

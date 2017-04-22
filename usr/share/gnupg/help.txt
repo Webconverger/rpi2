@@ -14,7 +14,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, see <http://www.gnu.org/licenses/>.
+# along with this program; if not, see <https://www.gnu.org/licenses/>.
 
 
 # Note that this help file needs to be UTF-8 encoded.  When looking
@@ -207,7 +207,7 @@ N  to change the name.
 C  to change the comment.
 E  to change the email address.
 O  to continue with key generation.
-Q  to to quit the key generation.
+Q  to quit the key generation.
 .
 
 .gpg.keygen.sub.okay
@@ -312,7 +312,7 @@ self-signatures will be advanced by one second.
 .gpg.passphrase.enter
 # (keep a leading empty line)
 
-Please enter the passhrase; this is a secret sentence.
+Please enter the passphrase; this is a secret sentence.
 .
 
 
@@ -337,7 +337,7 @@ file (which is shown in brackets) will be used.
 
 .gpg.ask_revocation_reason.code
 # revoke.c (ask_revocation_reason)
-You should specify a reason for the certification.  Depending on the
+You should specify a reason for the revocation.  Depending on the
 context you have the ability to choose from this list:
   "Key has been compromised"
       Use this if you have a reason to believe that unauthorized persons
@@ -358,8 +358,19 @@ revocation certificate.  Please keep this text concise.
 An empty line ends the text.
 .
 
-
-
+.gpg.tofu.conflict
+# tofu.c
+TOFU has detected another key with the same (or a very similar) email
+address.  It might be that the user created a new key.  In this case,
+you can safely trust the new key (but, confirm this by asking the
+person).  However, it could also be that the key is a forgery or there
+is an active Man-in-the-Middle (MitM) attack.  In this case, you
+should mark the key as being bad, so that it is untrusted.  Marking a
+key as being untrusted means that any signatures will be considered
+bad and attempts to encrypt to the key will be flagged.  If you are
+unsure and can't currently check, you should select either accept once
+or reject once.
+.
 
 .gpgsm.root-cert-not-trusted
 # This text gets displayed by the audit log if
@@ -373,7 +384,7 @@ your system administrator whether you should trust this certificate.
 
 
 .gpgsm.crl-problem
-# This tex is displayed by the audit log for problems with
+# This text is displayed by the audit log for problems with
 # the CRL or OCSP checking.
 Depending on your configuration a problem retrieving the CRL or
 performing an OCSP check occurred.  There are a great variety of

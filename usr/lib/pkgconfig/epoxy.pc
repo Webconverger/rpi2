@@ -1,11 +1,15 @@
 prefix=/usr
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+epoxy_has_glx=1
+epoxy_has_egl=1
+epoxy_has_wgl=0
 
 Name: epoxy
 Description: epoxy GL dispatch Library
-Version: 1.2
+Version: 1.4.1
 Cflags: -I${includedir}
 Libs: -L${libdir} -lepoxy
 Libs.private: -ldl

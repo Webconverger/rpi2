@@ -3,8 +3,8 @@
 prefix=/usr/bin
 
 major_version=3
-minor_version=18
-patch_version=0
+minor_version=30
+patch_version=1
 
 usage()
 {

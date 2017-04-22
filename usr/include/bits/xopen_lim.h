@@ -1,4 +1,4 @@
-/* Copyright (C) 1996-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1996-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -77,7 +77,9 @@
 
 /* Maximum number of bytes in N-to-1 collation mapping.  We have no
    limit.  */
-#define NL_NMAX		INT_MAX
+#if defined __USE_GNU || !defined __USE_XOPEN2K8
+# define NL_NMAX	INT_MAX
+#endif
 
 /* Maximum set number.  We have no limit.  */
 #define NL_SETMAX	INT_MAX

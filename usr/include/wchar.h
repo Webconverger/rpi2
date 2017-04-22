@@ -1,4 +1,4 @@
-/* Copyright (C) 1995-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1995-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -24,7 +24,8 @@
 
 #if !defined __need_mbstate_t && !defined __need_wint_t
 # define _WCHAR_H 1
-# include <features.h>
+# define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+# include <bits/libc-header-start.h>
 #endif
 
 #ifdef _WCHAR_H
@@ -145,26 +146,29 @@ __USING_NAMESPACE_STD(tm)
 __BEGIN_NAMESPACE_STD
 /* Copy SRC to DEST.  */
 extern wchar_t *wcscpy (wchar_t *__restrict __dest,
-			const wchar_t *__restrict __src) __THROW;
+			const wchar_t *__restrict __src)
+     __THROW __nonnull ((1, 2));
+
 /* Copy no more than N wide-characters of SRC to DEST.  */
 extern wchar_t *wcsncpy (wchar_t *__restrict __dest,
 			 const wchar_t *__restrict __src, size_t __n)
-     __THROW;
+     __THROW __nonnull ((1, 2));
 
 /* Append SRC onto DEST.  */
 extern wchar_t *wcscat (wchar_t *__restrict __dest,
-			const wchar_t *__restrict __src) __THROW;
+			const wchar_t *__restrict __src)
+     __THROW __nonnull ((1, 2));
 /* Append no more than N wide-characters of SRC onto DEST.  */
 extern wchar_t *wcsncat (wchar_t *__restrict __dest,
 			 const wchar_t *__restrict __src, size_t __n)
-     __THROW;
+     __THROW __nonnull ((1, 2));
 
 /* Compare S1 and S2.  */
 extern int wcscmp (const wchar_t *__s1, const wchar_t *__s2)
-     __THROW __attribute_pure__;
+     __THROW __attribute_pure__ __nonnull ((1, 2));
 /* Compare N wide-characters of S1 and S2.  */
 extern int wcsncmp (const wchar_t *__s1, const wchar_t *__s2, size_t __n)
-     __THROW __attribute_pure__;
+     __THROW __attribute_pure__ __nonnull ((1, 2));
 __END_NAMESPACE_STD
 
 #ifdef __USE_XOPEN2K8
@@ -571,10 +575,12 @@ extern wchar_t *wcpcpy (wchar_t *__restrict __dest,
 extern wchar_t *wcpncpy (wchar_t *__restrict __dest,
 			 const wchar_t *__restrict __src, size_t __n)
      __THROW;
+#endif
 
 
 /* Wide character I/O functions.  */
 
+#if defined __USE_XOPEN2K8 || __GLIBC_USE (LIB_EXT2)
 /* Like OPEN_MEMSTREAM, but the stream is wide oriented and produces
    a wide character string.  */
 extern __FILE *open_wmemstream (wchar_t **__bufloc, size_t *__sizeloc) __THROW;

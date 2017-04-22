@@ -2,5 +2,5 @@ sdkdir=/usr/include/xorg
 
 Name: synaptics
 Description: X.Org synaptics input driver.
-Version: 1.8.2
+Version: 1.9.0
 Cflags: -I${sdkdir}

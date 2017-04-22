@@ -1,4 +1,4 @@
-/* Copyright (C) 2004-2014 Free Software Foundation, Inc.
+/* Copyright (C) 2004-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -19,8 +19,10 @@
 # error "Never use <bits/string3.h> directly; include <string.h> instead."
 #endif
 
+#if !__GNUC_PREREQ (5,0)
 __warndecl (__warn_memset_zero_len,
 	    "memset used with constant zero length parameter; this could be due to transposed parameters");
+#endif
 
 #ifndef __cplusplus
 /* XXX This is temporarily.  We should not redefine any of the symbols
@@ -75,26 +77,29 @@ __NTH (mempcpy (void *__restrict __dest, const void *__restrict __src,
 __fortify_function void *
 __NTH (memset (void *__dest, int __ch, size_t __len))
 {
+  /* GCC-5.0 and newer implements these checks in the compiler, so we don't
+     need them here.  */
+#if !__GNUC_PREREQ (5,0)
   if (__builtin_constant_p (__len) && __len == 0
       && (!__builtin_constant_p (__ch) || __ch != 0))
     {
       __warn_memset_zero_len ();
       return __dest;
     }
+#endif
   return __builtin___memset_chk (__dest, __ch, __len, __bos0 (__dest));
 }
 
 #ifdef __USE_MISC
-__fortify_function void
-__NTH (bcopy (const void *__src, void *__dest, size_t __len))
-{
-  (void) __builtin___memmove_chk (__dest, __src, __len, __bos0 (__dest));
-}
+# include <bits/strings_fortified.h>
+
+void __explicit_bzero_chk (void *__dest, size_t __len, size_t __destlen)
+  __THROW __nonnull ((1));
 
 __fortify_function void
-__NTH (bzero (void *__dest, size_t __len))
+__NTH (explicit_bzero (void *__dest, size_t __len))
 {
-  (void) __builtin___memset_chk (__dest, '\0', __len, __bos0 (__dest));
+  __explicit_bzero_chk (__dest, __len, __bos0 (__dest));
 }
 #endif
 
@@ -120,7 +125,7 @@ __NTH (strncpy (char *__restrict __dest, const char *__restrict __src,
   return __builtin___strncpy_chk (__dest, __src, __len, __bos (__dest));
 }
 
-// XXX We have no corresponding builtin yet.
+/* XXX We have no corresponding builtin yet.  */
 extern char *__stpncpy_chk (char *__dest, const char *__src, size_t __n,
 			    size_t __destlen) __THROW;
 extern char *__REDIRECT_NTH (__stpncpy_alias, (char *__dest, const char *__src,
@@ -130,7 +135,7 @@ __fortify_function char *
 __NTH (stpncpy (char *__dest, const char *__src, size_t __n))
 {
   if (__bos (__dest) != (size_t) -1
-      && (!__builtin_constant_p (__n) || __n <= __bos (__dest)))
+      && (!__builtin_constant_p (__n) || __n > __bos (__dest)))
     return __stpncpy_chk (__dest, __src, __n, __bos (__dest));
   return __stpncpy_alias (__dest, __src, __n);
 }

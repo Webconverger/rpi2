@@ -110,6 +110,7 @@
 #define AUDIT_SECCOMP		1326	/* Secure Computing event */
 #define AUDIT_PROCTITLE		1327	/* Proctitle emit event */
 #define AUDIT_FEATURE_CHANGE	1328	/* audit log listing feature changes */
+#define AUDIT_REPLACE		1329	/* Replace auditd if this packet unanswerd */
 
 #define AUDIT_AVC		1400	/* SE Linux avc denial or grant */
 #define AUDIT_SELINUX_ERR	1401	/* Internal SE Linux Errors */
@@ -129,6 +130,8 @@
 #define AUDIT_MAC_IPSEC_EVENT	1415	/* Audit an IPSec event */
 #define AUDIT_MAC_UNLBL_STCADD	1416	/* NetLabel: add a static label */
 #define AUDIT_MAC_UNLBL_STCDEL	1417	/* NetLabel: del a static label */
+#define AUDIT_MAC_CALIPSO_ADD	1418	/* NetLabel: add CALIPSO DOI entry */
+#define AUDIT_MAC_CALIPSO_DEL	1419	/* NetLabel: del CALIPSO DOI entry */
 
 #define AUDIT_FIRST_KERN_ANOM_MSG   1700
 #define AUDIT_LAST_KERN_ANOM_MSG    1799
@@ -251,6 +254,7 @@
 #define AUDIT_OBJ_LEV_LOW	22
 #define AUDIT_OBJ_LEV_HIGH	23
 #define AUDIT_LOGINUID_SET	24
+#define AUDIT_SESSIONID	25	/* Session ID */
 
 				/* These are ONLY useful when checking
 				 * at syscall exit time (AUDIT_AT_EXIT). */
@@ -266,6 +270,7 @@
 #define AUDIT_OBJ_UID	109
 #define AUDIT_OBJ_GID	110
 #define AUDIT_FIELD_COMPARE	111
+#define AUDIT_EXE	112
 
 #define AUDIT_ARG0      200
 #define AUDIT_ARG1      (AUDIT_ARG0+1)
@@ -322,9 +327,21 @@ enum {
 #define AUDIT_STATUS_BACKLOG_LIMIT	0x0010
 #define AUDIT_STATUS_BACKLOG_WAIT_TIME	0x0020
 
-#define AUDIT_VERSION_BACKLOG_LIMIT	1
-#define AUDIT_VERSION_BACKLOG_WAIT_TIME	2
-#define AUDIT_VERSION_LATEST AUDIT_VERSION_BACKLOG_WAIT_TIME
+#define AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT	0x00000001
+#define AUDIT_FEATURE_BITMAP_BACKLOG_WAIT_TIME	0x00000002
+#define AUDIT_FEATURE_BITMAP_EXECUTABLE_PATH	0x00000004
+#define AUDIT_FEATURE_BITMAP_EXCLUDE_EXTEND	0x00000008
+#define AUDIT_FEATURE_BITMAP_SESSIONID_FILTER	0x00000010
+#define AUDIT_FEATURE_BITMAP_ALL (AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT | \
+				  AUDIT_FEATURE_BITMAP_BACKLOG_WAIT_TIME | \
+				  AUDIT_FEATURE_BITMAP_EXECUTABLE_PATH | \
+				  AUDIT_FEATURE_BITMAP_EXCLUDE_EXTEND | \
+				  AUDIT_FEATURE_BITMAP_SESSIONID_FILTER)
+
+/* deprecated: AUDIT_VERSION_* */
+#define AUDIT_VERSION_LATEST 		AUDIT_FEATURE_BITMAP_ALL
+#define AUDIT_VERSION_BACKLOG_LIMIT	AUDIT_FEATURE_BITMAP_BACKLOG_LIMIT
+#define AUDIT_VERSION_BACKLOG_WAIT_TIME	AUDIT_FEATURE_BITMAP_BACKLOG_WAIT_TIME
 
 				/* Failure-to-log actions */
 #define AUDIT_FAIL_SILENT	0
@@ -376,6 +393,9 @@ enum {
 #define AUDIT_ARCH_SHEL64	(EM_SH|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
 #define AUDIT_ARCH_SPARC	(EM_SPARC)
 #define AUDIT_ARCH_SPARC64	(EM_SPARCV9|__AUDIT_ARCH_64BIT)
+#define AUDIT_ARCH_TILEGX	(EM_TILEGX|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
+#define AUDIT_ARCH_TILEGX32	(EM_TILEGX|__AUDIT_ARCH_LE)
+#define AUDIT_ARCH_TILEPRO	(EM_TILEPRO|__AUDIT_ARCH_LE)
 #define AUDIT_ARCH_X86_64	(EM_X86_64|__AUDIT_ARCH_64BIT|__AUDIT_ARCH_LE)
 
 #define AUDIT_PERM_EXEC		1
@@ -406,7 +426,10 @@ struct audit_status {
 	__u32		backlog_limit;	/* waiting messages limit */
 	__u32		lost;		/* messages lost */
 	__u32		backlog;	/* messages waiting in queue */
-	__u32		version;	/* audit api version number */
+	union {
+		__u32	version;	/* deprecated: audit api version num */
+		__u32	feature_bitmap;	/* bitmap of kernel audit features */
+	};
 	__u32		backlog_wait_time;/* message queue wait timeout */
 };
 

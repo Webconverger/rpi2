@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -22,7 +22,8 @@
 #ifndef	_STRING_H
 #define	_STRING_H	1
 
-#include <features.h>
+#define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+#include <bits/libc-header-start.h>
 
 __BEGIN_DECLS
 
@@ -31,12 +32,8 @@ __BEGIN_DECLS
 #define	__need_NULL
 #include <stddef.h>
 
-/* Provide correct C++ prototypes, and indicate this to the caller.  This
-   requires a compatible C++ standard library.  As a heuristic, we provide
-   these when the compiler indicates full conformance with C++98 or later,
-   and for older GCC versions that are known to provide a compatible
-   libstdc++.  */
-#if defined __cplusplus && (__cplusplus >= 199711L || __GNUC_PREREQ (4, 4))
+/* Tell the caller that we provide correct C++ prototypes.  */
+#if defined __cplusplus && __GNUC_PREREQ (4, 4)
 # define __CORRECT_ISO_CPP_STRING_H_PROTO
 #endif
 
@@ -157,20 +154,19 @@ extern size_t strxfrm (char *__restrict __dest,
 __END_NAMESPACE_STD
 
 #ifdef __USE_XOPEN2K8
-/* The following functions are equivalent to the both above but they
-   take the locale they use for the collation as an extra argument.
-   This is not standardsized but something like will come.  */
 # include <xlocale.h>
 
-/* Compare the collated forms of S1 and S2 using rules from L.  */
+/* Compare the collated forms of S1 and S2, using sorting rules from L.  */
 extern int strcoll_l (const char *__s1, const char *__s2, __locale_t __l)
      __THROW __attribute_pure__ __nonnull ((1, 2, 3));
-/* Put a transformation of SRC into no more than N bytes of DEST.  */
+/* Put a transformation of SRC into no more than N bytes of DEST,
+   using sorting rules from L.  */
 extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
 			 __locale_t __l) __THROW __nonnull ((2, 4));
 #endif
 
-#if defined __USE_XOPEN_EXTENDED || defined __USE_XOPEN2K8
+#if (defined __USE_XOPEN_EXTENDED || defined __USE_XOPEN2K8	\
+     || __GLIBC_USE (LIB_EXT2))
 /* Duplicate S, returning an identical malloc'd string.  */
 extern char *strdup (const char *__s)
      __THROW __attribute_malloc__ __nonnull ((1));
@@ -179,7 +175,7 @@ extern char *strdup (const char *__s)
 /* Return a malloc'd copy of at most N bytes of STRING.  The
    resultant string is terminated even if no null terminator
    appears before STRING[N].  */
-#if defined __USE_XOPEN2K8
+#if defined __USE_XOPEN2K8 || __GLIBC_USE (LIB_EXT2)
 extern char *strndup (const char *__string, size_t __n)
      __THROW __attribute_malloc__ __nonnull ((1));
 #endif
@@ -457,6 +453,10 @@ extern void bcopy (const void *__src, void *__dest, size_t __n)
 /* Set N bytes of S to 0.  */
 extern void bzero (void *__s, size_t __n) __THROW __nonnull ((1));
 
+/* As bzero, but the compiler will not delete a call to this
+   function, even if S is dead after the call.  */
+extern void explicit_bzero (void *__s, size_t __n) __THROW __nonnull ((1));
+
 /* Compare N bytes of S1 and S2 (same as memcmp).  */
 extern int bcmp (const void *__s1, const void *__s2, size_t __n)
      __THROW __attribute_pure__ __nonnull ((1, 2));
@@ -606,7 +606,7 @@ extern char *basename (const char *__filename) __THROW __nonnull ((1));
 #endif
 
 
-#if defined __GNUC__ && __GNUC__ >= 2
+#if __GNUC_PREREQ (3,4)
 # if defined __OPTIMIZE__ && !defined __OPTIMIZE_SIZE__ \
      && !defined __NO_INLINE__ && !defined __cplusplus
 /* When using GNU CC we provide some optimized versions of selected
@@ -637,6 +637,23 @@ extern char *basename (const char *__filename) __THROW __nonnull ((1));
 # if __USE_FORTIFY_LEVEL > 0 && defined __fortify_function
 /* Functions with security checks.  */
 #  include <bits/string3.h>
+# endif
+#endif
+
+#if defined __USE_GNU && defined __OPTIMIZE__ \
+    && defined __extern_always_inline && __GNUC_PREREQ (3,2)
+# if !defined _FORCE_INLINES && !defined _HAVE_STRING_ARCH_mempcpy
+
+#define mempcpy(dest, src, n) __mempcpy_inline (dest, src, n)
+#define __mempcpy(dest, src, n) __mempcpy_inline (dest, src, n)
+
+__extern_always_inline void *
+__mempcpy_inline (void *__restrict __dest,
+		  const void *__restrict __src, size_t __n)
+{
+  return (char *) memcpy (__dest, __src, __n) + __n;
+}
+
 # endif
 #endif
 

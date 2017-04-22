@@ -1,12 +1,21 @@
 /* DO NOT EDIT! GENERATED AUTOMATICALLY! */
 /* Elementary Unicode string functions.
-   Copyright (C) 2001-2002, 2005-2015 Free Software Foundation, Inc.
+   Copyright (C) 2001-2002, 2005-2016 Free Software Foundation, Inc.
 
-   This program is free software: you can redistribute it and/or modify it
-   under the terms of the GNU Lesser General Public License as published
-   by the Free Software Foundation; either version 3 of the License, or
-   (at your option) any later version.
+   This program is free software: you can redistribute it and/or
+   modify it under the terms of either:
 
+     * the GNU Lesser General Public License as published by the Free
+       Software Foundation; either version 3 of the License, or (at your
+       option) any later version.
+
+   or
+
+     * the GNU General Public License as published by the Free
+       Software Foundation; either version 2 of the License, or (at your
+       option) any later version.
+
+   or both in parallel, as here.
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -201,15 +210,11 @@ u32_mbtouc_unsafe (ucs4_t *puc,
 {
   uint32_t c = *s;
 
-#  if CONFIG_UNICODE_SAFETY
   if (c < 0xd800 || (c >= 0xe000 && c < 0x110000))
-#  endif
     *puc = c;
-#  if CONFIG_UNICODE_SAFETY
   else
     /* invalid multibyte character */
     *puc = 0xfffd;
-#  endif
   return 1;
 }
 # endif

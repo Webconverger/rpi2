@@ -5,7 +5,7 @@ includedir=/usr/include/nss
 
 Name: NSS
 Description: Network Security Services
-Version: 3.18
-Requires: nspr >= 4.10.7
-Libs: -lssl3 -lsmime3 -lnss3 -lnssutil3
+Version: 3.30.1
+Requires: nspr >= 4.12
+Libs: -L${libdir} -lssl3 -lsmime3 -lnss3 -lnssutil3
 Cflags: -I${includedir}

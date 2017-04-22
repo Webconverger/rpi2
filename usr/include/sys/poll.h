@@ -1,5 +1,5 @@
 /* Compatibility definitions for System V `poll' interface.
-   Copyright (C) 1994-2014 Free Software Foundation, Inc.
+   Copyright (C) 1994-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -27,8 +27,7 @@
 /* Get the __sigset_t definition.  */
 # include <bits/sigset.h>
 /* Get the timespec definition.  */
-# define __need_timespec
-# include <time.h>
+#include <bits/types/struct_timespec.h>
 #endif
 
 

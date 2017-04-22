@@ -12,9 +12,10 @@ DefaultDependencies=no
 Conflicts=shutdown.target
 After=systemd-modules-load.service
 Before=sysinit.target shutdown.target
-ConditionPathIsReadWrite=/proc/sys/
+ConditionPathIsReadWrite=/proc/sys/net/
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/lib/systemd/systemd-sysctl
+TimeoutSec=90s

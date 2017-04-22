@@ -1,6 +1,6 @@
 /* Definitions of constants and data structure for POSIX 1003.1b-1993
    scheduling interface.
-   Copyright (C) 1996-2014 Free Software Foundation, Inc.
+   Copyright (C) 1996-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -60,6 +60,7 @@
 				      force CLONE_PTRACE on this clone.  */
 # define CLONE_CHILD_SETTID 0x01000000 /* Store TID in userlevel buffer in
 					  the child.  */
+# define CLONE_NEWCGROUP    0x02000000	/* New cgroup namespace.  */
 # define CLONE_NEWUTS	0x04000000	/* New utsname group.  */
 # define CLONE_NEWIPC	0x08000000	/* New ipcs.  */
 # define CLONE_NEWUSER	0x10000000	/* New user namespace.  */
@@ -115,7 +116,7 @@ struct __sched_param
 # define __NCPUBITS	(8 * sizeof (__cpu_mask))
 
 /* Type for array elements in 'cpu_set_t'.  */
-typedef unsigned long int __cpu_mask;
+typedef __CPU_MASK_TYPE __cpu_mask;
 
 /* Basic access functions.  */
 # define __CPUELT(cpu)	((cpu) / __NCPUBITS)

@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -34,6 +34,15 @@ __BEGIN_DECLS
    numbers and flag bits for `open', `fcntl', et al.  */
 #include <bits/fcntl.h>
 
+/* Detect if open needs mode as a third argument (or for openat as a fourth
+   argument).  */
+#ifdef __O_TMPFILE
+# define __OPEN_NEEDS_MODE(oflag) \
+  (((oflag) & O_CREAT) != 0 || ((oflag) & __O_TMPFILE) == __O_TMPFILE)
+#else
+# define __OPEN_NEEDS_MODE(oflag) (((oflag) & O_CREAT) != 0)
+#endif
+
 /* POSIX.1-2001 specifies that these types are defined by <fcntl.h>.
    Earlier POSIX standards permitted any type ending in `_t' to be defined
    by any POSIX header, so we don't conditionalize the definitions here.  */
@@ -62,9 +71,10 @@ typedef __pid_t pid_t;
 #endif
 
 /* For XPG all symbols from <sys/stat.h> should also be available.  */
+#ifdef __USE_XOPEN2K8
+# include <bits/types/struct_timespec.h>
+#endif
 #if defined __USE_XOPEN || defined __USE_XOPEN2K8
-# define __need_timespec
-# include <time.h>
 # include <bits/stat.h>
 
 # define S_IFMT		__S_IFMT
@@ -160,8 +170,9 @@ typedef __pid_t pid_t;
 extern int fcntl (int __fd, int __cmd, ...);
 
 /* Open FILE and return a new file descriptor for it, or -1 on error.
-   OFLAG determines the type of access used.  If O_CREAT is on OFLAG,
-   the third argument is taken as a `mode_t', the mode of the created file.
+   OFLAG determines the type of access used.  If O_CREAT or O_TMPFILE is set
+   in OFLAG, the third argument is taken as a `mode_t', the mode of the
+   created file.
 
    This function is a cancellation point and therefore not marked with
    __THROW.  */

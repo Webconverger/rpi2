@@ -27,7 +27,7 @@
 (defsystem gpgme
     :description "GnuPG Made Easy."
     :author "g10 Code GmbH"
-    :version "1.5.3"
+    :version "1.9.0"
     :licence "GPL"
     :depends-on ("cffi" "gpg-error")
     :components ((:file "gpgme-package")

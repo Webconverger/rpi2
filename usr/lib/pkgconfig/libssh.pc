@@ -1,6 +1,6 @@
 Name: libssh
 Description: The SSH Library
-Version: 0.6.4
+Version: 0.7.5
 Libs: -L/usr/lib -lssh
 Cflags: -I/usr/include
 

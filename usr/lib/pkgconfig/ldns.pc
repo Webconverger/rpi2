@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: ldns
+Description: Library for DNS programming
+URL: http://www.nlnetlabs.nl/projects/ldns
+Version: 1.7.0
+Requires: 
+Libs: -L${libdir} -lldns
+Libs.private: -Wl,-O1,--sort-common,--as-needed,-z,relro
+Cflags: -I${includedir} 

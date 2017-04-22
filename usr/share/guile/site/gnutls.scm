@@ -1,5 +1,5 @@
 ;;; GnuTLS --- Guile bindings for GnuTLS.
-;;; Copyright (C) 2007-2012, 2014, 2015 Free Software Foundation, Inc.
+;;; Copyright (C) 2007-2012, 2014, 2015, 2016 Free Software Foundation, Inc.
 ;;;
 ;;; GnuTLS is free software; you can redistribute it and/or
 ;;; modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,6 @@
            ;; certificate credentials
            certificate-credentials? make-certificate-credentials
            set-certificate-credentials-dh-parameters!
-           set-certificate-credentials-rsa-export-parameters!
            set-certificate-credentials-x509-key-files!
            set-certificate-credentials-x509-trust-file!
            set-certificate-credentials-x509-crl-file!
@@ -79,10 +78,6 @@
            set-session-dh-prime-bits!
            make-dh-parameters dh-parameters?
            pkcs3-import-dh-parameters pkcs3-export-dh-parameters
-
-           ;; RSA
-           make-rsa-parameters rsa-parameters?
-           pkcs1-import-rsa-parameters pkcs1-export-rsa-parameters
 
            ;; X.509
            x509-certificate? x509-private-key?
@@ -416,6 +411,12 @@
            ;; enum values
            openpgp-certificate-format/raw
            openpgp-certificate-format/base64))
+
+(cond-expand
+  ((not guile-2)                                  ;silly 1.8
+   (define-macro (eval-when foo a b)
+     `(begin ,a ,b)))
+  (else #t))
 
 (eval-when (expand load eval)
   (define %libdir

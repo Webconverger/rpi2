@@ -1,6 +1,8 @@
+# $Id: HTML.pm 7353 2016-09-10 13:03:54Z gavin $
 # HTML.pm: output tree as HTML.
 #
-# Copyright 2011, 2012 Free Software Foundation, Inc.
+# Copyright 2011, 2012, 2013, 2014, 2015,
+# 2016 Free Software Foundation, Inc.
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,6 +29,7 @@ use Texinfo::Common;
 use Texinfo::Convert::Texinfo;
 use Texinfo::Convert::Text;
 use Texinfo::Convert::Unicode;
+use Texinfo::Convert::NodeNameNormalization;
 
 use Carp qw(cluck);
 
@@ -53,7 +56,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @EXPORT = qw(
 );
 
-$VERSION = '5.1.90';
+$VERSION = '6.2';
 
 # misc commands that are of use for formatting.
 my %formatting_misc_commands = %Texinfo::Convert::Text::formatting_misc_commands;
@@ -101,7 +104,7 @@ $composition_context_commands{'float'} = 1;
 
 my %pre_class_types;
 
-# FIXME allow customization?
+# FIXME allow customization? (also in DocBook)
 my %upper_case_commands = ( 'sc' => 1 );
 
 sub in_math($)
@@ -213,6 +216,8 @@ sub _get_target($$)
   if ($self->{'targets'}->{$command}) {
     $target = $self->{'targets'}->{$command};
   } elsif ($command->{'cmdname'}
+    # This should only happen for @*heading*, root_commands targets should 
+    # already be set.
             and $sectioning_commands{$command->{'cmdname'}} 
             and !$root_commands{$command->{'cmdname'}}) {
     $target = $self->_new_sectioning_command_target($command);
@@ -297,7 +302,6 @@ sub command_filename($$)
       return $element->{'filename'};
     }
   }
-  #print STDERR "No filename ".Texinfo::Parser::_print_command_args_texi($command);
   return undef;
 }
 
@@ -503,7 +507,7 @@ sub command_text($$;$)
       } else {
         if (!$command->{'extra'}->{'misc_content'}) {
           cluck "No misc_content: "
-            .Texinfo::Parser::_print_current($command);
+            .Texinfo::Common::_print_current($command);
         }
         if (defined($command->{'number'})
             and ($self->get_conf('NUMBER_SECTIONS')
@@ -1051,11 +1055,10 @@ my %css_map = (
      'pre.display'            => 'font-family: inherit',
      'pre.smalldisplay'       => 'font-family: inherit; font-size: smaller',
      'pre.smallexample'       => 'font-size: smaller',
-     'span.sansserif'         => 'font-family:sans-serif; font-weight:normal',
-     'span.roman'         => 'font-family:serif; font-weight:normal',
-     'span.nocodebreak'   => 'white-space:nowrap',
-     'span.nolinebreak'   => 'white-space:nowrap',
-     'kbd'                => 'font-style:oblique',
+     'span.sansserif'     => 'font-family: sans-serif; font-weight: normal',
+     'span.roman'         => 'font-family: initial; font-weight: normal',
+     'span.nolinebreak'   => 'white-space: nowrap',
+     'kbd'                => 'font-style: oblique',
 );
 
 $css_map{'pre.format'} = $css_map{'pre.display'};
@@ -1072,22 +1075,18 @@ foreach my $preformatted_command (keys(%preformatted_commands_context)) {
 $pre_class_commands{'menu'} = 'menu-preformatted';
 $pre_class_types{'menu_comment'} = 'menu-comment';
 
-my %indented_block_commands;
+my %indented_preformatted_commands;
 foreach my $indented_format ('example', 'display', 'lisp') {
-  $indented_block_commands{$indented_format} = 1;
-  $indented_block_commands{"small$indented_format"} = 1;
+  $indented_preformatted_commands{$indented_format} = 1;
+  $indented_preformatted_commands{"small$indented_format"} = 1;
 
   $css_map{"div.$indented_format"} = 'margin-left: 3.2em';
   $css_map{"div.small$indented_format"} = 'margin-left: 3.2em';
 }
 
-foreach my $indented_format ('indentedblock') {
-  $indented_block_commands{$indented_format} = 1;
-  $indented_block_commands{"small$indented_format"} = 1;
-
-  $css_map{"div.$indented_format"} = 'margin-left: 3.2em';
-  $css_map{"div.small$indented_format"} = 'margin-left: 3.2em; font-size: smaller';
-}
+$css_map{"blockquote.indentedblock"} = 'margin-right: 0em';
+$css_map{"blockquote.smallindentedblock"}
+  = 'margin-right: 0em; font-size: smaller';
 
 # types that are in code style in the default case
 my %default_code_types = (
@@ -1138,7 +1137,6 @@ my %kept_misc_commands;
 my @informative_global_commands = ('contents', 'shortcontents',
   'summarycontents', 'allowcodebreaks', 'documentlanguage',
   'footnotestyle', 'documentencoding', 
-  'setcontentsaftertitlepage', 'setshortcontentsaftertitlepage',
   'xrefautomaticsectiontitle', 'deftypefnnewline');
 # taken from global
 # 'documentencoding'
@@ -1170,7 +1168,7 @@ foreach my $misc_command (keys(%misc_commands)) {
 }
 
 foreach my $ignored_brace_commands ('caption', 'shortcaption', 
-  'hyphenation') {
+  'hyphenation', 'sortas') {
   #$ignored_commands{$ignored_brace_commands} = 1;
   $default_commands_conversion{$ignored_brace_commands} = undef;
 }
@@ -1310,6 +1308,8 @@ $style_attribute_commands{'normal'} = {
       'samp'        => 'samp',
       'sc'          => 'small',
       'strong'      => 'strong',
+      'sub'         => 'sub',
+      'sup'         => 'sup',
       't'           => 'tt',
       'var'         => 'var',
       'verb'        => 'tt',
@@ -1375,7 +1375,6 @@ sub _convert_style_command($$$$)
   if (!defined($text)) {
     # happens with bogus @-commands without argument, like @strong something
     #cluck "text not defined in _convert_style_command";
-    #print STDERR Texinfo::Parser::_print_current($command);
     return '';
   }
   # handle the effect of kbdinputstyle
@@ -1479,17 +1478,48 @@ sub _convert_explained_command($$$$)
   my $args = shift;
 
   my $with_explanation;
+  my $explanation_result;
   my $explanation_string;
+  my $normalized_type
+    = Texinfo::Convert::NodeNameNormalization::normalize_node(
+    {'contents' =>
+      $command->{'extra'}->{'brace_command_contents'}->[0]});
+
   if ($args->[1] and defined($args->[1]->{'string'}) 
                  and $args->[1]->{'string'} =~ /\S/) {
     $with_explanation = 1;
     $explanation_string = $args->[1]->{'string'};
-  }
-  if ($command->{'extra'}->{'explanation_contents'}) {
+
+    # Convert the expanation of the acronym.  Must do this before we save
+    # the explanation for the future, otherwise we get infinite recursion
+    # for recursively-defined acronyms.
+    $explanation_result = $self->convert_tree( $args->[1]->{'tree'} );
+
+    $self->{'explained_commands'}->{$cmdname}->{$normalized_type} =
+       $command->{'extra'}->{'brace_command_contents'}->[1];
+  } elsif ($command->{'extra'}->{'explanation_contents'}) {
+    if (@{$command->{'extra'}->{'explanation_contents'}}) {
+      $explanation_string = $self->convert_tree_new_formatting_context(
+        {'type' => '_string', 
+         'contents' => $command->{'extra'}->{'explanation_contents'}},
+        $cmdname, $cmdname);
+    }
+  } elsif ($self->{'explained_commands'}->{$cmdname}->{$normalized_type}) {
     $explanation_string = $self->convert_tree_new_formatting_context(
       {'type' => '_string', 
-       'contents' => $command->{'extra'}->{'explanation_contents'}},
-      $cmdname, $cmdname);
+       'contents' => $self->{'explained_commands'}
+                       ->{$cmdname}->{$normalized_type}},
+    $cmdname, $cmdname);
+
+    $command->{'extra'}->{'explanation_contents'} 
+       = $self->{'explained_commands'}->{$cmdname}->{$normalized_type};
+  } else {
+    # Avoid ever giving an explanation for this element.  This prevents
+    # infinite recursion for a recursively-defined acronym, when an
+    # @acronym within the explanation could end up referring to the
+    # containing @acronym.
+
+    $command->{'extra'}->{'explanation_contents'} = [];
   }
   my $result = $args->[0]->{'normal'};
   if (!$self->in_string()) {
@@ -1504,8 +1534,10 @@ sub _convert_explained_command($$$$)
     $result = $self->convert_tree($self->gdt('{explained_string} ({explanation})',
           {'explained_string' => {'type' => '_converted',
                    'text' => $result},
-           'explanation' => $args->[1]->{'tree'} }));
+           'explanation' => {'type' => '_converted',
+                   'text' => $explanation_result}}));
   }
+
   return $result;
 }
 
@@ -1748,7 +1780,6 @@ sub _convert_key_command($$$$)
   my $text = $args->[0]->{'normal'};
   if (!defined($text)) {
     # happens with bogus @-commands without argument, like @strong something
-    #print STDERR Texinfo::Parser::_print_current($command);
     return '';
   }
   if ($self->in_string()) {
@@ -1781,7 +1812,6 @@ sub _convert_indicateurl_command($$$$)
   my $text = $args->[0]->{'normal'};
   if (!defined($text)) {
     # happens with bogus @-commands without argument, like @strong something
-    #print STDERR Texinfo::Parser::_print_current($command);
     return '';
   }
   if (!$self->in_string()) {
@@ -1807,7 +1837,6 @@ sub _convert_ctrl_command($$$$)
   my $text = $args->[0]->{'normal'};
   if (!defined($text)) {
     # happens with bogus @-commands without argument, like @strong something
-    #print STDERR Texinfo::Parser::_print_current($command);
     return '';
   }
   return $self->protect_text('^') .$text;
@@ -1825,13 +1854,30 @@ sub _convert_titlefont_command($$$$)
   my $text = $args->[0]->{'normal'};
   if (!defined($text)) {
     # happens with bogus @-commands without argument, like @strong something
-    #print STDERR Texinfo::Parser::_print_current($command);
     return '';
   }
   return &{$self->{'format_heading_text'}}($self, 'titlefont', $text, 0, $command);
 }
-
 $default_commands_conversion{'titlefont'} = \&_convert_titlefont_command;
+
+sub _convert_U_command($$$$)
+{
+  my $self = shift;
+  my $cmdname = shift;
+  my $command = shift;
+  my $args = shift;
+
+  my $arg = $args->[0]->{'normal'};
+  my $res;
+  if (defined($arg) && $arg) {
+    # checks on the value already done in Parser, just output it here.
+    $res = "&#x$arg;";
+  } else {
+    $res = '';
+  }
+  return $res;
+}
+$default_commands_conversion{'U'} = \&_convert_U_command;
 
 sub _default_comment($$) {
   my $self = shift;
@@ -2348,7 +2394,6 @@ sub _convert_raw_command($$$$)
   my $content = shift;
 
   if ($cmdname eq $self->{'output_format'}) {
-    chomp ($content);
     return $content;
   }
   $self->line_warn(sprintf($self->__("raw format %s is not converted"), 
@@ -2403,8 +2448,15 @@ foreach my $command (keys(%inline_commands)) {
   $default_commands_conversion{$command} = \&_convert_inline_command;
 }
 
+sub _indent_with_table ($)
+{
+  my $content = shift;
+
+  return '<table><tr><td>&nbsp;</td><td>'.$content."</td></tr></table>\n";
+}
+
 my $html_menu_entry_index = 0;
-sub _convert_preformatted_or_indented_commands($$$$)
+sub _convert_preformatted_command($$$$)
 {
   my $self = shift;
   my $cmdname = shift;
@@ -2417,8 +2469,8 @@ sub _convert_preformatted_or_indented_commands($$$$)
 
   if ($content ne '' and !$self->in_string()) {
     if ($self->get_conf('COMPLEX_FORMAT_IN_TABLE')) {
-      if ($indented_block_commands{$cmdname}) {
-        return '<table><tr><td>&nbsp;</td><td>'.$content."</td></tr></table>\n";
+      if ($indented_preformatted_commands{$cmdname}) {
+        return _indent_with_table ($content);
       } else {
         return $content."\n";
       }
@@ -2430,11 +2482,34 @@ sub _convert_preformatted_or_indented_commands($$$$)
   }
 }
 
-foreach my $preformatted_or_indented_command (keys(%preformatted_commands), 
-                                      'indentedblock', 'smallindentedblock') {
-  $default_commands_conversion{$preformatted_or_indented_command} 
-  = \&_convert_preformatted_or_indented_commands;
+foreach my $preformatted_command (keys(%preformatted_commands)) {
+  $default_commands_conversion{$preformatted_command} 
+    = \&_convert_preformatted_command;
 }
+
+sub _convert_indented_command($$$$)
+{
+  my $self = shift;
+  my $cmdname = shift;
+  my $command = shift;
+  my $content = shift;
+
+  if ($content ne '' and !$self->in_string()) {
+    if ($self->get_conf('COMPLEX_FORMAT_IN_TABLE')) {
+      return _indent_with_table ($content);
+    } else {
+      return $self->_attribute_class('blockquote', $cmdname).">\n"
+             .$content.'</blockquote>'."\n";
+    }
+  } else {
+    return $content;
+  }
+}
+
+$default_commands_conversion{'indentedblock'} = \&_convert_indented_command;
+$default_commands_conversion{'smallindentedblock'}
+  = \&_convert_indented_command;
+
 
 sub _convert_verbatim_command($$$$)
 {
@@ -2482,6 +2557,7 @@ sub _convert_command_noop($$$$)
   return $content;
 }
 
+$default_commands_conversion{'raggedright'} = \&_convert_command_noop;
 $default_commands_conversion{'flushleft'} = \&_convert_command_noop;
 $default_commands_conversion{'flushright'} = \&_convert_command_noop;
 $default_commands_conversion{'group'} = \&_convert_command_noop;
@@ -2769,8 +2845,6 @@ sub _convert_float_command($$$$$)
   } else {
     $prepended_text = '';
   }
-  #print STDERR "Float $prepended_text: caption $caption ".
-  #  Texinfo::Parser::_print_current ($caption)."\n";
   
   if ($caption and $caption_text eq '') {
     $caption_text = $self->convert_tree_new_formatting_context(
@@ -2863,10 +2937,16 @@ sub _convert_enumerate_command($$$$)
   if ($self->in_string()) {
     return $content;
   }
-  if ($content ne '') {
-    return "<ol>\n" . $content . "</ol>\n";
-  } else {
+  if ($content eq '') {
     return '';
+  }
+  if ($command->{'extra'}{'enumerate_specification'}
+      and $command->{'extra'}{'enumerate_specification'} =~ /^\d*$/
+      and $command->{'extra'}{'enumerate_specification'} ne '1') {
+    return "<ol start=\"$command->{'extra'}{'enumerate_specification'}\">\n"
+           . $content . "</ol>\n";
+  } else {
+    return "<ol>\n" . $content . "</ol>\n";
   }
 }
 
@@ -3488,8 +3568,7 @@ sub _convert_informative_command($$$$)
       and ($cmdname eq 'contents' or $cmdname eq 'shortcontents')
       and $self->get_conf($cmdname)
       and $self->{'structuring'} and $self->{'structuring'}->{'sectioning_root'}
-      and scalar(@{$self->{'structuring'}->{'sections_list'}}) > 1
-      and ! $self->get_conf('set'.$cmdname.'aftertitlepage')) {
+      and scalar(@{$self->{'structuring'}->{'sections_list'}}) > 1) {
     return $self->_contents_inline_element($cmdname, $command);
   }
   if ($cmdname eq 'documentlanguage') {
@@ -3503,6 +3582,9 @@ foreach my $informative_command (@informative_global_commands) {
     = \&_convert_informative_command;
 }
 
+# Keys are tree element types, values are function references to convert
+# elements of that type.  Can be overridden with
+# Texinfo::Config::texinfo_types_conversion.
 my %default_types_conversion;
 
 sub default_types_conversion($$)
@@ -3513,15 +3595,12 @@ sub default_types_conversion($$)
 }
 
 # Ignored commands
-
-#my %ignored_types;
 foreach my $type ('empty_line_after_command', 'preamble',
             'preamble_before_setfilename',
             'empty_spaces_after_command', 'spaces_at_end',
             'empty_spaces_before_argument', 'empty_spaces_before_paragraph',
             'empty_spaces_after_close_brace', 
             'empty_space_at_end_def_bracketed') {
-  #$ignored_types{$type} = 1;
   $default_types_conversion{$type} = undef;
 }
 
@@ -3610,7 +3689,7 @@ sub _convert_preformatted_type($$$$)
 
   if (!defined($content)) {
     cluck "content undef in _convert_preformatted_type " 
-       .Texinfo::Parser::_print_current($command);
+       .Texinfo::Common::_print_current($command);
   }
 
   my $current = $command;
@@ -3648,6 +3727,7 @@ sub _convert_preformatted_type($$$$)
   if ($self->in_string()) {
     return $content;
   }
+  $content =~ s/^\n/\n\n/; # a newline immediately after a <pre> is ignored.
   my $result = $self->_attribute_class('pre', $pre_class).">".$content."</pre>";
 
   # this may happen with lines without textual content 
@@ -3722,7 +3802,7 @@ sub _convert_text($$$)
       $text =~ s/\x{1F}/--/g;
     }
   }
-  $text = $self->_protect_space_codebreak($text);
+  $text = $self->_protect_space($text);
   return $text;
 }
 
@@ -3941,7 +4021,7 @@ sub _convert_def_line_type($$$$)
   }
 
   my $index_label = '';
-  my $index_id = $self->command_id ($command);
+  my $index_id = $self->command_id($command);
   if (defined($index_id) and $index_id ne '' and !@{$self->{'multiple_pass'}}) {
     $index_label = "<a name=\"$index_id\"></a>";
   }
@@ -4250,27 +4330,6 @@ sub _convert_root_text_type($$$$)
 
 $default_types_conversion{'text_root'} = \&_convert_root_text_type;
 
-sub _contents_shortcontents_in_title($)
-{
-  my $self = shift;
-
-  my $result = '';
-
-  if ($self->{'structuring'} and $self->{'structuring'}->{'sectioning_root'}
-      and scalar(@{$self->{'structuring'}->{'sections_list'}}) > 1) {
-    foreach my $command ('contents', 'shortcontents') {
-      if ($self->get_conf($command)
-          and $self->get_conf('set'.$command.'aftertitlepage')) {
-        my $contents_text = $self->_contents_inline_element($command, undef);
-        if ($contents_text ne '') {
-          $result .= $contents_text . $self->get_conf('DEFAULT_RULE')."\n";
-        }
-      }
-    }
-  }
-  return $result;
-}
-
 # Convert @titlepage.  Falls back to simpletitle.
 sub _default_titlepage($)
 {
@@ -4290,7 +4349,6 @@ sub _default_titlepage($)
   my $result = '';
   $result .= $titlepage_text.$self->get_conf('DEFAULT_RULE')."\n"
     if (defined($titlepage_text));
-  $result .= $self->_contents_shortcontents_in_title();
   return $result;
 }
 
@@ -4310,12 +4368,15 @@ sub _print_title($)
                                             0, {'cmdname' => 'settitle',
                      'contents' => $self->{'simpletitle_tree'}->{'contents'}});
       }
-      $result .= $self->_contents_shortcontents_in_title();
     }
   }
   return $result;
 }
 
+# Function for converting the top-level elements in the conversion: a section 
+# or a node.  $ELEMENT was created in this module (in _prepare_elements), with 
+# type 'element' (it's not a tree element created by the parser).  $CONTENT
+# is the contents of the node/section, already converted.
 sub _convert_element_type($$$$)
 {
   my $self = shift;
@@ -4323,12 +4384,6 @@ sub _convert_element_type($$$$)
   my $element = shift;
   my $content = shift;
 
-  #print STDERR "GGGGGGGG $element $element->{'parent'} $element->{'parent'}->{'type'}\n";
-  #print STDERR "$element->{'extra'}->{'special_element'}\n"
-  #   if ($element->{'extra'}->{'special_element'});
-  #if (!defined($element->{'parent'})) {
-  #  print STDERR "NO PARENT ".Texinfo::Parser::_print_current($element)."\n";
-  #}
   if ($self->in_string()) {
     if (defined($content)) {
       return $content;
@@ -4363,8 +4418,9 @@ sub _convert_element_type($$$$)
     $result .= &{$self->{'format_heading_text'}}($self, $class.'-heading', 
                        $heading, $level)."\n";
 
-    my $special_element_body .= &{$self->{'format_special_element_body'}}($self, 
-                                                 $special_element, $element);
+    my $special_element_body .= &{$self->{'format_special_element_body'}}
+                                    ($self, $special_element, $element);
+
     # This may happen with footnotes in regions that are not expanded,
     # like @copying or @titlepage
     if ($special_element_body eq '') {
@@ -4504,6 +4560,7 @@ sub _new_document_context($$)
           };
 }
 
+# Functions accessed with e.g. 'format_heading_text' for 'heading_text'.
 my %default_formatting_references = (
      'heading_text' => \&_default_heading_text,
      'comment' => \&_default_comment,
@@ -4552,6 +4609,78 @@ sub _complete_commands_formatting($$)
   }
 }
 
+my %htmlxref_entries = (
+ 'node' => [ 'node', 'section', 'chapter', 'mono' ],
+ 'section' => [ 'section', 'chapter','node', 'mono' ],
+ 'chapter' => [ 'chapter', 'section', 'node', 'mono' ],
+ 'mono' => [ 'mono', 'chapter', 'section', 'node' ],
+);
+
+sub _parse_htmlxref_files($$)
+{
+  my $self = shift;
+  my $files = shift;
+  my $htmlxref;
+
+  foreach my $file (@$files) {
+    print STDERR "html refs config file: $file\n" if ($self->get_conf('DEBUG'));
+    unless (open (HTMLXREF, $file)) {
+      $self->document_warn(
+        sprintf($self->__("could not open html refs config file %s: %s"),
+          $file, $!));
+      next;
+    }
+    my $line_nr = 0;
+    my %variables;
+    while (my $hline = <HTMLXREF>) {
+      my $line = $hline;
+      $line_nr++;
+      next if $hline =~ /^\s*#/;
+      #$hline =~ s/[#]\s.*//;
+      $hline =~ s/^\s*//;
+      next if $hline =~ /^\s*$/;
+      chomp ($hline);
+      if ($hline =~ s/^\s*(\w+)\s*=\s*//) {
+        # handle variables
+        my $var = $1;
+        my $re = join '|', map { quotemeta $_ } keys %variables;
+        $hline =~ s/\$\{($re)\}/defined $variables{$1} ? $variables{$1} 
+                                                       : "\${$1}"/ge;
+        $variables{$var} = $hline;
+        next;
+      }
+      my @htmlxref = split /\s+/, $hline;
+      my $manual = shift @htmlxref;
+      my $split_or_mono = shift @htmlxref;
+      #print STDERR "$split_or_mono $Texi2HTML::Config::htmlxref_entries{$split_or_mono} $line_nr\n";
+      if (!defined($split_or_mono)) {
+        $self->file_line_warn($self->__("missing type"), $file, $line_nr);
+        next;
+      } elsif (!defined($htmlxref_entries{$split_or_mono})) {
+        $self->file_line_warn(sprintf($self->__("unrecognized type: %s"), 
+                               $split_or_mono), $file, $line_nr);
+        next;
+      }
+      my $href = shift @htmlxref;
+      next if (exists($htmlxref->{$manual}->{$split_or_mono}));
+
+      if (defined($href)) { # substitute 'variables'
+        my $re = join '|', map { quotemeta $_ } keys %variables;
+        $href =~ s/\$\{($re)\}/defined $variables{$1} ? $variables{$1} 
+                                                      : "\${$1}"/ge;
+        $href =~ s/\/*$// if ($split_or_mono ne 'mono');
+      }
+      $htmlxref->{$manual}->{$split_or_mono} = $href;
+    }
+    if (!close (HTMLXREF)) {
+      $self->document_warn(sprintf($self->__(
+                       "error on closing html refs config file %s: %s"),
+                             $file, $!));
+    }
+  }
+  return $htmlxref;
+}
+
 sub converter_initialize($)
 {
   my $self = shift;
@@ -4568,8 +4697,8 @@ sub converter_initialize($)
 
   $self->{'htmlxref'} = {};
   if ($self->{'htmlxref_files'}) {
-    $self->{'htmlxref'} = Texinfo::Common::parse_htmlxref_files($self, 
-                                                  $self->{'htmlxref_files'});
+    $self->{'htmlxref'} = _parse_htmlxref_files($self,
+                                                $self->{'htmlxref_files'});
   }
 
   foreach my $type (keys(%default_types_conversion)) {
@@ -4901,21 +5030,10 @@ sub _prepare_css($)
   $self->{'css_rule_lines'} = \@css_rule_lines;
 }
 
-sub _id_to_filename($$)
-{
-  my $self = shift;
-  my $id = shift;
-  return substr($id, 0, $self->get_conf('BASEFILENAME_LENGTH'));
-}
-
 sub _node_id_file($$)
 {
   my $self = shift;
   my $node_info = shift;
-
-  my $no_unidecode;
-  $no_unidecode = 1 if (defined($self->get_conf('USE_UNIDECODE'))
-                        and !$self->get_conf('USE_UNIDECODE'));
 
   my ($target, $id);
   my $normalized = $node_info->{'normalized'};
@@ -4932,39 +5050,21 @@ sub _node_id_file($$)
     ($target, $id) = &$Texinfo::Config::node_target_name($node_info,
                                                          $target, $id);
   }
-  my $filename;
-  if (defined($node_info->{'normalized'})) { 
-    if ($self->get_conf('TRANSLITERATE_FILE_NAMES')) {
-      $filename = Texinfo::Convert::NodeNameNormalization::transliterate_texinfo(
-       {'contents' => $node_info->{'node_content'}},
-            $no_unidecode);
-    } else {
-      $filename = $node_info->{'normalized'};
-    }
-  } else {
-    $filename = '';
-  }
-  return ($self->_id_to_filename($filename), $target, $id);
+
+  my $filename = $self->_node_filename($node_info);
+
+  return ($filename, $target, $id);
 }
 
 sub _new_sectioning_command_target($$)
 {
   my $self = shift;
   my $command = shift;
-  my $no_unidecode;
 
-  $no_unidecode = 1 if (defined($self->get_conf('USE_UNIDECODE')) 
-                        and !$self->get_conf('USE_UNIDECODE'));
+  my ($normalized_name, $filename) 
+    = $self->_sectioning_command_normalized_filename($command);
 
-  my $filename = Texinfo::Convert::NodeNameNormalization::transliterate_texinfo(
-       {'contents' => $command->{'extra'}->{'misc_content'}},
-                $no_unidecode);
-
-  my $target_base = _normalized_to_id($filename);
-  $filename = $self->_id_to_filename($filename);
-  $filename .= '.'.$self->get_conf('EXTENSION') 
-    if (defined($self->get_conf('EXTENSION')) 
-      and $self->get_conf('EXTENSION') ne '');
+  my $target_base = _normalized_to_id($normalized_name);
   if ($target_base !~ /\S/ and $command->{'cmdname'} eq 'top' 
       and defined($self->{'misc_elements_targets'}->{'Top'})) {
     $target_base = $self->{'misc_elements_targets'}->{'Top'};
@@ -5129,36 +5229,6 @@ sub _set_root_commands_targets_node_files($$)
   }
 }
 
-sub _set_element_file($$$)
-{
-  my $self = shift;
-  my $element = shift;
-  my $filename = shift;
-
-  if (!defined($filename)) {
-    cluck("_set_element_file: filename not defined\n");
-  }
-  if ($self->get_conf('CASE_INSENSITIVE_FILENAMES')) {
-    if (exists($self->{'filenames'}->{lc($filename)})) {
-      if ($self->get_conf('DEBUG')) {
-        print STDERR "Reusing ".$self->{'filenames'}->{lc($filename)}
-                     ." for $filename\n";
-      }
-      $filename = $self->{'filenames'}->{lc($filename)};
-    } else {
-      $self->{'filenames'}->{lc($filename)} = $filename;
-    }
-  }
-  $element->{'filename'} = $filename;
-  if (defined($self->{'destination_directory'}) 
-      and $self->{'destination_directory'} ne '') {
-    $element->{'out_filename'} = 
-      File::Spec->catfile($self->{'destination_directory'}, $filename);
-  } else {
-    $element->{'out_filename'} = $filename;
-  }
-}
-
 sub _get_element($$;$);
 
 # If $find_container is set, the element that holds the command is found,
@@ -5216,36 +5286,6 @@ sub _get_element($$;$)
       return ($element, $root_command);
     }
   }
-}
-
-sub _top_node_filename($)
-{
-  my $self = shift;
-
-  my $top_node_filename;
-  if (defined($self->get_conf('TOP_FILE')) 
-      and $self->get_conf('TOP_FILE') ne '') {
-    $top_node_filename = $self->get_conf('TOP_FILE');
-  } else {
-    if (defined($self->get_conf('TOP_NODE_FILE'))) {
-      $top_node_filename = $self->get_conf('TOP_NODE_FILE');
-    } else {
-      # TOP_NODE_FILE is set in the default case.
-      # If not the manual name is used.
-      $top_node_filename = $self->{'document_name'};
-    }
-    if (defined($top_node_filename)) {
-      my $top_node_extension;
-      if ($self->get_conf('NODE_FILENAMES')) {
-        $top_node_extension = $self->get_conf('NODE_FILE_EXTENSION');
-      } else {
-        $top_node_extension = $self->get_conf('EXTENSION');
-      }
-      $top_node_filename .= '.'.$top_node_extension 
-        if (defined($top_node_extension) and $top_node_extension ne '');
-    }
-  }
-  return $top_node_filename;
 }
 
 sub _set_pages_files($$)
@@ -5391,6 +5431,9 @@ sub _set_pages_files($$)
   }
 }
 
+# $ROOT is a parsed Texinfo tree.  Return a list of the "elements" we need to
+# output in the HTML file(s).  Each "element" is what can go in one HTML file,
+# such as the content between @node lines in the Texinfo source.
 sub _prepare_elements($$)
 {
   my $self = shift;
@@ -5448,9 +5491,7 @@ sub _prepare_special_elements($$)
     foreach my $cmdname ('contents', 'shortcontents') {
       my $type = $contents_command_element_name{$cmdname};
       if ($self->get_conf($cmdname)) {
-        if ($self->get_conf('INLINE_CONTENTS') 
-           or ($self->get_conf('set'.$cmdname.'aftertitlepage'))) {
-        } else {
+        if (not $self->get_conf('INLINE_CONTENTS')) {
           $do_special{$type} = 1;
         }
       }
@@ -5562,11 +5603,7 @@ sub _prepare_contents_elements($)
       my $type = $contents_command_element_name{$cmdname};
       if ($self->get_conf($cmdname)) {
         my $default_filename;
-        if ($self->get_conf('set'.$cmdname.'aftertitlepage')) {
-          if ($self->{'elements'}) {
-            $default_filename = $self->{'elements'}->[0]->{'filename'};
-          }
-        } elsif ($self->get_conf('INLINE_CONTENTS')) {
+        if ($self->get_conf('INLINE_CONTENTS')) {
           if ($self->{'extra'} and $self->{'extra'}->{$cmdname}) {
             foreach my $command(@{$self->{'extra'}->{$cmdname}}) {
               my ($element, $root_command) 
@@ -5650,7 +5687,7 @@ sub _prepare_global_targets($$)
   } elsif ($node_top) {
     my $element_top = $node_top->{'parent'};
     if (!$element_top) {
-      die "No parent for node_top: ".Texinfo::Parser::_print_current($node_top);
+      die "No parent for node_top: ".Texinfo::Common::_print_current($node_top);
     }
     $self->{'global_target_elements'}->{'Top'} = $element_top;
   } else {
@@ -5764,8 +5801,6 @@ sub _htmlxref($$)
   return $self->{'htmlxref'}->{$file};
 }
 
-my %htmlxref_entries = %Texinfo::Common::htmlxref_entries;
-
 sub _external_node_href($$$$)
 {
   my $self = shift;
@@ -5773,11 +5808,21 @@ sub _external_node_href($$$$)
   my $filename = shift;
   my $link_command = shift;
   
+  # This only overrides an implicit pointer to (dir) as the Top node's Up.
+  # It has no effect if a pointer is explicitly specified,
+  # or if implicit pointers aren't being created (e.g., just a Top node).
   if ($external_node->{'top_node_up'} 
       and defined($self->get_conf('TOP_NODE_UP_URL'))) {
     return $self->get_conf('TOP_NODE_UP_URL');
   }
 
+  # In addition to that implicit (dir) as the Top node's Up, replace all
+  # other references to external file "dir" with the same TOP_NODE_UP_URL.
+  if (defined($self->get_conf('TOP_NODE_UP_URL'))
+      and $external_node->{'manual_content'}[0]->{'text'} eq "dir") {
+    return $self->get_conf('TOP_NODE_UP_URL');
+  }
+  
   #print STDERR "external_node: ".join('|', keys(%$external_node))."\n";
   my ($target_filebase, $target, $id) = $self->_node_id_file($external_node);
 
@@ -5932,7 +5977,7 @@ sub _element_direction($$$$;$)
     ######## debug
     if (!$element_target->{'type'}) {
       die "No type for element_target $direction $element_target: "
-        . Texinfo::Parser::_print_current_keys($element_target)
+        . Texinfo::Common::_print_current_keys($element_target)
         . "directions :". Texinfo::Structuring::_print_directions($element);
     }
     ########
@@ -6719,6 +6764,9 @@ sub texinfo_register_type_formatting($$)
 
 }
 
+# Main function for outputting a manual in HTML.
+# $SELF is the output converter object of class Texinfo::Convert::HTML (this 
+# module), and $ROOT is the Texinfo tree from the parser.
 sub output($$)
 {
   my $self = shift;
@@ -6761,9 +6809,10 @@ sub output($$)
     = Texinfo::Common::collect_renamed_nodes($self, $self->{'input_basename_name'},
                                              $self->{'renamed_nodes'});
 
+
+  # Get the list of "elements" to be processed, i.e. nodes or sections.
   # This should return undef if called on a tree without node or sections.
-  my ($elements, $special_elements) 
-    = $self->_prepare_elements($root);
+  my ($elements, $special_elements) = $self->_prepare_elements($root);
 
   Texinfo::Structuring::split_pages($elements, $self->get_conf('SPLIT'));
 
@@ -6783,7 +6832,7 @@ sub output($$)
   # PrevFile and NextFile can be set.
   Texinfo::Structuring::elements_file_directions($self, $elements);
 
-  # associate the special elements that have no page to the main page.
+  # Associate the special elements that have no page with the main page.
   # This may only happen if not split.
   if ($special_elements 
       and $elements and $elements->[0] 
@@ -6807,8 +6856,8 @@ sub output($$)
 
   &{$self->{'format_css_lines'}}($self);
 
-  $self->set_conf('BODYTEXT', 'lang="' . $self->get_conf('documentlanguage') 
-   . '" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"');
+  $self->set_conf('BODYTEXT',
+                  'lang="' . $self->get_conf('documentlanguage') . '"');
 
   # prepare title.  fulltitle uses more possibility than simpletitle for
   # title, including @-commands found in @titlepage only.  Therefore
@@ -6904,10 +6953,10 @@ sub output($$)
   # that the correct language is set, for instance.  The @-command
   # will necessarily appear later on -- even if it appears a the
   # beginning of the file.
-  #
-  # Now do the output
+
   my $fh;
   my $output = '';
+
   if (!$elements or !defined($elements->[0]->{'filename'})) {
     # no page
     my $outfile;
@@ -6963,6 +7012,7 @@ sub output($$)
       if ($self->get_conf('DEBUG'));
     my %files;
     
+    # Now do the output, converting each member in @$elements in turn.
     $special_elements = [] if (!defined($special_elements));
     foreach my $element (@$elements, @$special_elements) {
       my $file_fh;
@@ -7026,7 +7076,7 @@ sub output($$)
   $self->{'current_filename'} = undef;
   if ($self->get_conf('NODE_FILES') 
       and $self->{'labels'} and $self->{'output_file'} ne '') {
-    foreach my $label (keys (%{$self->{'labels'}})) {
+    foreach my $label (sort(keys (%{$self->{'labels'}}))) {
       my $node = $self->{'labels'}->{$label};
       my $target = $self->_get_target($node);
       # filename may not be defined in case of an @anchor or similar in
@@ -7196,6 +7246,7 @@ sub _parse_node_and_warn_external($$$$$)
   return undef;
 }
 
+# Convert the 'contents' of a tree element.
 sub _convert_contents($$$)
 {
   my $self = shift;
@@ -7204,7 +7255,7 @@ sub _convert_contents($$$)
   my $content_formatted = '';
   if (ref($root->{'contents'}) ne 'ARRAY') {
     cluck "for $root contents not an array: $root->{'contents'}";
-    print STDERR Texinfo::Parser::_print_current($root);
+    print STDERR Texinfo::Common::_print_current($root);
   }
 
   my $content_idx = 0;
@@ -7212,8 +7263,8 @@ sub _convert_contents($$$)
     my $new_content = $self->_convert($content, "$command_type [$content_idx]");
     if (!defined($new_content)) {
       cluck "content not defined for $command_type [$content_idx]\n";
-      print STDERR "root is: ".Texinfo::Parser::_print_current ($root);
-      print STDERR "content is: ".Texinfo::Parser::_print_current ($content);
+      print STDERR "root is: ".Texinfo::Common::_print_current ($root);
+      print STDERR "content is: ".Texinfo::Common::_print_current ($content);
     } else {
       $content_formatted .= $new_content;
     }
@@ -7245,40 +7296,32 @@ sub _attribute_class($$$)
   return "<$element class=\"$class\"$style";
 }
 
-sub _protect_space_codebreak($$)
+sub _protect_space($$)
 {
   my $self = shift;
   my $text = shift;
 
   return $text if ($self->in_preformatted());
 
-  my $in_w;
-  $in_w = 1 if ($self->in_space_protected());
-
-  if ($in_w or $self->in_code() 
-      and $self->get_conf('allowcodebreaks') eq 'false') {
-    my $class = 'nolinebreak';
-    $class = 'nocodebreak' if ($self->in_code() 
-                           and $self->get_conf('allowcodebreaks') eq 'false');
-    my $open = $self->_attribute_class('span', $class);
+  if ($self->in_space_protected()) {
+    my $open = $self->_attribute_class('span', 'nolinebreak');
     if ($open ne '') {
       $open .= '>';
-      # protect spaces in the html leading attribute in case we are in 'w'
-      $open =~ s/ /\x{1F}/g if ($in_w);
-      # special span to avoid breaking at _-
+      # Protect spaces in the html leading attribute in case we are in 'w'
+      $open =~ s/ /\x{1F}/g;
+      # Special span to avoid breaking at _-
       $text =~ s/(\S*[_-]\S*)/${open}$1<\/span>/g;
     }
-  }
-  if ($in_w) {
     $text .= '&nbsp;' if (chomp($text));
-    # protect spaces within text
+    # Protect spaces within text
     $text =~ s/ /&nbsp;/g;
-    # revert protected spaces in leading html attribute
+    # Revert protected spaces in leading html attribute
     $text =~ s/\x{1F}/ /g;
   }
   return $text;
 }
 
+# Convert tree element $ROOT, and return HTML text for the output files.
 sub _convert($$;$);
 
 sub _convert($$;$)
@@ -7308,9 +7351,6 @@ sub _convert($$;$)
       print STDERR " text: $text";
     }
     print STDERR "\n";
-   
-    #print STDERR "  Special def_command: $root->{'extra'}->{'def_command'}\n"
-    #  if (defined($root->{'extra'}) and $root->{'extra'}->{'def_command'});
   }
 
   if (ref($root) ne 'HASH') {
@@ -7333,7 +7373,7 @@ sub _convert($$;$)
     return '';
   }
 
-  # process text
+  # Process text
   if (defined($root->{'text'})) {
     # already converted to html, keep it as is
     if ($root->{'type'} and $root->{'type'} eq '_converted') {
@@ -7533,6 +7573,7 @@ sub _convert($$;$)
     push @{$self->{'document_context'}->[-1]->{'commands'}}, 
       $root->{'cmdname'}
         if ($root->{'cmdname'});
+
     if ($root->{'type'} eq 'paragraph') {
       $self->{'document_context'}->[-1]->{'formatting_context'}->[-1]->{'paragraph_number'}++;
     } elsif ($root->{'type'} eq 'preformatted'
@@ -7547,6 +7588,7 @@ sub _convert($$;$)
       push @{$self->{'document_context'}->[-1]->{'composition_context'}},
         $root->{'type'};
     }
+
     if ($self->{'code_types'}->{$root->{'type'}}) {
       #$self->{'document_context'}->[-1]->{'code'}++;
       push @{$self->{'document_context'}->[-1]->{'monospace'}}, 1;
@@ -7554,6 +7596,7 @@ sub _convert($$;$)
     if ($root->{'type'} eq '_string') {
       $self->{'document_context'}->[-1]->{'string'}++;
     }
+
     my $content_formatted;
     if ($root->{'type'} eq 'definfoenclose_command') {
       if ($root->{'args'}) {
@@ -7562,6 +7605,7 @@ sub _convert($$;$)
     } elsif ($root->{'contents'}) {
       $content_formatted = $self->_convert_contents($root, $command_type);
     }
+
     my $result = '';
     if (exists($self->{'types_conversion'}->{$root->{'type'}})) {
       $result = &{$self->{'types_conversion'}->{$root->{'type'}}} ($self,
@@ -7674,6 +7718,7 @@ sub _set_variables_texi2html()
 1;
 
 __END__
+# $Id: HTML.pm 7353 2016-09-10 13:03:54Z gavin $
 # Automatically generated from maintain/template.pod
 
 =head1 NAME
@@ -7686,6 +7731,9 @@ Texinfo::Convert::HTML - Convert Texinfo tree to HTML
     = Texinfo::Convert::HTML->converter({'parser' => $parser});
 
   $converter->output($tree);
+  $converter->convert($tree);
+  $converter->convert_tree($tree);
+  $converter->output_internal_links(); # HTML only
 
 =head1 DESCRIPTION
 
@@ -7697,7 +7745,7 @@ Texinfo::Convert::HTML converts a Texinfo tree to HTML.
 
 =item $converter = Texinfo::Convert::HTML->converter($options)
 
-Initialize an HTML converter.  
+Initialize converter from Texinfo to HTML.  
 
 The I<$options> hash reference holds options for the converter.  In
 this option hash reference a parser object may be associated with the 
@@ -7720,14 +7768,14 @@ the resulting output.
 =item $result = $converter->convert_tree($tree)
 
 Convert a Texinfo tree portion I<$tree> and return the resulting 
-output.  This function do not try to output a full document but only
-portions of document.  For a full document use C<convert>.
+output.  This function does not try to output a full document but only
+portions.  For a full document use C<convert>.
 
 =item $result = $converter->output_internal_links()
 
-Returns text representing the links in the document.  At present the format 
-should follow the C<--internal-links> option of texi2any/makeinfo specification
-and this is only relevant for HTML.
+Returns text representing the links in the document.  The format should
+follow the C<--internal-links> option of the texi2any/makeinfo
+specification.  This is only supported in (and relevant for) HTML.
 
 =back
 
@@ -7737,7 +7785,7 @@ Patrice Dumas, E<lt>pertusus@free.frE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2012 Free Software Foundation, Inc.
+Copyright 2015 Free Software Foundation, Inc.
 
 This library is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

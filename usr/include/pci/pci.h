@@ -1,7 +1,7 @@
 /*
  *	The PCI Library
  *
- *	Copyright (c) 1997--2014 Martin Mares <mj@ucw.cz>
+ *	Copyright (c) 1997--2017 Martin Mares <mj@ucw.cz>
  *
  *	Can be freely distributed and used under the terms of the GNU GPL.
  */
@@ -16,7 +16,7 @@
 #include "header.h"
 #include "types.h"
 
-#define PCI_LIB_VERSION 0x030300
+#define PCI_LIB_VERSION 0x030504
 
 #ifndef PCI_ABI
 #define PCI_ABI
@@ -39,7 +39,7 @@ enum pci_access_type {
   PCI_ACCESS_AIX_DEVICE,		/* /dev/pci0, /dev/bus0, etc. */
   PCI_ACCESS_NBSD_LIBPCI,		/* NetBSD libpci */
   PCI_ACCESS_OBSD_DEVICE,		/* OpenBSD /dev/pci */
-  PCI_ACCESS_DUMP,			    /* Dump file */
+  PCI_ACCESS_DUMP,			/* Dump file */
   PCI_ACCESS_DARWIN,			/* Darwin */
   PCI_ACCESS_MAX
 };
@@ -119,7 +119,8 @@ struct pci_param *pci_walk_params(struct pci_access *acc, struct pci_param *prev
 
 struct pci_dev {
   struct pci_dev *next;			/* Next device in the chain */
-  u16 domain;				/* PCI domain (host bridge) */
+  u16 domain_16;			/* 16-bit version of the PCI domain for backward compatibility */
+					/* 0xffff if the real domain doesn't fit in 16 bits */
   u8 bus, dev, func;			/* Bus inside domain, device and function */
 
   /* These fields are set by pci_fill_info() */
@@ -135,6 +136,10 @@ struct pci_dev {
   char *phy_slot;			/* Physical slot */
   char *module_alias;			/* Linux kernel module alias */
   char *label;				/* Device name as exported by BIOS */
+  int numa_node;			/* NUMA node */
+  pciaddr_t flags[6];			/* PCI_IORESOURCE_* flags for regions */
+  pciaddr_t rom_flags;			/* PCI_IORESOURCE_* flags for expansion ROM */
+  int domain;				/* PCI domain (host bridge) */
 
   /* Fields used internally: */
   struct pci_access *access;
@@ -161,18 +166,20 @@ int pci_write_block(struct pci_dev *, int pos, u8 *buf, int len) PCI_ABI;
 
 int pci_fill_info(struct pci_dev *, int flags) PCI_ABI; /* Fill in device information */
 
-#define PCI_FILL_IDENT		1
-#define PCI_FILL_IRQ		2
-#define PCI_FILL_BASES		4
-#define PCI_FILL_ROM_BASE	8
-#define PCI_FILL_SIZES		16
-#define PCI_FILL_CLASS		32
-#define PCI_FILL_CAPS		64
-#define PCI_FILL_EXT_CAPS	128
-#define PCI_FILL_PHYS_SLOT	256
-#define PCI_FILL_MODULE_ALIAS	512
-#define PCI_FILL_LABEL		1024
-#define PCI_FILL_RESCAN		0x10000
+#define PCI_FILL_IDENT		0x0001
+#define PCI_FILL_IRQ		0x0002
+#define PCI_FILL_BASES		0x0004
+#define PCI_FILL_ROM_BASE	0x0008
+#define PCI_FILL_SIZES		0x0010
+#define PCI_FILL_CLASS		0x0020
+#define PCI_FILL_CAPS		0x0040
+#define PCI_FILL_EXT_CAPS	0x0080
+#define PCI_FILL_PHYS_SLOT	0x0100
+#define PCI_FILL_MODULE_ALIAS	0x0200
+#define PCI_FILL_LABEL		0x0400
+#define PCI_FILL_NUMA_NODE	0x0800
+#define PCI_FILL_IO_FLAGS	0x1000
+#define PCI_FILL_RESCAN		0x00010000
 
 void pci_setup_cache(struct pci_dev *, u8 *cache, int len) PCI_ABI;
 

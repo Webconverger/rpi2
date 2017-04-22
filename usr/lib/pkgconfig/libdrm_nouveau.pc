@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: libdrm_nouveau
 Description: Userspace interface to nouveau kernel DRM services
-Version: 2.4.60
+Version: 2.4.80
 Libs: -L${libdir} -ldrm_nouveau
-Cflags: -I${includedir} -I${includedir}/libdrm
+Cflags: -I${includedir} -I${includedir}/libdrm -I${includedir}/libdrm/nouveau
 Requires.private: libdrm

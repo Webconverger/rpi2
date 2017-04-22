@@ -1,6 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
 sdkdir=/usr/include/xorg
 
 Name: xorg-mouse
 Description: X.Org mouse input driver for non-evdev OS'es
-Version: 1.9.1
+Version: 1.9.2
 Cflags: -I${sdkdir}

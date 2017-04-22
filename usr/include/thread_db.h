@@ -1,5 +1,5 @@
 /* thread_db.h -- interface to libthread_db.so library for debugging -lpthread
-   Copyright (C) 1999-2014 Free Software Foundation, Inc.
+   Copyright (C) 1999-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -108,7 +108,7 @@ struct link_map;
 
 #define TD_EVENTSIZE	2
 #define BT_UISHIFT	5 /* log base 2 of BT_NBIPUI, to extract word index */
-#define BT_NBIPUI	(1 << BT_UISHIFT)       /* n bits per uint */
+#define BT_NBIPUI	(1 << BT_UISHIFT)       /* n bits per unsigned int */
 #define BT_UIMASK	(BT_NBIPUI - 1)         /* to extract bit index */
 
 /* Bitmask of enabled events. */

@@ -246,7 +246,10 @@ NOTE: these values are the same as the lcms2 AOTTTTTUYFPXSEEECCCCBBB type.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -345,7 +348,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -463,7 +469,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -525,7 +534,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -662,7 +674,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -750,7 +765,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -838,7 +856,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -880,7 +901,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1022,7 +1046,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1060,7 +1087,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1152,7 +1182,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1294,7 +1327,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1408,7 +1444,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1446,7 +1485,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1603,7 +1645,10 @@ to start if it is not already running.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1688,7 +1733,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1777,7 +1825,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1898,7 +1949,10 @@ cd_profile_install_system_wide() on the result.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -1972,11 +2026,8 @@ Do not use it in GUI applications.</doc>
         <doc xml:space="preserve">The system vendor.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="ClientPrivate" c:type="CdClientPrivate*"/>
       </field>
       <glib:signal name="changed" when="last" version="0.1.0">
         <doc xml:space="preserve">The ::changed signal is emitted when properties may have changed.</doc>
@@ -2341,9 +2392,6 @@ Do not use it in GUI applications.</doc>
         <doc xml:space="preserve">The file if invalid</doc>
       </member>
     </enumeration>
-    <record name="ClientPrivate" c:type="CdClientPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdClient data</doc>
-    </record>
     <record name="ColorLab"
             c:type="CdColorLab"
             glib:type-name="CdColorLab"
@@ -2504,6 +2552,24 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the color object</doc>
             <type name="ColorRGB" c:type="CdColorRGB*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="from_wavelength"
+              c:identifier="cd_color_rgb_from_wavelength"
+              version="1.3.4">
+        <doc xml:space="preserve">Set an RGB color which is roughly representative to the wavelength.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="dest" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdColorRGB for the RGB result</doc>
+            <type name="ColorRGB" c:type="CdColorRGB*"/>
+          </instance-parameter>
+          <parameter name="wavelength" transfer-ownership="none">
+            <doc xml:space="preserve">the wavelength roughly between 380nm and 780nm</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
         </parameters>
       </method>
       <method name="interpolate"
@@ -3479,7 +3545,10 @@ non-monotonic, in which case it falls back to linear interpolation.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -3565,7 +3634,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -3914,7 +3986,10 @@ removed.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4002,7 +4077,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4184,7 +4262,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4269,7 +4350,10 @@ returned if cd_device_get_profile_for_qualifiers_sync() is used.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4351,7 +4435,10 @@ returned if cd_device_get_profile_for_qualifiers_sync() is used.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4436,7 +4523,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4554,7 +4644,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4754,7 +4847,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -4966,11 +5062,8 @@ Do not use it in GUI applications.</doc>
         <doc xml:space="preserve">The device vendor.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="DevicePrivate" c:type="CdDevicePrivate*"/>
       </field>
       <glib:signal name="changed" when="last" version="0.1.0">
         <doc xml:space="preserve">The ::changed signal is emitted when the device data has changed.</doc>
@@ -5126,9 +5219,6 @@ Do not use it in GUI applications.</doc>
       <member name="virtual" value="2" c:identifier="CD_DEVICE_MODE_VIRTUAL">
       </member>
     </enumeration>
-    <record name="DevicePrivate" c:type="CdDevicePrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdDevice data</doc>
-    </record>
     <enumeration name="DeviceRelation" c:type="CdDeviceRelation">
       <doc xml:space="preserve">The device to profile relationship.</doc>
       <member name="unknown"
@@ -5378,11 +5468,8 @@ Do not use it in GUI applications.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="DomPrivate" c:type="CdDomPrivate*"/>
       </field>
     </class>
     <record name="DomClass" c:type="CdDomClass" glib:is-gtype-struct-for="Dom">
@@ -5445,9 +5532,6 @@ Do not use it in GUI applications.</doc>
           </return-value>
         </callback>
       </field>
-    </record>
-    <record name="DomPrivate" c:type="CdDomPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdDom data</doc>
     </record>
     <class name="Edid"
            c:symbol-prefix="edid"
@@ -5695,11 +5779,8 @@ Do not use it in GUI applications.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="EdidPrivate" c:type="CdEdidPrivate*"/>
       </field>
     </class>
     <record name="EdidClass"
@@ -5764,8 +5845,6 @@ Do not use it in GUI applications.</doc>
           </return-value>
         </callback>
       </field>
-    </record>
-    <record name="EdidPrivate" c:type="CdEdidPrivate" disguised="1">
     </record>
     <class name="Icc"
            c:symbol-prefix="icc"
@@ -5971,7 +6050,7 @@ and the %CD_ICC_LOAD_FLAGS_FALLBACK_MD5 flag is used.</doc>
               version="1.1.7">
         <doc xml:space="preserve">Return the cmsContext instance used locally. This may be required if you
 are using native LCMS calls and then cd_icc_load_handle().</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">Do not call cmsDeleteContext() on this value!</doc>
           <type name="gpointer" c:type="gpointer"/>
         </return-value>
@@ -6078,7 +6157,7 @@ This function will only return results if the profile was loaded with the
       <method name="get_handle" c:identifier="cd_icc_get_handle">
         <doc xml:space="preserve">Return the cmsHPROFILE instance used locally. This may be required if you
 are using the profile in a transform.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">Do not call cmsCloseProfile() on this value!</doc>
           <type name="gpointer" c:type="gpointer"/>
         </return-value>
@@ -6486,7 +6565,10 @@ be called if cd_icc_load_file() has previously been used on the @icc object.</do
             <doc xml:space="preserve">a #CdIcc instance.</doc>
             <type name="Icc" c:type="CdIcc*"/>
           </instance-parameter>
-          <parameter name="handle" transfer-ownership="none">
+          <parameter name="handle"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">a cmsHPROFILE instance</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -6990,11 +7072,8 @@ half the size, and 2.0 would indicate the gamut is twice the size.</doc>
       <property name="white" transfer-ownership="none">
         <type name="ColorXYZ"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="IccPrivate" c:type="CdIccPrivate*"/>
       </field>
     </class>
     <record name="IccClass" c:type="CdIccClass" glib:is-gtype-struct-for="Icc">
@@ -7141,9 +7220,6 @@ half the size, and 2.0 would indicate the gamut is twice the size.</doc>
       <member name="all" value="255" c:identifier="CD_ICC_LOAD_FLAGS_ALL">
       </member>
     </bitfield>
-    <record name="IccPrivate" c:type="CdIccPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdIcc data</doc>
-    </record>
     <enumeration name="IccSaveFlags" version="0.1.32" c:type="CdIccSaveFlags">
       <doc xml:space="preserve">Flags used when saving an ICC profile.</doc>
       <member name="none" value="0" c:identifier="CD_ICC_SAVE_FLAGS_NONE">
@@ -7333,11 +7409,8 @@ only useful to the colord daemon. This function can only be called once.</doc>
           </parameter>
         </parameters>
       </method>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="IccStorePrivate" c:type="CdIccStorePrivate*"/>
       </field>
       <glib:signal name="added" when="last" version="1.0.2">
         <doc xml:space="preserve">The ::added signal is emitted when an ICC profile has been added.</doc>
@@ -7394,8 +7467,6 @@ only useful to the colord daemon. This function can only be called once.</doc>
           </parameters>
         </callback>
       </field>
-    </record>
-    <record name="IccStorePrivate" c:type="CdIccStorePrivate" disguised="1">
     </record>
     <enumeration name="IccStoreSearchFlags"
                  version="1.1.1"
@@ -7634,11 +7705,8 @@ implementation detail.</doc>
         <doc xml:space="preserve">The kind of interpolation.</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="InterpPrivate" c:type="CdInterpPrivate*"/>
       </field>
     </class>
     <class name="InterpAkima"
@@ -7657,11 +7725,8 @@ implementation detail.</doc>
           <type name="Interp" c:type="CdInterp*"/>
         </return-value>
       </constructor>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="Interp" c:type="CdInterp"/>
-      </field>
-      <field name="priv">
-        <type name="InterpAkimaPrivate" c:type="CdInterpAkimaPrivate*"/>
       </field>
     </class>
     <record name="InterpAkimaClass"
@@ -7670,11 +7735,6 @@ implementation detail.</doc>
       <field name="parent_class">
         <type name="InterpClass" c:type="CdInterpClass"/>
       </field>
-    </record>
-    <record name="InterpAkimaPrivate"
-            c:type="CdInterpAkimaPrivate"
-            disguised="1">
-      <doc xml:space="preserve">Private #CdInterpAkima data</doc>
     </record>
     <record name="InterpClass"
             c:type="CdInterpClass"
@@ -7800,11 +7860,8 @@ implementation detail.</doc>
           <type name="Interp" c:type="CdInterp*"/>
         </return-value>
       </constructor>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="Interp" c:type="CdInterp"/>
-      </field>
-      <field name="priv">
-        <type name="InterpLinearPrivate" c:type="CdInterpLinearPrivate*"/>
       </field>
     </class>
     <record name="InterpLinearClass"
@@ -7813,13 +7870,6 @@ implementation detail.</doc>
       <field name="parent_class">
         <type name="InterpClass" c:type="CdInterpClass"/>
       </field>
-    </record>
-    <record name="InterpLinearPrivate"
-            c:type="CdInterpLinearPrivate"
-            disguised="1">
-    </record>
-    <record name="InterpPrivate" c:type="CdInterpPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdInterp data</doc>
     </record>
     <class name="It8"
            c:symbol-prefix="it8"
@@ -8585,11 +8635,8 @@ Matrix Method by Yoshihiro Ohno and Jonathan E. Hardis, 1997.</doc>
         <doc xml:space="preserve">The file title, e.g. "Factor calibration".</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="It8Private" c:type="CdIt8Private*"/>
       </field>
     </class>
     <record name="It8Class" c:type="CdIt8Class" glib:is-gtype-struct-for="It8">
@@ -8686,18 +8733,15 @@ Matrix Method by Yoshihiro Ohno and Jonathan E. Hardis, 1997.</doc>
       <member name="cmf" value="7" c:identifier="CD_IT8_KIND_CMF">
       </member>
     </enumeration>
-    <record name="It8Private" c:type="CdIt8Private" disguised="1">
-      <doc xml:space="preserve">Private #CdIt8 data</doc>
-    </record>
     <constant name="MAJOR_VERSION" value="1" c:type="CD_MAJOR_VERSION">
       <doc xml:space="preserve">The compile-time major version</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" value="9" c:type="CD_MICRO_VERSION">
+    <constant name="MICRO_VERSION" value="4" c:type="CD_MICRO_VERSION">
       <doc xml:space="preserve">The compile-time micro version</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" value="2" c:type="CD_MINOR_VERSION">
+    <constant name="MINOR_VERSION" value="3" c:type="CD_MINOR_VERSION">
       <doc xml:space="preserve">The compile-time minor version</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -9207,7 +9251,10 @@ Matrix Method by Yoshihiro Ohno and Jonathan E. Hardis, 1997.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -9596,7 +9643,10 @@ users.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -9729,7 +9779,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -9872,11 +9925,8 @@ Do not use it in GUI applications.</doc>
           <type name="utf8"/>
         </array>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="ProfilePrivate" c:type="CdProfilePrivate*"/>
       </field>
       <glib:signal name="changed" when="last" version="0.1.0">
         <doc xml:space="preserve">The ::changed signal is emitted when the profile data has changed.</doc>
@@ -10036,9 +10086,6 @@ Do not use it in GUI applications.</doc>
               c:identifier="CD_PROFILE_KIND_NAMED_COLOR">
       </member>
     </enumeration>
-    <record name="ProfilePrivate" c:type="CdProfilePrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdProfile data</doc>
-    </record>
     <enumeration name="ProfileQuality" c:type="CdProfileQuality">
       <doc xml:space="preserve">The quality of the profile produced through calibration.</doc>
       <member name="low" value="0" c:identifier="CD_PROFILE_QUALITY_LOW">
@@ -10404,7 +10451,10 @@ used, but may be of limited use.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -10729,7 +10779,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -10798,6 +10851,97 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">a #CdSensor instance.</doc>
             <type name="Sensor" c:type="CdSensor*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_spectrum"
+              c:identifier="cd_sensor_get_spectrum"
+              version="1.3.1">
+        <doc xml:space="preserve">Gets a color spectrum from a sensor</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sensor" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSensor instance.</doc>
+            <type name="Sensor" c:type="CdSensor*"/>
+          </instance-parameter>
+          <parameter name="cap" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSensorCap</doc>
+            <type name="SensorCap" c:type="CdSensorCap"/>
+          </parameter>
+          <parameter name="cancellable"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">a #GCancellable, or %NULL</doc>
+            <type name="Gio.Cancellable" c:type="GCancellable*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <doc xml:space="preserve">the function to run on completion</doc>
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">the data to pass to @callback</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_spectrum_finish"
+              c:identifier="cd_sensor_get_spectrum_finish"
+              version="1.3.1"
+              throws="1">
+        <doc xml:space="preserve">Gets the result from the asynchronous function.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the XYZ reading, or %NULL</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sensor" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSensor instance.</doc>
+            <type name="Sensor" c:type="CdSensor*"/>
+          </instance-parameter>
+          <parameter name="res" transfer-ownership="none">
+            <doc xml:space="preserve">the #GAsyncResult</doc>
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_spectrum_sync"
+              c:identifier="cd_sensor_get_spectrum_sync"
+              version="1.3.1"
+              throws="1">
+        <doc xml:space="preserve">Gets a spectrum from the sensor.
+
+WARNING: This function is synchronous, and may block.
+Do not use it in GUI applications.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the XYZ reading, with ambient levels in Lux encoded in X, or %NULL for error.</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sensor" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSensor instance.</doc>
+            <type name="Sensor" c:type="CdSensor*"/>
+          </instance-parameter>
+          <parameter name="cap" transfer-ownership="none">
+            <doc xml:space="preserve">The device capability, e.g. %CD_SENSOR_CAP_AMBIENT.</doc>
+            <type name="SensorCap" c:type="CdSensorCap"/>
+          </parameter>
+          <parameter name="cancellable"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">a #GCancellable or %NULL</doc>
+            <type name="Gio.Cancellable" c:type="GCancellable*"/>
+          </parameter>
         </parameters>
       </method>
       <method name="get_state"
@@ -10873,7 +11017,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -10978,7 +11125,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -11073,7 +11223,10 @@ Do not use it in GUI applications.</doc>
             <doc xml:space="preserve">the function to run on completion</doc>
             <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
           </parameter>
-          <parameter name="user_data" transfer-ownership="none">
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data to pass to @callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -11177,11 +11330,8 @@ Do not use it in GUI applications.</doc>
         <doc xml:space="preserve">The sensor vendor.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="SensorPrivate" c:type="CdSensorPrivate*"/>
       </field>
       <glib:signal name="button-pressed" when="last" version="0.1.6">
         <doc xml:space="preserve">The ::button-pressed signal is emitted when the button has been pressed.</doc>
@@ -11191,7 +11341,7 @@ Do not use it in GUI applications.</doc>
       </glib:signal>
     </class>
     <enumeration name="SensorCap" c:type="CdSensorCap">
-      <doc xml:space="preserve">The sensor capabilities.</doc>
+      <doc xml:space="preserve">The sensor capabilities, i.e. things the sensor can do.</doc>
       <member name="unknown" value="0" c:identifier="CD_SENSOR_CAP_UNKNOWN">
       </member>
       <member name="lcd" value="1" c:identifier="CD_SENSOR_CAP_LCD">
@@ -11233,6 +11383,16 @@ Do not use it in GUI applications.</doc>
       <member name="wide_gamut_lcd_rgb_led"
               value="14"
               c:identifier="CD_SENSOR_CAP_WIDE_GAMUT_LCD_RGB_LED">
+      </member>
+      <member name="spectral" value="15" c:identifier="CD_SENSOR_CAP_SPECTRAL">
+      </member>
+      <member name="calibration_dark"
+              value="16"
+              c:identifier="CD_SENSOR_CAP_CALIBRATION_DARK">
+      </member>
+      <member name="calibration_irradiance"
+              value="17"
+              c:identifier="CD_SENSOR_CAP_CALIBRATION_IRRADIANCE">
       </member>
     </enumeration>
     <record name="SensorClass"
@@ -11353,6 +11513,16 @@ Do not use it in GUI applications.</doc>
               c:identifier="CD_SENSOR_ERROR_REQUIRED_POSITION_SURFACE">
         <doc xml:space="preserve">The sensor needs to be in the surface position</doc>
       </member>
+      <member name="required_dark_calibration"
+              value="9"
+              c:identifier="CD_SENSOR_ERROR_REQUIRED_DARK_CALIBRATION">
+        <doc xml:space="preserve">The sensor needs dark calibration</doc>
+      </member>
+      <member name="required_irradiance_calibration"
+              value="10"
+              c:identifier="CD_SENSOR_ERROR_REQUIRED_IRRADIANCE_CALIBRATION">
+        <doc xml:space="preserve">The sensor needs irradiance calibration</doc>
+      </member>
     </enumeration>
     <enumeration name="SensorKind" c:type="CdSensorKind">
       <doc xml:space="preserve">The sensor type.</doc>
@@ -11428,10 +11598,11 @@ Do not use it in GUI applications.</doc>
               value="24"
               c:identifier="CD_SENSOR_KIND_COLORHUG2">
       </member>
+      <member name="spyder5" value="25" c:identifier="CD_SENSOR_KIND_SPYDER5">
+      </member>
+      <member name="spark" value="26" c:identifier="CD_SENSOR_KIND_SPARK">
+      </member>
     </enumeration>
-    <record name="SensorPrivate" c:type="CdSensorPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdSensor data</doc>
-    </record>
     <enumeration name="SensorState" c:type="CdSensorState">
       <doc xml:space="preserve">The state of the sensor.</doc>
       <member name="unknown" value="0" c:identifier="CD_SENSOR_STATE_UNKNOWN">
@@ -11472,6 +11643,33 @@ Do not use it in GUI applications.</doc>
         <parameters>
           <parameter name="temperature" transfer-ownership="none">
             <doc xml:space="preserve">the temperature in Kelvin</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="planckian_new_full"
+                   c:identifier="cd_spectrum_planckian_new_full"
+                   version="1.3.1">
+        <doc xml:space="preserve">Allocates a Planckian spectrum at a specific temperature.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A newly allocated #CdSpectrum object</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <parameter name="temperature" transfer-ownership="none">
+            <doc xml:space="preserve">the temperature in Kelvin</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="start" transfer-ownership="none">
+            <doc xml:space="preserve">the new spectrum start</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="end" transfer-ownership="none">
+            <doc xml:space="preserve">the new spectrum end</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="resolution" transfer-ownership="none">
+            <doc xml:space="preserve">the resolution to use when resampling</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
@@ -11676,6 +11874,34 @@ NOTE: This affects every value in the spectrum.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="get_value_max"
+              c:identifier="cd_spectrum_get_value_max"
+              version="1.3.1">
+        <doc xml:space="preserve">Gets the largest normalised value in the spectrum.</doc>
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance.</doc>
+            <type name="Spectrum" c:type="const CdSpectrum*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_value_min"
+              c:identifier="cd_spectrum_get_value_min"
+              version="1.3.1">
+        <doc xml:space="preserve">Gets the smallest normalised value in the spectrum.</doc>
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance.</doc>
+            <type name="Spectrum" c:type="const CdSpectrum*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_value_raw"
               c:identifier="cd_spectrum_get_value_raw"
               version="1.2.6">
@@ -11712,6 +11938,71 @@ applied. Most people should use cd_spectrum_get_value() instead.</doc>
           <parameter name="idx" transfer-ownership="none">
             <doc xml:space="preserve">an index into the data</doc>
             <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_wavelength_cal"
+              c:identifier="cd_spectrum_get_wavelength_cal"
+              version="1.3.1">
+        <doc xml:space="preserve">Gets the calibration coefficients used to map pixel indexes to
+wavelengths.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="c1" transfer-ownership="none">
+            <doc xml:space="preserve">the 1st coefficient</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="c2" transfer-ownership="none">
+            <doc xml:space="preserve">the 2nd coefficient</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="c3" transfer-ownership="none">
+            <doc xml:space="preserve">the 3rd coefficient</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="limit_max"
+              c:identifier="cd_spectrum_limit_max"
+              version="1.3.1">
+        <doc xml:space="preserve">Ensures no values in the spectrum fall above a set limit. If they
+are found, set them to @value.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <doc xml:space="preserve">the threshold value to limit the spectrum</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="limit_min"
+              c:identifier="cd_spectrum_limit_min"
+              version="1.3.1">
+        <doc xml:space="preserve">Ensures no values in the spectrum fall below a set limit. If they
+are found, set them to @value.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <doc xml:space="preserve">the threshold value to limit the spectrum</doc>
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
@@ -11778,6 +12069,52 @@ applied. Most people should use cd_spectrum_get_value() instead.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="resample"
+              c:identifier="cd_spectrum_resample"
+              version="1.3.1">
+        <doc xml:space="preserve">Resample a new spectrum with linear index to wavelength coefficients.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a #CdSpectrum instance</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="start" transfer-ownership="none">
+            <doc xml:space="preserve">the new spectrum start</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="end" transfer-ownership="none">
+            <doc xml:space="preserve">the new spectrum end</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="resolution" transfer-ownership="none">
+            <doc xml:space="preserve">the resolution to use when resampling</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="resample_to_size"
+              c:identifier="cd_spectrum_resample_to_size"
+              version="1.3.4">
+        <doc xml:space="preserve">Resample a new spectrum with the desired number of points.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a #CdSpectrum instance</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="size" transfer-ownership="none">
+            <doc xml:space="preserve">the output spectrum size</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_data"
               c:identifier="cd_spectrum_set_data"
               version="1.1.6">
@@ -11801,7 +12138,10 @@ applied. Most people should use cd_spectrum_get_value() instead.</doc>
       <method name="set_end"
               c:identifier="cd_spectrum_set_end"
               version="1.1.6">
-        <doc xml:space="preserve">Set the end value of the spectal data in nm.</doc>
+        <doc xml:space="preserve">Set the end value of the spectal data in nm.
+
+If there is already spectral data, the wavelength calibration will
+also be set automatically.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -11888,6 +12228,83 @@ NOTE: This affects every value in the spectrum.</doc>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">a data value</doc>
             <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_wavelength_cal"
+              c:identifier="cd_spectrum_set_wavelength_cal"
+              version="1.3.1">
+        <doc xml:space="preserve">Sets the calibration coefficients used to map pixel indexes to
+wavelengths.
+
+This function will set the 'end' wavelength automatically,
+potentially overwriting the value set by cd_spectrum_set_end().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="c1" transfer-ownership="none">
+            <doc xml:space="preserve">the 1st coefficient</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="c2" transfer-ownership="none">
+            <doc xml:space="preserve">the 2nd coefficient</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="c3" transfer-ownership="none">
+            <doc xml:space="preserve">the 3rd coefficient</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="subtract"
+              c:identifier="cd_spectrum_subtract"
+              version="1.3.1">
+        <doc xml:space="preserve">Subtracts one spectral plot from another. If the spectra have the same start,
+end and the same number of data points they are not resampled.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a #CdSpectrum instance</doc>
+          <type name="Spectrum" c:type="CdSpectrum*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="s1" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance, e.g. a sample</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="s2" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance, e.g. a dark calibration</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </parameter>
+          <parameter name="resolution" transfer-ownership="none">
+            <doc xml:space="preserve">the resolution to use when resampling</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="to_string"
+              c:identifier="cd_spectrum_to_string"
+              version="1.3.1">
+        <doc xml:space="preserve">Returns a graphical representation of the spectrum.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a printable ASCII string</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="spectrum" transfer-ownership="none">
+            <doc xml:space="preserve">a #CdSpectrum instance</doc>
+            <type name="Spectrum" c:type="CdSpectrum*"/>
+          </instance-parameter>
+          <parameter name="max_width" transfer-ownership="none">
+            <doc xml:space="preserve">the terminal width</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="max_height" transfer-ownership="none">
+            <doc xml:space="preserve">the terminal height</doc>
+            <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
       </method>
@@ -12067,11 +12484,17 @@ of the formats, input, output or abstract profiles are changed.</doc>
             <doc xml:space="preserve">a #CdTransform instance.</doc>
             <type name="Transform" c:type="CdTransform*"/>
           </instance-parameter>
-          <parameter name="data_in" transfer-ownership="none">
+          <parameter name="data_in"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data buffer to convert</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
-          <parameter name="data_out" transfer-ownership="none">
+          <parameter name="data_out"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
             <doc xml:space="preserve">the data buffer to return, which can be the same as @data_in</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -12266,11 +12689,8 @@ This is typically only needed for soft-proofing.</doc>
       <property name="rendering-intent" writable="1" transfer-ownership="none">
         <type name="guint" c:type="guint"/>
       </property>
-      <field name="parent">
+      <field name="parent_instance">
         <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="priv">
-        <type name="TransformPrivate" c:type="CdTransformPrivate*"/>
       </field>
     </class>
     <record name="TransformClass"
@@ -12353,9 +12773,6 @@ This is typically only needed for soft-proofing.</doc>
       <member name="last" value="2" c:identifier="CD_TRANSFORM_ERROR_LAST">
       </member>
     </enumeration>
-    <record name="TransformPrivate" c:type="CdTransformPrivate" disguised="1">
-      <doc xml:space="preserve">Private #CdTransform data</doc>
-    </record>
     <record name="Vec3" c:type="CdVec3">
       <field name="v0" writable="1">
         <type name="gdouble" c:type="double"/>
@@ -12819,7 +13236,10 @@ non-monotonic, in which case it falls back to linear interpolation.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </return-value>
       <parameters>
-        <parameter name="ctx" transfer-ownership="none">
+        <parameter name="ctx"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
@@ -12830,7 +13250,10 @@ non-monotonic, in which case it falls back to linear interpolation.</doc>
         <type name="none" c:type="void"/>
       </return-value>
       <parameters>
-        <parameter name="ctx" transfer-ownership="none">
+        <parameter name="ctx"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
@@ -12840,13 +13263,16 @@ non-monotonic, in which case it falls back to linear interpolation.</doc>
         <type name="none" c:type="void"/>
       </return-value>
       <parameters>
-        <parameter name="ctx" transfer-ownership="none">
+        <parameter name="ctx"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
     </function>
     <function name="context_lcms_new" c:identifier="cd_context_lcms_new">
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A new LCMS context</doc>
         <type name="gpointer" c:type="gpointer"/>
       </return-value>

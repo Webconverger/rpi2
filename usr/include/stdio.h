@@ -1,5 +1,5 @@
 /* Define ISO C stdio on top of C++ iostreams.
-   Copyright (C) 1991-2014 Free Software Foundation, Inc.
+   Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -24,7 +24,8 @@
 
 #if !defined __need_FILE && !defined __need___FILE
 # define _STDIO_H	1
-# include <features.h>
+# define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+# include <bits/libc-header-start.h>
 
 __BEGIN_DECLS
 
@@ -84,7 +85,7 @@ typedef _G_va_list va_list;
 # endif
 #endif
 
-#ifdef __USE_XOPEN2K8
+#if defined __USE_UNIX98 || defined __USE_XOPEN2K
 # ifndef __off_t_defined
 # ifndef __USE_FILE_OFFSET64
 typedef __off_t off_t;
@@ -97,7 +98,9 @@ typedef __off64_t off_t;
 typedef __off64_t off64_t;
 # define __off64_t_defined
 # endif
+#endif
 
+#ifdef __USE_XOPEN2K8
 # ifndef __ssize_t_defined
 typedef __ssize_t ssize_t;
 # define __ssize_t_defined
@@ -314,7 +317,7 @@ extern FILE *fopencookie (void *__restrict __magic_cookie,
 			  _IO_cookie_io_functions_t __io_funcs) __THROW __wur;
 #endif
 
-#ifdef __USE_XOPEN2K8
+#if defined __USE_XOPEN2K8 || __GLIBC_USE (LIB_EXT2)
 /* Create a new stream that refers to a memory buffer.  */
 extern FILE *fmemopen (void *__s, size_t __len, const char *__modes)
   __THROW __wur;
@@ -393,7 +396,7 @@ extern int vsnprintf (char *__restrict __s, size_t __maxlen,
 __END_NAMESPACE_C99
 #endif
 
-#ifdef __USE_GNU
+#if __GLIBC_USE (LIB_EXT2)
 /* Write formatted output to a string dynamically allocated with `malloc'.
    Store the address of the string in *PTR.  */
 extern int vasprintf (char **__restrict __ptr, const char *__restrict __f,
@@ -542,7 +545,7 @@ __END_NAMESPACE_STD
    optimization for it.  */
 #define getc(_fp) _IO_getc (_fp)
 
-#ifdef __USE_POSIX
+#ifdef __USE_POSIX199506
 /* These are defined in POSIX.1:1996.
 
    These functions are possible cancellation points and therefore not
@@ -594,7 +597,7 @@ __END_NAMESPACE_STD
 extern int fputc_unlocked (int __c, FILE *__stream);
 #endif /* Use MISC.  */
 
-#ifdef __USE_POSIX
+#ifdef __USE_POSIX199506
 /* These are defined in POSIX.1:1996.
 
    These functions are possible cancellation points and therefore not
@@ -651,7 +654,7 @@ extern char *fgets_unlocked (char *__restrict __s, int __n,
 #endif
 
 
-#ifdef	__USE_XOPEN2K8
+#if defined __USE_XOPEN2K8 || __GLIBC_USE (LIB_EXT2)
 /* Read up to (and including) a DELIMITER from STREAM into *LINEPTR
    (and null-terminate it). *LINEPTR is a pointer returned from malloc (or
    NULL), pointing to *N characters of space.  It is realloc'd as
@@ -885,7 +888,7 @@ extern char *ctermid (char *__s) __THROW;
 #endif /* Use POSIX.  */
 
 
-#ifdef __USE_XOPEN
+#if (defined __USE_XOPEN && !defined __USE_XOPEN2K) || defined __USE_GNU
 /* Return the name of the current user.  */
 extern char *cuserid (char *__s);
 #endif /* Use X/Open, but not issue 6.  */
@@ -905,7 +908,7 @@ extern int obstack_vprintf (struct obstack *__restrict __obstack,
 #endif /* Use GNU.  */
 
 
-#ifdef __USE_POSIX
+#ifdef __USE_POSIX199506
 /* These are defined in POSIX.1:1996.  */
 
 /* Acquire ownership of STREAM.  */

@@ -14,7 +14,7 @@
 #include "pwcache.h"
 
 #define SIGNAL_STRING
-#define QUICK_THREADS        /* copy (vs. read) some thread info from parent proc_t */
+//#define QUICK_THREADS        /* copy (vs. read) some thread info from parent proc_t */
 
 EXTERN_C_BEGIN
 
@@ -116,6 +116,9 @@ typedef struct proc_t {
 	vm_size,        // status          equals 'size' (as kb)
 	vm_lock,        // status          locked pages (as kb)
 	vm_rss,         // status          equals 'rss' and/or 'resident' (as kb)
+	vm_rss_anon,    // status          the 'anonymous' portion of vm_rss (as kb)
+	vm_rss_file,    // status          the 'file-backed' portion of vm_rss (as kb)
+	vm_rss_shared,  // status          the 'shared' portion of vm_rss (as kb)
 	vm_data,        // status          data only size (as kb)
 	vm_stack,       // status          stack only size (as kb)
 	vm_swap,        // status          based on linux-2.6.34 "swap ents" (as kb)
@@ -134,6 +137,7 @@ typedef struct proc_t {
         **environ,      // (special)       environment string vector (/proc/#/environ)
         **cmdline,      // (special)       command line string vector (/proc/#/cmdline)
         **cgroup,       // (special)       cgroup string vector (/proc/#/cgroup)
+         *cgname,       // (special)       name portion of above (if possible)
          *supgid,       // status          supplementary gids as comma delimited str
          *supgrp;       // supp grp names as comma delimited str, derived from supgid
     char
@@ -164,14 +168,11 @@ typedef struct proc_t {
 	tpgid,		// stat            terminal process group id
 	exit_signal,	// stat            might not be SIGCHLD
 	processor;      // stat            current (or most recent?) CPU
-#ifdef OOMEM_ENABLE
     int
         oom_score,      // oom_score       (badness for OOM killer)
         oom_adj;        // oom_adj         (adjustment to OOM score)
-#endif
     long
         ns[NUM_NS];     // (ns subdir)     inode number of namespaces
-#ifdef WITH_SYSTEMD
     char
         *sd_mach,       // n/a             systemd vm/container name
         *sd_ouid,       // n/a             systemd session owner uid
@@ -180,7 +181,8 @@ typedef struct proc_t {
         *sd_slice,      // n/a             systemd slice unit
         *sd_unit,       // n/a             systemd system unit id
         *sd_uunit;      // n/a             systemd user unit id
-#endif
+    const char
+        *lxcname;       // n/a             lxc container name
 } proc_t;
 
 // PROCTAB: data structure holding the persistent information readproc needs
@@ -285,13 +287,13 @@ extern proc_t * get_proc_stats(pid_t pid, proc_t *p);
 #define PROC_FILLGRP         0x0010 // resolve group id number -> group name
 #define PROC_FILLSTATUS      0x0020 // read status
 #define PROC_FILLSTAT        0x0040 // read stat
-#define PROC_FILLWCHAN       0x0080 // look up WCHAN name
 #define PROC_FILLARG         0x0100 // alloc and fill in `cmdline'
 #define PROC_FILLCGROUP      0x0200 // alloc and fill in `cgroup`
 #define PROC_FILLSUPGRP      0x0400 // resolve supplementary group id -> group name
 #define PROC_FILLOOM         0x0800 // fill in proc_t oom_score and oom_adj
 #define PROC_FILLNS          0x8000 // fill in proc_t namespace information
 #define PROC_FILLSYSTEMD    0x80000 // fill in proc_t systemd information
+#define PROC_FILL_LXC      0x800000 // fill in proc_t lxcname, if possible
 
 #define PROC_LOOSE_TASKS     0x2000 // treat threads as if they were processes
 

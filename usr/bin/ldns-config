@@ -2,14 +2,14 @@
 
 prefix="/usr"
 exec_prefix="${prefix}"
-VERSION="1.6.17"
-CFLAGS="-Wstrict-prototypes -Wwrite-strings -W -Wall -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
+VERSION="1.7.0"
+CFLAGS="-Wunused-function -Wstrict-prototypes -Wwrite-strings -W -Wall -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
 CPPFLAGS="-D_FORTIFY_SOURCE=2  "
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro  "
-LIBS="  -lcrypto -ldl"
+LIBS="  -lcrypto"
 LIBDIR="${exec_prefix}/lib"
 INCLUDEDIR="${prefix}/include"
-LIBVERSION="@LIBLDNS_CURRENT@.@LIBLDNS_REVISION@.@LIBLDNS_AGE@"
+LIBVERSION="2:0:0"
 
 for arg in $@
 do

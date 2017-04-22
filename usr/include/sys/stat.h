@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -26,19 +26,16 @@
 
 #include <bits/types.h>		/* For __mode_t and __dev_t.  */
 
-#if defined __USE_XOPEN || defined __USE_XOPEN2K || defined __USE_ATFILE
-# if defined __USE_XOPEN || defined __USE_XOPEN2K
-#  define __need_time_t
-# endif
-# ifdef __USE_ATFILE
-#  define __need_timespec
-# endif
-# include <time.h>		/* For time_t resp. timespec.  */
+#ifdef __USE_ATFILE
+# include <bits/types/struct_timespec.h>
 #endif
 
 #if defined __USE_XOPEN || defined __USE_XOPEN2K
 /* The Single Unix specification says that some more types are
    available here.  */
+
+# include <bits/types/time_t.h>
+
 # ifndef __dev_t_defined
 typedef __dev_t dev_t;
 #  define __dev_t_defined
@@ -115,7 +112,7 @@ __BEGIN_DECLS
 # ifdef __S_IFLNK
 #  define S_IFLNK	__S_IFLNK
 # endif
-# if (defined __USE_MISC || defined __USE_UNIX98) \
+# if (defined __USE_MISC || defined __USE_XOPEN_EXTENDED) \
      && defined __S_IFSOCK
 #  define S_IFSOCK	__S_IFSOCK
 # endif
@@ -140,7 +137,7 @@ __BEGIN_DECLS
 # define S_ISLNK(mode)  0
 #endif
 
-#if (defined __USE_UNIX98 || defined __USE_XOPEN2K) \
+#if (defined __USE_XOPEN_EXTENDED || defined __USE_XOPEN2K) \
     && defined __S_IFSOCK
 # define S_ISSOCK(mode) __S_ISTYPE((mode), __S_IFSOCK)
 #elif defined __USE_XOPEN2K
@@ -292,7 +289,7 @@ extern int lchmod (const char *__file, __mode_t __mode)
 #endif
 
 /* Set file access permissions of the file FD is open on to MODE.  */
-#ifdef __USE_POSIX
+#if defined __USE_POSIX199309 || defined __USE_XOPEN_EXTENDED
 extern int fchmod (int __fd, __mode_t __mode) __THROW;
 #endif
 

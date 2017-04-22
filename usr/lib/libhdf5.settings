@@ -1,0 +1,72 @@
+	    SUMMARY OF THE HDF5 CONFIGURATION
+	    =================================
+
+General Information:
+-------------------
+                   HDF5 Version: 1.10.0-patch1
+                  Configured on: Tue Sep  6 02:31:22 MDT 2016
+                  Configured by: builduser@
+                    Host system: armv7l-unknown-linux-gnueabihf
+              Uname information: Linux leming 3.10.96-3-ARCH #1 SMP PREEMPT Thu Mar 24 19:24:55 MDT 2016 armv7l GNU/Linux
+                       Byte sex: little-endian
+             Installation point: /usr
+
+Compiling Options:
+------------------
+                     Build Mode: production
+              Debugging Symbols: no
+                        Asserts: no
+                      Profiling: no
+             Optimization Level: high
+
+Linking Options:
+----------------
+                      Libraries: shared
+  Statically Linked Executables: 
+                        LDFLAGS: -Wl,-O1,--sort-common,--as-needed,-z,relro
+                     H5_LDFLAGS: 
+                     AM_LDFLAGS: 
+                Extra libraries: -lz -ldl -lm 
+                       Archiver: ar
+                         Ranlib: ranlib
+
+Languages:
+----------
+                              C: yes
+                     C Compiler: /usr/lib/distcc/bin/gcc
+                       CPPFLAGS: -D_FORTIFY_SOURCE=2
+                    H5_CPPFLAGS: -D_GNU_SOURCE -D_POSIX_C_SOURCE=200112L   -DNDEBUG -UH5_DEBUG_API
+                    AM_CPPFLAGS: -D_FILE_OFFSET_BITS=64 
+                        C Flags: -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector --param=ssp-buffer-size=4
+                     H5 C Flags:    
+                     AM C Flags: 
+               Shared C Library: yes
+               Static C Library: no
+
+
+                        Fortran: no
+
+                            C++: no
+
+                           Java: no
+
+
+Features:
+---------
+                  Parallel HDF5: no
+             High-level library: yes
+                   Threadsafety: no
+            Default API mapping: v110
+ With deprecated public symbols: yes
+         I/O filters (external): deflate(zlib)
+                            MPE: no
+                     Direct VFD: no
+                        dmalloc: no
+ Packages w/ extra debug output: none
+                    API tracing: no
+           Using memory checker: no
+Memory allocation sanity checks: no
+            Metadata trace file: no
+         Function stack tracing: no
+      Strict file format checks: no
+   Optimization instrumentation: no

@@ -1,0 +1,35 @@
+# NetCDF C Configuration Summary
+==============================
+
+# General
+-------
+NetCDF Version:		4.4.1
+Configured On:		Fri Oct 21 06:33:42 MDT 2016
+Host System:		armv7l-unknown-linux-gnueabihf
+Build Directory: 	/build/netcdf/src/netcdf-c-4.4.1
+Install Prefix:         /usr
+
+# Compiling Options
+-----------------
+C Compiler:		/usr/lib/distcc/bin/gcc
+CFLAGS:			-march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe -fstack-protector --param=ssp-buffer-size=4
+CPPFLAGS:		-D_FORTIFY_SOURCE=2
+LDFLAGS:		-Wl,-O1,--sort-common,--as-needed,-z,relro
+AM_CFLAGS:		
+AM_CPPFLAGS:		
+AM_LDFLAGS:		
+Shared Library:		yes
+Static Library:		yes
+Extra libraries:	-lhdf5_hl -lhdf5 -ldl -lm -lz -lcurl 
+
+# Features
+--------
+NetCDF-2 API:		yes
+HDF4 Support:		no
+NetCDF-4 API:		yes
+NC-4 Parallel Support:	no
+PNetCDF Support:	no
+DAP Support:		yes
+Diskless Support:	yes
+MMap Support:		no
+JNA Support:		no

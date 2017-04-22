@@ -1,5 +1,5 @@
 /* bits/typesizes.h -- underlying types for *_t.  Generic version.
-   Copyright (C) 2002-2014 Free Software Foundation, Inc.
+   Copyright (C) 2002-2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -59,6 +59,7 @@
 #define __SSIZE_T_TYPE		__SWORD_TYPE
 #define __SYSCALL_SLONG_TYPE	__SLONGWORD_TYPE
 #define __SYSCALL_ULONG_TYPE	__ULONGWORD_TYPE
+#define __CPU_MASK_TYPE 	__ULONGWORD_TYPE
 
 #ifdef __LP64__
 /* Tell the libc code that off_t and off64_t are actually the same type
@@ -68,6 +69,11 @@
 
 /* Same for ino_t and ino64_t.  */
 # define __INO_T_MATCHES_INO64_T	1
+
+/* And for rlim_t and rlim64_t.  */
+# define __RLIM_T_MATCHES_RLIM64_T	1
+#else
+# define __RLIM_T_MATCHES_RLIM64_T	0
 #endif
 
 /* Number of descriptors that can fit in an `fd_set'.  */

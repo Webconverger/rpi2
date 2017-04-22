@@ -1,5 +1,3 @@
-/*-*- Mode: C; c-basic-offset: 8; indent-tabs-mode: nil -*-*/
-
 #ifndef foosdloginhfoo
 #define foosdloginhfoo
 
@@ -22,8 +20,8 @@
   along with systemd; If not, see <http://www.gnu.org/licenses/>.
 ***/
 
-#include <sys/types.h>
 #include <inttypes.h>
+#include <sys/types.h>
 
 #include "_sd-common.h"
 
@@ -62,45 +60,60 @@ int sd_pid_get_session(pid_t pid, char **session);
  * return an error for system processes. */
 int sd_pid_get_owner_uid(pid_t pid, uid_t *uid);
 
-/* Get systemd unit (i.e. service) name from PID, for system
+/* Get systemd non-slice unit (i.e. service) name from PID, for system
  * services. This will return an error for non-service processes. */
 int sd_pid_get_unit(pid_t pid, char **unit);
 
-/* Get systemd unit (i.e. service) name from PID, for user
+/* Get systemd non-slice unit (i.e. service) name from PID, for user
  * services. This will return an error for non-user-service
  * processes. */
 int sd_pid_get_user_unit(pid_t pid, char **unit);
+
+/* Get slice name from PID. */
+int sd_pid_get_slice(pid_t pid, char **slice);
+
+/* Get user slice name from PID. */
+int sd_pid_get_user_slice(pid_t pid, char **slice);
 
 /* Get machine name from PID, for processes assigned to a VM or
  * container. This will return an error for non-machine processes. */
 int sd_pid_get_machine_name(pid_t pid, char **machine);
 
-/* Get slice name from PID. */
-int sd_pid_get_slice(pid_t pid, char **slice);
+/* Get the control group from a PID, relative to the root of the
+ * hierarchy. */
+int sd_pid_get_cgroup(pid_t pid, char **cgroup);
 
-/* Similar to sd_pid_get_session(), but retrieves data about peer of
- * connected AF_UNIX socket */
+/* Similar to sd_pid_get_session(), but retrieves data about the peer
+ * of a connected AF_UNIX socket */
 int sd_peer_get_session(int fd, char **session);
 
-/* Similar to sd_pid_get_owner_uid(), but retrieves data about peer of
- * connected AF_UNIX socket */
+/* Similar to sd_pid_get_owner_uid(), but retrieves data about the peer of
+ * a connected AF_UNIX socket */
 int sd_peer_get_owner_uid(int fd, uid_t *uid);
 
-/* Similar to sd_pid_get_unit(), but retrieves data about peer of
- * connected AF_UNIX socket */
+/* Similar to sd_pid_get_unit(), but retrieves data about the peer of
+ * a connected AF_UNIX socket */
 int sd_peer_get_unit(int fd, char **unit);
 
-/* Similar to sd_pid_get_user_unit(), but retrieves data about peer of
- * connected AF_UNIX socket */
+/* Similar to sd_pid_get_user_unit(), but retrieves data about the peer of
+ * a connected AF_UNIX socket */
 int sd_peer_get_user_unit(int fd, char **unit);
 
-/* Similar to sd_pid_get_machine_name(), but retrieves data about peer
- * of connected AF_UNIX socket */
+/* Similar to sd_pid_get_slice(), but retrieves data about the peer of
+ * a connected AF_UNIX socket */
+int sd_peer_get_slice(int fd, char **slice);
+
+/* Similar to sd_pid_get_user_slice(), but retrieves data about the peer of
+ * a connected AF_UNIX socket */
+int sd_peer_get_user_slice(int fd, char **slice);
+
+/* Similar to sd_pid_get_machine_name(), but retrieves data about the
+ * peer of a connected AF_UNIX socket */
 int sd_peer_get_machine_name(int fd, char **machine);
 
-/* Similar to sd_pid_get_slice(), but retrieves data about peer of
- * connected AF_UNIX socket */
-int sd_peer_get_slice(int fd, char **slice);
+/* Similar to sd_pid_get_cgroup(), but retrieves data about the peer
+ * of a connected AF_UNIX socket. */
+int sd_peer_get_cgroup(pid_t pid, char **cgroup);
 
 /* Get state from UID. Possible states: offline, lingering, online, active, closing */
 int sd_uid_get_state(uid_t uid, char **state);
@@ -224,6 +237,8 @@ int sd_login_monitor_get_events(sd_login_monitor *m);
 
 /* Get timeout for poll(), as usec value relative to CLOCK_MONOTONIC's epoch */
 int sd_login_monitor_get_timeout(sd_login_monitor *m, uint64_t *timeout_usec);
+
+_SD_DEFINE_POINTER_CLEANUP_FUNC(sd_login_monitor, sd_login_monitor_unref);
 
 _SD_END_DECLARATIONS;
 
