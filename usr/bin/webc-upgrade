@@ -2,6 +2,9 @@
 git remote set-url origin https://github.com/Webconverger/rpi2.git
 # Upgrade
 git pull origin master || exit 1
+
+mount /bootfat
+
 # Sync /boot with the fat partition TODO: Is there a safer way of doing this?
 cp -r /boot/* /bootfat/
 
@@ -18,5 +21,7 @@ then
 		logger "$rpi2config" succesfully set
 	fi
 fi
+
+umount /bootfat
 
 logger Upgrade finished
